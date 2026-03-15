@@ -404,7 +404,6 @@
 
   /* ── FOOTER ─────────────────────────────── */
   footer {
-    margin-left: var(--sidebar-w);
     padding: 24px 56px;
     border-top: 1px solid var(--border);
     font-size: 12px;
@@ -420,8 +419,9 @@
 
   @media (max-width: 800px) {
     #sidebar { display: none; }
-    #main { margin-left: 0; padding: 32px 24px 72px; }
-    footer { margin-left: 0; padding: 24px; }
+    .page-wrapper { margin-left: 0 !important; }
+    #main { padding: 32px 24px 72px; }
+    footer { padding: 24px; }
   }
 
   /* ── LANGUAGE PICKER ─────────────────────── */
@@ -495,6 +495,7 @@
 <!-- ══════════════════ MAIN ══════════════════ -->
 
 <div style="background:#fff8e1;border-bottom:2px solid #f5a623;padding:10px 56px;font-size:13px;color:#5a3e00;display:flex;align-items:center;gap:10px;margin-left:260px;"><span style="font-size:18px;">🌐</span><span>Die Navigation dieser Seite ist auf Deutsch. Der vollständige Inhalt wird in Kürze übersetzt.</span></div>
+<div class="page-wrapper" style="flex:1; min-width:0; margin-left:var(--sidebar-w); display:flex; flex-direction:column;">
 <main id="main">
 
   <!-- HERO -->
@@ -1420,6 +1421,7 @@ msal_http_cache.bin</pre>
 <footer>
   <p>Azure Bastion RDP Connector v2.8.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
+</div>
 
 <script>
   // Highlight active nav link based on scroll position
