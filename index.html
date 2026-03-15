@@ -1266,25 +1266,25 @@
   <!-- ── SETTINGS ─────────────────────────── -->
   <section id="settings">
     <h2><span class="icon">💾</span> Settings &amp; Persistence</h2>
-    <p>Application settings are stored as a JSON file at:</p>
-    <pre>%APPDATA%\BastionRDPConnector\settings.json</pre>
-    <p>You do not need to edit this file manually — the application manages it automatically. However, if you need to reset your settings, you can delete this file and the application will start fresh.</p>
+    <p>The application automatically saves and restores your preferences between sessions. You never need to edit any file manually — everything is managed by the application.</p>
 
-    <h3>All file locations</h3>
+    <h3>File locations</h3>
+    <p>The application reads and writes the following files on your machine:</p>
     <table class="field-table">
       <thead><tr><th>File</th><th>Path</th><th>Purpose</th></tr></thead>
       <tbody>
-        <tr><td>Settings</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>Last-used subscription, Bastion, VM, ports, connection method, language, etc.</td></tr>
-        <tr><td>MSAL token cache</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Encrypted access &amp; refresh tokens (shared with Azure CLI)</td></tr>
-        <tr><td>Azure profile</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Subscription list and signed-in user info (shared with Azure CLI)</td></tr>
-        <tr><td>Cloud config</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Azure cloud endpoint configuration (shared with Azure CLI)</td></tr>
-        <tr><td>HTTP cache</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>HTTP response cache (shared with Azure CLI)</td></tr>
-        <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log. Cleared on every application start.</td></tr>
-        <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Deleted on application exit.</td></tr>
+        <tr><td>Settings</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>User preferences: last-used subscription, Bastion, VM, ports, connection method, language, etc. See below for the full list.</td></tr>
+        <tr><td>MSAL token cache</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Encrypted Azure login tokens. Shared with Azure CLI.</td></tr>
+        <tr><td>Azure profile</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Subscription list and signed-in user info. Shared with Azure CLI.</td></tr>
+        <tr><td>Cloud config</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Azure cloud endpoint configuration. Shared with Azure CLI.</td></tr>
+        <tr><td>HTTP cache</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>HTTP response cache. Shared with Azure CLI.</td></tr>
+        <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log for troubleshooting. Cleared on every application start.</td></tr>
+        <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Deleted when the application closes.</td></tr>
       </tbody>
     </table>
 
-    <h3>What is saved</h3>
+    <h3>Contents of settings.json</h3>
+    <p>The following preferences are stored in <code>settings.json</code> and automatically restored on the next launch:</p>
     <table class="field-table">
       <thead><tr><th>Setting</th><th>Scope</th><th>Notes</th></tr></thead>
       <tbody>
