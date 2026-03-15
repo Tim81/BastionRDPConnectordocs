@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Azure Bastion RDP Connector — Documentación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --azure: #0078D4;
+    --azure-dark: #005A9E;
+    --azure-light: #deeffa;
+    --ink: #0d1117;
+    --ink-muted: #3d4451;
+    --ink-faint: #6b7280;
+    --surface: #f7f9fc;
+    --surface-alt: #eef2f7;
+    --border: #d1dbe8;
+    --green: #107c10;
+    --red: #d32f2f;
+    --warn: #c47d00;
+    --radius: 8px;
+    --sidebar-w: 260px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    display: flex;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--ink);
+    color: #e8edf3;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  .sidebar-logo {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .sidebar-logo .product {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--azure);
+    margin-bottom: 4px;
+  }
+  .sidebar-logo h1 {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #fff;
+  }
+  .sidebar-logo .version {
+    margin-top: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #6b7a8d;
+    background: rgba(255,255,255,.06);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  nav { flex: 1; padding: 16px 0 32px; }
+
+  .nav-group { margin-bottom: 4px; }
+
+  .nav-group-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #4a5568;
+    padding: 12px 20px 6px;
+  }
+
+  nav a {
+    display: block;
+    padding: 7px 20px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #a0aec0;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  nav a:hover { color: #fff; background: rgba(255,255,255,.05); }
+  nav a.active { color: #fff; border-left-color: var(--azure); background: rgba(0,120,212,.12); }
+
+  /* ── MAIN ─────────────────────────────── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    max-width: 900px;
+    padding: 60px 56px 100px;
+  }
+
+  /* ── SECTIONS ─────────────────────────── */
+  section { margin-bottom: 72px; scroll-margin-top: 32px; }
+
+  h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2 .icon { font-size: 22px; }
+
+  h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 36px 0 12px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 24px 0 8px;
+  }
+
+  p { margin-bottom: 14px; color: var(--ink-muted); }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--azure) 0%, #0050a0 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 40px 44px;
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+    pointer-events: none;
+  }
+  .hero .subtitle {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .hero p {
+    color: rgba(255,255,255,.8);
+    font-size: 15.5px;
+    max-width: 560px;
+    margin-bottom: 0;
+  }
+
+  /* ── CALLOUTS ─────────────────────────── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin: 20px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .callout .ci { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+  .callout p { margin: 0; }
+  .callout.info { background: var(--azure-light); color: #00407a; border-left: 4px solid var(--azure); }
+  .callout.warn { background: #fff8e1; color: #5a3e00; border-left: 4px solid #f5a623; }
+  .callout.tip  { background: #e8f5e9; color: #1b4d1b; border-left: 4px solid var(--green); }
+  .callout.danger { background: #fce4e4; color: #5c0000; border-left: 4px solid var(--red); }
+
+  /* ── STEPS ─────────────────────────────── */
+  .steps { counter-reset: step; margin: 20px 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+  .step-num {
+    counter-increment: step;
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--azure);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  }
+  .step-content strong { display: block; font-size: 15px; margin-bottom: 3px; }
+  .step-content p { margin: 0; color: var(--ink-faint); font-size: 14px; }
+
+  /* ── FIELD TABLE ─────────────────────────── */
+  .field-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .field-table th {
+    background: var(--ink);
+    color: #e0e8f0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 9px 14px;
+  }
+  .field-table th:first-child { border-radius: var(--radius) 0 0 0; }
+  .field-table th:last-child { border-radius: 0 var(--radius) 0 0; }
+  .field-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--ink-muted);
+  }
+  .field-table tr:last-child td { border-bottom: none; }
+  .field-table tr:nth-child(even) td { background: var(--surface-alt); }
+  .field-table td:first-child { font-family: 'DM Mono', monospace; color: var(--ink); font-size: 13px; }
+
+  /* ── UI MOCKUP CARDS ─────────────────────── */
+  .ui-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .ui-card-titlebar {
+    background: var(--ink);
+    color: #a0aec0;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ui-card-titlebar .dots span {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .ui-card-titlebar .dots span:nth-child(1) { background: #ff5f57; }
+  .ui-card-titlebar .dots span:nth-child(2) { background: #ffbd2e; }
+  .ui-card-titlebar .dots span:nth-child(3) { background: #28c840; }
+  .ui-card-body { padding: 20px 24px; }
+
+  /* Fake UI components inside mockup */
+  .ui-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .ui-label { font-size: 12px; color: var(--ink-faint); width: 130px; flex-shrink: 0; }
+  .ui-field {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+  .ui-btn {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: default;
+    font-family: 'Syne', sans-serif;
+  }
+  .ui-btn.primary { background: var(--azure); color: #fff; }
+  .ui-btn.secondary { background: var(--surface-alt); color: var(--ink); border: 1px solid var(--border); }
+  .ui-btn.danger { background: var(--red); color: #fff; }
+  .ui-tab-bar {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 16px;
+    gap: 2px;
+  }
+  .ui-tab {
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: default;
+  }
+  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
+  .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+  .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .ui-dot.green { background: var(--green); }
+  .ui-dot.red { background: var(--red); }
+  .ui-dot.orange { background: var(--warn); }
+
+  /* ── CODE ─────────────────────────────── */
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: var(--surface-alt);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--azure-dark);
+  }
+  pre {
+    background: var(--ink);
+    color: #c9d1d9;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 16px 0;
+  }
+
+  /* ── COMPARISON TABLE ─────────────────── */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .compare-table th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .compare-table th:first-child { background: var(--surface-alt); color: var(--ink-muted); width: 35%; }
+  .compare-table th:nth-child(2) { background: var(--azure); color: #fff; }
+  .compare-table th:nth-child(3) { background: var(--ink); color: #e0e8f0; }
+  .compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--ink-muted); vertical-align: top; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { color: var(--ink); font-weight: 600; }
+  .compare-table td:nth-child(2) { background: #f0f8ff; }
+  .compare-table td:nth-child(3) { background: #f7f8fb; }
+
+  /* ── BADGE ─────────────────────────────── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .badge.green { background: #e8f5e9; color: var(--green); }
+  .badge.blue { background: var(--azure-light); color: var(--azure-dark); }
+  .badge.orange { background: #fff3e0; color: #8a4800; }
+
+  /* ── LANG GRID ─────────────────────────── */
+  .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0; }
+  .lang-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .lang-card .flag { font-size: 22px; }
+
+  /* ── FOOTER ─────────────────────────────── */
+  footer {
+    margin-left: var(--sidebar-w);
+    padding: 24px 56px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-faint);
+    background: var(--surface);
+  }
+  footer a { color: var(--azure); text-decoration: none; }
+
+  /* ── SCROLLBAR ─────────────────────────── */
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
+
+  @media (max-width: 800px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 32px 24px 72px; }
+    footer { margin-left: 0; padding: 24px; }
+  }
+
+  /* ── LANGUAGE PICKER ─────────────────────── */
+
+  .lang-picker { margin-top: auto; padding: 16px 20px 24px; border-top: 1px solid rgba(255,255,255,.08); }
+  .lang-picker-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #4a5568; margin-bottom: 10px; }
+  .lang-picker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .lang-picker-btn { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 5px; color: #a0aec0; font-size: 11px; font-weight: 600; padding: 5px 4px; cursor: pointer; transition: background .15s, color .15s, border-color .15s; font-family: inherit; }
+  .lang-picker-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+  .lang-picker-btn.active { background: rgba(0,120,212,.35); border-color: rgba(0,120,212,.6); color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="product">Azure Bastion</div>
+    <h1>RDP Connector</h1>
+    <div class="version">v2.8.6 · Documentación</div>
+  </div>
+  <nav>
+    <div class="nav-group">
+      <div class="nav-group-label">Introducción</div>
+      <a href="#overview" class="active">Descripción general</a>
+      <a href="#prerequisites">Requisitos previos</a>
+      <a href="#installation">Instalación</a>
+      <a href="#first-login">Primer inicio de sesión</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">La interfaz</div>
+      <a href="#layout">Diseño de ventana</a>
+      <a href="#tab-ip">Pestaña Dirección IP</a>
+      <a href="#tab-vm">Pestaña Azure VM</a>
+      <a href="#tab-tunnels">Túneles activos</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Métodos de conexión</div>
+      <a href="#method-tunnel">Modo túnel</a>
+      <a href="#method-rdgateway">Modo RD Gateway</a>
+      <a href="#method-comparison">Comparación</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Funciones</div>
+      <a href="#monitor-config">Configuración de monitores</a>
+      <a href="#entraid">Autenticación Entra ID</a>
+      <a href="#vm-power">Gestión de energía VM</a>
+      <a href="#multi-tenant">Compatibilidad multiinquilino</a>
+      <a href="#tray">Bandeja del sistema</a>
+      <a href="#language">Idiomas</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Referencia</div>
+      <a href="#settings">Configuración y persistencia</a>
+      <a href="#troubleshooting">Solución de problemas</a>
+    </div>
+  </nav>
+  <div class="lang-picker">
+    <div class="lang-picker-label">🌐 Idioma</div>
+    <div class="lang-picker-grid">
+      <button class="lang-picker-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
+      <button class="lang-picker-btn" data-lang="nl" onclick="switchLang('nl')">🇳🇱 NL</button>
+      <button class="lang-picker-btn" data-lang="de" onclick="switchLang('de')">🇩🇪 DE</button>
+      <button class="lang-picker-btn" data-lang="fr" onclick="switchLang('fr')">🇫🇷 FR</button>
+      <button class="lang-picker-btn" data-lang="es" onclick="switchLang('es')">🇪🇸 ES</button>
+      <button class="lang-picker-btn" data-lang="pt" onclick="switchLang('pt')">🇵🇹 PT</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+
+<div style="background:#fff8e1;border-bottom:2px solid #f5a623;padding:10px 56px;font-size:13px;color:#5a3e00;display:flex;align-items:center;gap:10px;margin-left:260px;"><span style="font-size:18px;">🌐</span><span>La navegación de esta página está en español. El contenido completo se traducirá próximamente.</span></div>
+<main id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="subtitle">Documentación para el usuario</div>
+    <h1>Azure Bastion RDP Connector</h1>
+    <p>Conéctese de forma segura a VM de Azure y direcciones IP a través de Azure Bastion con el cliente RDP nativo de Windows.</p>
+  </div>
+
+  <!-- ── OVERVIEW ─────────────────────────── -->
+  <section id="overview">
+    <h2><span class="icon">🗺️</span> Descripción general</h2>
+    <p>Azure Bastion RDP Connector es una aplicación de escritorio de Windows que facilita el establecimiento de conexiones RDP seguras a máquinas virtuales y direcciones IP alojadas en Microsoft Azure, enrutadas a través de <strong>Azure Bastion</strong> — sin exponer direcciones IP públicas ni abrir puertos RDP a Internet.</p>
+    <p>Internamente utiliza sus credenciales de cuenta de Azure y el servicio Azure Bastion. Nunca necesita gestionar certificados, VPN ni reglas de firewall. La aplicación gestiona toda la complejidad y entrega el control directamente a su cliente estándar de Escritorio remoto de Windows.</p>
+
+    <h3>Funciones principales</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td>Conectar por IP</td><td>Túnel a cualquier dirección IP alcanzable a través de Bastion</td></tr>
+        <tr><td>Conectar por VM</td><td>Explorar y seleccionar cualquier VM de Azure en sus suscripciones</td></tr>
+        <tr><td>Modo túnel</td><td>Classic local port-forward via Azure CLI</td></tr>
+        <tr><td>Modo RD Gateway</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
+        <tr><td>Gestión de energía VM</td><td>Ver el estado de energía e iniciar VM detenidas desde la aplicación</td></tr>
+        <tr><td>Multiinquilino</td><td>Cambiar entre inquilinos de Entra ID; configuración guardada por inquilino</td></tr>
+        <tr><td>Multimonitor</td><td>Monitor único o todos los monitores para sesiones RD Gateway</td></tr>
+        <tr><td>Autenticación Entra ID</td><td>SSO Entra ID opcional para conexiones RD Gateway del mismo inquilino</td></tr>
+        <tr><td>Bandeja del sistema</td><td>Minimizar a la bandeja, recibir notificaciones, administrar túneles</td></tr>
+        <tr><td>6 idiomas</td><td>Inglés, Neerlandés, Alemán, Francés, Español, Portugués</td></tr>
+        <tr><td>Instancia única</td><td>Solo puede ejecutarse una copia de la aplicación a la vez; iniciar una segunda copia trae la ventana existente al primer plano</td></tr>
+        <tr><td>Tema claro y oscuro</td><td>Sigue automáticamente la configuración de tema claro/oscuro de Windows</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── PREREQUISITES ─────────────────────── -->
+  <section id="prerequisites">
+    <h2><span class="icon">✅</span> Requisitos previos</h2>
+    <p>Antes de utilizar la aplicación, asegúrese de que lo siguiente esté disponible en su entorno.</p>
+
+    <h3>En su equipo</h3>
+    <table class="field-table">
+      <thead><tr><th>Requisito</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Windows 10/11 (x64)</td><td>La aplicación es un ejecutable nativo de Windows x64</td></tr>
+        <tr><td>Cliente de Escritorio remoto</td><td>Integrado en Windows — <code>mstsc.exe</code></td></tr>
+        <tr><td>Azure CLI (solo modo túnel)</td><td>Solo necesario para el método <em>Túnel</em>. Descargar desde <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>El modo RD Gateway no requiere Azure CLI.</strong> Si solo utiliza el método de conexión RD Gateway, puede omitir completamente la instalación de Azure CLI.</p>
+    </div>
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Azure CLI Bastion extension</strong> — El modo túnel también requiere la <code>azure-bastion</code> Extensión de Azure CLI (separada de la propia CLI). Si no está instalada, la aplicación lo detectará y ofrecerá instalarla automáticamente antes de crear el primer túnel.</p>
+    </div>
+
+    <h3>En Azure</h3>
+    <table class="field-table">
+      <thead><tr><th>Recurso</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Azure Bastion (SKU Estándar o Premium)</td><td>El SKU Basic no admite tunneling ni RD Gateway</td></tr>
+        <tr><td>Una suscripción de Azure</td><td>La aplicación lista todas las suscripciones a las que tiene acceso</td></tr>
+        <tr><td>Rol de lector en Bastion + VM/red de destino</td><td>RBAC mínimo requerido para listar y conectar; se necesita <em>Virtual Machine Contributor</em> o superior para iniciar VM detenidas</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Accesibilidad de red</strong> — Azure Bastion puede llegar a una VM de destino o dirección IP siempre que exista conectividad de red entre ellos. Esto incluye:</p>
+      <ul style="margin: 6px 0 0 18px; line-height:2;">
+        <li><strong>Configuraciones simples:</strong> Bastion implementado en el mismo VNet o en un VNet directamente emparejado.</li>
+        <li><strong>Configuraciones Enterprise / Landing Zone:</strong> Bastion implementado en una <em>Connectivity Landing Zone</em> centralizada conectada a través de un hub de <strong>Azure Virtual WAN</strong> (vWAN). En esta topología, Bastion no es visible dentro de las zonas de aterrizaje spoke individuales en el Portal de Azure — aunque puede alcanzar todas las VNets spoke a través del vWAN. Esta aplicación está diseñada específicamente para resolver este problema, proporcionando a los usuarios una interfaz simple para conectarse a través de un Bastion administrado centralmente independientemente de en qué zona de aterrizaje se encuentre su VM.</li>
+      </ul>
+      <p style="margin-top:8px;">Si no está seguro de si su Bastion puede llegar a un objetivo específico, contacte con su equipo de plataforma Azure o de red.</p>
+    </div>
+  </section>
+
+  <!-- ── INSTALLATION ─────────────────────── -->
+  <section id="installation">
+    <h2><span class="icon">📦</span> Instalación</h2>
+    <p>Azure Bastion RDP Connector está disponible en la <strong>Microsoft Store</strong>. La instalación es gestionada completamente por Windows — sin configuración manual, sin archivos ZIP extraídos y sin advertencias de SmartScreen.</p>
+
+    <!-- Store badge / download card -->
+    <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:28px 32px; margin:24px 0; display:flex; align-items:center; gap:28px; box-shadow:0 2px 12px rgba(0,0,0,.06);">
+      <!-- Store icon -->
+      <img src="data:image/png;base64,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" alt="Azure Bastion RDP Connector icon" style="flex-shrink:0; width:64px; height:64px; border-radius:14px; image-rendering:auto;"/>
+      <div style="flex:1;">
+        <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px;">Available on</div>
+        <div style="font-size:20px; font-weight:800; color:var(--ink); margin-bottom:10px;">Microsoft Store</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="ms-windows-store://pdp/?productid=9N9MJ1V43Z6T"
+             style="display:inline-flex; align-items:center; gap:8px; background:var(--azure); color:#fff; text-decoration:none; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700;">
+            <span>🪟</span> Abrir en la aplicación Store
+          </a>
+          <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T"
+             target="_blank"
+             style="display:inline-flex; align-items:center; gap:8px; background:var(--surface-alt); color:var(--ink); text-decoration:none; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700; border:1px solid var(--border);">
+            <span>🌐</span> Ver en el navegador
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Cómo instalar</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Abrir la página de Microsoft Store</strong>
+          <p>Haga clic en <em>Abrir en la aplicación Store</em> arriba, o visite <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T" target="_blank" style="color:var(--azure);">apps.microsoft.com/detail/9N9MJ1V43Z6T</a> en su navegador.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Hacer clic en Obtener / Instalar</strong>
+          <p>Windows descarga e instala la aplicación automáticamente. No se requieren derechos de administrador para una instalación por usuario.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Iniciar desde el menú Inicio</strong>
+          <p>Busque <strong>Bastion RDP Connector</strong> o encuéntrelo en sus aplicaciones instaladas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Dado que la aplicación se instala a través de la Microsoft Store, se actualiza automáticamente en segundo plano. Siempre tendrá la última versión sin ninguna acción manual.</p>
+    </div>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>La configuración se guarda en <code>%APPDATA%\BastionRDPConnector\settings.json</code>. Su última suscripción, Bastion, VM y preferencias de conexión se restauran automáticamente en el siguiente inicio.</p>
+    </div>
+  </section>
+
+  <!-- ── FIRST LOGIN ─────────────────────── -->
+  <section id="first-login">
+    <h2><span class="icon">🔐</span> Primer inicio de sesión</h2>
+    <p>Cada vez que la aplicación se inicia, verifica si existe una <strong>caché de tokens MSAL</strong> válida en su máquina. Lo que ocurre a continuación depende de esa verificación:</p>
+
+    <table class="field-table" style="margin-bottom:20px;">
+      <thead><tr><th>Situación</th><th>Qué hace la aplicación</th></tr></thead>
+      <tbody>
+        <tr><td>No se encontró token en caché</td><td>La ventana de inicio de sesión de Microsoft Azure se abre inmediatamente para que pueda iniciar sesión.</td></tr>
+        <tr><td>Token válido encontrado en caché</td><td>La aplicación inicia sesión silenciosamente — no aparece ventana de inicio de sesión. Va directamente a la selección de inquilino (si es multi-inquilino).</td></tr>
+        <tr><td>Token expirado / la política de CA requiere reautenticación</td><td>La ventana de inicio de sesión se abre nuevamente para satisfacer los requisitos de acceso condicional de su organización (p. ej., MFA diaria).</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>La aplicación almacena el estado de autenticación en cuatro archivos dentro de <code>%USERPROFILE%\.azure\</code> — la misma carpeta utilizada por Azure CLI:</p>
+      <table class="field-table" style="margin:8px 0 0;">
+        <thead><tr><th>Archivo</th><th>Contenido</th></tr></thead>
+        <tbody>
+          <tr><td>msal_token_cache.bin</td><td>Tokens de acceso y actualización MSAL cifrados</td></tr>
+          <tr><td>azureProfile.json</td><td>Lista de suscripciones e información del usuario conectado</td></tr>
+          <tr><td>clouds.config</td><td>Configuración de punto de conexión de Azure cloud</td></tr>
+          <tr><td>msal_http_cache.bin</td><td>Caché de respuesta HTTP</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;">Dado que estos archivos se comparten con Azure CLI, la aplicación puede reutilizar una sesión <code>az login</code> existente y viceversa.</p>
+    </div>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p><strong>Para restablecer la caché de tokens</strong> (forzar un nuevo inicio de sesión en el próximo inicio), elimine los cuatro archivos de <code>%USERPROFILE%\.azure\</code>:<br/>
+      <code>msal_token_cache.bin</code>, <code>azureProfile.json</code>, <code>clouds.config</code>, <code>msal_http_cache.bin</code><br/><br/>
+      También puede usar el botón <strong>Cerrar sesión</strong> — elimina automáticamente los cuatro archivos y borra la caché MSAL en un solo paso. Tenga en cuenta que esto también cierra las sesiones activas de Azure CLI.</p>
+    </div>
+
+    <h3>Inicio de sesión (sin token en caché)</h3>
+    <p>Cuando no hay ningún token en caché, la ventana de inicio de sesión de Microsoft Azure se abre automáticamente:</p>
+
+    <div style="display:flex; gap:24px; align-items:flex-start; margin:16px 0 24px;">
+      <img src="screen-login.png" alt="Microsoft Azure login window" style="width:220px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); flex-shrink:0;"/>
+      <div>
+        <div class="steps" style="margin:0;">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Seleccionar "Cuenta profesional o educativa"</strong>
+              <p>En las opciones de inicio de sesión, elija su cuenta de Microsoft organizacional — no una cuenta de Microsoft personal.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Ingresar su UPN</strong>
+              <p>Escriba su dirección de correo electrónico del trabajo (nombre principal de usuario) o selecciónela de la lista si fue almacenada en caché previamente por Windows.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Completar MFA si es necesario</strong>
+              <p>Siga las instrucciones en pantalla para cualquier autenticación multifactor que su organización exija.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Selección de inquilino</h3>
+    <p>Después de un inicio de sesión exitoso — o cuando la aplicación se reinicia y reutiliza un token en caché — aparece un <strong>diálogo de selección de inquilino</strong> si su cuenta tiene acceso a más de un inquilino de Entra ID (por ejemplo, a través de Azure Lighthouse).</p>
+
+    <div style="display:flex; gap:24px; align-items:flex-start; margin:16px 0 24px;">
+      <img src="screen-tenant.png" alt="Select Azure Tenant dialog" style="width:260px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); flex-shrink:0;"/>
+      <div>
+        <p>Seleccione el inquilino cuyos recursos desea usar y haga clic en <strong>OK</strong>. Si el inquilino seleccionado requiere MFA y su token en caché no lo satisface, aparecerá un aviso de autenticación adicional.</p>
+        <div class="callout info" style="margin-top:12px;">
+          <span class="ci">ℹ️</span>
+          <p>Puede cambiar de inquilino en cualquier momento mientras la aplicación se está ejecutando — su configuración (última suscripción, Bastion, VM, etc.) se almacena por separado por inquilino y se restaura automáticamente cuando vuelve.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Seleccionar una suscripción</h3>
+    <p>Tras la selección del inquilino, se carga la ventana principal. La barra superior muestra la <strong>suscripción de Bastion</strong> activa. Si su cuenta tiene acceso a varias suscripciones y la preseleccionada no contiene el Azure Bastion que necesita, haga clic en <strong>Cambiar</strong> para abrir el selector de suscripciones.</p>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>La <strong>suscripción de Bastion</strong> (barra superior) es la suscripción que contiene su recurso Bastion. La <strong>suscripción de VM</strong> (pestaña Azure VM) puede ser una suscripción diferente — las conexiones entre suscripciones están totalmente admitidas.</p>
+    </div>
+
+    <p>Su token de acceso se almacena de forma segura en el disco (caché de tokens MSAL). En los inicios posteriores, la aplicación se autentica silenciosamente — no se le pedirá que inicie sesión nuevamente a menos que su sesión caduque o la política de acceso condicional de su organización requiera reautenticación.</p>
+
+    <div class="callout danger">
+      <span class="ci">🔴</span>
+      <p>Para cerrar sesión y borrar el token en caché, haga clic en el botón rojo <strong>Cerrar sesión</strong> en la barra superior. Aparecerá un diálogo de confirmación antes de que la aplicación se cierre y elimine todas las credenciales en caché. El próximo inicio requerirá un inicio de sesión completo.</p>
+    </div>
+  </section>
+
+  <!-- ── WINDOW LAYOUT ─────────────────────── -->
+  <section id="layout">
+    <h2><span class="icon">🖼️</span> Diseño de ventana</h2>
+    <p>La ventana principal está dividida en tres áreas persistentes y tres pestañas.</p>
+
+    <div class="ui-card">
+      <div class="ui-card-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Azure Bastion RDP Connector
+      </div>
+      <div class="ui-card-body">
+        <!-- Subscription bar -->
+        <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px; margin-bottom:0; border-bottom:none; border-radius:6px 6px 0 0;">
+          <div class="ui-row" style="margin-bottom:6px;">
+            <span style="font-size:12px; flex:1; color:var(--ink-muted);">Bastion Subscription: <strong>Contoso Production</strong></span>
+            <span class="ui-btn secondary">Cambiar</span>
+          </div>
+          <div class="ui-row" style="margin-bottom:0;">
+            <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
+            <span class="ui-btn danger">Cerrar sesión</span>
+          </div>
+        </div>
+        <!-- Bastion bar -->
+        <div style="border:1px solid var(--border); border-top:none; border-radius:0 0 6px 6px; padding:10px 14px; margin-bottom:12px;">
+          <div class="ui-row" style="margin-bottom:0;">
+            <span style="font-size:12px; color:var(--ink-muted); margin-right:8px;">Bastion</span>
+            <div class="ui-field" style="flex:1;">prod-bastion-westeurope</div>
+            <span class="ui-btn secondary" style="margin-left:8px;">Actualizar</span>
+          </div>
+        </div>
+        <!-- Tabs -->
+        <div class="ui-tab-bar">
+          <div class="ui-tab active">Dirección IP</div>
+          <div class="ui-tab">Azure VM</div>
+          <div class="ui-tab">Túneles activos</div>
+        </div>
+        <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(El contenido de las pestañas se muestra en las secciones siguientes)</div>
+      </div>
+    </div>
+
+    <table class="field-table">
+      <thead><tr><th>Área</th><th>Propósito</th></tr></thead>
+      <tbody>
+        <tr><td>Barra de suscripción (arriba)</td><td>Muestra la suscripción de Bastion activa y la cuenta de sesión iniciada. Proporciona los botones <strong>Cambiar</strong> y <strong>Cerrar sesión</strong>.</td></tr>
+        <tr><td>Selector de Bastion</td><td>Lista desplegable para seleccionar la instancia de Azure Bastion. Haga clic en <strong>Actualizar</strong> para recargar la lista.</td></tr>
+        <tr><td>Pestaña Dirección IP</td><td>Conexión a cualquier dirección IP a través de Bastion con un túnel local.</td></tr>
+        <tr><td>Pestaña Azure VM</td><td>Explorar VMs en suscripciones, verificar estado de energía, iniciar VMs y conectar.</td></tr>
+        <tr><td>Pestaña Túneles activos</td><td>Ver y administrar todos los túneles actualmente abiertos por esta aplicación.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── TAB 1: IP ADDRESS ─────────────────── -->
+  <section id="tab-ip">
+    <h2><span class="icon">🌐</span> Pestaña Dirección IP</h2>
+    <p>Use esta pestaña cuando desee conectarse a una <strong>dirección IP específica</strong> a través de Azure Bastion, en lugar de seleccionar una VM de Azure. Esto es útil para recursos que no son de Azure, máquinas locales o recursos sin registro de VM en su suscripción.</p>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>La pestaña Dirección IP siempre usa el <strong>modo túnel</strong>. RD Gateway no está disponible para conexiones IP directas.</p>
+    </div>
+
+    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+
+    <div class="ui-card">
+      <div class="ui-card-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Pestaña Dirección IP
+      </div>
+      <div class="ui-card-body">
+        <div class="ui-row">
+          <span class="ui-label">Dirección IP</span>
+          <div class="ui-field">10.0.1.42</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Puerto de destino</div>
+            <div class="ui-field">3389</div>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Puerto local</div>
+            <div class="ui-field">55000</div>
+          </div>
+        </div>
+        <div style="font-size:11px; color:var(--ink-faint); margin-bottom:12px; line-height:1.5;">
+          Se creará un túnel local. Conecte su cliente RDP a <strong>localhost:55000</strong>.
+        </div>
+        <div class="ui-row" style="justify-content:space-between;">
+          <span class="ui-btn secondary">🌐 Language</span>
+          <span class="ui-btn primary">Conectar</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Campos</h3>
+    <table class="field-table">
+      <thead><tr><th>Campo</th><th>Descripción</th><th>Predeterminado</th></tr></thead>
+      <tbody>
+        <tr><td>Dirección IP</td><td>La dirección IP privada de la máquina de destino. Debe ser accesible desde el VNet de Bastion.</td><td>—</td></tr>
+        <tr><td>Puerto de destino</td><td>El puerto RDP en la máquina remota.</td><td>3389</td></tr>
+        <tr><td>Puerto local</td><td>El puerto en su máquina local donde se crea el túnel. Su cliente RDP se conecta a <code>localhost:[Puerto local]</code>.</td><td>55000</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cómo conectarse</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Ingresar la dirección IP de destino</strong>
+          <p>Escriba la IP privada de la máquina a la que desea llegar.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Ajustar puertos si es necesario</strong>
+          <p>Deje el Puerto de destino en <code>3389</code> a menos que la máquina use un puerto RDP no estándar. Cambie el Puerto local solo si <code>55000</code> ya está en uso en su máquina.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Hacer clic en Conectar</strong>
+          <p>La aplicación abre un túnel de Azure CLI y lanza el cliente RDP de Windows apuntando a <code>localhost:[Puerto local]</code>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TAB 2: AZURE VM ─────────────────── -->
+  <section id="tab-vm">
+    <h2><span class="icon">🖥️</span> Pestaña Azure VM</h2>
+    <p>Use esta pestaña para explorar sus máquinas virtuales de Azure y conectarse a ellas directamente. La aplicación puede iniciar automáticamente las VM detenidas y admite ambos métodos de conexión.</p>
+
+    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
+        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM detenida (desasignada)</div>
+      </div>
+      <div style="text-align:center;">
+        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
+        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM en ejecución – Conectar habilitado</div>
+      </div>
+    </div>
+
+    <div class="ui-card">
+      <div class="ui-card-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Pestaña Azure VM
+      </div>
+      <div class="ui-card-body">
+        <div class="ui-section">Método de conexión</div>
+        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+            <input type="radio" checked readonly> Tunnel
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+            <input type="radio" readonly> RD Gateway
+          </label>
+        </div>
+        <div class="ui-section">Configuración de monitor</div>
+        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Monitor único</label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Todos los monitores</label>
+        </div>
+        <div class="ui-row">
+          <span class="ui-label">VM Subscription</span>
+          <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
+          <span class="ui-btn secondary" style="margin-left:8px;">Actualizar</span>
+        </div>
+        <div class="ui-row">
+          <span class="ui-label">Máquina virtual</span>
+          <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
+          <span class="ui-btn secondary" style="margin-left:8px;">Actualizar</span>
+        </div>
+        <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
+          <div class="ui-dot green"></div>
+          <span style="font-size:12px; color:var(--green); font-weight:600;">En ejecución</span>
+          <span style="font-size:13px; margin-left:4px;">🔄</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Puerto de destino</div><div class="ui-field">3389</div></div>
+          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Puerto local</div><div class="ui-field">55000</div></div>
+        </div>
+        <div class="ui-row" style="justify-content:space-between;">
+          <span class="ui-btn secondary">🌐 Language</span>
+          <span class="ui-btn primary">Conectar</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Campos</h3>
+    <table class="field-table">
+      <thead><tr><th>Campo</th><th>Descripción</th></tr></thead>
+      <tbody>
+        <tr><td>Método de conexión</td><td>Elija <strong>Túnel</strong> o <strong>RD Gateway</strong>. Consulte la <a href="#method-comparison">sección de comparación</a> para orientarse.</td></tr>
+        <tr><td>Configuración de monitores</td><td>Seleccione <strong>Monitor único</strong> (solo pantalla principal) o <strong>Todos los monitores</strong> (en todos los monitores). Solo aplica en modo RD Gateway.</td></tr>
+        <tr><td>Autenticación Entra ID</td><td>Casilla opcional (visible solo en modo RD Gateway). Habilita SSO de Entra ID. Ver <a href="#entraid">Autenticación Entra ID</a>.</td></tr>
+        <tr><td>Suscripción VM</td><td>La suscripción que contiene la VM de destino. Puede diferir de la suscripción de Bastion (el acceso entre suscripciones es compatible).</td></tr>
+        <tr><td>Máquina virtual</td><td>La VM específica a la que conectarse. La lista se completa después de seleccionar una suscripción.</td></tr>
+        <tr><td>Estado de energía</td><td>Muestra el estado actual de la VM con un punto codificado por color: 🟢 En ejecución · 🔴 Detenida/Desasignada · 🟠 Iniciando/Deteniendo/Otro</td></tr>
+        <tr><td>Puerto de destino</td><td>Puerto RDP en la VM (solo modo túnel).</td></tr>
+        <tr><td>Puerto local</td><td>Puerto de túnel local (solo modo túnel).</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Los valores de puerto están <strong>sincronizados</strong> entre la pestaña Dirección IP y la pestaña Azure VM. Cambiar el puerto en una pestaña actualiza automáticamente la otra.</p>
+    </div>
+  </section>
+
+  <!-- ── TAB 3: ACTIVE TUNNELS ─────────────── -->
+  <section id="tab-tunnels">
+    <h2><span class="icon">🔗</span> Pestaña Túneles activos</h2>
+    <p>Esta pestaña muestra todos los túneles RDP actualmente abiertos por la aplicación. Cada entrada de túnel muestra el destino de conexión, el puerto local y el momento en que se inició el túnel.</p>
+
+    <img src="screen-tunnels.png" alt="Active Tunnels tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+
+    <div class="ui-card">
+      <div class="ui-card-titlebar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Active Tunnels Tab
+      </div>
+      <div class="ui-card-body">
+        <div style="text-align:right; margin-bottom:10px;"><span class="ui-btn secondary">Actualizar</span></div>
+        <!-- Tarjeta de túnel -->
+        <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:700;">🖥️ vm-dev-web-01</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55000 → 10.0.1.42:3389 · Iniciado 14:32</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Conectar RDP</span>
+            <span class="ui-btn danger" style="font-size:11px; padding:4px 10px;">Detener</span>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:13px; font-weight:700;">🌐 10.0.2.10</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55001 → 10.0.2.10:3389 · Iniciado 15:05</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Conectar RDP</span>
+            <span class="ui-btn danger" style="font-size:11px; padding:4px 10px;">Detener</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="field-table">
+      <thead><tr><th>Control</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr><td>Actualizar</td><td>Recarga la lista de túneles activos.</td></tr>
+        <tr><td>Conectar RDP</td><td>Vuelve a iniciar el cliente RDP de Windows conectado al puerto local de este túnel. Útil si cerró accidentalmente la ventana RDP.</td></tr>
+        <tr><td>Detener</td><td>Termina el túnel y limpia el proceso subyacente de Azure CLI.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <p>Detener un túnel desconectará inmediatamente cualquier sesión RDP activa que use ese túnel. Guarde su trabajo en la sesión remota antes de hacer clic en Detener.</p>
+    </div>
+  </section>
+
+  <!-- ── METHOD: TUNNEL ─────────────────────── -->
+  <section id="method-tunnel">
+    <h2><span class="icon">🚇</span> Modo túnel</h2>
+    <p>El modo túnel utiliza el comando Azure CLI <code>az network bastion tunnel</code> para crear un <strong>reenvío de puerto local</strong>. El tráfico de un puerto de su máquina (<em>Puerto local</em>) se enruta a través de Azure Bastion hacia el destino (<em>Puerto de destino</em>) en la máquina remota.</p>
+
+    <h3>Cómo funciona</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>La aplicación verifica los requisitos previos</strong>
+          <p>La aplicación verifica que Azure CLI esté instalado y que la extensión de CLI <code>azure-bastion</code> esté presente. Si falta la extensión, ofrece instalarla automáticamente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>La ventana se minimiza a la bandeja y el túnel se abre</strong>
+          <p>La ventana principal se minimiza automáticamente para no estorbar. La aplicación invoca Azure CLI en segundo plano para establecer el túnel de reenvío de puerto local.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>El cliente RDP se inicia automáticamente</strong>
+          <p>El cliente RDP de Windows se lanza apuntando a <code>localhost:[Puerto local]</code>. El tráfico se reenvía de forma transparente a través de Bastion.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>El túnel permanece abierto</strong>
+          <p>El proceso de túnel se ejecuta en segundo plano. Puede verlo en la pestaña <em>Túneles activos</em> y en el menú contextual del icono de la bandeja. Persiste hasta que lo detenga o cierre la aplicación.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>El modo túnel es el único método disponible en la pestaña <strong>Dirección IP</strong>. Admite múltiples túneles simultáneos a diferentes destinos.</p>
+    </div>
+  </section>
+
+  <!-- ── METHOD: RD GATEWAY ─────────────────── -->
+  <section id="method-rdgateway">
+    <h2><span class="icon">🏛️</span> Modo RD Gateway</h2>
+    <p>El modo RD Gateway utiliza la misma API que el botón <em>Conectar</em> del portal de Azure. La aplicación llama al endpoint de Azure Bastion RD Gateway y descarga un archivo <code>.rdp</code> preconfigurado. El cliente RDP de Windows se conecta entonces <strong>directamente a Azure Bastion</strong> como RD Gateway — no se necesita reenvío de puerto local.</p>
+
+    <h3>Cómo funciona</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>La ventana se minimiza a la bandeja y se obtiene el archivo RDP</strong>
+          <p>La ventana principal se minimiza automáticamente. La aplicación llama a la API de Bastion para generar un archivo RDP temporal firmado y lo guarda de forma segura en una carpeta temporal privada con permisos restringidos.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>El cliente RDP se inicia automáticamente</strong>
+          <p><code>mstsc.exe</code> se lanza con el archivo RDP descargado. Se conecta directamente al endpoint RD Gateway de Bastion — no se necesita reenvío de puerto local.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>El archivo temporal se limpia al salir</strong>
+          <p>El archivo RDP se conserva solo durante la sesión de la aplicación y se elimina de forma segura cuando la aplicación se cierra.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>El modo RD Gateway <strong>no</strong> requiere Azure CLI. Si su organización no permite la instalación de Azure CLI, use el modo RD Gateway.</p>
+    </div>
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Mecanismo de reserva de Entra ID</strong> — If <em>Use Entra ID Authentication</em> está habilitada pero la API de Bastion la rechaza (por ejemplo, en un escenario entre inquilinos), la aplicación reintenta automáticamente usando la autenticación RDP tradicional para que la conexión pueda tener éxito.</p>
+    </div>
+  </section>
+
+  <!-- ── COMPARISON ─────────────────────────── -->
+  <section id="method-comparison">
+    <h2><span class="icon">⚖️</span> Comparación de métodos</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>🚇 Tunnel</th>
+          <th>🏛️ RD Gateway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Requiere Azure CLI</td><td>✅ Sí</td><td>❌ No</td></tr>
+        <tr><td>Funciona con pestaña Dirección IP</td><td>✅ Sí</td><td>❌ No</td></tr>
+        <tr><td>Funciona con pestaña Azure VM</td><td>✅ Sí</td><td>✅ Sí</td></tr>
+        <tr><td>Múltiples sesiones simultáneas</td><td>✅ Sí</td><td>✅ Sí</td></tr>
+        <tr><td>Compatibilidad con varios monitores</td><td>Limitado</td><td>✅ Completo (Único / Todos)</td></tr>
+        <tr><td>Opción SSO de Entra ID</td><td>❌ No</td><td>✅ Sí (mismo inquilino)</td></tr>
+        <tr><td>Puerto local requerido</td><td>✅ Sí</td><td>❌ No</td></tr>
+        <tr><td>Aparece en pestaña Túneles activos</td><td>✅ Sí</td><td>❌ No</td></tr>
+        <tr><td>Ruta del tráfico de red</td><td>localhost → Bastion → VM</td><td>Cliente RDP → Bastion → VM</td></tr>
+      </tbody>
+    </table>
+    <p>En general, use <strong>RD Gateway</strong> para el acceso diario a VM de Azure. Use <strong>Tunnel</strong> cuando Azure CLI ya forma parte de su flujo de trabajo, o cuando necesita conectarse a una <strong>dirección IP específica</strong> que no es una VM de Azure — por ejemplo:</p>
+    <ul style="margin: 6px 0 14px 22px; color:var(--ink-muted); line-height:2.1;">
+      <li>Un <strong>servidor o estación de trabajo local</strong> alcanzable desde Azure Bastion a través de una VPN de sitio a sitio o un circuito Azure ExpressRoute.</li>
+      <li>Un host en <strong>otro proveedor de nube</strong> (p. ej., AWS, GCP) conectado a Azure a través de VPN.</li>
+      <li>Cualquier otra dirección IP enrutable de forma privada que Bastion pueda alcanzar pero que no tenga registro de VM de Azure en su suscripción.</li>
+    </ul>
+    <p>En estos casos, RD Gateway no está disponible — el modo túnel con una dirección IP directa es la única opción.</p>
+  </section>
+
+  <!-- ── MONITOR CONFIG ─────────────────────── -->
+  <section id="monitor-config">
+    <h2><span class="icon">🖥️</span> Configuración de monitores</h2>
+    <p>Disponible en la <strong>pestaña Azure VM</strong> cuando se selecciona el método de conexión <em>RD Gateway</em>.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Opción</th><th>Comportamiento</th></tr></thead>
+      <tbody>
+        <tr><td>Monitor único</td><td>La sesión RDP se abre en pantalla completa solo en su monitor principal. Adecuado para configuraciones de un solo monitor o cuando desea mantener otras pantallas disponibles.</td></tr>
+        <tr><td>Todos los monitores</td><td>La sesión RDP se extiende por todos los monitores conectados. El escritorio remoto se expande para llenar toda su configuración de múltiples monitores.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>La configuración del monitor se escribe en el archivo RDP descargado. Se recuerda entre sesiones por inquilino.</p>
+    </div>
+  </section>
+
+  <!-- ── ENTRA ID AUTH ─────────────────────── -->
+  <section id="entraid">
+    <h2><span class="icon">🔑</span> Autenticación Entra ID</h2>
+    <p>Disponible como casilla opcional en la <strong>pestaña Azure VM</strong> cuando se selecciona el modo <em>RD Gateway</em>.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Estado</th><th>Comportamiento</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge blue">DESACTIVADO (predeterminado)</span></td><td>Autenticación RDP tradicional. Introduce el nombre de usuario y la contraseña de Windows en la pantalla de inicio de sesión RDP. Funciona entre inquilinos y en todos los escenarios.</td></tr>
+        <tr><td><span class="badge green">ACTIVADO</span></td><td>Inicio de sesión único (SSO) de Entra ID. La sesión RDP se autentica usando su identidad de Microsoft. <strong>Solo funciona cuando su cuenta y la VM de destino están en el mismo inquilino de Entra ID.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <p>No habilite la autenticación de Entra ID si se conecta entre inquilinos (p. ej., a través de Azure Lighthouse a una suscripción de cliente). Use la configuración predeterminada DESACTIVADO en esos casos.</p>
+    </div>
+  </section>
+
+  <!-- ── VM POWER MANAGEMENT ─────────────────── -->
+  <section id="vm-power">
+    <h2><span class="icon">⚡</span> Gestión de energía VM</h2>
+    <p>Cuando se selecciona una VM en la pestaña Azure VM, la aplicación muestra su estado de energía actual y le permite iniciarla si está detenida.</p>
+
+    <h3>Indicadores de estado de energía</h3>
+    <div style="display:flex; flex-direction:column; gap:10px; margin:16px 0;">
+      <div class="ui-state"><div class="ui-dot green"></div><strong>En ejecución</strong> — La VM está encendida y lista para aceptar conexiones.</div>
+      <div class="ui-state"><div class="ui-dot red"></div><strong>Detenida / Desasignada</strong> — La VM está apagada. Aparece un botón <strong>Iniciar VM</strong>.</div>
+      <div class="ui-state"><div class="ui-dot orange"></div><strong>Iniciando / Deteniendo / Otro</strong> — La VM está en un estado de transición. Se muestra un indicador de progreso cuando la aplicación inicia un arranque.</div>
+    </div>
+
+    <h3>Iniciar una VM detenida</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Seleccionar la VM detenida</strong>
+          <p>El indicador de estado de energía rojo y el botón <strong>Iniciar VM</strong> aparecen.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Hacer clic en Iniciar VM</strong>
+          <p>El botón se reemplaza por un indicador de progreso (<em>⏳ Iniciando VM…</em>). La aplicación consulta Azure para obtener el estado de energía actualizado.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Esperar el estado En ejecución</strong>
+          <p>Cuando el indicador se vuelve verde, la VM está lista. Luego puede hacer clic en <strong>Conectar</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>El estado <strong>En ejecución</strong> significa que Azure ha encendido la VM, pero el sistema operativo invitado aún necesita uno o dos minutos para arrancar completamente. Si su intento de conexión es rechazado justo después de que la VM alcance el estado En ejecución, espere 2–3 minutos e inténtelo de nuevo.</p>
+    </div>
+
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <p>Iniciar una VM requiere al menos el rol <strong>Virtual Machine Contributor</strong> en esa VM. Si el botón Iniciar VM no aparece, es posible que su cuenta carezca del permiso requerido.</p>
+    </div>
+
+    <p>Una vez iniciado el arranque de una VM, la aplicación consulta Azure cada 5 segundos durante un máximo de 5 minutos esperando el estado En ejecución. Si la VM no alcanza ese estado, haga clic en el botón 🔄 <strong>Actualizar</strong> para comprobar el estado actual manualmente.</p>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>El botón <strong>Conectar</strong> en la pestaña Azure VM está deshabilitado cuando la VM no está en estado En ejecución. Incluso si hace clic en Conectar inmediatamente después de que el indicador de estado se vuelva verde, la aplicación revalida el estado de energía en ese momento antes de proceder.</p>
+    </div>
+  </section>
+
+  <!-- ── MULTI-TENANT ─────────────────────── -->
+  <section id="multi-tenant">
+    <h2><span class="icon">🏢</span> Compatibilidad multiinquilino</h2>
+    <p>Si su cuenta de Azure tiene acceso a múltiples inquilinos de Entra ID (por ejemplo, a través de <strong>Azure Lighthouse</strong> para escenarios de proveedores de servicios administrados), la aplicación admite cambiar entre inquilinos.</p>
+
+    <h3>Cómo funciona la selección de inquilino</h3>
+    <p>Después de iniciar sesión, si se detectan múltiples inquilinos, se le presentará un diálogo de selección de inquilino. El inquilino seleccionado se muestra junto al nombre de su cuenta en la barra superior.</p>
+
+    <h3>Configuración por inquilino</h3>
+    <p>Los siguientes ajustes se almacenan <strong>por separado para cada inquilino</strong>, por lo que al cambiar de inquilino se restaura su contexto anterior para ese inquilino:</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin:12px 0;">
+      <span class="badge blue">Última suscripción</span>
+      <span class="badge blue">Último Bastion</span>
+      <span class="badge blue">Última suscripción de VM</span>
+      <span class="badge blue">Última VM</span>
+      <span class="badge blue">Última dirección IP</span>
+      <span class="badge blue">Puertos destino y local</span>
+      <span class="badge blue">Método de conexión</span>
+      <span class="badge blue">Modo de monitor</span>
+      <span class="badge blue">Entra ID Auth setting</span>
+    </div>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>La preferencia de idioma es <strong>global</strong> — se aplica a todos los inquilinos y no se restablece al cambiar.</p>
+    </div>
+  </section>
+
+  <!-- ── SYSTEM TRAY ─────────────────────── -->
+  <section id="tray">
+    <h2><span class="icon">📌</span> Bandeja del sistema</h2>
+    <p>La aplicación agrega un icono en la bandeja del sistema de Windows (área de notificación). Esto le permite mantenerla ejecutándose en segundo plano mientras mantiene ordenada su barra de tareas.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Acción</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td>Doble clic en el icono de la bandeja</td><td>Restaura la ventana principal al primer plano.</td></tr>
+        <tr><td>Clic derecho en el icono de la bandeja</td><td>Abre un menú contextual con todos los túneles activos (cada uno como submenú), un elemento <em>Mostrar ventana principal</em> y un elemento <em>Salir</em>.</td></tr>
+        <tr><td>Submenú de túnel</td><td>Cada túnel activo aparece como un submenú que muestra el destino y el puerto local. Desde allí puede <strong>Conectar RDP</strong> (volver a iniciar el cliente RDP) o <strong>Detener túnel</strong> sin abrir la ventana principal.</td></tr>
+        <tr><td>Notificaciones</td><td>El icono de la bandeja muestra notificaciones de tipo toast para túnel iniciado, túnel conectado, túnel detenido, VM iniciada y errores de conexión.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Cerrar la ventana principal <strong>o</strong> minimizarla oculta la ventana y la elimina de la barra de tareas — la aplicación continúa ejecutándose en la bandeja. Para salir completamente, haga clic derecho en el icono de la bandeja y elija <strong>Salir</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ── LANGUAGE ─────────────────────────── -->
+  <section id="language">
+    <h2><span class="icon">🌐</span> Idiomas</h2>
+    <p>La aplicación admite seis idiomas de interfaz. El idioma se detecta automáticamente desde la configuración regional de Windows en el primer inicio. Puede cambiarlo en cualquier momento usando el botón <strong>🌐 Idioma</strong> en cualquiera de las pestañas de conexión.</p>
+
+    <div class="lang-grid">
+      <div class="lang-card"><span class="flag">🇬🇧</span> English</div>
+      <div class="lang-card"><span class="flag">🇳🇱</span> Nederlands</div>
+      <div class="lang-card"><span class="flag">🇩🇪</span> Deutsch</div>
+      <div class="lang-card"><span class="flag">🇫🇷</span> Français</div>
+      <div class="lang-card"><span class="flag">🇪🇸</span> Español</div>
+      <div class="lang-card"><span class="flag">🇵🇹</span> Português</div>
+    </div>
+
+    <p>Los cambios de idioma tienen efecto <strong>inmediatamente</strong> sin reiniciar la aplicación. Todo el texto de la interfaz — etiquetas, botones, mensajes y tooltips — se actualiza en vivo. El idioma seleccionado se guarda globalmente y persiste entre inicios.</p>
+
+    <h3>Orden de detección automática</h3>
+    <p>Si aún no se ha guardado ningún idioma, la aplicación intenta detectar su preferencia en este orden:</p>
+    <ol style="margin: 12px 0 12px 20px; color: var(--ink-muted); line-height:2;">
+      <li>Idioma de la interfaz de Windows (<code>CultureInfo.CurrentUICulture</code>)</li>
+      <li>Idioma de interfaz de Windows instalado</li>
+      <li>Formato regional de Windows</li>
+      <li>Configuración de idioma del Registro de Windows</li>
+      <li>Vuelve al <strong>inglés</strong></li>
+    </ol>
+  </section>
+
+  <!-- ── SETTINGS ─────────────────────────── -->
+  <section id="settings">
+    <h2><span class="icon">💾</span> Configuración y persistencia</h2>
+    <p>La aplicación guarda y restaura automáticamente sus preferencias entre sesiones. Nunca necesita editar ningún archivo manualmente — todo es gestionado por la aplicación.</p>
+
+    <h3>Ubicaciones de archivos</h3>
+    <p>La aplicación lee y escribe los siguientes archivos en su máquina:</p>
+    <table class="field-table">
+      <thead><tr><th>Archivo</th><th>Ruta</th><th>Propósito</th></tr></thead>
+      <tbody>
+        <tr><td>Configuración</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>Preferencias del usuario: última suscripción, Bastion, VM, puertos, método de conexión, idioma, etc. Vea a continuación la lista completa.</td></tr>
+        <tr><td>Caché de tokens MSAL</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Tokens de inicio de sesión de Azure cifrados. Compartido con Azure CLI.</td></tr>
+        <tr><td>Perfil Azure</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Lista de suscripciones e información del usuario que ha iniciado sesión. Compartido con Azure CLI.</td></tr>
+        <tr><td>Configuración de nube</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Configuración de punto de conexión de Azure cloud. Compartido con Azure CLI.</td></tr>
+        <tr><td>Caché HTTP</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Caché de respuesta HTTP. Compartido con Azure CLI.</td></tr>
+        <tr><td>Registro de depuración</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registro de diagnóstico para solución de problemas. Borrado en cada inicio de la aplicación.</td></tr>
+        <tr><td>Archivos RDP temporales</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Archivos RDP temporales creados por conexiones RD Gateway. Eliminados cuando la aplicación se cierra.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Contenido de settings.json</h3>
+    <p>Las siguientes preferencias se almacenan en <code>settings.json</code> y se restauran automáticamente en el siguiente inicio:</p>
+    <table class="field-table">
+      <thead><tr><th>Configuración</th><th>Ámbito</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Idioma</td><td><span class="badge blue">Global</span></td><td>Se aplica a todos los inquilinos</td></tr>
+        <tr><td>Última suscripción (Bastion)</td><td><span class="badge orange">Por inquilino</span></td><td>Restaurado al volver al inquilino</td></tr>
+        <tr><td>Último Bastion</td><td><span class="badge orange">Por inquilino</span></td><td></td></tr>
+        <tr><td>Última suscripción VM</td><td><span class="badge orange">Por inquilino</span></td><td></td></tr>
+        <tr><td>Última VM</td><td><span class="badge orange">Por inquilino</span></td><td></td></tr>
+        <tr><td>Última dirección IP</td><td><span class="badge orange">Por inquilino</span></td><td></td></tr>
+        <tr><td>Puerto de destino / Puerto local</td><td><span class="badge orange">Por inquilino</span></td><td>Sincronizado entre ambas pestañas</td></tr>
+        <tr><td>Método de conexión</td><td><span class="badge orange">Por inquilino</span></td><td>Túnel o RD Gateway</td></tr>
+        <tr><td>Modo monitor</td><td><span class="badge orange">Por inquilino</span></td><td>Monitor único o todos los monitores</td></tr>
+        <tr><td>Autenticación Entra ID</td><td><span class="badge orange">Por inquilino</span></td><td>Activar/desactivar SSO de RD Gateway</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── TROUBLESHOOTING ─────────────────────── -->
+  <section id="troubleshooting">
+    <h2><span class="icon">🔧</span> Solución de problemas</h2>
+
+    <h3>La aplicación no inicia / la ventana no aparece</h3>
+    <p>La aplicación aplica una política de <strong>instancia única</strong>. Si ya está ejecutándose en la bandeja del sistema, volver a iniciarla no abrirá una segunda ventana — en su lugar, la ventana existente se trae al primer plano. Compruebe la bandeja del sistema para el icono de la aplicación.</p>
+
+    <h3>Error «Azure CLI no encontrado» (modo túnel)</h3>
+    <p>El modo túnel requiere que Azure CLI (<code>az</code>) esté instalado y accesible en el <code>PATH</code> del sistema. Descárguelo e instálelo desde <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a>. Si Azure CLI falta cuando intenta conectarse, la aplicación mostrará esta URL y ofrecerá abrirla directamente. Luego reinicie la aplicación.</p>
+
+    <h3>No aparecen suscripciones / lista de Bastion vacía</h3>
+    <p>Esto generalmente significa que su cuenta no tiene los permisos RBAC requeridos en ninguna suscripción, o que el inquilino seleccionado no contiene recursos de Bastion. Intente:</p>
+    <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
+      <li>Haga clic en <strong>Actualizar</strong> junto al selector de Bastion.</li>
+      <li>Use <strong>Cambiar</strong> para seleccionar una suscripción diferente.</li>
+      <li>Cerrar sesión y volver a iniciarla si su sesión de Azure puede haber expirado.</li>
+      <li>Comunicarse con su administrador de Azure para verificar sus asignaciones de roles.</li>
+    </ul>
+
+    <h3>El cliente RDP se abre pero la conexión falla — Azure VM (RD Gateway)</h3>
+    <p>Compruebe lo siguiente:</p>
+    <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
+      <li>El estado de energía de la VM de destino es <strong>En ejecución</strong> y el sistema operativo ha tenido 2–3 minutos para arrancar completamente.</li>
+      <li>El SKU de Bastion es <strong>Estándar o Premium</strong> (Basic no admite conexiones de cliente nativo).</li>
+      <li>Ninguna regla de grupo de seguridad de red (NSG) está bloqueando el tráfico entrante desde Bastion a la VM en el puerto 3389.</li>
+      <li>Existe conectividad de red entre su Bastion y la VM — ya sea directamente, a través del emparejamiento de VNet o a través de Virtual WAN.</li>
+    </ul>
+
+    <h3>El cliente RDP se abre pero la conexión falla — Azure VM (modo túnel)</h3>
+    <p>Además de las comprobaciones anteriores, verifique que:</p>
+    <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
+      <li>Azure CLI está instalado y actualizado (<code>az upgrade</code>).</li>
+      <li>El proceso de túnel sigue en ejecución — compruebe la pestaña <strong>Túneles activos</strong>. Si el túnel se detuvo inesperadamente, intente conectarse de nuevo para reiniciarlo.</li>
+    </ul>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Si el puerto local configurado ya está en uso, la aplicación selecciona automáticamente el siguiente puerto disponible y actualiza la visualización — no se necesita intervención manual.</p>
+    </div>
+
+    <h3>El cliente RDP se abre pero la conexión falla — dirección IP (modo túnel)</h3>
+    <p>Además de las comprobaciones generales del túnel anteriores, verifique que:</p>
+    <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
+      <li>La dirección IP de destino es <strong>accesible desde Azure Bastion</strong> — no solo desde su máquina local. Para hosts locales esto requiere una VPN de sitio a sitio o circuito ExpressRoute funcionando. Para hosts en otra nube, debe existir una conexión VPN a Azure.</li>
+      <li>El <strong>Puerto de destino</strong> correcto está configurado. Aunque 3389 es el puerto RDP estándar, los hosts locales o no de Azure pueden usar un puerto diferente.</li>
+      <li>Un firewall o firewall basado en host en la máquina de destino no está bloqueando el RDP entrante desde el rango IP de la subred de Bastion.</li>
+      <li>La conexión VPN o ExpressRoute en sí está en buen estado — consulte a su equipo de red si no está seguro.</li>
+    </ul>
+
+    <h3>El botón Iniciar VM no aparece</h3>
+    <p>Su cuenta requiere al menos el rol <strong>Virtual Machine Contributor</strong> en la VM de destino para iniciarla. Pida a su administrador de Azure que otorgue este rol, o inicie la VM manualmente desde Azure Portal.</p>
+
+    <h3>La autenticación Entra ID falla</h3>
+    <p>La autenticación de Entra ID solo funciona cuando su cuenta está <strong>en el mismo inquilino</strong> que la VM de destino. Si se conecta entre inquilinos, desmarque la opción <em>Usar autenticación de EntraID</em> y use credenciales de Windows tradicionales en su lugar.</p>
+
+    <h3>Sesión expirada / solicitudes de inicio de sesión repetidas</h3>
+    <p>Su organización puede tener una política de acceso condicional que requiera reautenticación diaria o MFA. Este es el comportamiento esperado. Simplemente complete el aviso de inicio de sesión cuando aparezca.</p>
+
+    <h3>Restablecer configuración</h3>
+    <p>Elimine el archivo de configuración para devolver las preferencias a sus valores predeterminados:</p>
+    <pre>%APPDATA%\BastionRDPConnector\settings.json</pre>
+    <p>El próximo inicio restablecerá todas las preferencias guardadas. No se cerrará su sesión.</p>
+
+    <h3>Restablecer el inicio de sesión / caché de tokens</h3>
+    <p>La forma más sencilla es hacer clic en el botón <strong>Cerrar sesión</strong> — esto elimina automáticamente los cuatro archivos de autenticación y borra la caché MSAL en un solo paso. Si necesita restablecer sin abrir la aplicación, elimine manualmente estos cuatro archivos de <code>%USERPROFILE%\.azure\</code>:</p>
+    <pre>msal_token_cache.bin
+azureProfile.json
+clouds.config
+msal_http_cache.bin</pre>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <p>Estos archivos son compartidos con Azure CLI. Eliminarlos también cerrará las sesiones activas de Azure CLI — los comandos <code>az</code> requerirán <code>az login</code> de nuevo.</p>
+    </div>
+
+    <h3>Restablecimiento completo (configuración + inicio de sesión)</h3>
+    <p>Para restablecer completamente la aplicación a un estado limpio, elimine el archivo de configuración y los cuatro archivos de autenticación:</p>
+    <pre>%APPDATA%\BastionRDPConnector\settings.json
+%USERPROFILE%\.azure\msal_token_cache.bin
+%USERPROFILE%\.azure\azureProfile.json
+%USERPROFILE%\.azure\clouds.config
+%USERPROFILE%\.azure\msal_http_cache.bin</pre>
+
+    <h3>Registro de depuración</h3>
+    <p>La aplicación escribe un registro de depuración detallado que puede ayudar a diagnosticar problemas de conexión o autenticación:</p>
+    <pre>%LOCALAPPDATA%\BastionRDPConnector\debug.log</pre>
+    <div class="callout warn">
+      <span class="ci">⚠️</span>
+      <p>El archivo de registro se <strong>borra cada vez que la aplicación se inicia</strong>. Si necesita capturar un registro para solucionar problemas, reproduzca el problema dentro de la misma sesión — no reinicie la aplicación de antemano.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <p>Azure Bastion RDP Connector v2.8.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+</footer>
+
+<script>
+  // Highlight active nav link based on scroll position
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+  
+  
+  
+  
+  <script src="lang.js"></script>
+</body>
+</html>

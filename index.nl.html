@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Azure Bastion RDP Connector — Documentation</title>
+<title>Azure Bastion RDP Connector — Documentatie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
 <style>
@@ -441,46 +441,46 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v2.8.6 · Documentation</div>
+    <div class="version">v2.8.6 · Documentatie</div>
   </div>
   <nav>
     <div class="nav-group">
-      <div class="nav-group-label">Getting Started</div>
-      <a href="#overview" class="active">Overview</a>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#installation">Installation</a>
-      <a href="#first-login">First Login</a>
+      <div class="nav-group-label">Aan de slag</div>
+      <a href="#overview" class="active">Overzicht</a>
+      <a href="#prerequisites">Vereisten</a>
+      <a href="#installation">Installatie</a>
+      <a href="#first-login">Eerste aanmelding</a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label">The Interface</div>
-      <a href="#layout">Window Layout</a>
-      <a href="#tab-ip">IP Address Tab</a>
-      <a href="#tab-vm">Azure VM Tab</a>
-      <a href="#tab-tunnels">Active Tunnels Tab</a>
+      <div class="nav-group-label">De interface</div>
+      <a href="#layout">Vensterindeling</a>
+      <a href="#tab-ip">IP-adres tabblad</a>
+      <a href="#tab-vm">Azure VM tabblad</a>
+      <a href="#tab-tunnels">Actieve Tunnels tabblad</a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label">Connection Methods</div>
-      <a href="#method-tunnel">Tunnel Mode</a>
-      <a href="#method-rdgateway">RD Gateway Mode</a>
-      <a href="#method-comparison">Comparison</a>
+      <div class="nav-group-label">Verbindingsmethoden</div>
+      <a href="#method-tunnel">Tunnelmodus</a>
+      <a href="#method-rdgateway">RD Gateway-modus</a>
+      <a href="#method-comparison">Vergelijking</a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label">Features</div>
-      <a href="#monitor-config">Monitor Configuration</a>
-      <a href="#entraid">Entra ID Auth</a>
-      <a href="#vm-power">VM Power Management</a>
-      <a href="#multi-tenant">Multi-Tenant Support</a>
-      <a href="#tray">System Tray</a>
-      <a href="#language">Languages</a>
+      <div class="nav-group-label">Functies</div>
+      <a href="#monitor-config">Monitor Configuratie</a>
+      <a href="#entraid">Entra ID Authenticatie</a>
+      <a href="#vm-power">VM Energiebeheer</a>
+      <a href="#multi-tenant">Multi-Tenant ondersteuning</a>
+      <a href="#tray">Systeemvak</a>
+      <a href="#language">Talen</a>
     </div>
     <div class="nav-group">
-      <div class="nav-group-label">Reference</div>
-      <a href="#settings">Settings & Persistence</a>
-      <a href="#troubleshooting">Troubleshooting</a>
+      <div class="nav-group-label">Naslag</div>
+      <a href="#settings">Instellingen en opslag</a>
+      <a href="#troubleshooting">Problemen oplossen</a>
     </div>
   </nav>
   <div class="lang-picker">
-    <div class="lang-picker-label">🌐 Language</div>
+    <div class="lang-picker-label">🌐 Taal</div>
     <div class="lang-picker-grid">
       <button class="lang-picker-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
       <button class="lang-picker-btn" data-lang="nl" onclick="switchLang('nl')">🇳🇱 NL</button>
@@ -497,86 +497,86 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="subtitle">End-User Documentation</div>
+    <div class="subtitle">Gebruikersdocumentatie</div>
     <h1>Azure Bastion RDP Connector</h1>
-    <p>Securely connect to Azure VMs and IP addresses through Azure Bastion using the native Windows RDP client — via a simple, user-friendly interface.</p>
+    <p>Maak veilig verbinding met Azure-VM's en IP-adressen via Azure Bastion met de native Windows RDP-client — via een eenvoudige, gebruiksvriendelijke interface.</p>
   </div>
 
   <!-- ── OVERVIEW ─────────────────────────── -->
   <section id="overview">
-    <h2><span class="icon">🗺️</span> Overview</h2>
-    <p>Azure Bastion RDP Connector is a Windows desktop application that makes it easy to establish secure RDP connections to virtual machines and IP addresses hosted in Microsoft Azure, routed through <strong>Azure Bastion</strong> — without exposing public IP addresses or opening RDP ports to the internet.</p>
-    <p>Under the hood it uses your Azure account credentials and the Azure Bastion service. You never need to manage certificates, VPNs, or open firewall rules. The application handles all the complexity and hands control directly to your standard Windows Remote Desktop client.</p>
+    <h2><span class="icon">🗺️</span> Overzicht</h2>
+    <p>Azure Bastion RDP Connector is een Windows-desktopapplicatie waarmee u eenvoudig beveiligde RDP-verbindingen kunt maken met virtuele machines en IP-adressen in Microsoft Azure, via <strong>Azure Bastion</strong> — zonder publieke IP-adressen bloot te stellen of RDP-poorten naar het internet open te zetten.</p>
+    <p>Achter de schermen gebruikt de applicatie uw Azure-accountgegevens en de Azure Bastion-service. U hoeft nooit certificaten, VPN's of firewallregels te beheren. De applicatie verwerkt alle complexiteit en geeft de controle direct over aan uw standaard Windows Remote Desktop-client.</p>
 
-    <h3>Key capabilities</h3>
+    <h3>Belangrijkste mogelijkheden</h3>
     <table class="field-table">
-      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
       <tbody>
-        <tr><td>Connect by IP</td><td>Tunnel to any IP address reachable through Bastion</td></tr>
-        <tr><td>Connect by VM</td><td>Browse and pick any Azure VM in your subscriptions</td></tr>
-        <tr><td>Tunnel mode</td><td>Classic local port-forward via Azure CLI</td></tr>
-        <tr><td>RD Gateway mode</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
-        <tr><td>VM power management</td><td>View power state and start stopped VMs from the app</td></tr>
-        <tr><td>Multi-tenant</td><td>Switch between Entra ID tenants; settings saved per tenant</td></tr>
-        <tr><td>Multi-monitor</td><td>Single monitor or span-all-monitors for RD Gateway sessions</td></tr>
-        <tr><td>Entra ID auth</td><td>Optional Entra ID SSO for same-tenant RD Gateway connections</td></tr>
-        <tr><td>System tray</td><td>Minimise to tray, receive notifications, manage tunnels</td></tr>
-        <tr><td>6 languages</td><td>English, Dutch, German, French, Spanish, Portuguese</td></tr>
-        <tr><td>Single instance</td><td>Only one copy of the application can run at a time; launching a second copy brings the existing window to the front</td></tr>
-        <tr><td>Light &amp; dark theme</td><td>Automatically follows the Windows light/dark theme setting</td></tr>
+        <tr><td>Verbinden via IP</td><td>Tunnel naar elk IP-adres bereikbaar via Bastion</td></tr>
+        <tr><td>Verbinden via VM</td><td>Blader door en kies een Azure-VM in uw subscriptions</td></tr>
+        <tr><td>Tunnelmodus</td><td>Klassieke lokale poortdoorschakeling via Azure CLI</td></tr>
+        <tr><td>RD Gateway-modus</td><td>Moderne directe RD Gateway-verbinding via de Bastion API</td></tr>
+        <tr><td>VM energiebeheer</td><td>Bekijk de status en start gestopte VM's vanuit de app</td></tr>
+        <tr><td>Multi-tenant</td><td>Schakel tussen Entra ID tenants; instellingen worden per tenant opgeslagen</td></tr>
+        <tr><td>Multi-monitor</td><td>Enkel beeldscherm of alle beeldschermen voor RD Gateway-sessies</td></tr>
+        <tr><td>Entra ID authenticatie</td><td>Optionele Entra ID SSO voor RD Gateway-verbindingen binnen dezelfde tenant</td></tr>
+        <tr><td>Systeemvak</td><td>Minimaliseren naar systeemvak, meldingen ontvangen, tunnels beheren</td></tr>
+        <tr><td>6 talen</td><td>Engels, Nederlands, Duits, Frans, Spaans, Portugees</td></tr>
+        <tr><td>Enkelvoudige instantie</td><td>Er kan slechts één exemplaar tegelijk actief zijn; een tweede exemplaar brengt het bestaande venster naar voren</td></tr>
+        <tr><td>Licht en donker thema</td><td>Volgt automatisch de licht/donker thema-instelling van Windows</td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ── PREREQUISITES ─────────────────────── -->
   <section id="prerequisites">
-    <h2><span class="icon">✅</span> Prerequisites</h2>
-    <p>Before you can use the application, ensure the following are available in your environment.</p>
+    <h2><span class="icon">✅</span> Vereisten</h2>
+    <p>Controleer voordat u de applicatie gebruikt of het volgende beschikbaar is in uw omgeving.</p>
 
-    <h3>On your machine</h3>
+    <h3>Op uw computer</h3>
     <table class="field-table">
-      <thead><tr><th>Requirement</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Vereiste</th><th>Opmerkingen</th></tr></thead>
       <tbody>
-        <tr><td>Windows 10/11 (x64)</td><td>The application is a native Windows x64 executable</td></tr>
-        <tr><td>Remote Desktop client</td><td>Built into Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Azure CLI (Tunnel mode only)</td><td>Required only if you use <em>Tunnel</em> connection method. Download from <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
+        <tr><td>Windows 10/11 (x64)</td><td>De applicatie is een native Windows x64-uitvoerbaar bestand</td></tr>
+        <tr><td>Remote Desktop-client</td><td>Ingebouwd in Windows — <code>mstsc.exe</code></td></tr>
+        <tr><td>Azure CLI (alleen tunnelmodus)</td><td>Alleen vereist als u de <em>Tunnel</em>-verbindingsmethode gebruikt. Download via <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p><strong>RD Gateway mode does not require Azure CLI.</strong> If you only use the RD Gateway connection method, you can skip the Azure CLI installation entirely.</p>
+      <p><strong>RD Gateway-modus vereist geen Azure CLI.</strong> Als u alleen de RD Gateway-verbindingsmethode gebruikt, kunt u de Azure CLI-installatie volledig overslaan.</p>
     </div>
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p><strong>Azure CLI Bastion extension</strong> — Tunnel mode also requires the <code>azure-bastion</code> Azure CLI extension (separate from the CLI itself). If it is not installed, the application will detect this and offer to install it automatically before the first tunnel is created.</p>
+      <p><strong>Azure CLI Bastion extension</strong> — De Tunnelmodus vereist ook de <code>azure-bastion</code> Azure CLI-extensie (los van de CLI zelf). Als deze niet is geïnstalleerd, detecteert de applicatie dit en biedt aan deze automatisch te installeren vóór de eerste tunnel wordt aangemaakt.</p>
     </div>
 
     <h3>In Azure</h3>
     <table class="field-table">
-      <thead><tr><th>Resource</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Resource</th><th>Opmerkingen</th></tr></thead>
       <tbody>
-        <tr><td>Azure Bastion (Standard or Premium SKU)</td><td>Basic SKU does not support tunnelling or RD Gateway</td></tr>
-        <tr><td>An Azure subscription</td><td>The application lists all subscriptions you have access to</td></tr>
-        <tr><td>Reader role on Bastion + target VM/network</td><td>Minimum RBAC required to list and connect; <em>Virtual Machine Contributor</em> or higher is needed to start stopped VMs</td></tr>
+        <tr><td>Azure Bastion (Standard of Premium SKU)</td><td>Basic SKU ondersteunt geen tunneling of RD Gateway</td></tr>
+        <tr><td>Een Azure subscription</td><td>De applicatie toont alle subscriptions waartoe u toegang heeft</td></tr>
+        <tr><td>Reader-rol op Bastion + doel-VM/netwerk</td><td>Minimaal vereiste RBAC om te verbinden; <em>Virtual Machine Contributor</em> of hoger is nodig om gestopte VM's te starten</td></tr>
       </tbody>
     </table>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p><strong>Network reachability</strong> — Azure Bastion can reach a target VM or IP address as long as network connectivity exists between them. This includes:</p>
+      <p><strong>Netwerkbereikbaarheid</strong> — Azure Bastion kan een doel-VM of IP-adres bereiken zolang er netwerkconnectiviteit bestaat. Dit omvat:</p>
       <ul style="margin: 6px 0 0 18px; line-height:2;">
-        <li><strong>Simple setups:</strong> Bastion deployed in the same VNet, or a directly peered VNet.</li>
-        <li><strong>Enterprise / Landing Zone setups:</strong> Bastion deployed in a centralised <em>Connectivity Landing Zone</em> connected via <strong>Azure Virtual WAN</strong> (vWAN) hub. In this topology, Bastion is not visible inside individual spoke landing zones in the Azure Portal — even though it can reach all spoke VNets through the vWAN. This application is specifically designed to solve this problem, giving users a simple interface to connect through a centrally managed Bastion regardless of which landing zone their VM lives in.</li>
+        <li><strong>Eenvoudige opstellingen:</strong> Bastion geïmplementeerd in hetzelfde VNet of een direct gepeered VNet.</li>
+        <li><strong>Enterprise / Landing Zone-opstellingen:</strong> Bastion geïmplementeerd in een centrale <em>Connectivity Landing Zone</em> verbonden via een <strong>Azure Virtual WAN</strong> (vWAN) hub. In deze topologie is Bastion niet zichtbaar in afzonderlijke spoke-landing zones in de Azure Portal — ook al kan het alle spoke-VNets via het vWAN bereiken. Deze applicatie is speciaal ontworpen om dit probleem op te lossen en biedt gebruikers een eenvoudige interface om verbinding te maken via een centraal beheerde Bastion, ongeacht in welke landing zone hun VM zich bevindt.</li>
       </ul>
-      <p style="margin-top:8px;">If you are unsure whether your Bastion can reach a specific target, contact your Azure platform or network team.</p>
+      <p style="margin-top:8px;">Als u niet zeker weet of uw Bastion een specifiek doel kan bereiken, neem dan contact op met uw Azure-platform- of netwerkteam.</p>
     </div>
   </section>
 
   <!-- ── INSTALLATION ─────────────────────── -->
   <section id="installation">
-    <h2><span class="icon">📦</span> Installation</h2>
-    <p>Azure Bastion RDP Connector is available on the <strong>Microsoft Store</strong>. Installation is handled entirely by Windows — no manual setup, no extracted ZIP files, and no SmartScreen warnings.</p>
+    <h2><span class="icon">📦</span> Installatie</h2>
+    <p>Azure Bastion RDP Connector is beschikbaar in de <strong>Microsoft Store</strong>. De installatie wordt volledig door Windows afgehandeld — geen handmatige installatie, geen uitgepakte ZIP-bestanden en geen SmartScreen-waarschuwingen.</p>
 
     <!-- Store badge / download card -->
     <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:28px 32px; margin:24px 0; display:flex; align-items:center; gap:28px; box-shadow:0 2px 12px rgba(0,0,0,.06);">
@@ -588,91 +588,91 @@
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <a href="ms-windows-store://pdp/?productid=9N9MJ1V43Z6T"
              style="display:inline-flex; align-items:center; gap:8px; background:var(--azure); color:#fff; text-decoration:none; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700;">
-            <span>🪟</span> Open in Store app
+            <span>🪟</span> Openen in Store-app
           </a>
           <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T"
              target="_blank"
              style="display:inline-flex; align-items:center; gap:8px; background:var(--surface-alt); color:var(--ink); text-decoration:none; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700; border:1px solid var(--border);">
-            <span>🌐</span> View in browser
+            <span>🌐</span> Bekijken in browser
           </a>
         </div>
       </div>
     </div>
 
-    <h3>How to install</h3>
+    <h3>Installatiestappen</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Open the Microsoft Store listing</strong>
-          <p>Click <em>Open in Store app</em> above, or visit <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T" target="_blank" style="color:var(--azure);">apps.microsoft.com/detail/9N9MJ1V43Z6T</a> in your browser.</p>
+          <strong>Open de Microsoft Store-pagina</strong>
+          <p>Click <em>Openen in Store-app</em> above, or visit <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T" target="_blank" style="color:var(--azure);">apps.microsoft.com/detail/9N9MJ1V43Z6T</a> in uw browser.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Click Get / Install</strong>
-          <p>Windows downloads and installs the application automatically. No administrator rights are required for a per-user install.</p>
+          <strong>Klik op Ophalen / Installeren</strong>
+          <p>Windows downloadt en installeert de applicatie automatisch. Er zijn geen beheerdersrechten vereist voor een installatie per gebruiker.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Launch from the Start menu</strong>
-          <p>Search for <strong>Bastion RDP Connector</strong> or find it under your installed apps.</p>
+          <strong>Starten vanuit het Start-menu</strong>
+          <p>Zoek naar <strong>Bastion RDP Connector</strong> of zoek het op onder uw geïnstalleerde apps.</p>
         </div>
       </div>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Because the app is installed via the Microsoft Store, it updates automatically in the background. You will always have the latest version without any manual action.</p>
+      <p>Omdat de app is geïnstalleerd via de Microsoft Store, wordt deze automatisch op de achtergrond bijgewerkt. U beschikt altijd over de nieuwste versie zonder handmatige actie.</p>
     </div>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>Settings are saved to <code>%APPDATA%\BastionRDPConnector\settings.json</code>. Your last-used subscription, Bastion, VM, and connection preferences are automatically restored on the next launch.</p>
+      <p>Instellingen worden opgeslagen in <code>%APPDATA%\BastionRDPConnector\settings.json</code>. Uw laatst gebruikte subscription, Bastion, VM en verbindingsvoorkeuren worden automatisch hersteld bij de volgende start.</p>
     </div>
   </section>
 
   <!-- ── FIRST LOGIN ─────────────────────── -->
   <section id="first-login">
-    <h2><span class="icon">🔐</span> First Login</h2>
-    <p>Each time the application starts, it checks whether a valid <strong>MSAL token cache</strong> exists on your machine. What happens next depends on that check:</p>
+    <h2><span class="icon">🔐</span> Eerste aanmelding</h2>
+    <p>Elke keer dat de applicatie start, controleert deze of er een geldige <strong>MSAL-tokencache</strong> aanwezig is op uw computer. Wat er daarna gebeurt, hangt af van die controle:</p>
 
     <table class="field-table" style="margin-bottom:20px;">
-      <thead><tr><th>Situation</th><th>What the app does</th></tr></thead>
+      <thead><tr><th>Situatie</th><th>Wat de app doet</th></tr></thead>
       <tbody>
-        <tr><td>No cached token found</td><td>The Microsoft Azure login window opens immediately so you can sign in.</td></tr>
-        <tr><td>Valid cached token found</td><td>The app signs in silently — no login window appears. You go straight to tenant selection (if multi-tenant).</td></tr>
-        <tr><td>Token expired / CA policy requires re-auth</td><td>The login window opens again to satisfy your organisation's Conditional Access requirements (e.g. daily MFA).</td></tr>
+        <tr><td>Geen gecachede token gevonden</td><td>Het Microsoft Azure-aanmeldingsvenster wordt direct geopend zodat u zich kunt aanmelden.</td></tr>
+        <tr><td>Geldige gecachede token gevonden</td><td>De app meldt zich stil aan — er verschijnt geen aanmeldingsvenster. U gaat direct naar de tenantselectie (indien multi-tenant).</td></tr>
+        <tr><td>Token verlopen / CA-beleid vereist herverificatie</td><td>Het aanmeldingsvenster wordt opnieuw geopend om te voldoen aan de Conditional Access-vereisten van uw organisatie (bijv. dagelijkse MFA).</td></tr>
       </tbody>
     </table>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>The application stores authentication state in four files inside <code>%USERPROFILE%\.azure\</code> — the same folder used by the Azure CLI:</p>
+      <p>De applicatie slaat verificatiestatus op in vier bestanden in <code>%USERPROFILE%\.azure\</code> — dezelfde map die door de Azure CLI wordt gebruikt:</p>
       <table class="field-table" style="margin:8px 0 0;">
-        <thead><tr><th>File</th><th>Contents</th></tr></thead>
+        <thead><tr><th>Bestand</th><th>Inhoud</th></tr></thead>
         <tbody>
-          <tr><td>msal_token_cache.bin</td><td>Encrypted MSAL access and refresh tokens</td></tr>
-          <tr><td>azureProfile.json</td><td>Subscription list and signed-in user info</td></tr>
-          <tr><td>clouds.config</td><td>Azure cloud endpoint configuration</td></tr>
-          <tr><td>msal_http_cache.bin</td><td>HTTP response cache</td></tr>
+          <tr><td>msal_token_cache.bin</td><td>Versleutelde MSAL-toegangs- en vernieuwingstokens</td></tr>
+          <tr><td>azureProfile.json</td><td>Subscription-lijst en aangemelde gebruikersinformatie</td></tr>
+          <tr><td>clouds.config</td><td>Configuratie van Azure cloud-eindpunten</td></tr>
+          <tr><td>msal_http_cache.bin</td><td>HTTP-antwoordcache</td></tr>
         </tbody>
       </table>
-      <p style="margin-top:8px;">Because these files are shared with the Azure CLI, the application can reuse an existing <code>az login</code> session and vice versa.</p>
+      <p style="margin-top:8px;">Omdat deze bestanden worden gedeeld met de Azure CLI, kan de applicatie een bestaande <code>az login</code>-sessie hergebruiken en omgekeerd.</p>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p><strong>To reset the token cache</strong> (force a fresh login on next start), delete all four files from <code>%USERPROFILE%\.azure\</code>:<br/>
+      <p><strong>Om de tokencache opnieuw in te stellen</strong> (forceer een nieuwe aanmelding bij de volgende start), verwijder alle vier bestanden uit <code>%USERPROFILE%\.azure\</code>:<br/>
       <code>msal_token_cache.bin</code>, <code>azureProfile.json</code>, <code>clouds.config</code>, <code>msal_http_cache.bin</code><br/><br/>
-      Alternatively, use the <strong>Logout</strong> button — it automatically deletes all four files and clears the MSAL cache in one step. Note that this also signs out any active Azure CLI sessions.</p>
+      U kunt ook de knop <strong>Afmelden</strong> gebruiken — deze verwijdert automatisch alle vier bestanden en wist de MSAL-cache in één stap. Houd er rekening mee dat hierdoor ook actieve Azure CLI-sessies worden beëindigd.</p>
     </div>
 
-    <h3>Signing in (no cached token)</h3>
-    <p>When no token is cached, the Microsoft Azure login window opens automatically:</p>
+    <h3>Aanmelden (geen gecachede token)</h3>
+    <p>Als er geen token is gecached, wordt het Microsoft Azure-aanmeldingsvenster automatisch geopend:</p>
 
     <div style="display:flex; gap:24px; align-items:flex-start; margin:16px 0 24px;">
       <img src="screen-login.png" alt="Microsoft Azure login window" style="width:220px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); flex-shrink:0;"/>
@@ -681,62 +681,62 @@
           <div class="step">
             <div class="step-num">1</div>
             <div class="step-content">
-              <strong>Select "School or work account"</strong>
-              <p>In the sign-in options, choose your organisational Microsoft account — not a personal Microsoft account.</p>
+              <strong>Selecteer "School- of werkaccount"</strong>
+              <p>Kies bij de aanmeldingsopties uw organisatie-Microsoft-account — geen persoonlijk Microsoft-account.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">2</div>
             <div class="step-content">
-              <strong>Enter your UPN</strong>
-              <p>Type your work e-mail address (User Principal Name), or select it from the list if it was previously cached by Windows.</p>
+              <strong>Voer uw UPN in</strong>
+              <p>Typ uw zakelijke e-mailadres (User Principal Name) of selecteer het uit de lijst als het eerder door Windows is gecached.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">3</div>
             <div class="step-content">
-              <strong>Complete MFA if required</strong>
-              <p>Follow the on-screen prompts for any multi-factor authentication your organisation enforces.</p>
+              <strong>Voltooi MFA indien vereist</strong>
+              <p>Volg de instructies op het scherm voor meervoudige verificatie die uw organisatie vereist.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <h3>Tenant selection</h3>
-    <p>After a successful login — or when the app restarts and re-uses a cached token — a <strong>tenant selection dialog</strong> appears if your account has access to more than one Entra ID tenant (for example via Azure Lighthouse).</p>
+    <h3>Tenantselectie</h3>
+    <p>Na een succesvolle aanmelding — of wanneer de app opnieuw start en een gecachede token hergebruikt — verschijnt een <strong>tenantselectiedialoogvenster</strong> als uw account toegang heeft tot meer dan één Entra ID-tenant (bijvoorbeeld via Azure Lighthouse).</p>
 
     <div style="display:flex; gap:24px; align-items:flex-start; margin:16px 0 24px;">
       <img src="screen-tenant.png" alt="Select Azure Tenant dialog" style="width:260px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); flex-shrink:0;"/>
       <div>
-        <p>Select the tenant whose resources you want to work with, then click <strong>OK</strong>. If the selected tenant requires MFA and your cached token does not satisfy it, an additional authentication prompt will appear.</p>
+        <p>Selecteer de tenant waarvan u de resources wilt gebruiken en klik op <strong>OK</strong>. Als de geselecteerde tenant MFA vereist en uw gecachede token dit niet voldoet, verschijnt er een aanvullende verificatieprompt.</p>
         <div class="callout info" style="margin-top:12px;">
           <span class="ci">ℹ️</span>
-          <p>You can switch tenants at any time while the app is running — your settings (last subscription, Bastion, VM, etc.) are stored separately per tenant and restored automatically when you switch back.</p>
+          <p>U kunt op elk moment van tenant wisselen terwijl de app actief is — uw instellingen (laatste subscription, Bastion, VM, enz.) worden afzonderlijk per tenant opgeslagen en automatisch hersteld wanneer u terugschakelt.</p>
         </div>
       </div>
     </div>
 
-    <h3>Selecting a subscription</h3>
-    <p>After tenant selection the main window loads. The top bar shows the currently active <strong>Bastion Subscription</strong>. If your account has access to multiple subscriptions and the pre-selected one does not contain the Azure Bastion you need, click <strong>Change</strong> to open the subscription picker.</p>
+    <h3>Een subscription selecteren</h3>
+    <p>Na de tenantselectie wordt het hoofdvenster geladen. De bovenste balk toont de momenteel actieve <strong>Bastion Subscription</strong>. Als uw account toegang heeft tot meerdere subscriptions en de voorgeselecteerde subscription niet de benodigde Azure Bastion bevat, klik dan op <strong>Wijzig</strong> om de subscription-kiezer te openen.</p>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>The <strong>Bastion Subscription</strong> (top bar) is the subscription that contains your Bastion resource. The <strong>VM Subscription</strong> (Azure VM tab) can be a different subscription — cross-subscription connections are fully supported.</p>
+      <p>De <strong>Bastion Subscription</strong> (bovenste balk) is de subscription die uw Bastion-resource bevat. De <strong>VM Subscription</strong> (tabblad Azure VM) kan een andere subscription zijn — verbindingen tussen subscriptions worden volledig ondersteund.</p>
     </div>
 
-    <p>Your access token is securely cached on disk (MSAL token cache). On subsequent launches the application re-authenticates silently — you will not be prompted to log in again unless your session expires or your organisation's Conditional Access policy requires re-authentication.</p>
+    <p>Uw toegangstoken wordt veilig opgeslagen op schijf (MSAL-tokencache). Bij volgende starts meldt de applicatie zich stil opnieuw aan — u wordt niet opnieuw gevraagd u aan te melden tenzij uw sessie verloopt of het Conditional Access-beleid van uw organisatie herverificatie vereist.</p>
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>To log out and clear the cached token, click the red <strong>Logout</strong> button in the top bar. A confirmation dialog will appear before the application closes and removes all cached credentials. The next launch will require a full sign-in.</p>
+      <p>Om u af te melden en de gecachede token te wissen, klikt u op de rode knop <strong>Afmelden</strong> in de bovenste balk. Er verschijnt een bevestigingsdialoogvenster voordat de applicatie sluit en alle gecachede aanmeldingsgegevens verwijdert. De volgende start vereist een volledige aanmelding.</p>
     </div>
   </section>
 
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
-    <h2><span class="icon">🖼️</span> Window Layout</h2>
-    <p>The main window is divided into three persistent areas and three tabs.</p>
+    <h2><span class="icon">🖼️</span> Vensterindeling</h2>
+    <p>Het hoofdvenster is verdeeld in drie vaste gebieden en drie tabbladen.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -748,11 +748,11 @@
         <div style="border:1px solid var(--border); border-radius:6px; padding:10px 14px; margin-bottom:0; border-bottom:none; border-radius:6px 6px 0 0;">
           <div class="ui-row" style="margin-bottom:6px;">
             <span style="font-size:12px; flex:1; color:var(--ink-muted);">Bastion Subscription: <strong>Contoso Production</strong></span>
-            <span class="ui-btn secondary">Change</span>
+            <span class="ui-btn secondary">Wijzig</span>
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Logout</span>
+            <span class="ui-btn danger">Afmelden</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -760,39 +760,39 @@
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:12px; color:var(--ink-muted); margin-right:8px;">Bastion</span>
             <div class="ui-field" style="flex:1;">prod-bastion-westeurope</div>
-            <span class="ui-btn secondary" style="margin-left:8px;">Refresh</span>
+            <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
           </div>
         </div>
         <!-- Tabs -->
         <div class="ui-tab-bar">
-          <div class="ui-tab active">IP Address</div>
+          <div class="ui-tab active">IP-adres</div>
           <div class="ui-tab">Azure VM</div>
-          <div class="ui-tab">Active Tunnels</div>
+          <div class="ui-tab">Actieve Tunnels</div>
         </div>
-        <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Tab content shown in sections below)</div>
+        <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Tabbladinhoud wordt hieronder weergegeven)</div>
       </div>
     </div>
 
     <table class="field-table">
-      <thead><tr><th>Area</th><th>Purpose</th></tr></thead>
+      <thead><tr><th>Gebied</th><th>Doel</th></tr></thead>
       <tbody>
-        <tr><td>Subscription bar (top)</td><td>Shows the active Bastion subscription and logged-in account. Provides <strong>Change</strong> and <strong>Logout</strong> buttons.</td></tr>
-        <tr><td>Bastion selector</td><td>Dropdown to pick the Azure Bastion instance to use for connections. Click <strong>Refresh</strong> to reload the list.</td></tr>
-        <tr><td>IP Address tab</td><td>Connect to any IP address through Bastion using a local tunnel.</td></tr>
-        <tr><td>Azure VM tab</td><td>Browse VMs across subscriptions, check power state, start VMs, and connect.</td></tr>
-        <tr><td>Active Tunnels tab</td><td>View and manage all tunnels currently open by this application.</td></tr>
+        <tr><td>Subscription-balk (bovenaan)</td><td>Toont de actieve Bastion Subscription en het aangemelde account. Biedt de knoppen <strong>Wijzig</strong> en <strong>Afmelden</strong>.</td></tr>
+        <tr><td>Bastion-selector</td><td>Vervolgkeuzelijst om de Azure Bastion-instantie te kiezen. Klik op <strong>Ververs</strong> om de lijst opnieuw te laden.</td></tr>
+        <tr><td>IP-adres tabblad</td><td>Verbinden met elk IP-adres via Bastion met een lokale tunnel.</td></tr>
+        <tr><td>Azure VM tabblad</td><td>Blader door VM's, controleer de status, start VM's en maak verbinding.</td></tr>
+        <tr><td>Actieve Tunnels tabblad</td><td>Bekijk en beheer alle tunnels die momenteel open zijn.</td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ── TAB 1: IP ADDRESS ─────────────────── -->
   <section id="tab-ip">
-    <h2><span class="icon">🌐</span> IP Address Tab</h2>
-    <p>Use this tab when you want to connect to a <strong>specific IP address</strong> through Azure Bastion, rather than selecting a VM from Azure. This is useful for non-Azure resources, on-premises machines, or resources without a VM record in your subscription.</p>
+    <h2><span class="icon">🌐</span> Tabblad IP-adres</h2>
+    <p>Gebruik dit tabblad wanneer u verbinding wilt maken met een <strong>specifiek IP-adres</strong> via Azure Bastion, in plaats van een VM te selecteren uit Azure. Dit is handig voor niet-Azure-resources, on-premises computers of resources zonder een VM-record in uw subscription.</p>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>The IP Address tab always uses <strong>Tunnel mode</strong>. RD Gateway is not available for direct IP connections.</p>
+      <p>Het tabblad IP-adres gebruikt altijd de <strong>tunnelmodus</strong>. RD Gateway is niet beschikbaar voor directe IP-verbindingen.</p>
     </div>
 
     <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
@@ -800,64 +800,64 @@
     <div class="ui-card">
       <div class="ui-card-titlebar">
         <div class="dots"><span></span><span></span><span></span></div>
-        IP Address Tab
+        Tabblad IP-adres
       </div>
       <div class="ui-card-body">
         <div class="ui-row">
-          <span class="ui-label">IP Address</span>
+          <span class="ui-label">IP-adres</span>
           <div class="ui-field">10.0.1.42</div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
           <div>
-            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Target Port</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Doel poort</div>
             <div class="ui-field">3389</div>
           </div>
           <div>
-            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Local Port</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Lokale poort</div>
             <div class="ui-field">55000</div>
           </div>
         </div>
         <div style="font-size:11px; color:var(--ink-faint); margin-bottom:12px; line-height:1.5;">
-          A local tunnel will be created. Connect your RDP client to <strong>localhost:55000</strong>.
+          Er wordt een lokale tunnel aangemaakt. Verbind uw RDP-client met <strong>localhost:55000</strong>.
         </div>
         <div class="ui-row" style="justify-content:space-between;">
           <span class="ui-btn secondary">🌐 Language</span>
-          <span class="ui-btn primary">Connect</span>
+          <span class="ui-btn primary">Verbinden</span>
         </div>
       </div>
     </div>
 
-    <h3>Fields</h3>
+    <h3>Velden</h3>
     <table class="field-table">
-      <thead><tr><th>Field</th><th>Description</th><th>Default</th></tr></thead>
+      <thead><tr><th>Veld</th><th>Beschrijving</th><th>Standaard</th></tr></thead>
       <tbody>
-        <tr><td>IP Address</td><td>The private IP address of the target machine. Must be reachable from Bastion's VNet.</td><td>—</td></tr>
-        <tr><td>Target Port</td><td>The RDP port on the remote machine.</td><td>3389</td></tr>
-        <tr><td>Local Port</td><td>The port on your local machine where the tunnel is created. Your RDP client connects to <code>localhost:[Local Port]</code>.</td><td>55000</td></tr>
+        <tr><td>IP-adres</td><td>Het privé-IP-adres van de doelcomputer. Moet bereikbaar zijn vanuit het VNet van Bastion.</td><td>—</td></tr>
+        <tr><td>Doel poort</td><td>De RDP-poort op de externe computer.</td><td>3389</td></tr>
+        <tr><td>Lokale poort</td><td>De poort op uw lokale computer waar de tunnel wordt aangemaakt. Uw RDP-client maakt verbinding met <code>localhost:[Lokale poort]</code>.</td><td>55000</td></tr>
       </tbody>
     </table>
 
-    <h3>How to connect</h3>
+    <h3>Verbinding maken</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Enter the target IP address</strong>
-          <p>Type the private IP of the machine you want to reach.</p>
+          <strong>Voer het doel-IP-adres in</strong>
+          <p>Typ het privé-IP van de computer waarmee u verbinding wilt maken.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Adjust ports if needed</strong>
-          <p>Leave Target Port as <code>3389</code> unless the machine uses a non-standard RDP port. Change Local Port only if <code>55000</code> is already in use on your machine.</p>
+          <strong>Pas poorten aan indien nodig</strong>
+          <p>Laat de Doel poort op <code>3389</code> staan tenzij de computer een niet-standaard RDP-poort gebruikt. Wijzig de Lokale poort alleen als <code>55000</code> al in gebruik is op uw computer.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Click Connect</strong>
-          <p>The application opens an Azure CLI tunnel and launches the Windows RDP client pointing to <code>localhost:[Local Port]</code>.</p>
+          <strong>Klik op Verbinden</strong>
+          <p>De applicatie opent een Azure CLI-tunnel en start de Windows RDP-client gericht op <code>localhost:[Lokale poort]</code>.</p>
         </div>
       </div>
     </div>
@@ -865,27 +865,27 @@
 
   <!-- ── TAB 2: AZURE VM ─────────────────── -->
   <section id="tab-vm">
-    <h2><span class="icon">🖥️</span> Azure VM Tab</h2>
-    <p>Use this tab to browse your Azure Virtual Machines and connect to them directly. The application can automatically start stopped VMs and supports both connection methods.</p>
+    <h2><span class="icon">🖥️</span> Tabblad Azure VM</h2>
+    <p>Gebruik dit tabblad om door uw Azure Virtual Machines te bladeren en er direct mee verbinding te maken. De applicatie kan gestopte VM's automatisch starten en ondersteunt beide verbindingsmethoden.</p>
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM stopped (deallocated)</div>
+        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestopt (gede-alloceerd)</div>
       </div>
       <div style="text-align:center;">
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM running – Connect enabled</div>
+        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM actief — Verbinden ingeschakeld</div>
       </div>
     </div>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
         <div class="dots"><span></span><span></span><span></span></div>
-        Azure VM Tab
+        Tabblad Azure VM
       </div>
       <div class="ui-card-body">
-        <div class="ui-section">Connection Method</div>
+        <div class="ui-section">Verbindingsmethode</div>
         <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
           <label style="display:flex; align-items:center; gap:6px; cursor:default;">
             <input type="radio" checked readonly> Tunnel
@@ -894,62 +894,62 @@
             <input type="radio" readonly> RD Gateway
           </label>
         </div>
-        <div class="ui-section">Monitor Configuration</div>
+        <div class="ui-section">Monitor Configuratie</div>
         <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Single Monitor</label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> All Monitors</label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Enkel beeldscherm</label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle beeldschermen</label>
         </div>
         <div class="ui-row">
           <span class="ui-label">VM Subscription</span>
           <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Refresh</span>
+          <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
         </div>
         <div class="ui-row">
-          <span class="ui-label">Virtual Machine</span>
+          <span class="ui-label">Virtuele machine</span>
           <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Refresh</span>
+          <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
         </div>
         <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
           <div class="ui-dot green"></div>
-          <span style="font-size:12px; color:var(--green); font-weight:600;">Running</span>
+          <span style="font-size:12px; color:var(--green); font-weight:600;">Actief</span>
           <span style="font-size:13px; margin-left:4px;">🔄</span>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
-          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Target Port</div><div class="ui-field">3389</div></div>
-          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Local Port</div><div class="ui-field">55000</div></div>
+          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Doel poort</div><div class="ui-field">3389</div></div>
+          <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Lokale poort</div><div class="ui-field">55000</div></div>
         </div>
         <div class="ui-row" style="justify-content:space-between;">
           <span class="ui-btn secondary">🌐 Language</span>
-          <span class="ui-btn primary">Connect</span>
+          <span class="ui-btn primary">Verbinden</span>
         </div>
       </div>
     </div>
 
-    <h3>Fields</h3>
+    <h3>Velden</h3>
     <table class="field-table">
-      <thead><tr><th>Field</th><th>Description</th></tr></thead>
+      <thead><tr><th>Veld</th><th>Beschrijving</th></tr></thead>
       <tbody>
-        <tr><td>Connection Method</td><td>Choose <strong>Tunnel</strong> or <strong>RD Gateway</strong>. See the <a href="#method-comparison">comparison section</a> for guidance.</td></tr>
-        <tr><td>Monitor Configuration</td><td>Select <strong>Single Monitor</strong> (primary screen only) or <strong>All Monitors</strong> (span across all displays). Only applies to RD Gateway mode.</td></tr>
-        <tr><td>Entra ID Authentication</td><td>Optional checkbox (visible in RD Gateway mode only). Enables Entra ID SSO. See <a href="#entraid">Entra ID Auth</a>.</td></tr>
-        <tr><td>VM Subscription</td><td>The subscription containing the target VM. Can differ from the Bastion subscription (cross-subscription access is supported).</td></tr>
-        <tr><td>Virtual Machine</td><td>The specific VM to connect to. The list is populated after selecting a subscription.</td></tr>
-        <tr><td>Power State</td><td>Shows the current VM status with a colour-coded dot: 🟢 Running · 🔴 Stopped/Deallocated · 🟠 Starting/Stopping/Other</td></tr>
-        <tr><td>Target Port</td><td>RDP port on the VM (Tunnel mode only).</td></tr>
-        <tr><td>Local Port</td><td>Local tunnel port (Tunnel mode only).</td></tr>
+        <tr><td>Verbindingsmethode</td><td>Kies <strong>Tunnel</strong> of <strong>RD Gateway</strong>. Zie de <a href="#method-comparison">vergelijkingssectie</a> voor advies.</td></tr>
+        <tr><td>Monitor Configuratie</td><td>Selecteer <strong>Enkel beeldscherm</strong> (alleen primair scherm) of <strong>Alle beeldschermen</strong> (over alle schermen). Alleen voor RD Gateway-modus.</td></tr>
+        <tr><td>Entra ID Authenticatie</td><td>Optioneel selectievakje (alleen in RD Gateway-modus). Schakelt Entra ID SSO in. Zie <a href="#entraid">Entra ID Authenticatie</a>.</td></tr>
+        <tr><td>VM Subscription</td><td>De subscription die de doel-VM bevat. Kan afwijken van de Bastion Subscription.</td></tr>
+        <tr><td>Virtuele machine</td><td>De specifieke VM waarmee verbinding moet worden gemaakt. De lijst wordt ingevuld na het selecteren van een subscription.</td></tr>
+        <tr><td>Status</td><td>Toont de huidige VM-status met een gekleurde stip: 🟢 Actief · 🔴 Gestopt/Gede-alloceerd · 🟠 Starten/Stoppen/Overig</td></tr>
+        <tr><td>Doel poort</td><td>RDP-poort op de VM (alleen Tunnelmodus).</td></tr>
+        <tr><td>Lokale poort</td><td>Lokale tunnelpoort (alleen Tunnelmodus).</td></tr>
       </tbody>
     </table>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Port values are <strong>synchronised</strong> between the IP Address tab and the Azure VM tab. Changing the port on one tab automatically updates the other.</p>
+      <p>Poortwaarden worden <strong>gesynchroniseerd</strong> tussen het IP-adres tabblad en het Azure VM tabblad. Wijziging op één tabblad werkt het andere automatisch bij.</p>
     </div>
   </section>
 
   <!-- ── TAB 3: ACTIVE TUNNELS ─────────────── -->
   <section id="tab-tunnels">
-    <h2><span class="icon">🔗</span> Active Tunnels Tab</h2>
-    <p>This tab shows all RDP tunnels currently open by the application. Each tunnel entry displays the connection target, local port, and the time the tunnel was started.</p>
+    <h2><span class="icon">🔗</span> Tabblad Actieve Tunnels</h2>
+    <p>Dit tabblad toont alle RDP-tunnels die momenteel door de applicatie zijn geopend. Elke tunnelvermelding toont het verbindingsdoel, de lokale poort en het tijdstip waarop de tunnel is gestart.</p>
 
     <img src="screen-tunnels.png" alt="Active Tunnels tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
@@ -959,25 +959,25 @@
         Active Tunnels Tab
       </div>
       <div class="ui-card-body">
-        <div style="text-align:right; margin-bottom:10px;"><span class="ui-btn secondary">Refresh</span></div>
-        <!-- Tunnel card -->
+        <div style="text-align:right; margin-bottom:10px;"><span class="ui-btn secondary">Ververs</span></div>
+        <!-- Tunnelkaart -->
         <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <div style="font-size:13px; font-weight:700;">🖥️ vm-dev-web-01</div>
-            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55000 → 10.0.1.42:3389 · Started 14:32</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55000 → 10.0.1.42:3389 · Gestart 14:32</div>
           </div>
           <div style="display:flex; gap:6px;">
-            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Connect RDP</span>
+            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Verbind RDP</span>
             <span class="ui-btn danger" style="font-size:11px; padding:4px 10px;">Stop</span>
           </div>
         </div>
         <div style="border:1px solid var(--border); border-radius:6px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <div style="font-size:13px; font-weight:700;">🌐 10.0.2.10</div>
-            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55001 → 10.0.2.10:3389 · Started 15:05</div>
+            <div style="font-size:11px; color:var(--ink-faint); margin-top:3px;">localhost:55001 → 10.0.2.10:3389 · Gestart 15:05</div>
           </div>
           <div style="display:flex; gap:6px;">
-            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Connect RDP</span>
+            <span class="ui-btn primary" style="font-size:11px; padding:4px 10px;">Verbind RDP</span>
             <span class="ui-btn danger" style="font-size:11px; padding:4px 10px;">Stop</span>
           </div>
         </div>
@@ -985,106 +985,106 @@
     </div>
 
     <table class="field-table">
-      <thead><tr><th>Control</th><th>Action</th></tr></thead>
+      <thead><tr><th>Besturingselement</th><th>Actie</th></tr></thead>
       <tbody>
-        <tr><td>Refresh</td><td>Reloads the list of active tunnels.</td></tr>
-        <tr><td>Connect RDP</td><td>Re-launches the Windows RDP client connected to this tunnel's local port. Useful if you accidentally closed the RDP window.</td></tr>
-        <tr><td>Stop</td><td>Terminates the tunnel and cleans up the underlying Azure CLI process.</td></tr>
+        <tr><td>Ververs</td><td>Laadt de lijst met actieve tunnels opnieuw.</td></tr>
+        <tr><td>Verbind RDP</td><td>Start de Windows RDP-client opnieuw verbonden met de lokale poort van deze tunnel. Handig als u het RDP-venster per ongeluk heeft gesloten.</td></tr>
+        <tr><td>Stoppen</td><td>Beëindigt de tunnel en ruimt het onderliggende Azure CLI-proces op.</td></tr>
       </tbody>
     </table>
 
     <div class="callout warn">
       <span class="ci">⚠️</span>
-      <p>Stopping a tunnel will immediately disconnect any active RDP session using that tunnel. Save your work in the remote session before clicking Stop.</p>
+      <p>Het stoppen van een tunnel verbreekt onmiddellijk elke actieve RDP-sessie. Sla uw werk op in de externe sessie voordat u op Stoppen klikt.</p>
     </div>
   </section>
 
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
-    <h2><span class="icon">🚇</span> Tunnel Mode</h2>
-    <p>Tunnel mode uses the <code>az network bastion tunnel</code> Azure CLI command to create a <strong>local port forward</strong>. Traffic from a port on your machine (<em>Local Port</em>) is routed through Azure Bastion to the target (<em>Target Port</em>) on the remote machine.</p>
+    <h2><span class="icon">🚇</span> Tunnelmodus</h2>
+    <p>De Tunnelmodus gebruikt de <code>az network bastion tunnel</code> Azure CLI-opdracht om een <strong>lokale port forward</strong> te maken. Verkeer van een poort op uw computer (<em>Lokale poort</em>) wordt via Azure Bastion naar het doel (<em>Doel poort</em>) op de externe computer gerouteerd.</p>
 
-    <h3>How it works</h3>
+    <h3>Hoe het werkt</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Application checks prerequisites</strong>
-          <p>The app verifies that Azure CLI is installed and that the <code>azure-bastion</code> CLI extension is present. If the extension is missing, it offers to install it automatically.</p>
+          <strong>Applicatie controleert vereisten</strong>
+          <p>De app controleert of Azure CLI is geïnstalleerd en of de <code>azure-bastion</code> CLI-extensie aanwezig is. Als de extensie ontbreekt, biedt de app aan deze automatisch te installeren.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Window minimises to tray and tunnel opens</strong>
-          <p>The main window minimises automatically so it stays out of the way. The app invokes Azure CLI in the background to establish the local port-forward tunnel.</p>
+          <strong>Venster minimaliseert naar systeemvak en tunnel opent</strong>
+          <p>Het hoofdvenster minimaliseert automatisch zodat het niet in de weg staat. De app roept Azure CLI op de achtergrond aan om de lokale poortdoorschakelingstunnel te maken.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>RDP client launches automatically</strong>
-          <p>The Windows RDP client is launched pointing to <code>localhost:[Local Port]</code>. Traffic is forwarded transparently through Bastion.</p>
+          <strong>RDP-client wordt automatisch gestart</strong>
+          <p>De Windows RDP-client wordt gestart gericht op <code>localhost:[Lokale poort]</code>. Verkeer wordt transparant via Bastion doorgestuurd.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <strong>Tunnel stays open</strong>
-          <p>The tunnel process runs in the background. You can see it in the <em>Active Tunnels</em> tab and in the tray icon context menu. It persists until you stop it or exit the application.</p>
+          <strong>Tunnel blijft open</strong>
+          <p>Het tunnelproces wordt op de achtergrond uitgevoerd. U kunt het zien op het tabblad <em>Actieve Tunnels</em> en in het contextmenu van het systeemvakpictogram. Het blijft actief totdat u het stopt of de applicatie afsluit.</p>
         </div>
       </div>
     </div>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>Tunnel mode is the only method available on the <strong>IP Address</strong> tab. It supports multiple simultaneous tunnels to different targets.</p>
+      <p>De Tunnelmodus is de enige methode beschikbaar op het tabblad <strong>IP-adres</strong>. Deze ondersteunt meerdere gelijktijdige tunnels naar verschillende doelen.</p>
     </div>
   </section>
 
   <!-- ── METHOD: RD GATEWAY ─────────────────── -->
   <section id="method-rdgateway">
-    <h2><span class="icon">🏛️</span> RD Gateway Mode</h2>
-    <p>RD Gateway mode uses the same API as the <em>Connect</em> button in the Azure Portal. The application calls the Azure Bastion RD Gateway endpoint and downloads a pre-configured <code>.rdp</code> file. The Windows RDP client then connects <strong>directly to Azure Bastion</strong> acting as an RD Gateway — no local port forwarding is needed.</p>
+    <h2><span class="icon">🏛️</span> RD Gateway-modus</h2>
+    <p>De RD Gateway-modus gebruikt dezelfde API als de knop <em>Verbinden</em> in de Azure Portal. De applicatie roept het Azure Bastion RD Gateway-eindpunt aan en downloadt een vooraf geconfigureerd <code>.rdp</code>-bestand. De Windows RDP-client maakt vervolgens rechtstreeks verbinding met <strong>Azure Bastion</strong> als RD Gateway — geen lokale port forward nodig.</p>
 
-    <h3>How it works</h3>
+    <h3>Hoe het werkt</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Window minimises to tray and RDP file is fetched</strong>
-          <p>The main window minimises automatically. The app calls the Bastion API to generate a signed, temporary RDP file and saves it securely to a private temp folder on disk with restricted permissions.</p>
+          <strong>Venster minimaliseert naar systeemvak en RDP-bestand wordt opgehaald</strong>
+          <p>Het hoofdvenster minimaliseert automatisch. De app roept de Bastion API aan om een ondertekend, tijdelijk RDP-bestand te genereren en slaat dit veilig op in een privé tijdelijke map op schijf met beperkte machtigingen.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>RDP client launches automatically</strong>
-          <p><code>mstsc.exe</code> launches with the downloaded RDP file. It connects directly to Bastion's RD Gateway endpoint — no local port forwarding needed.</p>
+          <strong>RDP-client wordt automatisch gestart</strong>
+          <p><code>mstsc.exe</code> start met het gedownloade RDP-bestand. Het maakt rechtstreeks verbinding met het RD Gateway-eindpunt van Bastion — geen lokale port forward nodig.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Temporary file is cleaned up on exit</strong>
-          <p>The RDP file is kept only for the duration of the application session and is securely deleted when the application closes.</p>
+          <strong>Tijdelijk bestand wordt opgeruimd bij afsluiten</strong>
+          <p>Het RDP-bestand wordt alleen bewaard voor de duur van de applicatiesessie en wordt veilig verwijderd wanneer de applicatie sluit.</p>
         </div>
       </div>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>RD Gateway mode does <strong>not</strong> require Azure CLI. If your organisation does not permit Azure CLI installation, use RD Gateway mode.</p>
+      <p>RD Gateway-modus vereist <strong>geen</strong> Azure CLI. Als uw organisatie Azure CLI-installatie niet toestaat, gebruik dan de RD Gateway-modus.</p>
     </div>
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p><strong>Entra ID auth fallback</strong> — If <em>Use Entra ID Authentication</em> is enabled but the Bastion API rejects it (for example in a cross-tenant scenario), the application automatically retries using traditional RDP authentication so the connection can still succeed.</p>
+      <p><strong>Entra ID authenticatie terugvaloptie</strong> — Als <em>Entra ID Authenticatie gebruiken</em> is ingeschakeld maar de Bastion API dit afwijst (bijv. in een cross-tenant scenario), probeert de applicatie automatisch opnieuw met traditionele RDP-authenticatie zodat de verbinding toch kan slagen.</p>
     </div>
   </section>
 
   <!-- ── COMPARISON ─────────────────────────── -->
   <section id="method-comparison">
-    <h2><span class="icon">⚖️</span> Method Comparison</h2>
+    <h2><span class="icon">⚖️</span> Methodenvergelijking</h2>
     <table class="compare-table">
       <thead>
         <tr>
@@ -1094,172 +1094,172 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Requires Azure CLI</td><td>✅ Yes</td><td>❌ No</td></tr>
-        <tr><td>Works with IP Address tab</td><td>✅ Yes</td><td>❌ No</td></tr>
-        <tr><td>Works with Azure VM tab</td><td>✅ Yes</td><td>✅ Yes</td></tr>
-        <tr><td>Multiple simultaneous sessions</td><td>✅ Yes</td><td>✅ Yes</td></tr>
-        <tr><td>Monitor span support</td><td>Limited</td><td>✅ Full (Single / All)</td></tr>
-        <tr><td>Entra ID SSO option</td><td>❌ No</td><td>✅ Yes (same-tenant)</td></tr>
-        <tr><td>Local port required</td><td>✅ Yes</td><td>❌ No</td></tr>
-        <tr><td>Appears in Active Tunnels tab</td><td>✅ Yes</td><td>❌ No</td></tr>
-        <tr><td>Network traffic path</td><td>localhost → Bastion → VM</td><td>RDP client → Bastion → VM</td></tr>
+        <tr><td>Vereist Azure CLI</td><td>✅ Ja</td><td>❌ Nee</td></tr>
+        <tr><td>Werkt met tabblad IP-adres</td><td>✅ Ja</td><td>❌ Nee</td></tr>
+        <tr><td>Werkt met tabblad Azure VM</td><td>✅ Ja</td><td>✅ Ja</td></tr>
+        <tr><td>Meerdere gelijktijdige sessies</td><td>✅ Ja</td><td>✅ Ja</td></tr>
+        <tr><td>Ondersteuning meerdere schermen</td><td>Beperkt</td><td>✅ Volledig (Enkel / Alle)</td></tr>
+        <tr><td>Entra ID SSO-optie</td><td>❌ Nee</td><td>✅ Ja (zelfde tenant)</td></tr>
+        <tr><td>Lokale poort vereist</td><td>✅ Ja</td><td>❌ Nee</td></tr>
+        <tr><td>Zichtbaar in tabblad Actieve Tunnels</td><td>✅ Ja</td><td>❌ Nee</td></tr>
+        <tr><td>Netwerkverkeersroute</td><td>localhost → Bastion → VM</td><td>RDP-client → Bastion → VM</td></tr>
       </tbody>
     </table>
-    <p>In general, use <strong>RD Gateway</strong> for day-to-day Azure VM access. Use <strong>Tunnel</strong> when Azure CLI is already part of your workflow, or when you need to connect to a <strong>specific IP address</strong> that is not an Azure VM — for example:</p>
+    <p>In het algemeen gebruikt u <strong>RD Gateway</strong> voor dagelijkse toegang tot Azure-VM's. Gebruik <strong>Tunnel</strong> als Azure CLI al deel uitmaakt van uw workflow, of wanneer u verbinding moet maken met een <strong>specifiek IP-adres</strong> dat geen Azure-VM is — bijvoorbeeld:</p>
     <ul style="margin: 6px 0 14px 22px; color:var(--ink-muted); line-height:2.1;">
-      <li>An <strong>on-premises server or workstation</strong> reachable from Azure Bastion via a site-to-site VPN or Azure ExpressRoute circuit.</li>
-      <li>A host in <strong>another cloud provider</strong> (e.g. AWS, GCP) connected to Azure via VPN.</li>
-      <li>Any other privately routable IP address that Bastion can reach but that has no Azure VM record in your subscription.</li>
+      <li>Een <strong>on-premises server of werkstation</strong> bereikbaar vanuit Azure Bastion via een site-to-site VPN of Azure ExpressRoute-verbinding.</li>
+      <li>Een host bij een <strong>andere cloudprovider</strong> (bijv. AWS, GCP) verbonden met Azure via VPN.</li>
+      <li>Elk ander privé-routeerbaar IP-adres dat Bastion kan bereiken maar geen Azure VM-record in uw subscription heeft.</li>
     </ul>
-    <p>In these cases RD Gateway is not available — Tunnel mode with a direct IP address is the only option.</p>
+    <p>In deze gevallen is RD Gateway niet beschikbaar — tunnelmodus met een direct IP-adres is de enige optie.</p>
   </section>
 
   <!-- ── MONITOR CONFIG ─────────────────────── -->
   <section id="monitor-config">
-    <h2><span class="icon">🖥️</span> Monitor Configuration</h2>
-    <p>Available in the <strong>Azure VM tab</strong> when <em>RD Gateway</em> connection method is selected.</p>
+    <h2><span class="icon">🖥️</span> Monitor Configuratie</h2>
+    <p>Beschikbaar op het <strong>tabblad Azure VM</strong> wanneer de verbindingsmethode <em>RD Gateway</em> is geselecteerd.</p>
 
     <table class="field-table">
-      <thead><tr><th>Option</th><th>Behaviour</th></tr></thead>
+      <thead><tr><th>Optie</th><th>Gedrag</th></tr></thead>
       <tbody>
-        <tr><td>Single Monitor</td><td>The RDP session opens full-screen on your primary monitor only. Suitable for single-monitor setups or when you want to keep other screens available.</td></tr>
-        <tr><td>All Monitors</td><td>The RDP session spans across all connected monitors. The remote desktop stretches to fill your entire multi-monitor setup.</td></tr>
+        <tr><td>Enkel beeldscherm</td><td>De RDP-sessie opent op volledig scherm op alleen uw primaire monitor. Geschikt voor éénmonitoropstellingen.</td></tr>
+        <tr><td>Alle beeldschermen</td><td>De RDP-sessie strekt zich uit over alle aangesloten monitors.</td></tr>
       </tbody>
     </table>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>Monitor configuration is written into the downloaded RDP file. It is remembered between sessions per tenant.</p>
+      <p>Monitor Configuratie wordt opgeslagen in het RDP-bestand en per tenant onthouden.</p>
     </div>
   </section>
 
   <!-- ── ENTRA ID AUTH ─────────────────────── -->
   <section id="entraid">
-    <h2><span class="icon">🔑</span> Entra ID Authentication</h2>
-    <p>Available as an optional checkbox in the <strong>Azure VM tab</strong> when <em>RD Gateway</em> mode is selected.</p>
+    <h2><span class="icon">🔑</span> Entra ID Authenticatie</h2>
+    <p>Beschikbaar als optioneel selectievakje op het <strong>tabblad Azure VM</strong> wanneer de modus <em>RD Gateway</em> is geselecteerd.</p>
 
     <table class="field-table">
-      <thead><tr><th>State</th><th>Behaviour</th></tr></thead>
+      <thead><tr><th>Status</th><th>Gedrag</th></tr></thead>
       <tbody>
-        <tr><td><span class="badge blue">OFF (default)</span></td><td>Traditional RDP authentication. You enter Windows username and password in the RDP login screen. Works across tenants and in all scenarios.</td></tr>
-        <tr><td><span class="badge green">ON</span></td><td>Entra ID single sign-on (SSO). The RDP session authenticates using your Microsoft identity. <strong>Only works when your account and the target VM are in the same Entra ID tenant.</strong></td></tr>
+        <tr><td><span class="badge blue">UIT (standaard)</span></td><td>Traditionele RDP-authenticatie. U voert Windows-gebruikersnaam en wachtwoord in. Werkt in alle scenario's.</td></tr>
+        <tr><td><span class="badge green">AAN</span></td><td>Entra ID single sign-on (SSO). De RDP-sessie verifieert met uw Microsoft-identiteit. <strong>Werkt alleen wanneer uw account en de doel-VM in dezelfde Entra ID tenant zitten.</strong></td></tr>
       </tbody>
     </table>
 
     <div class="callout warn">
       <span class="ci">⚠️</span>
-      <p>Do not enable Entra ID Authentication if you are connecting cross-tenant (e.g., via Azure Lighthouse to a customer subscription). Use the default OFF setting in those cases.</p>
+      <p>Schakel Entra ID Authenticatie niet in als u verbinding maakt over tenants heen (bijv. via Azure Lighthouse). Gebruik in die gevallen de standaardinstelling UIT.</p>
     </div>
   </section>
 
   <!-- ── VM POWER MANAGEMENT ─────────────────── -->
   <section id="vm-power">
-    <h2><span class="icon">⚡</span> VM Power Management</h2>
-    <p>When a VM is selected in the Azure VM tab, the application displays its current power state and allows you to start it if it is stopped.</p>
+    <h2><span class="icon">⚡</span> VM Energiebeheer</h2>
+    <p>Wanneer een VM is geselecteerd op het tabblad Azure VM, toont de applicatie de huidige status en kunt u deze starten als deze is gestopt.</p>
 
-    <h3>Power state indicators</h3>
+    <h3>Statusoverzicht</h3>
     <div style="display:flex; flex-direction:column; gap:10px; margin:16px 0;">
-      <div class="ui-state"><div class="ui-dot green"></div><strong>Running</strong> — The VM is powered on and ready to accept connections.</div>
-      <div class="ui-state"><div class="ui-dot red"></div><strong>Stopped / Deallocated</strong> — The VM is off. A <strong>Start VM</strong> button appears.</div>
-      <div class="ui-state"><div class="ui-dot orange"></div><strong>Starting / Stopping / Other</strong> — The VM is in a transitional state. A progress indicator is shown when the app initiates a start.</div>
+      <div class="ui-state"><div class="ui-dot green"></div><strong>Actief</strong> — De VM is ingeschakeld en klaar om verbindingen te accepteren.</div>
+      <div class="ui-state"><div class="ui-dot red"></div><strong>Gestopt / Gede-alloceerd</strong> — De VM is uitgeschakeld. Er verschijnt een knop <strong>Start VM</strong>.</div>
+      <div class="ui-state"><div class="ui-dot orange"></div><strong>Starten / Stoppen / Overig</strong> — De VM bevindt zich in een overgangstoestand. Er wordt een voortgangsindicator weergegeven wanneer de app een start initieert.</div>
     </div>
 
-    <h3>Starting a stopped VM</h3>
+    <h3>Een gestopte VM starten</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Select the stopped VM</strong>
-          <p>The red power-state indicator and <strong>Start VM</strong> button appear.</p>
+          <strong>Selecteer de gestopte VM</strong>
+          <p>De rode statusindicator en de knop <strong>Start VM</strong> verschijnen.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Click Start VM</strong>
-          <p>The button is replaced by a progress indicator (<em>⏳ Starting VM…</em>). The application polls Azure for the updated power state.</p>
+          <strong>Klik op Start VM</strong>
+          <p>De knop wordt vervangen door een voortgangsindicator (<em>⏳ VM wordt gestart…</em>). De applicatie pollt Azure op de bijgewerkte status.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Wait for Running status</strong>
-          <p>When the indicator turns green, the VM is ready. You can then click <strong>Connect</strong>.</p>
+          <strong>Wacht op de status Actief</strong>
+          <p>Wanneer de indicator groen wordt, is de VM klaar. U kunt dan op <strong>Verbinden</strong> klikken.</p>
         </div>
       </div>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>The <strong>Running</strong> state means Azure has powered on the VM — but the guest operating system still needs a minute or two to fully boot and start accepting RDP connections. If your connection attempt is refused immediately after the VM reaches Running state, wait 2–3 minutes and try again.</p>
+      <p>De status <strong>Actief</strong> betekent dat Azure de VM heeft ingeschakeld — maar het gastbesturingssysteem heeft nog een minuut of twee nodig om volledig op te starten en RDP-verbindingen te accepteren. Als uw verbindingspoging direct wordt geweigerd nadat de VM de status Actief heeft bereikt, wacht dan 2–3 minuten en probeer het opnieuw.</p>
     </div>
 
     <div class="callout warn">
       <span class="ci">⚠️</span>
-      <p>Starting a VM requires at least <strong>Virtual Machine Contributor</strong> role on that VM. If the Start VM button does not appear, your account may lack the required permission.</p>
+      <p>Het starten van een VM vereist minimaal de rol <strong>Virtual Machine Contributor</strong> op die VM. Als de knop Start VM niet verschijnt, heeft uw account mogelijk niet de vereiste machtiging.</p>
     </div>
 
-    <p>Once a VM start is initiated, the application polls Azure every 5 seconds for up to 5 minutes waiting for the Running state. If the VM does not reach Running within that time, click the 🔄 <strong>Refresh</strong> button to check the current state manually.</p>
+    <p>Zodra een VM-start is geïnitieerd, pollt de applicatie Azure elke 5 seconden gedurende maximaal 5 minuten in afwachting van de status Actief. Als de VM die status niet bereikt binnen die tijd, klik dan op de knop 🔄 <strong>Ververs</strong> om de huidige status handmatig te controleren.</p>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>The <strong>Connect</strong> button on the Azure VM tab is disabled whenever the VM is not in Running state. Even if you click Connect immediately after the status indicator turns green, the application re-validates the power state at that moment before proceeding.</p>
+      <p>De knop <strong>Verbinden</strong> op het tabblad Azure VM is uitgeschakeld wanneer de VM niet de status Actief heeft. Zelfs als u direct op Verbinden klikt nadat de statusindicator groen wordt, valideert de applicatie de status opnieuw voordat er wordt doorgegaan.</p>
     </div>
   </section>
 
   <!-- ── MULTI-TENANT ─────────────────────── -->
   <section id="multi-tenant">
-    <h2><span class="icon">🏢</span> Multi-Tenant Support</h2>
-    <p>If your Azure account has access to multiple Entra ID tenants (for example, via <strong>Azure Lighthouse</strong> for managed service provider scenarios), the application supports switching between tenants.</p>
+    <h2><span class="icon">🏢</span> Multi-Tenant ondersteuning</h2>
+    <p>Als uw Azure-account toegang heeft tot meerdere Entra ID-tenants (bijvoorbeeld via <strong>Azure Lighthouse</strong> voor beheerde serviceproviderscenario's), ondersteunt de applicatie het wisselen tussen tenants.</p>
 
-    <h3>How tenant selection works</h3>
-    <p>After logging in, if multiple tenants are detected, you will be presented with a tenant selection dialog. The selected tenant is displayed next to your account name in the top bar.</p>
+    <h3>Hoe tenantselectie werkt</h3>
+    <p>Na het aanmelden wordt u, als meerdere tenants worden gedetecteerd, een tenantselectiedialoogvenster gepresenteerd. De geselecteerde tenant wordt weergegeven naast uw accountnaam in de bovenste balk.</p>
 
-    <h3>Per-tenant settings</h3>
-    <p>The following settings are stored <strong>separately for each tenant</strong>, so switching tenants restores your previous context for that tenant:</p>
+    <h3>Instellingen per tenant</h3>
+    <p>De volgende instellingen worden <strong>afzonderlijk voor elke tenant</strong> opgeslagen, zodat het wisselen van tenant uw vorige context voor die tenant herstelt:</p>
     <div style="display:flex; flex-wrap:wrap; gap:8px; margin:12px 0;">
-      <span class="badge blue">Last Subscription</span>
-      <span class="badge blue">Last Bastion</span>
-      <span class="badge blue">Last VM Subscription</span>
-      <span class="badge blue">Last VM</span>
-      <span class="badge blue">Last IP Address</span>
-      <span class="badge blue">Target &amp; Local Ports</span>
-      <span class="badge blue">Connection Method</span>
-      <span class="badge blue">Monitor Mode</span>
-      <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Laatste Subscription</span>
+      <span class="badge blue">Laatste Bastion</span>
+      <span class="badge blue">Laatste VM Subscription</span>
+      <span class="badge blue">Laatste VM</span>
+      <span class="badge blue">Laatste IP-adres</span>
+      <span class="badge blue">Doel- en lokale poort</span>
+      <span class="badge blue">Verbindingsmethode</span>
+      <span class="badge blue">Monitormodus</span>
+      <span class="badge blue">Entra ID-verificatie</span>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Language preference is <strong>global</strong> — it applies across all tenants and is not reset when switching.</p>
+      <p>Taalvoorkeur is <strong>globaal</strong> — van toepassing op alle tenants en wordt niet gereset bij het wisselen.</p>
     </div>
   </section>
 
   <!-- ── SYSTEM TRAY ─────────────────────── -->
   <section id="tray">
-    <h2><span class="icon">📌</span> System Tray</h2>
-    <p>The application adds an icon to the Windows system tray (notification area). This lets you keep it running in the background while keeping your taskbar tidy.</p>
+    <h2><span class="icon">📌</span> Systeemvak</h2>
+    <p>De applicatie voegt een pictogram toe aan het Windows-systeemvak (meldingsgebied). Zo kunt u het op de achtergrond laten draaien terwijl uw taakbalk overzichtelijk blijft.</p>
 
     <table class="field-table">
-      <thead><tr><th>Action</th><th>Result</th></tr></thead>
+      <thead><tr><th>Actie</th><th>Resultaat</th></tr></thead>
       <tbody>
-        <tr><td>Double-click tray icon</td><td>Restores the main window to the foreground.</td></tr>
-        <tr><td>Right-click tray icon</td><td>Opens a context menu listing all active tunnels (each as a submenu), a <em>Show Main Window</em> item, and an <em>Exit</em> item.</td></tr>
-        <tr><td>Tunnel submenu</td><td>Each active tunnel appears as a submenu showing the target and local port. From there you can <strong>Connect RDP</strong> (re-launch the RDP client) or <strong>Stop Tunnel</strong> without opening the main window.</td></tr>
-        <tr><td>Balloon notifications</td><td>The tray icon shows toast-style notifications for tunnel started, tunnel connected, tunnel stopped, VM started, and connection errors.</td></tr>
+        <tr><td>Dubbelklik op systeemvakpictogram</td><td>Herstelt het hoofdvenster naar de voorgrond.</td></tr>
+        <tr><td>Klik met rechtermuisknop op systeemvakpictogram</td><td>Opent een contextmenu met alle actieve tunnels (elk als submenu), een item <em>Toon hoofdvenster</em> en een item <em>Afsluiten</em>.</td></tr>
+        <tr><td>Tunnel-submenu</td><td>Elke actieve tunnel verschijnt als submenu met het doel en de lokale poort. Van hieruit kunt u <strong>Verbind RDP</strong> (de RDP-client opnieuw starten) of <strong>Tunnel stoppen</strong> zonder het hoofdvenster te openen.</td></tr>
+        <tr><td>Ballonmeldingen</td><td>Het systeemvakpictogram toont toastmeldingen voor tunnel gestart, tunnel verbonden, tunnel gestopt, VM gestart en verbindingsfouten.</td></tr>
       </tbody>
     </table>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Closing the main window <strong>or</strong> minimising it hides the window and removes it from the taskbar — the application continues running in the tray. To fully exit, right-click the tray icon and choose <strong>Exit</strong>.</p>
+      <p>Het sluiten van het hoofdvenster <strong>of</strong> het minimaliseren ervan verbergt het venster en verwijdert het uit de taakbalk — de applicatie blijft actief in het systeemvak. Om volledig af te sluiten, klikt u met de rechtermuisknop op het systeemvakpictogram en kiest u <strong>Afsluiten</strong>.</p>
     </div>
   </section>
 
   <!-- ── LANGUAGE ─────────────────────────── -->
   <section id="language">
-    <h2><span class="icon">🌐</span> Languages</h2>
-    <p>The application supports six interface languages. The language is automatically detected from your Windows regional settings on first launch. You can change it at any time using the <strong>🌐 Language</strong> button on either connection tab.</p>
+    <h2><span class="icon">🌐</span> Talen</h2>
+    <p>De applicatie ondersteunt zes interfacetalen. De taal wordt automatisch gedetecteerd uit uw Windows regionale instellingen bij de eerste start. U kunt deze op elk moment wijzigen met de knop <strong>🌐 Taal</strong> op beide verbindingstabbladen.</p>
 
     <div class="lang-grid">
       <div class="lang-card"><span class="flag">🇬🇧</span> English</div>
@@ -1270,145 +1270,145 @@
       <div class="lang-card"><span class="flag">🇵🇹</span> Português</div>
     </div>
 
-    <p>Language changes take effect <strong>immediately</strong> without restarting the application. All UI text — labels, buttons, messages, and tooltips — updates live. The selected language is saved globally and persists across launches.</p>
+    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt. De geselecteerde taal wordt globaal opgeslagen.</p>
 
-    <h3>Automatic detection order</h3>
-    <p>If no language has been saved yet, the application tries to detect your preference in this order:</p>
+    <h3>Automatische detectievolgorde</h3>
+    <p>Als er nog geen taal is opgeslagen, probeert de applicatie uw voorkeur in deze volgorde te detecteren:</p>
     <ol style="margin: 12px 0 12px 20px; color: var(--ink-muted); line-height:2;">
-      <li>Windows UI language (<code>CultureInfo.CurrentUICulture</code>)</li>
-      <li>Windows installed UI language</li>
-      <li>Windows regional format</li>
-      <li>Windows Registry language settings</li>
-      <li>Falls back to <strong>English</strong></li>
+      <li>Windows UI-taal (<code>CultureInfo.CurrentUICulture</code>)</li>
+      <li>Geïnstalleerde Windows UI-taal</li>
+      <li>Windows regionaal formaat</li>
+      <li>Windows Register-taalinstellingen</li>
+      <li>Valt terug op <strong>Engels</strong></li>
     </ol>
   </section>
 
   <!-- ── SETTINGS ─────────────────────────── -->
   <section id="settings">
-    <h2><span class="icon">💾</span> Settings &amp; Persistence</h2>
-    <p>The application automatically saves and restores your preferences between sessions. You never need to edit any file manually — everything is managed by the application.</p>
+    <h2><span class="icon">💾</span> Instellingen en opslag</h2>
+    <p>De applicatie slaat uw voorkeuren automatisch op en herstelt deze tussen sessies. U hoeft nooit handmatig een bestand te bewerken — alles wordt beheerd door de applicatie.</p>
 
-    <h3>File locations</h3>
-    <p>The application reads and writes the following files on your machine:</p>
+    <h3>Bestandslocaties</h3>
+    <p>De applicatie leest en schrijft de volgende bestanden op uw computer:</p>
     <table class="field-table">
-      <thead><tr><th>File</th><th>Path</th><th>Purpose</th></tr></thead>
+      <thead><tr><th>Bestand</th><th>Pad</th><th>Doel</th></tr></thead>
       <tbody>
-        <tr><td>Settings</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>User preferences: last-used subscription, Bastion, VM, ports, connection method, language, etc. See below for the full list.</td></tr>
-        <tr><td>MSAL token cache</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Encrypted Azure login tokens. Shared with Azure CLI.</td></tr>
-        <tr><td>Azure profile</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Subscription list and signed-in user info. Shared with Azure CLI.</td></tr>
-        <tr><td>Cloud config</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Azure cloud endpoint configuration. Shared with Azure CLI.</td></tr>
-        <tr><td>HTTP cache</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>HTTP response cache. Shared with Azure CLI.</td></tr>
-        <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log for troubleshooting. Cleared on every application start.</td></tr>
-        <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Deleted when the application closes.</td></tr>
+        <tr><td>Instellingen</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>Gebruikersvoorkeuren: laatste subscription, Bastion, VM, poorten, verbindingsmethode, taal, enz.</td></tr>
+        <tr><td>MSAL tokencache</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Versleutelde Azure-aanmeldingstokens. Gedeeld met Azure CLI.</td></tr>
+        <tr><td>Azure-profiel</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Subscription-lijst en aangemelde gebruikersinformatie. Gedeeld met Azure CLI.</td></tr>
+        <tr><td>Cloudconfiguratie</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Configuratie van Azure cloud-eindpunten. Gedeeld met Azure CLI.</td></tr>
+        <tr><td>HTTP-cache</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>HTTP-antwoordcache. Gedeeld met Azure CLI.</td></tr>
+        <tr><td>Debug logboek</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostisch logboek. Wordt gewist bij elke start van de applicatie.</td></tr>
+        <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Verwijderd bij afsluiten.</td></tr>
       </tbody>
     </table>
 
-    <h3>Contents of settings.json</h3>
-    <p>The following preferences are stored in <code>settings.json</code> and automatically restored on the next launch:</p>
+    <h3>Inhoud van settings.json</h3>
+    <p>De volgende voorkeuren worden opgeslagen in <code>settings.json</code> en automatisch hersteld bij de volgende start:</p>
     <table class="field-table">
-      <thead><tr><th>Setting</th><th>Scope</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Instelling</th><th>Bereik</th><th>Opmerkingen</th></tr></thead>
       <tbody>
-        <tr><td>Language</td><td><span class="badge blue">Global</span></td><td>Applies across all tenants</td></tr>
-        <tr><td>Last Subscription (Bastion)</td><td><span class="badge orange">Per-tenant</span></td><td>Restored when tenant is switched back</td></tr>
-        <tr><td>Last Bastion</td><td><span class="badge orange">Per-tenant</span></td><td></td></tr>
-        <tr><td>Last VM Subscription</td><td><span class="badge orange">Per-tenant</span></td><td></td></tr>
-        <tr><td>Last VM</td><td><span class="badge orange">Per-tenant</span></td><td></td></tr>
-        <tr><td>Last IP Address</td><td><span class="badge orange">Per-tenant</span></td><td></td></tr>
-        <tr><td>Target Port / Local Port</td><td><span class="badge orange">Per-tenant</span></td><td>Synchronised between both tabs</td></tr>
-        <tr><td>Connection Method</td><td><span class="badge orange">Per-tenant</span></td><td>Tunnel or RD Gateway</td></tr>
-        <tr><td>Monitor Mode</td><td><span class="badge orange">Per-tenant</span></td><td>Single or All Monitors</td></tr>
-        <tr><td>Entra ID Auth</td><td><span class="badge orange">Per-tenant</span></td><td>On/off for RD Gateway SSO</td></tr>
+        <tr><td>Taal</td><td><span class="badge blue">Globaal</span></td><td>Van toepassing op alle tenants</td></tr>
+        <tr><td>Laatste subscription (Bastion)</td><td><span class="badge orange">Per tenant</span></td><td>Hersteld wanneer teruggeschakeld naar de tenant</td></tr>
+        <tr><td>Laatste Bastion</td><td><span class="badge orange">Per tenant</span></td><td></td></tr>
+        <tr><td>Laatste VM Subscription</td><td><span class="badge orange">Per tenant</span></td><td></td></tr>
+        <tr><td>Laatste VM</td><td><span class="badge orange">Per tenant</span></td><td></td></tr>
+        <tr><td>Laatste IP-adres</td><td><span class="badge orange">Per tenant</span></td><td></td></tr>
+        <tr><td>Doel poort / Lokale poort</td><td><span class="badge orange">Per tenant</span></td><td>Gesynchroniseerd tussen beide tabbladen</td></tr>
+        <tr><td>Verbindingsmethode</td><td><span class="badge orange">Per tenant</span></td><td>Tunnel of RD Gateway</td></tr>
+        <tr><td>Monitormodus</td><td><span class="badge orange">Per tenant</span></td><td>Enkel beeldscherm of alle beeldschermen</td></tr>
+        <tr><td>Entra ID Authenticatie</td><td><span class="badge orange">Per tenant</span></td><td>Aan/uit voor RD Gateway SSO</td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ── TROUBLESHOOTING ─────────────────────── -->
   <section id="troubleshooting">
-    <h2><span class="icon">🔧</span> Troubleshooting</h2>
+    <h2><span class="icon">🔧</span> Problemen oplossen</h2>
 
-    <h3>Launching the application does nothing / window does not appear</h3>
-    <p>The application enforces a <strong>single instance</strong> policy. If it is already running in the system tray, launching it again will not open a second window — instead the existing window is brought to the foreground. Check the system tray for the application icon.</p>
+    <h3>De applicatie starten doet niets / venster verschijnt niet</h3>
+    <p>De applicatie hanteert een beleid voor <strong>enkelvoudige instantie</strong>. Als het al actief is in het systeemvak, wordt er geen tweede venster geopend bij een nieuwe start — het bestaande venster wordt naar de voorgrond gebracht. Controleer het systeemvak op het applicatiepictogram.</p>
 
-    <h3>"Azure CLI not found" error (Tunnel mode)</h3>
-    <p>Tunnel mode requires the Azure CLI (<code>az</code>) to be installed and accessible on your system <code>PATH</code>. Download and install it from <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a>. If Azure CLI is missing when you try to connect, the application will display this URL and offer to open it directly., then restart the application.</p>
+    <h3>Fout "Azure CLI niet gevonden" (tunnelmodus)</h3>
+    <p>De Tunnelmodus vereist dat Azure CLI (<code>az</code>) is geïnstalleerd en toegankelijk is via uw systeem <code>PATH</code>. Download en installeer via <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a>. Als Azure CLI ontbreekt wanneer u probeert verbinding te maken, toont de applicatie deze URL en biedt aan deze direct te openen. Start de applicatie daarna opnieuw.</p>
 
-    <h3>No subscriptions appear / Bastion list is empty</h3>
-    <p>This usually means your account does not have the required RBAC permissions on any subscription, or the selected tenant does not contain any Bastion resources. Try:</p>
+    <h3>Geen subscriptions zichtbaar / Bastion-lijst is leeg</h3>
+    <p>Dit betekent gewoonlijk dat uw account niet de vereiste RBAC-machtigingen heeft, of dat de geselecteerde tenant geen Bastion-resources bevat. Probeer:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
-      <li>Clicking <strong>Refresh</strong> next to the Bastion selector.</li>
-      <li>Using <strong>Change</strong> to select a different subscription.</li>
-      <li>Logging out and back in if your Azure session may have expired.</li>
-      <li>Contacting your Azure administrator to verify your role assignments.</li>
+      <li>Klik op <strong>Ververs</strong> naast de Bastion-selector.</li>
+      <li>Gebruik <strong>Wijzig</strong> om een andere subscription te selecteren.</li>
+      <li>Meld u af en opnieuw aan als uw Azure-sessie mogelijk is verlopen.</li>
+      <li>Neem contact op met uw Azure-beheerder om uw roltoewijzingen te verifiëren.</li>
     </ul>
 
-    <h3>RDP client opens but connection fails — Azure VM (RD Gateway)</h3>
-    <p>Verify that:</p>
+    <h3>RDP-client opent maar verbinding mislukt — Azure VM (RD Gateway)</h3>
+    <p>Controleer het volgende:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
-      <li>The target VM's power state is <strong>Running</strong> and the OS has had 2–3 minutes to fully boot.</li>
-      <li>The Bastion SKU is <strong>Standard or Premium</strong> (Basic does not support native client connections).</li>
-      <li>No Network Security Group (NSG) rule is blocking inbound traffic from Bastion to the VM on port 3389.</li>
-      <li>Network connectivity exists between your Bastion and the VM — either directly, via VNet peering, or via Virtual WAN.</li>
+      <li>De status van de doel-VM is <strong>Actief</strong> en het besturingssysteem heeft 2–3 minuten gehad om volledig op te starten.</li>
+      <li>De Bastion SKU is <strong>Standard of Premium</strong> (Basic ondersteunt geen native client-verbindingen).</li>
+      <li>Geen Network Security Group (NSG)-regel blokkeert inkomend verkeer van Bastion naar de VM op poort 3389.</li>
+      <li>Er is netwerkconnectiviteit tussen uw Bastion en de VM — direct, via VNet-peering of via Virtual WAN.</li>
     </ul>
 
-    <h3>RDP client opens but connection fails — Azure VM (Tunnel mode)</h3>
-    <p>In addition to the checks above, verify that:</p>
+    <h3>RDP-client opent maar verbinding mislukt — Azure VM (tunnelmodus)</h3>
+    <p>Controleer naast het bovenstaande ook het volgende:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
-      <li>Azure CLI is installed and up to date (<code>az upgrade</code>).</li>
-      <li>The tunnel process is still running — check the <strong>Active Tunnels</strong> tab. If the tunnel has stopped unexpectedly, try connecting again to restart it.</li>
+      <li>Azure CLI is geïnstalleerd en up-to-date (<code>az upgrade</code>).</li>
+      <li>Het tunnelproces is nog actief — controleer het tabblad <strong>Actieve Tunnels</strong>. Als de tunnel onverwacht is gestopt, probeer dan opnieuw verbinding te maken.</li>
     </ul>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>If the configured local port is already in use, the application automatically selects the next available port and updates the display — no manual intervention needed.</p>
+      <p>Als de geconfigureerde lokale poort al in gebruik is, selecteert de applicatie automatisch de volgende beschikbare poort en werkt de weergave bij — geen handmatige interventie nodig.</p>
     </div>
 
-    <h3>RDP client opens but connection fails — IP address (Tunnel mode)</h3>
-    <p>In addition to the general tunnel checks above, verify that:</p>
+    <h3>RDP-client opent maar verbinding mislukt — IP-adres (tunnelmodus)</h3>
+    <p>Controleer naast de algemene tunnelcontroles hierboven ook het volgende:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
-      <li>The target IP address is <strong>reachable from Azure Bastion</strong> — not just from your local machine. For on-premises hosts this requires a working site-to-site VPN or ExpressRoute circuit. For hosts in another cloud, a VPN connection to Azure must be in place.</li>
-      <li>The correct <strong>Target Port</strong> is set. While 3389 is standard for RDP, on-premises or non-Azure hosts may use a different port.</li>
-      <li>A firewall or host-based firewall on the target machine is not blocking inbound RDP from the Bastion subnet's IP range.</li>
-      <li>The VPN or ExpressRoute connection itself is healthy — check with your network team if unsure.</li>
+      <li>Het doel-IP-adres is <strong>bereikbaar vanuit Azure Bastion</strong> — niet alleen vanuit uw lokale computer. Voor on-premises hosts vereist dit een werkende site-to-site VPN of ExpressRoute-verbinding. Voor hosts bij een andere cloud moet er een VPN-verbinding met Azure zijn.</li>
+      <li>De juiste <strong>Doel poort</strong> is ingesteld. Hoewel 3389 standaard is voor RDP, kunnen on-premises of niet-Azure-hosts een andere poort gebruiken.</li>
+      <li>Een firewall of hostgebaseerde firewall op de doelcomputer blokkeert geen inkomend RDP vanuit het IP-bereik van het Bastion-subnet.</li>
+      <li>De VPN- of ExpressRoute-verbinding zelf is gezond — neem contact op met uw netwerkteam als u het niet zeker weet.</li>
     </ul>
 
-    <h3>Start VM button does not appear</h3>
-    <p>Your account requires at minimum the <strong>Virtual Machine Contributor</strong> role on the target VM to start it. Ask your Azure administrator to grant this role, or start the VM manually from the Azure Portal.</p>
+    <h3>Knop Start VM verschijnt niet</h3>
+    <p>Uw account vereist minimaal de rol <strong>Virtual Machine Contributor</strong> op de doel-VM om deze te starten. Vraag uw Azure-beheerder om deze rol toe te kennen, of start de VM handmatig vanuit de Azure Portal.</p>
 
-    <h3>Entra ID Authentication fails</h3>
-    <p>Entra ID Authentication only works when your account is <strong>in the same tenant</strong> as the target VM. If connecting cross-tenant, uncheck the <em>Use Entra ID Authentication</em> option and use traditional Windows credentials instead.</p>
+    <h3>Entra ID Authenticatie mislukt</h3>
+    <p>Entra ID Authenticatie werkt alleen wanneer uw account zich <strong>in dezelfde tenant</strong> bevindt als de doel-VM. Als u verbinding maakt over tenants heen, schakel dan de optie <em>Entra ID Authenticatie gebruiken</em> uit.</p>
 
-    <h3>Session expired / repeated login prompts</h3>
-    <p>Your organisation may have a Conditional Access policy requiring daily re-authentication or MFA. This is expected behaviour. Simply complete the login prompt when it appears.</p>
+    <h3>Sessie verlopen / herhaalde aanmeldingsprompts</h3>
+    <p>Uw organisatie heeft mogelijk een Conditional Access-beleid dat dagelijkse herverificatie of MFA vereist. Dit is het verwachte gedrag. Voltooi gewoon de aanmeldingsprompt wanneer deze verschijnt.</p>
 
-    <h3>Resetting settings</h3>
-    <p>Delete the settings file to return preferences to their defaults:</p>
+    <h3>Instellingen opnieuw instellen</h3>
+    <p>Verwijder het instellingenbestand om voorkeuren terug te zetten naar de standaardwaarden:</p>
     <pre>%APPDATA%\BastionRDPConnector\settings.json</pre>
-    <p>The next launch will reset all saved preferences. You will not be logged out.</p>
+    <p>De volgende start zet alle opgeslagen voorkeuren terug. U wordt niet uitgelogd.</p>
 
-    <h3>Resetting the login / token cache</h3>
-    <p>The easiest way is to click the <strong>Logout</strong> button — this automatically deletes all four authentication files and clears the MSAL cache in one step. If you need to reset without opening the application, delete these four files manually from <code>%USERPROFILE%\.azure\</code>:</p>
+    <h3>Aanmelding / tokencache opnieuw instellen</h3>
+    <p>De eenvoudigste manier is om op de knop <strong>Afmelden</strong> te klikken — dit verwijdert automatisch alle vier verificatiebestanden en wist de MSAL-cache in één stap. Als u wilt resetten zonder de applicatie te openen, verwijder dan deze vier bestanden handmatig uit <code>%USERPROFILE%\.azure\</code>:</p>
     <pre>msal_token_cache.bin
 azureProfile.json
 clouds.config
 msal_http_cache.bin</pre>
     <div class="callout warn">
       <span class="ci">⚠️</span>
-      <p>These files are shared with the Azure CLI. Deleting them will also sign out any active Azure CLI sessions — <code>az</code> commands will require <code>az login</code> again.</p>
+      <p>Deze bestanden worden gedeeld met de Azure CLI. Het verwijderen ervan beëindigt ook actieve Azure CLI-sessies — <code>az</code>-opdrachten vereisen dan opnieuw <code>az login</code>.</p>
     </div>
 
-    <h3>Full reset (settings + login)</h3>
-    <p>To completely reset the application to a clean state, delete the settings file and all four authentication files:</p>
+    <h3>Volledig opnieuw instellen (instellingen + aanmelding)</h3>
+    <p>Om de applicatie volledig terug te zetten naar een schone staat, verwijder het instellingenbestand en alle vier verificatiebestanden:</p>
     <pre>%APPDATA%\BastionRDPConnector\settings.json
 %USERPROFILE%\.azure\msal_token_cache.bin
 %USERPROFILE%\.azure\azureProfile.json
 %USERPROFILE%\.azure\clouds.config
 %USERPROFILE%\.azure\msal_http_cache.bin</pre>
 
-    <h3>Debug log</h3>
-    <p>The application writes a detailed debug log that can help diagnose connection or authentication problems:</p>
+    <h3>Debug logboek</h3>
+    <p>De applicatie schrijft een gedetailleerd debug logboek dat kan helpen bij het diagnosticeren van verbindings- of verificatieproblemen:</p>
     <pre>%LOCALAPPDATA%\BastionRDPConnector\debug.log</pre>
     <div class="callout warn">
       <span class="ci">⚠️</span>
-      <p>The log file is <strong>cleared every time the application starts</strong>. If you need to capture a log for troubleshooting, reproduce the problem within the same session — do not restart the application beforehand.</p>
+      <p>Het logbestand wordt <strong>gewist elke keer dat de applicatie start</strong>. Als u een logboek wilt vastleggen voor probleemoplossing, reproduceer het probleem dan binnen dezelfde sessie — start de applicatie niet opnieuw op van tevoren.</p>
     </div>
   </section>
 
@@ -1416,7 +1416,7 @@ msal_http_cache.bin</pre>
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v2.8.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v2.8.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 
 <script>
