@@ -566,6 +566,55 @@
     .hero { padding: 22px 18px; }
     .hero h1 { font-size: 21px; }
   }
+
+  /* ── MOBILE LANG BAR (top of sidebar) ─── */
+  .mobile-lang-bar {
+    display: none; /* hidden on desktop */
+  }
+  @media (max-width: 800px) {
+    /* Show compact lang bar at top of sidebar on mobile */
+    .mobile-lang-bar {
+      display: block;
+      padding: 10px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mobile-lang-bar .mlb-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #4a5568;
+      margin-bottom: 8px;
+    }
+    .mobile-lang-bar .mlb-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+    .mobile-lang-bar .mlb-btn {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 5px;
+      color: #a0aec0;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 7px 4px;
+      cursor: pointer;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 36px; /* large enough tap target */
+    }
+    .mobile-lang-bar .mlb-btn:active { background: rgba(255,255,255,.15); }
+    .mobile-lang-bar .mlb-btn.active {
+      background: rgba(0,120,212,.40);
+      border-color: rgba(0,120,212,.7);
+      color: #fff;
+    }
+    /* Hide the bottom lang-picker on mobile — replaced by top bar */
+    .lang-picker { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -582,6 +631,17 @@
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
     <div class="version">v2.8.6 · Documentação</div>
+  </div>
+  <div class="mobile-lang-bar">
+    <div class="mlb-label">🌐 Idioma</div>
+    <div class="mlb-grid">
+      <button class="mlb-btn lang-picker-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="nl" onclick="switchLang('nl')">🇳🇱 NL</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="de" onclick="switchLang('de')">🇩🇪 DE</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="fr" onclick="switchLang('fr')">🇫🇷 FR</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="es" onclick="switchLang('es')">🇪🇸 ES</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="pt" onclick="switchLang('pt')">🇵🇹 PT</button>
+    </div>
   </div>
   <nav>
     <div class="nav-group">
