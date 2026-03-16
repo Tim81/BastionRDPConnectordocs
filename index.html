@@ -109,11 +109,13 @@
 
   /* ── MAIN ─────────────────────────────── */
   #main {
-    margin-left: var(--sidebar-w);
     flex: 1;
     max-width: 900px;
     padding: 60px 56px 100px;
   }
+
+  /* Sidebar offset for content wrapper */
+  .page-wrapper { margin-left: var(--sidebar-w); }
 
   /* ── SECTIONS ─────────────────────────── */
   section { margin-bottom: 72px; scroll-margin-top: 32px; }
@@ -496,8 +498,10 @@
       min-width: 0;
     }
 
-    /* Main padding — add top for hamburger */
+    /* Main: reset margins, full width on mobile */
     #main {
+      margin-left: 0 !important;
+      max-width: 100% !important;
       padding: 64px 20px 60px;
     }
 
@@ -629,7 +633,7 @@
 </aside>
 
 <!-- ══════════════════ MAIN ══════════════════ -->
-<div class="page-wrapper" style="flex:1; min-width:0; margin-left:var(--sidebar-w); display:flex; flex-direction:column;">
+<div class="page-wrapper" style="flex:1; min-width:0; display:flex; flex-direction:column;">
 <main id="main">
 
   <!-- HERO -->
