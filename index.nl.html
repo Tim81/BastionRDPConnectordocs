@@ -402,7 +402,7 @@
     font-size: 14px;
     font-weight: 600;
   }
-  .lang-card .flag { font-size: 22px; }
+  .lang-card img { border-radius: 3px; flex-shrink: 0; display: block; }
 
   /* ── FOOTER ─────────────────────────────── */
   footer {
@@ -482,6 +482,9 @@
   @media (max-width: 800px) {
     /* Show hamburger */
     #menu-btn { display: flex; }
+
+    /* Extra bottom space so last nav items clear browser chrome */
+    #sidebar nav { padding-bottom: 80px; }
 
     /* Sidebar slides in */
     #sidebar {
@@ -635,12 +638,12 @@
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
     <div class="mlb-grid">
-      <button class="mlb-btn lang-picker-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
-      <button class="mlb-btn lang-picker-btn" data-lang="nl" onclick="switchLang('nl')">🇳🇱 NL</button>
-      <button class="mlb-btn lang-picker-btn" data-lang="de" onclick="switchLang('de')">🇩🇪 DE</button>
-      <button class="mlb-btn lang-picker-btn" data-lang="fr" onclick="switchLang('fr')">🇫🇷 FR</button>
-      <button class="mlb-btn lang-picker-btn" data-lang="es" onclick="switchLang('es')">🇪🇸 ES</button>
-      <button class="mlb-btn lang-picker-btn" data-lang="pt" onclick="switchLang('pt')">🇵🇹 PT</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="en" onclick="switchLang('en')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2060%2030%22%3E%0A%3Crect%20width=%2260%22%20height=%2230%22%20fill=%22%23012169%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23fff%22%20stroke-width=%226%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23C8102E%22%20stroke-width=%224%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23fff%22%20stroke-width=%2210%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23C8102E%22%20stroke-width=%226%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="EN" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">EN</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="nl" onclick="switchLang('nl')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%209%206%22%3E%0A%3Crect%20width=%229%22%20height=%222%22%20fill=%22%23AE1C28%22/%3E%0A%3Crect%20y=%222%22%20width=%229%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20y=%224%22%20width=%229%22%20height=%222%22%20fill=%22%2321468B%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="NL" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">NL</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="de" onclick="switchLang('de')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%205%203%22%3E%0A%3Crect%20width=%225%22%20height=%221%22%20fill=%22%23000%22/%3E%0A%3Crect%20y=%221%22%20width=%225%22%20height=%221%22%20fill=%22%23D00%22/%3E%0A%3Crect%20y=%222%22%20width=%225%22%20height=%221%22%20fill=%22%23FFCE00%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="DE" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">DE</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="fr" onclick="switchLang('fr')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221%22%20height=%222%22%20fill=%22%23002395%22/%3E%0A%3Crect%20x=%221%22%20width=%221%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20x=%222%22%20width=%221%22%20height=%222%22%20fill=%22%23ED2939%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="FR" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">FR</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="es" onclick="switchLang('es')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%223%22%20height=%222%22%20fill=%22%23c60b1e%22/%3E%0A%3Crect%20y=%220.5%22%20width=%223%22%20height=%221%22%20fill=%22%23ffc400%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="ES" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">ES</button>
+      <button class="mlb-btn lang-picker-btn" data-lang="pt" onclick="switchLang('pt')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="PT" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">PT</button>
     </div>
   </div>
   <nav>
@@ -682,12 +685,12 @@
   <div class="lang-picker">
     <div class="lang-picker-label">🌐 Taal</div>
     <div class="lang-picker-grid">
-      <button class="lang-picker-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
-      <button class="lang-picker-btn" data-lang="nl" onclick="switchLang('nl')">🇳🇱 NL</button>
-      <button class="lang-picker-btn" data-lang="de" onclick="switchLang('de')">🇩🇪 DE</button>
-      <button class="lang-picker-btn" data-lang="fr" onclick="switchLang('fr')">🇫🇷 FR</button>
-      <button class="lang-picker-btn" data-lang="es" onclick="switchLang('es')">🇪🇸 ES</button>
-      <button class="lang-picker-btn" data-lang="pt" onclick="switchLang('pt')">🇵🇹 PT</button>
+      <button class="lang-picker-btn" data-lang="en" onclick="switchLang('en')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2060%2030%22%3E%0A%3Crect%20width=%2260%22%20height=%2230%22%20fill=%22%23012169%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23fff%22%20stroke-width=%226%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23C8102E%22%20stroke-width=%224%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23fff%22%20stroke-width=%2210%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23C8102E%22%20stroke-width=%226%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="EN" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">EN</button>
+      <button class="lang-picker-btn" data-lang="nl" onclick="switchLang('nl')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%209%206%22%3E%0A%3Crect%20width=%229%22%20height=%222%22%20fill=%22%23AE1C28%22/%3E%0A%3Crect%20y=%222%22%20width=%229%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20y=%224%22%20width=%229%22%20height=%222%22%20fill=%22%2321468B%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="NL" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">NL</button>
+      <button class="lang-picker-btn" data-lang="de" onclick="switchLang('de')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%205%203%22%3E%0A%3Crect%20width=%225%22%20height=%221%22%20fill=%22%23000%22/%3E%0A%3Crect%20y=%221%22%20width=%225%22%20height=%221%22%20fill=%22%23D00%22/%3E%0A%3Crect%20y=%222%22%20width=%225%22%20height=%221%22%20fill=%22%23FFCE00%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="DE" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">DE</button>
+      <button class="lang-picker-btn" data-lang="fr" onclick="switchLang('fr')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221%22%20height=%222%22%20fill=%22%23002395%22/%3E%0A%3Crect%20x=%221%22%20width=%221%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20x=%222%22%20width=%221%22%20height=%222%22%20fill=%22%23ED2939%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="FR" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">FR</button>
+      <button class="lang-picker-btn" data-lang="es" onclick="switchLang('es')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%223%22%20height=%222%22%20fill=%22%23c60b1e%22/%3E%0A%3Crect%20y=%220.5%22%20width=%223%22%20height=%221%22%20fill=%22%23ffc400%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="ES" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">ES</button>
+      <button class="lang-picker-btn" data-lang="pt" onclick="switchLang('pt')"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="16" height="12" alt="PT" style="border-radius:1px; vertical-align:middle; margin-right:3px; display:inline-block;">PT</button>
     </div>
   </div>
 </aside>
@@ -1463,12 +1466,12 @@
     <p>De applicatie ondersteunt zes interfacetalen. De taal wordt automatisch gedetecteerd uit uw Windows regionale instellingen bij de eerste start. U kunt deze op elk moment wijzigen met de knop <strong>🌐 Taal</strong> op beide verbindingstabbladen.</p>
 
     <div class="lang-grid">
-      <div class="lang-card"><span class="flag">🇬🇧</span> English</div>
-      <div class="lang-card"><span class="flag">🇳🇱</span> Nederlands</div>
-      <div class="lang-card"><span class="flag">🇩🇪</span> Deutsch</div>
-      <div class="lang-card"><span class="flag">🇫🇷</span> Français</div>
-      <div class="lang-card"><span class="flag">🇪🇸</span> Español</div>
-      <div class="lang-card"><span class="flag">🇵🇹</span> Português</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2060%2030%22%3E%0A%3Crect%20width=%2260%22%20height=%2230%22%20fill=%22%23012169%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23fff%22%20stroke-width=%226%22/%3E%0A%3Cpath%20d=%22M0,0%20L60,30%20M60,0%20L0,30%22%20stroke=%22%23C8102E%22%20stroke-width=%224%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23fff%22%20stroke-width=%2210%22/%3E%0A%3Cpath%20d=%22M30,0%20V30%20M0,15%20H60%22%20stroke=%22%23C8102E%22%20stroke-width=%226%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="English" style="border-radius:2px; flex-shrink:0; display:block;"> English</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%209%206%22%3E%0A%3Crect%20width=%229%22%20height=%222%22%20fill=%22%23AE1C28%22/%3E%0A%3Crect%20y=%222%22%20width=%229%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20y=%224%22%20width=%229%22%20height=%222%22%20fill=%22%2321468B%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Nederlands" style="border-radius:2px; flex-shrink:0; display:block;"> Nederlands</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%205%203%22%3E%0A%3Crect%20width=%225%22%20height=%221%22%20fill=%22%23000%22/%3E%0A%3Crect%20y=%221%22%20width=%225%22%20height=%221%22%20fill=%22%23D00%22/%3E%0A%3Crect%20y=%222%22%20width=%225%22%20height=%221%22%20fill=%22%23FFCE00%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Deutsch" style="border-radius:2px; flex-shrink:0; display:block;"> Deutsch</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221%22%20height=%222%22%20fill=%22%23002395%22/%3E%0A%3Crect%20x=%221%22%20width=%221%22%20height=%222%22%20fill=%22%23fff%22/%3E%0A%3Crect%20x=%222%22%20width=%221%22%20height=%222%22%20fill=%22%23ED2939%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Français" style="border-radius:2px; flex-shrink:0; display:block;"> Français</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%223%22%20height=%222%22%20fill=%22%23c60b1e%22/%3E%0A%3Crect%20y=%220.5%22%20width=%223%22%20height=%221%22%20fill=%22%23ffc400%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Español" style="border-radius:2px; flex-shrink:0; display:block;"> Español</div>
+      <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
     <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt. De geselecteerde taal wordt globaal opgeslagen.</p>
