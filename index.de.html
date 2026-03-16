@@ -417,12 +417,6 @@
   #sidebar::-webkit-scrollbar-track { background: transparent; }
   #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
 
-  @media (max-width: 800px) {
-    #sidebar { display: none; }
-    .page-wrapper { margin-left: 0 !important; }
-    #main { padding: 32px 24px 72px; }
-    footer { padding: 24px; }
-  }
 
   /* ── LANGUAGE PICKER ─────────────────────── */
 
@@ -432,9 +426,151 @@
   .lang-picker-btn { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 5px; color: #a0aec0; font-size: 11px; font-weight: 600; padding: 5px 4px; cursor: pointer; transition: background .15s, color .15s, border-color .15s; font-family: inherit; }
   .lang-picker-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
   .lang-picker-btn.active { background: rgba(0,120,212,.35); border-color: rgba(0,120,212,.6); color: #fff; }
+
+  /* ═══════════════════════════════════════════
+     MOBILE / RESPONSIVE — iOS Safari safe
+     ═══════════════════════════════════════════ */
+
+  /* Hamburger button — hidden on desktop */
+  #menu-btn {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 200;
+    background: var(--ink);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    -webkit-tap-highlight-color: transparent;
+  }
+  #menu-btn span {
+    display: block;
+    width: 22px; height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform .2s, opacity .2s;
+  }
+  #menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #menu-btn.open span:nth-child(2) { opacity: 0; }
+  #menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Sidebar overlay backdrop */
+  #sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 99;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #sidebar-overlay.visible { display: block; }
+
+  /* Make Store app button hideable */
+  .store-app-btn { display: inline-flex; }
+
+  /* Scrollable table wrapper */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+  .table-scroll .field-table,
+  .table-scroll .compare-table { margin: 0; width: 100%; min-width: 420px; }
+
+  @media (max-width: 800px) {
+    /* Show hamburger */
+    #menu-btn { display: flex; }
+
+    /* Sidebar slides in */
+    #sidebar {
+      display: flex !important;
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      z-index: 150;
+    }
+    #sidebar.open { transform: translateX(0); }
+
+    /* Wrapper takes full width */
+    .page-wrapper {
+      margin-left: 0 !important;
+      min-width: 0;
+    }
+
+    /* Main padding — add top for hamburger */
+    #main {
+      padding: 64px 20px 60px;
+    }
+
+    /* Footer */
+    footer { padding: 20px; }
+
+    /* Hero — tighter on mobile */
+    .hero {
+      padding: 28px 22px;
+      margin-bottom: 36px;
+      border-radius: 10px;
+    }
+    .hero h1 { font-size: 24px; }
+    .hero p  { font-size: 14px; }
+
+    /* Headings */
+    h2 { font-size: 22px; }
+    h3 { font-size: 17px; }
+
+    /* Sections */
+    section { margin-bottom: 48px; }
+
+    /* Steps — stack vertically on narrow */
+    .step { gap: 12px; }
+
+    /* Tables — wrap in scroll on mobile via JS */
+    .field-table, .compare-table {
+      min-width: 380px;
+    }
+
+    /* UI cards — scrollable */
+    .ui-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ui-card-body { min-width: 340px; }
+
+    /* Lang grid — 2 cols on mobile */
+    .lang-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Hide "Open in Store app" button on mobile — protocol won't work */
+    .store-app-btn { display: none !important; }
+
+    /* Callout full width */
+    .callout { padding: 12px 14px; }
+
+    /* Screenshot pairs — stack on mobile */
+    div[style*="display:flex"][style*="gap:24px"] {
+      flex-direction: column !important;
+    }
+    div[style*="display:flex"][style*="gap:24px"] img {
+      width: 100% !important;
+      max-width: 320px;
+    }
+
+    /* Comparison table header */
+    .compare-table th:first-child { width: 40%; }
+
+    /* Pre/code blocks */
+    pre { font-size: 12px; padding: 14px 16px; }
+  }
+
+  @media (max-width: 400px) {
+    #main { padding: 64px 16px 48px; }
+    .hero { padding: 22px 18px; }
+    .hero h1 { font-size: 21px; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ══════ MOBILE HAMBURGER ══════ -->
+<button id="menu-btn" aria-label="Toggle navigation" onclick="toggleNav()">
+  <span></span><span></span><span></span>
+</button>
+<div id="sidebar-overlay" onclick="toggleNav()"></div>
 
 <!-- ══════════════════ SIDEBAR ══════════════════ -->
 <aside id="sidebar">
@@ -588,7 +724,7 @@
         <div style="font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px;">Available on</div>
         <div style="font-size:20px; font-weight:800; color:var(--ink); margin-bottom:10px;">Microsoft Store</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a href="ms-windows-store://pdp/?productid=9N9MJ1V43Z6T"
+          <a href="ms-windows-store://pdp/?productid=9N9MJ1V43Z6T" class="store-app-btn"
              style="display:inline-flex; align-items:center; gap:8px; background:var(--azure); color:#fff; text-decoration:none; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700;">
             <span>🪟</span> In Store-App öffnen
           </a>
@@ -1443,6 +1579,35 @@ msal_http_cache.bin</pre>
   
   
   
+
+<script>
+/* ── Mobile navigation toggle ─── */
+function toggleNav() {
+  var sidebar  = document.getElementById('sidebar');
+  var btn      = document.getElementById('menu-btn');
+  var overlay  = document.getElementById('sidebar-overlay');
+  sidebar.classList.toggle('open');
+  btn.classList.toggle('open');
+  overlay.classList.toggle('visible');
+  document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+}
+/* Close nav when a link is tapped */
+document.getElementById('sidebar').querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    var sidebar = document.getElementById('sidebar');
+    if (sidebar.classList.contains('open')) toggleNav();
+  });
+});
+
+/* ── Wrap all tables in scroll containers ─── */
+document.querySelectorAll('.field-table, .compare-table').forEach(function(t) {
+  if (t.parentElement.classList.contains('table-scroll')) return;
+  var wrap = document.createElement('div');
+  wrap.className = 'table-scroll';
+  t.parentNode.insertBefore(wrap, t);
+  wrap.appendChild(t);
+});
+</script>
   <script src="lang.js"></script>
 </body>
 </html>
