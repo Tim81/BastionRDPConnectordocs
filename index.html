@@ -110,7 +110,7 @@
   /* ── MAIN ─────────────────────────────── */
   #main {
     flex: 1;
-    max-width: 900px;
+    max-width: 1100px;
     padding: 60px 56px 100px;
   }
 
@@ -196,14 +196,18 @@
     border-radius: var(--radius);
     padding: 14px 18px;
     margin: 20px 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 24px 1fr;
     gap: 12px;
     align-items: flex-start;
     font-size: 14px;
     line-height: 1.6;
   }
-  .callout .ci { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
-  .callout p { margin: 0; }
+  .callout .ci { font-size: 17px; margin-top: 1px; }
+  .callout p { margin: 0; min-width: 0; }
+  .callout .field-table { width: 100%; margin: 8px 0 0; }
+  /* All callout content after icon flows in the second grid column */
+  .callout > *:not(.ci) { grid-column: 2; min-width: 0; }
   .callout.info { background: var(--azure-light); color: #00407a; border-left: 4px solid var(--azure); }
   .callout.warn { background: #fff8e1; color: #5a3e00; border-left: 4px solid #f5a623; }
   .callout.tip  { background: #e8f5e9; color: #1b4d1b; border-left: 4px solid var(--green); }
@@ -1665,9 +1669,14 @@ document.getElementById('sidebar').querySelectorAll('a').forEach(function(a) {
   });
 });
 
-/* ── Wrap all tables in scroll containers ─── */
+/* ── Wrap tables in scroll containers (skip tables inside .callout) ─── */
 document.querySelectorAll('.field-table, .compare-table').forEach(function(t) {
   if (t.parentElement.classList.contains('table-scroll')) return;
+  // Don't wrap tables inside callouts — they are already constrained
+  var inCallout = false;
+  var p = t.parentElement;
+  while (p) { if (p.classList && p.classList.contains('callout')) { inCallout = true; break; } p = p.parentElement; }
+  if (inCallout) return;
   var wrap = document.createElement('div');
   wrap.className = 'table-scroll';
   t.parentNode.insertBefore(wrap, t);
