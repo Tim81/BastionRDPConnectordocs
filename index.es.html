@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v2.8.6 · Documentación</div>
+    <div class="version">v3.0.0 · Documentación</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -723,7 +723,7 @@
       <tbody>
         <tr><td>Conectar por IP</td><td>Túnel a cualquier dirección IP alcanzable a través de Bastion</td></tr>
         <tr><td>Conectar por VM</td><td>Explorar y seleccionar cualquier VM de Azure en sus suscripciones</td></tr>
-        <tr><td>Modo túnel</td><td>Classic local port-forward via Azure CLI</td></tr>
+        <tr><td>Modo túnel</td><td>Túnel WebSocket .NET nativo — sin Azure CLI requerido</td></tr>
         <tr><td>Modo RD Gateway</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>Gestión de energía VM</td><td>Ver el estado de energía e iniciar VM detenidas desde la aplicación</td></tr>
         <tr><td>Multiinquilino</td><td>Cambiar entre inquilinos de Entra ID; configuración guardada por inquilino</td></tr>
@@ -735,6 +735,7 @@
         <tr><td>Tema claro y oscuro</td><td>Sigue automáticamente la configuración de tema claro/oscuro de Windows</td></tr>
       </tbody>
     </table>
+
   </section>
 
   <!-- ── PREREQUISITES ─────────────────────── -->
@@ -746,9 +747,10 @@
     <table class="field-table">
       <thead><tr><th>Requisito</th><th>Notas</th></tr></thead>
       <tbody>
+        <tr><td>.NET 10</td><td>Incluido — la aplicación es autónoma, no requiere instalación .NET separada</td></tr>
         <tr><td>Windows 10/11 (x64)</td><td>La aplicación es un ejecutable nativo de Windows x64</td></tr>
         <tr><td>Cliente de Escritorio remoto</td><td>Integrado en Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Azure CLI (solo modo túnel)</td><td>Solo necesario para el método <em>Túnel</em>. Descargar desde <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
+        <tr><td>Azure CLI <span class="badge orange">solo v2.x</span></td><td>Ya no es necesario a partir de la v3.0. Solo necesario si utiliza la versión 2.x. Descargar desde <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
 
@@ -860,24 +862,19 @@
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
-      <p>La aplicación almacena el estado de autenticación en cuatro archivos dentro de <code>%USERPROFILE%\.azure\</code> — la misma carpeta utilizada por Azure CLI:</p>
-      <table class="field-table" style="margin:8px 0 0;">
-        <thead><tr><th>Archivo</th><th>Contenido</th></tr></thead>
-        <tbody>
-          <tr><td>msal_token_cache.bin</td><td>Tokens de acceso y actualización MSAL cifrados</td></tr>
-          <tr><td>azureProfile.json</td><td>Lista de suscripciones e información del usuario conectado</td></tr>
-          <tr><td>clouds.config</td><td>Configuración de punto de conexión de Azure cloud</td></tr>
-          <tr><td>msal_http_cache.bin</td><td>Caché de respuesta HTTP</td></tr>
-        </tbody>
-      </table>
+      <p>La aplicación almacena los tokens de autenticación en un archivo de caché privado: <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Este archivo no es itinerante y es específico de la máquina — no se comparte con Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">En v2.x, este archivo se almacenaba en <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> y se compartía con Azure CLI.</small> <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">En v2.x, este archivo se almacenaba en <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> y se compartía con Azure CLI.</small></p>
       <p style="margin-top:8px;">Dado que estos archivos se comparten con Azure CLI, la aplicación puede reutilizar una sesión <code>az login</code> existente y viceversa.</p>
     </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p><strong>Para restablecer la caché de tokens</strong> (forzar un nuevo inicio de sesión en el próximo inicio), elimine los cuatro archivos de <code>%USERPROFILE%\.azure\</code>:<br/>
-      <code>msal_token_cache.bin</code>, <code>azureProfile.json</code>, <code>clouds.config</code>, <code>msal_http_cache.bin</code><br/><br/>
-      También puede usar el botón <strong>Cerrar sesión</strong> — elimina automáticamente los cuatro archivos y borra la caché MSAL en un solo paso. Tenga en cuenta que esto también cierra las sesiones activas de Azure CLI.</p>
+      <p><strong>Para restablecer la caché de tokens</strong> (forzar un nuevo inicio de sesión en el próximo inicio), elimine el archivo de caché de Use el botón <strong>Cerrar sesión</strong> — elimina automáticamente el archivo de caché y borra la caché MSAL en un solo paso. También puede eliminar el archivo manualmente:</p>
+    <pre>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</pre>
+    </div>
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Antes de v3.0 (v2.x):</strong> La caché de tokens y los archivos relacionados se almacenaban en <code>%USERPROFILE%\.azure\</code> y se compartían con Azure CLI. Al actualizar desde v2.x puede limpiar los archivos antiguos — ya no se utilizan:<br/>
+      <code>msal_token_cache.bin</code> · <code>azureProfile.json</code> · <code>clouds.config</code> · <code>msal_http_cache.bin</code></p>
     </div>
 
     <h3>Inicio de sesión (sin token en caché)</h3>
@@ -1198,7 +1195,7 @@
       <tbody>
         <tr><td>Actualizar</td><td>Recarga la lista de túneles activos.</td></tr>
         <tr><td>Conectar RDP</td><td>Vuelve a iniciar el cliente RDP de Windows conectado al puerto local de este túnel. Útil si cerró accidentalmente la ventana RDP.</td></tr>
-        <tr><td>Detener</td><td>Termina el túnel y limpia el proceso subyacente de Azure CLI.</td></tr>
+        <tr><td>Detener</td><td>Termina el túnel y cierra la conexión WebSocket a Bastion.</td></tr>
       </tbody>
     </table>
 
@@ -1211,15 +1208,15 @@
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Modo túnel</h2>
-    <p>El modo túnel utiliza el comando Azure CLI <code>az network bastion tunnel</code> para crear un <strong>reenvío de puerto local</strong>. El tráfico de un puerto de su máquina (<em>Puerto local</em>) se enruta a través de Azure Bastion hacia el destino (<em>Puerto de destino</em>) en la máquina remota.</p>
+    <p>El modo túnel crea una conexión de <strong>reenvío de puerto local</strong>. El tráfico de un puerto de su máquina (<em>Puerto local</em>) se enruta a través de Azure Bastion al destino (<em>Puerto de destino</em>) en la máquina remota. A partir de la v3.0, esta funcionalidad está implementada de forma nativa — no se requiere software adicional. Los usuarios de v2.x aún necesitan tener Azure CLI instalado para que esto funcione.</p>
 
     <h3>Cómo funciona</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>La aplicación verifica los requisitos previos</strong>
-          <p>La aplicación verifica que Azure CLI esté instalado y que la extensión de CLI <code>azure-bastion</code> esté presente. Si falta la extensión, ofrece instalarla automáticamente.</p>
+          <strong>La aplicación se autentica con Azure</strong>
+          <p>La aplicación usa su token MSAL existente para obtener un token de acceso ARM. No se necesita Azure CLI ni herramientas externas.</p>
         </div>
       </div>
       <div class="step">
@@ -1281,15 +1278,17 @@
       </div>
     </div>
 
-    <div class="callout tip">
-      <span class="ci">💡</span>
-      <p>El modo RD Gateway <strong>no</strong> requiere Azure CLI. Si su organización no permite la instalación de Azure CLI, use el modo RD Gateway.</p>
-    </div>
+    
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p><strong>Mecanismo de reserva de Entra ID</strong> — If <em>Use Entra ID Authentication</em> está habilitada pero la API de Bastion la rechaza (por ejemplo, en un escenario entre inquilinos), la aplicación reintenta automáticamente usando la autenticación RDP tradicional para que la conexión pueda tener éxito.</p>
     </div>
   </section>
+
+    <div class="callout info">
+        <span class="ci">📄</span>
+        <p><strong>Referencia técnica disponible.</strong> Para detalles del protocolo y hallazgos de API no documentados, consulte la <a href="bastion_tech_ref.html" style="color:var(--azure); font-weight:600;">Azure Bastion Native Tunnel — Referencia Técnica →</a></p>
+      </div>
 
   <!-- ── COMPARISON ─────────────────────────── -->
   <section id="method-comparison">
@@ -1303,7 +1302,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Requiere Azure CLI</td><td>✅ Sí</td><td>❌ No</td></tr>
+        <tr><td>Requiere Azure CLI</td><td>❌ No <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">✅ Sí <span class="badge orange">v2.x</span></small></td><td>❌ No</td></tr>
         <tr><td>Funciona con pestaña Dirección IP</td><td>✅ Sí</td><td>❌ No</td></tr>
         <tr><td>Funciona con pestaña Azure VM</td><td>✅ Sí</td><td>✅ Sí</td></tr>
         <tr><td>Múltiples sesiones simultáneas</td><td>✅ Sí</td><td>✅ Sí</td></tr>
@@ -1314,7 +1313,7 @@
         <tr><td>Ruta del tráfico de red</td><td>localhost → Bastion → VM</td><td>Cliente RDP → Bastion → VM</td></tr>
       </tbody>
     </table>
-    <p>En general, use <strong>RD Gateway</strong> para el acceso diario a VM de Azure. Use <strong>Tunnel</strong> cuando Azure CLI ya forma parte de su flujo de trabajo, o cuando necesita conectarse a una <strong>dirección IP específica</strong> que no es una VM de Azure — por ejemplo:</p>
+    <p>En general, use <strong>RD Gateway</strong> para el acceso diario a VM de Azure. Use <strong>Tunnel</strong>, o cuando necesita conectarse a una <strong>dirección IP específica</strong> que no es una VM de Azure — por ejemplo:</p>
     <ul style="margin: 6px 0 14px 22px; color:var(--ink-muted); line-height:2.1;">
       <li>Un <strong>servidor o estación de trabajo local</strong> alcanzable desde Azure Bastion a través de una VPN de sitio a sitio o un circuito Azure ExpressRoute.</li>
       <li>Un host en <strong>otro proveedor de nube</strong> (p. ej., AWS, GCP) conectado a Azure a través de VPN.</li>
@@ -1359,6 +1358,11 @@
       <span class="ci">⚠️</span>
       <p>No habilite la autenticación de Entra ID si se conecta entre inquilinos (p. ej., a través de Azure Lighthouse a una suscripción de cliente). Use la configuración predeterminada DESACTIVADO en esos casos.</p>
     </div>
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Reserva automática</strong> — Si la autenticación Entra ID está habilitada pero la API de Bastion la rechaza (por ejemplo en un escenario de inquilino cruzado), la aplicación reintenta automáticamente con autenticación RDP tradicional para que la conexión pueda tener éxito.</p>
+    </div>
+
   </section>
 
   <!-- ── VM POWER MANAGEMENT ─────────────────── -->
@@ -1410,7 +1414,8 @@
 
     <p>Una vez iniciado el arranque de una VM, la aplicación consulta Azure cada 5 segundos durante un máximo de 5 minutos esperando el estado En ejecución. Si la VM no alcanza ese estado, haga clic en el botón 🔄 <strong>Actualizar</strong> para comprobar el estado actual manualmente.</p>
 
-    <div class="callout info">
+        <p>Cuando la VM alcanza el estado <strong>En ejecución</strong>, la aplicación muestra una notificación de Windows desde el icono de la bandeja del sistema confirmando que la VM está lista.</p>
+<div class="callout info">
       <span class="ci">ℹ️</span>
       <p>El botón <strong>Conectar</strong> en la pestaña Azure VM está deshabilitado cuando la VM no está en estado En ejecución. Incluso si hace clic en Conectar inmediatamente después de que el indicador de estado se vuelva verde, la aplicación revalida el estado de energía en ese momento antes de proceder.</p>
     </div>
@@ -1503,10 +1508,12 @@
       <thead><tr><th>Archivo</th><th>Ruta</th><th>Propósito</th></tr></thead>
       <tbody>
         <tr><td>Configuración</td><td><code>%APPDATA%\BastionRDPConnector\settings.json</code></td><td>Preferencias del usuario: última suscripción, Bastion, VM, puertos, método de conexión, idioma, etc. Vea a continuación la lista completa.</td></tr>
-        <tr><td>Caché de tokens MSAL</td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Tokens de inicio de sesión de Azure cifrados. Compartido con Azure CLI.</td></tr>
-        <tr><td>Perfil Azure</td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Lista de suscripciones e información del usuario que ha iniciado sesión. Compartido con Azure CLI.</td></tr>
-        <tr><td>Configuración de nube</td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Configuración de punto de conexión de Azure cloud. Compartido con Azure CLI.</td></tr>
-        <tr><td>Caché HTTP</td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Caché de respuesta HTTP. Compartido con Azure CLI.</td></tr>
+        
+        <tr><td>Caché de tokens MSAL</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code></td><td>Tokens de inicio de sesión de Azure cifrados. Privado para esta aplicación — no compartido con Azure CLI. <span class="badge orange">v3.0+</span></td></tr>
+        <tr><td>Caché de tokens MSAL <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_token_cache.bin</code></td><td>Ubicación anterior a v3.0 — compartido con Azure CLI. Aún presente si ejecutaba v2.x anteriormente.</td></tr>
+        <tr><td>Perfil Azure <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Antes de v3.0: lista de suscripciones e información del usuario conectado. Compartido con Azure CLI.</td></tr>
+        <tr><td>Configuración cloud <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Antes de v3.0: configuración de punto de conexión de Azure cloud. Compartido con Azure CLI.</td></tr>
+        <tr><td>Caché HTTP <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Antes de v3.0: caché de respuesta HTTP. Compartido con Azure CLI.</td></tr>
         <tr><td>Registro de depuración</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registro de diagnóstico para solución de problemas. Borrado en cada inicio de la aplicación.</td></tr>
         <tr><td>Archivos RDP temporales</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Archivos RDP temporales creados por conexiones RD Gateway. Eliminados cuando la aplicación se cierra.</td></tr>
       </tbody>
@@ -1538,9 +1545,6 @@
     <h3>La aplicación no inicia / la ventana no aparece</h3>
     <p>La aplicación aplica una política de <strong>instancia única</strong>. Si ya está ejecutándose en la bandeja del sistema, volver a iniciarla no abrirá una segunda ventana — en su lugar, la ventana existente se trae al primer plano. Compruebe la bandeja del sistema para el icono de la aplicación.</p>
 
-    <h3>Error «Azure CLI no encontrado» (modo túnel)</h3>
-    <p>El modo túnel requiere que Azure CLI (<code>az</code>) esté instalado y accesible en el <code>PATH</code> del sistema. Descárguelo e instálelo desde <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a>. Si Azure CLI falta cuando intenta conectarse, la aplicación mostrará esta URL y ofrecerá abrirla directamente. Luego reinicie la aplicación.</p>
-
     <h3>No aparecen suscripciones / lista de Bastion vacía</h3>
     <p>Esto generalmente significa que su cuenta no tiene los permisos RBAC requeridos en ninguna suscripción, o que el inquilino seleccionado no contiene recursos de Bastion. Intente:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
@@ -1562,7 +1566,6 @@
     <h3>El cliente RDP se abre pero la conexión falla — Azure VM (modo túnel)</h3>
     <p>Además de las comprobaciones anteriores, verifique que:</p>
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
-      <li>Azure CLI está instalado y actualizado (<code>az upgrade</code>).</li>
       <li>El proceso de túnel sigue en ejecución — compruebe la pestaña <strong>Túneles activos</strong>. Si el túnel se detuvo inesperadamente, intente conectarse de nuevo para reiniciarlo.</li>
     </ul>
     <div class="callout tip">
@@ -1594,23 +1597,18 @@
     <p>El próximo inicio restablecerá todas las preferencias guardadas. No se cerrará su sesión.</p>
 
     <h3>Restablecer el inicio de sesión / caché de tokens</h3>
-    <p>La forma más sencilla es hacer clic en el botón <strong>Cerrar sesión</strong> — esto elimina automáticamente los cuatro archivos de autenticación y borra la caché MSAL en un solo paso. Si necesita restablecer sin abrir la aplicación, elimine manualmente estos cuatro archivos de <code>%USERPROFILE%\.azure\</code>:</p>
-    <pre>msal_token_cache.bin
-azureProfile.json
-clouds.config
-msal_http_cache.bin</pre>
-    <div class="callout warn">
-      <span class="ci">⚠️</span>
-      <p>Estos archivos son compartidos con Azure CLI. Eliminarlos también cerrará las sesiones activas de Azure CLI — los comandos <code>az</code> requerirán <code>az login</code> de nuevo.</p>
+    <p>La forma más sencilla es hacer clic en el botón <strong>Cerrar sesión</strong> — esto elimina automáticamente el archivo de caché de autenticación y borra la caché MSAL en un solo paso. Si necesita restablecer sin abrir la aplicación, elimine el archivo manualmente:</p>
+    <pre>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</pre>
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Antes de v3.0 (v2.x):</strong> La caché de tokens y los archivos relacionados se almacenaban en <code>%USERPROFILE%\.azure\</code> y se compartían con Azure CLI. Si actualiza desde v2.x, puede limpiar opcionalmente los archivos antiguos — ya no se utilizan:<br/>
+      <code>msal_token_cache.bin</code> · <code>azureProfile.json</code> · <code>clouds.config</code> · <code>msal_http_cache.bin</code></p>
     </div>
 
     <h3>Restablecimiento completo (configuración + inicio de sesión)</h3>
-    <p>Para restablecer completamente la aplicación a un estado limpio, elimine el archivo de configuración y los cuatro archivos de autenticación:</p>
+    <p>Para restablecer completamente la aplicación a un estado limpio, elimine el archivo de configuración y el archivo de caché de autenticación:</p>
     <pre>%APPDATA%\BastionRDPConnector\settings.json
-%USERPROFILE%\.azure\msal_token_cache.bin
-%USERPROFILE%\.azure\azureProfile.json
-%USERPROFILE%\.azure\clouds.config
-%USERPROFILE%\.azure\msal_http_cache.bin</pre>
+%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</pre>
 
     <h3>Registro de depuración</h3>
     <p>La aplicación escribe un registro de depuración detallado que puede ayudar a diagnosticar problemas de conexión o autenticación:</p>
@@ -1625,7 +1623,7 @@ msal_http_cache.bin</pre>
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v2.8.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.0.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
 </footer>
 </div>
 

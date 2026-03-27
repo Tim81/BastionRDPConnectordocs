@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Azure Bastion Native Tunnel — Technical Implementation Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1f2b;
+  --surface: #1e2330;
+  --border: #2a3045;
+  --border-bright: #3d4a6a;
+  --text: #c8d0e0;
+  --text-muted: #7a8aaa;
+  --text-bright: #e8edf8;
+  --azure: #4da6ff;
+  --azure-dim: #2a5a8a;
+  --green: #3dd68c;
+  --green-dim: #1a4a35;
+  --red: #ff6b6b;
+  --red-dim: #4a1f1f;
+  --orange: #ffab40;
+  --orange-dim: #4a3010;
+  --purple: #b388ff;
+  --purple-dim: #2d1f4a;
+  --yellow: #ffd740;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Fraunces', serif;
+  --sans: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.75;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.sidebar-header {
+  padding: 24px 20px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-header .eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--azure);
+  margin-bottom: 6px;
+}
+.sidebar-header h1 {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.3;
+}
+.sidebar-header .version-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-bright);
+  border-radius: 20px;
+  padding: 2px 10px;
+  color: var(--text-muted);
+}
+nav { padding: 14px 0 40px; flex: 1; }
+.nav-section-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 20px 5px;
+  opacity: .7;
+}
+nav a {
+  display: block;
+  padding: 6px 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color .15s, border-color .15s, background .15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+nav a:hover { color: var(--text-bright); background: rgba(255,255,255,.04); }
+nav a.active { color: var(--azure); border-left-color: var(--azure); background: rgba(77,166,255,.07); }
+nav a .step-num {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-right: 6px;
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+
+/* ── MAIN ── */
+.page-wrapper {
+  margin-left: 260px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+#main {
+  max-width: 960px;
+  padding: 60px 64px 120px;
+  flex: 1;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #0d1a2e 0%, #0a1525 50%, #111827 100%);
+  border: 1px solid var(--border-bright);
+  border-radius: 12px;
+  padding: 44px 48px;
+  margin-bottom: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 70% 40%, rgba(77,166,255,.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--azure);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--azure);
+  opacity: .6;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--text-bright);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--azure);
+}
+.hero p {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.meta-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border-bright);
+  border-radius: 4px;
+  padding: 4px 12px;
+  color: var(--text-muted);
+}
+.meta-chip span { color: var(--text-bright); }
+
+/* ── SECTIONS ── */
+section { margin-bottom: 80px; scroll-margin-top: 28px; }
+h2 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+h2 .section-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--azure-dim);
+  color: var(--azure);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 700;
+}
+h3 {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin: 36px 0 12px;
+}
+p { margin-bottom: 14px; color: var(--text); }
+a { color: var(--azure); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── PROTOCOL FLOW ── */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 28px 0;
+}
+.flow-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  position: relative;
+}
+.flow-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 48px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.flow-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--azure-dim);
+  border: 2px solid var(--azure);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--azure);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+}
+.flow-content {
+  padding: 0 0 36px 16px;
+}
+.flow-content h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.flow-content p { margin-bottom: 10px; }
+
+/* ── CODE BLOCKS ── */
+pre {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin: 14px 0;
+  color: #abb2bf;
+  -webkit-overflow-scrolling: touch;
+}
+pre .cm { color: var(--text-muted); font-style: italic; }
+pre .kw { color: var(--azure); }
+pre .st { color: var(--green); }
+pre .nu { color: var(--orange); }
+pre .hl { background: rgba(255,171,64,.12); display: block; margin: 0 -24px; padding: 0 24px; }
+code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--azure);
+}
+
+/* ── CALLOUTS ── */
+.callout {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 12px;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+  line-height: 1.65;
+  align-items: flex-start;
+}
+.callout > *:not(.ci) { grid-column: 2; min-width: 0; }
+.callout p { margin: 0; }
+.callout .ci { font-size: 16px; margin-top: 1px; }
+.callout.warn { background: rgba(255,171,64,.08); border: 1px solid rgba(255,171,64,.25); color: #e8c078; }
+.callout.info { background: rgba(77,166,255,.07); border: 1px solid rgba(77,166,255,.2); color: #9bbfd8; }
+.callout.danger { background: rgba(255,107,107,.07); border: 1px solid rgba(255,107,107,.2); color: #d89090; }
+.callout.discovery { background: rgba(179,136,255,.08); border: 1px solid rgba(179,136,255,.25); color: #c8a8ff; }
+.callout strong { color: inherit; filter: brightness(1.3); }
+.callout code { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.12); color: #e0c8ff; }
+.callout.info code { color: var(--azure); background: rgba(77,166,255,.12); border-color: rgba(77,166,255,.2); }
+.callout.warn code { color: var(--orange); background: rgba(255,171,64,.12); border-color: rgba(255,171,64,.2); }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  min-width: 480px;
+}
+thead th {
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border-bright);
+}
+thead th:first-child { border-radius: 6px 0 0 0; }
+thead th:last-child { border-radius: 0 6px 0 0; }
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+td:first-child { font-family: var(--mono); color: var(--text-bright); font-size: 12.5px; }
+td code { font-size: 12px; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 2px 8px;
+  letter-spacing: .04em;
+}
+.badge-undoc { background: rgba(255,107,107,.15); color: var(--red); border: 1px solid rgba(255,107,107,.3); }
+.badge-crit  { background: rgba(255,171,64,.15); color: var(--orange); border: 1px solid rgba(255,171,64,.3); }
+.badge-ok    { background: rgba(61,214,140,.15); color: var(--green); border: 1px solid rgba(61,214,140,.3); }
+.badge-info  { background: rgba(77,166,255,.15); color: var(--azure); border: 1px solid rgba(77,166,255,.3); }
+
+/* ── DISCOVERY FINDINGS ── */
+.findings {
+  counter-reset: finding;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.finding {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  align-items: flex-start;
+}
+.finding.critical { border-color: rgba(255,171,64,.3); background: rgba(255,171,64,.04); }
+.finding-num {
+  counter-increment: finding;
+  content: counter(finding);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.finding.critical .finding-num { background: rgba(255,171,64,.12); }
+.finding-body h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 5px;
+}
+.finding-body p { margin: 0; font-size: 13.5px; }
+.finding-body code { font-size: 12px; }
+
+/* ── HTTP EXCHANGE BLOCK ── */
+.http-exchange {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 14px 0;
+}
+.http-exchange pre { margin: 0; }
+.http-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 24px 64px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+footer a { color: var(--azure); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  #sidebar { display: none; }
+  .page-wrapper { margin-left: 0; }
+  #main { padding: 40px 20px 80px; }
+  .hero { padding: 28px 24px; }
+  .hero h1 { font-size: 26px; }
+  .http-exchange { grid-template-columns: 1fr; }
+  footer { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <div class="eyebrow">Technical Reference</div>
+    <h1>Azure Bastion<br>Native Tunnel</h1>
+    <div class="version-badge">azext_bastion v1.4.3 · March 2026</div>
+  </div>
+  <nav>
+    <div class="nav-section-label">Overview</div>
+    <a href="#overview">Introduction</a>
+    <a href="#undocumented">Undocumented Findings</a>
+
+    <div class="nav-section-label">Protocol</div>
+    <a href="#protocol"><span class="step-num">1–5</span> Full Protocol Flow</a>
+    <a href="#step1"><span class="step-num">1</span> Resolve DNS</a>
+    <a href="#step2"><span class="step-num">2</span> Obtain Token</a>
+    <a href="#step3"><span class="step-num">3</span> Open WebSocket</a>
+    <a href="#step4"><span class="step-num">4</span> TCP Proxy</a>
+    <a href="#step5"><span class="step-num">5</span> Cleanup</a>
+
+    <div class="nav-section-label">Implementation</div>
+    <a href="#auth">Authentication</a>
+    <a href="#http-client">HTTP Client Config</a>
+    <a href="#ip-connect">IP-Connect Mode</a>
+    <a href="#errors">Error Reference</a>
+
+    <div class="nav-section-label">Reference</div>
+    <a href="#exchanges">Full HTTP Exchanges</a>
+    <a href="#debug-log">Debug Log</a>
+    <a href="#notes">Implementation Notes</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</aside>
+
+<div class="page-wrapper">
+<main id="main">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-eyebrow">Reverse-Engineered · Not Officially Documented</div>
+  <h1>Azure Bastion<br><em>Native Tunnel</em><br>Implementation</h1>
+  <p>How to establish Azure Bastion tunnels entirely in .NET — no Azure CLI, no subprocess, no external dependencies. Discovered by reading the Azure CLI extension source and validated through live testing.</p>
+  <div class="hero-meta">
+    <div class="meta-chip">Source: <span>azext_bastion/tunnel.py v1.4.3</span></div>
+    <div class="meta-chip">SKU: <span>Standard or Premium</span></div>
+    <div class="meta-chip">Language: <span>.NET / C#</span></div>
+    <div class="meta-chip">API version: <span>2024-05-01</span></div>
+    <div class="meta-chip">Validated: <span>West Europe, March 2026</span></div>
+  </div>
+</div>
+
+<!-- ── SECTION 1: OVERVIEW ── -->
+<section id="overview">
+  <h2><span class="section-num">1</span> Introduction</h2>
+  <p>Azure Bastion provides a managed jump host that allows RDP and SSH connections to Azure VMs — and to any private IP reachable from the Bastion subnet — without exposing public IP addresses. Microsoft provides the Azure CLI command <code>az network bastion tunnel</code> to use this feature from the command line.</p>
+  <p>This document describes how the same tunnel can be established <strong>natively in .NET</strong>, without invoking the Azure CLI. The protocol was reverse-engineered by reading the source of the <code>azext_bastion</code> Python extension and validated through live debug capture and testing.</p>
+
+  <div class="callout warn">
+    <span class="ci">⚠️</span>
+    <p><strong>This is not an officially documented API.</strong> The <code>/api/tokens</code> endpoint and <code>/webtunnelv2/</code> WebSocket path are internal implementation details of the Azure Bastion service, exposed for use by the Azure CLI extension. Microsoft may change them without notice. This document reflects the behaviour observed with <code>azext_bastion</code> v1.4.3 in March 2026.</p>
+  </div>
+
+  <h3>Prerequisites</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Bastion SKU</td><td>Standard or Premium (<code>enableTunneling = true</code> required; Basic SKU does not support tunnelling)</td></tr>
+      <tr><td>IP-connect mode</td><td>Additionally requires <code>enableIpConnect = true</code> on the Bastion host</td></tr>
+      <tr><td>RBAC</td><td>Reader on the Bastion host + target VM/network minimum; Virtual Machine Contributor to start stopped VMs</td></tr>
+      <tr><td>Authentication</td><td>ARM token with <code>management.azure.com/.default</code> scope (standard MSAL)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ── SECTION 2: UNDOCUMENTED FINDINGS ── -->
+<section id="undocumented">
+  <h2><span class="section-num">2</span> Undocumented Findings</h2>
+  <p>The following five findings were discovered during implementation. None appear in any public Microsoft documentation. Each caused implementation failures until discovered by reading the CLI source directly.</p>
+
+  <div class="findings">
+    <div class="finding critical">
+      <div class="finding-num">1</div>
+      <div class="finding-body">
+        <h4>Body must be form-encoded, not JSON <span class="badge badge-undoc">UNDOCUMENTED</span> <span class="badge badge-crit">CRITICAL</span></h4>
+        <p>The <code>/api/tokens</code> endpoint requires <code>Content-Type: application/x-www-form-urlencoded</code>. Sending <code>application/json</code> returns <strong>HTTP 500 "Unexpected internal error"</strong> on every attempt, with no indication from the error message that content type is the cause. This was the most persistent issue during implementation and is not documented anywhere.</p>
+      </div>
+    </div>
+    <div class="finding critical">
+      <div class="finding-num">2</div>
+      <div class="finding-body">
+        <h4>WebSocket path is <code>/webtunnelv2/</code> for Standard SKU <span class="badge badge-undoc">UNDOCUMENTED</span></h4>
+        <p>The current CLI extension uses the path <code>/webtunnelv2/{websocketToken}</code>. Older documentation and older CLI versions reference <code>/webtunnel/</code> (without v2). Using the wrong path causes the WebSocket handshake to fail silently. The v2 path is not documented in any Azure public reference.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <div class="finding-num">3</div>
+      <div class="finding-body">
+        <h4>Response contains three separate tokens with distinct roles <span class="badge badge-undoc">UNDOCUMENTED</span></h4>
+        <p>The token endpoint returns <code>authToken</code>, <code>websocketToken</code>, and <code>nodeId</code> — three different fields with three different purposes. Only <code>websocketToken</code> goes in the WebSocket URL. <code>authToken</code> is used only for the DELETE cleanup call. Using the wrong token in the WebSocket URL causes the connection to be rejected.</p>
+      </div>
+    </div>
+    <div class="finding">
+      <div class="finding-num">4</div>
+      <div class="finding-body">
+        <h4>IP-connect mode requires a <code>hostname</code> field in addition to the <code>bh-hostConnect</code> resourceId <span class="badge badge-undoc">UNDOCUMENTED</span></h4>
+        <p>For IP-based connections, the target IP address must appear in <em>both</em> the <code>resourceId</code> path (as <code>/bh-hostConnect/{ipAddress}</code>) and as a separate <code>hostname</code> form field. Omitting the <code>hostname</code> field returns <strong>HTTP 404 "Invalid IP address for connection."</strong></p>
+      </div>
+    </div>
+    <div class="finding">
+      <div class="finding-num">5</div>
+      <div class="finding-body">
+        <h4>The <code>token</code> field is for reconnection — empty string on first call, never omitted <span class="badge badge-undoc">UNDOCUMENTED</span></h4>
+        <p>The POST body must always include <code>token=</code> (an empty string). The field exists for reconnecting an existing session by passing the previous <code>authToken</code>. Omitting it entirely (rather than sending an empty value) may cause issues on some endpoint versions. On first connection it is always an empty string.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: PROTOCOL FLOW ── -->
+<section id="protocol">
+  <h2><span class="section-num">3</span> Protocol Flow</h2>
+  <p>The native tunnel is established in five steps for each client TCP connection. Steps 2–5 repeat for every new RDP client that connects to the local listener port.</p>
+
+  <div class="flow">
+    <div class="flow-step" id="step1">
+      <div class="flow-num">1</div>
+      <div class="flow-content">
+        <h4>Resolve the Bastion DNS name from ARM</h4>
+        <p>Call the Azure Resource Manager API to retrieve the Bastion host's DNS name and validate feature flags.</p>
+        <pre><span class="kw">GET</span> https://management.azure.com/subscriptions/<span class="st">{subscriptionId}</span>
+    /resourceGroups/<span class="st">{resourceGroupName}</span>
+    /providers/Microsoft.Network/bastionHosts/<span class="st">{bastionName}</span>
+    ?api-version=<span class="nu">2024-05-01</span>
+
+Authorization: Bearer <span class="st">{ARM token}</span>
+
+<span class="cm">// Response (excerpt):</span>
+{
+  "properties": {
+    "dnsName": "<span class="st">bst-&lt;uuid&gt;.bastion.azure.com</span>",
+    "enableTunneling": <span class="nu">true</span>,
+    "enableIpConnect": <span class="nu">true</span>,
+    "sku": { "name": "<span class="st">Standard</span>" }
+  }
+}</pre>
+        <p>Validate that <code>enableTunneling</code> is <code>true</code> and SKU is Standard or Premium before proceeding. For IP-connect mode, also validate <code>enableIpConnect</code>.</p>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step2">
+      <div class="flow-num">2</div>
+      <div class="flow-content">
+        <h4>Obtain a Bastion session token</h4>
+        <p>POST a form-encoded request to the Bastion host's token endpoint. This is not an ARM endpoint — it's on the Bastion DNS host directly.</p>
+        <div class="callout warn">
+          <span class="ci">⚠️</span>
+          <p><strong>Must be form-encoded, not JSON.</strong> The <code>Content-Type</code> must be <code>application/x-www-form-urlencoded</code>. JSON returns HTTP 500.</p>
+        </div>
+        <pre><span class="kw">POST</span> https://<span class="st">bst-&lt;uuid&gt;.bastion.azure.com</span>/api/tokens HTTP/1.1
+Content-Type: <span class="st">application/x-www-form-urlencoded</span>
+<span class="cm">// No Authorization header — ARM token goes in the form body</span>
+
+resourceId=<span class="st">{resourceId}</span>
+&amp;protocol=<span class="st">tcptunnel</span>
+&amp;workloadHostPort=<span class="nu">3389</span>
+&amp;aztoken=<span class="st">{ARM token}</span>
+&amp;token=            <span class="cm">// empty on first call; prev authToken for reconnection</span>
+
+<span class="cm">// IP-connect only — also add:</span>
+&amp;hostname=<span class="st">{targetIpAddress}</span></pre>
+
+        <p>The <code>resourceId</code> differs by connection mode:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mode</th><th>resourceId</th><th>Extra fields</th></tr></thead>
+          <tbody>
+            <tr><td>Azure VM</td><td><code>/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Compute/virtualMachines/{name}</code></td><td>—</td></tr>
+            <tr><td>IP-connect</td><td><code>/subscriptions/{bastionSub}/resourceGroups/{bastionRG}/providers/Microsoft.Network/bh-hostConnect/{ipAddress}</code></td><td><code>hostname={ipAddress}</code></td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="callout info">
+          <span class="ci">ℹ️</span>
+          <p>For IP-connect, the resource group in the <code>resourceId</code> is the <strong>Bastion's own resource group</strong>, not the target machine's. The IP address appears in both the resourceId path and as the separate <code>hostname</code> field.</p>
+        </div>
+
+        <p>The response contains three fields:</p>
+        <pre>{
+  "authToken":      "<span class="st">&lt;hex string&gt;</span>",   <span class="cm">// used for DELETE cleanup only</span>
+  "websocketToken": "<span class="st">&lt;hex string&gt;</span>",   <span class="cm">// used in WebSocket URL</span>
+  "nodeId":         "<span class="st">10.x.x.x</span>"      <span class="cm">// Bastion scale unit identifier</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step3">
+      <div class="flow-num">3</div>
+      <div class="flow-content">
+        <h4>Open the WebSocket tunnel</h4>
+        <p>Connect a WebSocket to the Bastion host using the <code>websocketToken</code> (not the <code>authToken</code>).</p>
+        <div class="callout warn">
+          <span class="ci">⚠️</span>
+          <p><strong>Use <code>/webtunnelv2/</code>, not <code>/webtunnel/</code>.</strong> Older docs and older CLI versions used the v1 path. Standard SKU requires v2. Using the wrong path fails the WebSocket handshake.</p>
+        </div>
+        <pre><span class="kw">WSS</span> wss://<span class="st">bst-&lt;uuid&gt;.bastion.azure.com</span>/webtunnelv2/<span class="st">{websocketToken}</span>?X-Node-Id=<span class="st">{nodeId}</span></pre>
+        <p>In .NET, use <code>ClientWebSocket</code>. No special sub-protocol is required:</p>
+        <pre><span class="kw">var</span> ws = <span class="kw">new</span> ClientWebSocket();
+ws.Options.SetRequestHeader(<span class="st">"User-Agent"</span>, <span class="st">"BastionRDPConnector/3.0"</span>);
+<span class="kw">await</span> ws.ConnectAsync(wsUri, cancellationToken);</pre>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step4">
+      <div class="flow-num">4</div>
+      <div class="flow-content">
+        <h4>Bidirectional TCP proxy</h4>
+        <p>Listen on a local TCP port. For each accepted connection, open a new WebSocket (repeating steps 2–3) and proxy bytes in both directions concurrently.</p>
+        <pre><span class="cm">// TCP → WebSocket</span>
+<span class="kw">while</span> (ws.State == WebSocketState.Open) {
+    <span class="kw">int</span> n = <span class="kw">await</span> tcpStream.ReadAsync(buffer, ct);
+    <span class="kw">if</span> (n == <span class="nu">0</span>) <span class="kw">break</span>;
+    <span class="kw">await</span> ws.SendAsync(buffer[..n], WebSocketMessageType.Binary,
+                      endOfMessage: <span class="kw">true</span>, ct);
+}
+
+<span class="cm">// WebSocket → TCP</span>
+<span class="kw">while</span> (ws.State == WebSocketState.Open) {
+    <span class="kw">var</span> result = <span class="kw">await</span> ws.ReceiveAsync(buffer, ct);
+    <span class="kw">if</span> (result.MessageType == WebSocketMessageType.Close) <span class="kw">break</span>;
+    <span class="kw">await</span> tcpStream.WriteAsync(buffer[..result.Count], ct);
+}</pre>
+        <p>Run both directions as concurrent tasks. When either side closes, cancel the other.</p>
+        <div class="callout info">
+          <span class="ci">ℹ️</span>
+          <p>Each RDP client connection must get its own independent WebSocket. A WebSocket cannot be shared across multiple clients. Use <code>ArrayPool&lt;byte&gt;</code> for receive buffers to avoid GC pressure during long sessions. The CLI uses a 4096-byte buffer; this is sufficient for RDP traffic.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step5">
+      <div class="flow-num">5</div>
+      <div class="flow-content">
+        <h4>Session cleanup</h4>
+        <p>After the session ends, delete the Bastion session token using the <code>authToken</code>.</p>
+        <pre><span class="kw">DELETE</span> https://<span class="st">bst-&lt;uuid&gt;.bastion.azure.com</span>/api/tokens/<span class="st">{authToken}</span> HTTP/1.1
+X-Node-Id: <span class="st">{nodeId}</span>
+
+HTTP/1.1 <span class="nu">204</span> No Content</pre>
+        <p>A 404 response means the session already expired — treat it as success. Cleanup failure is non-critical and should be logged and swallowed, never blocking the next connection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 4: AUTHENTICATION ── -->
+<section id="auth">
+  <h2><span class="section-num">4</span> Authentication</h2>
+  <p>Only a single ARM token is needed throughout the entire flow. The token is obtained using the standard MSAL credential with the <code>management.azure.com/.default</code> scope — the same credential used for all other Azure Resource Manager calls in the application.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Call</th><th>Token placement</th></tr></thead>
+    <tbody>
+      <tr><td>GET /bastionHosts (DNS lookup)</td><td><code>Authorization: Bearer {token}</code> header</td></tr>
+      <tr><td>POST /api/tokens (session token)</td><td><code>aztoken={token}</code> form field — no Authorization header</td></tr>
+      <tr><td>WebSocket connection</td><td>No token — <code>websocketToken</code> is embedded in the URL path</td></tr>
+      <tr><td>DELETE /api/tokens (cleanup)</td><td>No token — <code>authToken</code> is embedded in the URL path</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout discovery">
+    <span class="ci">🔍</span>
+    <p><strong>Token audience note.</strong> The Azure CLI uses <code>management.core.windows.net</code> as the token scope, which produces a token with that audience. A standard MSAL implementation using <code>management.azure.com</code> produces a different audience claim — but the Bastion endpoint accepts both, because Azure AD treats the two URIs as aliases for the same management resource. Significant time was spent during implementation trying to match the CLI scope exactly; this was unnecessary.</p>
+  </div>
+</section>
+
+<!-- ── SECTION 5: HTTP CLIENT CONFIG ── -->
+<section id="http-client">
+  <h2><span class="section-num">5</span> HTTP Client Configuration</h2>
+  <p>The <code>HttpClient</code> must be configured to use HTTP/1.1. Python's <code>urllib3</code> (used internally by the CLI) always negotiates HTTP/1.1, and the Bastion endpoint has been observed to behave incorrectly with HTTP/2 POST requests.</p>
+
+  <pre><span class="kw">var</span> httpClient = <span class="kw">new</span> HttpClient(<span class="kw">new</span> HttpClientHandler())
+{
+    Timeout = TimeSpan.FromSeconds(<span class="nu">30</span>),
+    DefaultRequestVersion     = <span class="kw">new</span> Version(<span class="nu">1</span>, <span class="nu">1</span>),
+    DefaultVersionPolicy      = HttpVersionPolicy.RequestVersionExact
+};</pre>
+
+  <p>Build the form body using <code>FormUrlEncodedContent</code>, which automatically sets the correct <code>Content-Type</code> header:</p>
+
+  <pre><span class="kw">var</span> formFields = <span class="kw">new</span> Dictionary&lt;string, string&gt;
+{
+    [<span class="st">"resourceId"</span>]       = resourceId,
+    [<span class="st">"protocol"</span>]         = <span class="st">"tcptunnel"</span>,
+    [<span class="st">"workloadHostPort"</span>] = targetPort.ToString(),  <span class="cm">// must be a string</span>
+    [<span class="st">"aztoken"</span>]          = armToken,
+    [<span class="st">"token"</span>]            = string.Empty            <span class="cm">// never omit</span>
+};
+
+<span class="cm">// IP-connect only:</span>
+<span class="kw">if</span> (!string.IsNullOrEmpty(targetIpAddress))
+    formFields[<span class="st">"hostname"</span>] = targetIpAddress;
+
+request.Content = <span class="kw">new</span> FormUrlEncodedContent(formFields);</pre>
+
+  <p>Set <code>NoDelay = true</code> on accepted TCP connections to minimise RDP latency. Without this, Nagle's algorithm introduces noticeable input lag in interactive sessions.</p>
+</section>
+
+<!-- ── SECTION 6: IP-CONNECT MODE ── -->
+<section id="ip-connect">
+  <h2><span class="section-num">6</span> IP-Connect Mode</h2>
+  <p>IP-connect mode allows tunnelling to any private IP address reachable from the Bastion subnet — not just Azure VMs. This includes on-premises hosts connected via ExpressRoute or Site-to-Site VPN, and hosts in other cloud providers connected via VPN.</p>
+
+  <p>Three differences from Azure VM mode:</p>
+  <ol style="margin: 12px 0 16px 22px; color: var(--text); line-height: 2.1;">
+    <li>The <code>resourceId</code> uses the <code>bh-hostConnect</code> provider path with the target IP as the resource name</li>
+    <li>An additional <code>hostname</code> field is required in the POST body, containing the same IP address</li>
+    <li>The resource group in the <code>resourceId</code> is the Bastion's own resource group, not the target's</li>
+  </ol>
+
+  <pre><span class="cm">// Azure VM mode resourceId:</span>
+/subscriptions/<span class="st">{sub}</span>/resourceGroups/<span class="st">{vmRG}</span>/providers/Microsoft.Compute/virtualMachines/<span class="st">{vmName}</span>
+
+<span class="cm">// IP-connect mode resourceId:</span>
+/subscriptions/<span class="st">{bastionSub}</span>/resourceGroups/<span class="st">{bastionRG}</span>/providers/Microsoft.Network/bh-hostConnect/<span class="st">{ipAddress}</span>
+
+<span class="cm">// IP-connect mode: also add to form body:</span>
+hostname=<span class="st">{ipAddress}</span></pre>
+
+  <div class="callout warn">
+    <span class="ci">⚠️</span>
+    <p><strong>Requires <code>enableIpConnect = true</code></strong> on the Bastion host configuration. This must be enabled in the Azure Portal under the Bastion resource's Configuration blade. It is disabled by default.</p>
+  </div>
+</section>
+
+<!-- ── SECTION 7: ERROR REFERENCE ── -->
+<section id="errors">
+  <h2><span class="section-num">7</span> Error Reference</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Error message</th><th>HTTP status</th><th>Root cause</th></tr></thead>
+    <tbody>
+      <tr><td>Unexpected internal error</td><td>500</td><td>Wrong <code>Content-Type</code> (JSON instead of form-encoded), or malformed body. This is the most common error during initial implementation.</td></tr>
+      <tr><td>Invalid IP address for connection.</td><td>404</td><td>Missing <code>hostname</code> field in form body for IP-connect mode.</td></tr>
+      <tr><td>Tunneling is disabled</td><td>Error</td><td><code>enableTunneling = false</code> on the Bastion host. Must be enabled under Basic → Standard SKU upgrade or via Configuration blade.</td></tr>
+      <tr><td>AuthorizationFailed</td><td>403</td><td>Insufficient RBAC permissions. User needs at least Reader on the Bastion host and target VM/network.</td></tr>
+      <tr><td>WebSocket handshake failed</td><td>WS error</td><td>Using <code>/webtunnel/</code> instead of <code>/webtunnelv2/</code>, or using <code>authToken</code> instead of <code>websocketToken</code> in the URL.</td></tr>
+      <tr><td>(no error, sessions hang)</td><td>—</td><td>HTTP/2 negotiated instead of HTTP/1.1. Force HTTP/1.1 via <code>DefaultVersionPolicy = RequestVersionExact</code>.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ── SECTION 8: FULL HTTP EXCHANGES ── -->
+<section id="exchanges">
+  <h2><span class="section-num">8</span> Full HTTP Exchanges</h2>
+  <p>Anonymised request/response examples captured during live testing. IP addresses replaced with representative placeholders.</p>
+
+  <h3>Azure VM mode — POST /api/tokens</h3>
+  <div class="http-exchange">
+    <div>
+      <div class="http-label">→ Request</div>
+      <pre><span class="kw">POST</span> https://bst-&lt;uuid&gt;.bastion.azure.com/api/tokens HTTP/1.1
+Content-Type: <span class="st">application/x-www-form-urlencoded</span>
+Accept: <span class="st">application/json</span>
+
+resourceId=%2Fsubscriptions%2F<span class="st">{sub}</span>
+  %2FresourceGroups%2F<span class="st">{rg}</span>
+  %2Fproviders%2FMicrosoft.Compute
+  %2FvirtualMachines%2F<span class="st">{vmName}</span>
+&amp;protocol=<span class="st">tcptunnel</span>
+&amp;workloadHostPort=<span class="nu">3389</span>
+&amp;aztoken=<span class="st">eyJ0eXAiOi[...]</span>
+&amp;token=</pre>
+    </div>
+    <div>
+      <div class="http-label">← Response</div>
+      <pre>HTTP/1.1 <span class="nu">200</span> OK
+Content-Type: application/json
+
+{
+  "authToken":
+    "<span class="st">&lt;64-char hex&gt;</span>",
+  "websocketToken":
+    "<span class="st">&lt;hex string&gt;</span>",
+  "nodeId":
+    "<span class="st">10.x.x.x</span>"
+}</pre>
+    </div>
+  </div>
+
+  <h3>IP-connect mode — POST /api/tokens</h3>
+  <div class="http-exchange">
+    <div>
+      <div class="http-label">→ Request</div>
+      <pre><span class="kw">POST</span> https://bst-&lt;uuid&gt;.bastion.azure.com/api/tokens HTTP/1.1
+Content-Type: <span class="st">application/x-www-form-urlencoded</span>
+
+resourceId=%2Fsubscriptions%2F<span class="st">{bastionSub}</span>
+  %2FresourceGroups%2F<span class="st">{bastionRG}</span>
+  %2Fproviders%2FMicrosoft.Network
+  %2Fbh-hostConnect%2F<span class="st">{targetIp}</span>
+&amp;protocol=<span class="st">tcptunnel</span>
+&amp;workloadHostPort=<span class="nu">3389</span>
+&amp;aztoken=<span class="st">eyJ0eXAiOi[...]</span>
+&amp;token=
+&amp;hostname=<span class="st">{targetIp}</span></pre>
+    </div>
+    <div>
+      <div class="http-label">← Response</div>
+      <pre>HTTP/1.1 <span class="nu">200</span> OK
+
+{
+  "authToken":
+    "<span class="st">&lt;64-char hex&gt;</span>",
+  "websocketToken":
+    "<span class="st">&lt;hex string&gt;</span>",
+  "nodeId":
+    "<span class="st">10.x.x.x</span>"
+}</pre>
+    </div>
+  </div>
+
+  <h3>WebSocket upgrade</h3>
+  <div class="http-exchange">
+    <div>
+      <div class="http-label">→ Request</div>
+      <pre><span class="kw">GET</span> /webtunnelv2/<span class="st">{websocketToken}</span>
+    ?X-Node-Id=<span class="st">{nodeId}</span> HTTP/1.1
+Host: bst-&lt;uuid&gt;.bastion.azure.com
+Upgrade: websocket
+Connection: Upgrade
+User-Agent: BastionRDPConnector/3.0</pre>
+    </div>
+    <div>
+      <div class="http-label">← Response</div>
+      <pre>HTTP/1.1 <span class="nu">101</span> Switching Protocols
+Upgrade: websocket
+Connection: Upgrade</pre>
+    </div>
+  </div>
+
+  <h3>Session cleanup — DELETE /api/tokens</h3>
+  <pre><span class="kw">DELETE</span> https://bst-&lt;uuid&gt;.bastion.azure.com/api/tokens/<span class="st">{authToken}</span> HTTP/1.1
+X-Node-Id: <span class="st">{nodeId}</span>
+
+HTTP/1.1 <span class="nu">204</span> No Content</pre>
+</section>
+
+<!-- ── SECTION 9: DEBUG LOG ── -->
+<section id="debug-log">
+  <h2><span class="section-num">9</span> Debug Log Output</h2>
+  <p>A successful connection produces the following sequence in the application debug log (<code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code>):</p>
+  <pre><span class="cm">INFO  | === Starting Native Bastion Tunnel (no Azure CLI) ===</span>
+<span class="cm">INFO  | ARM token: aud=https://management.azure.com, expires=19:15:47 (expires in 3649s)</span>
+<span class="cm">INFO  | Bastion SKU: Standard</span>
+<span class="cm">INFO  | Bastion features: enableTunneling=True, enableIpConnect=True, enableFileCopy=False</span>
+<span class="cm">INFO  | Bastion DNS: bst-&lt;uuid&gt;.bastion.azure.com</span>
+<span class="cm">INFO  | TCP listener started on localhost:55000</span>
+<span class="cm">INFO  | Accepted TCP connection from 127.0.0.1:{ephemeral-port}</span>
+<span class="cm">INFO  | Token request resourceId: /subscriptions/.../virtualMachines/{vmName}</span>
+<span class="cm">INFO  | Token request encoding: application/x-www-form-urlencoded</span>
+<span class="cm">INFO  | Token response received (294 chars)</span>
+<span class="cm">INFO  | Bastion token obtained (nodeId=10.x.x.x)</span>
+<span class="cm">INFO  | WebSocket connected to Bastion (state=Open)</span>
+<span class="cm">INFO  | TCP->WS: connection closed normally (...)</span>
+<span class="cm">INFO  | Cleaning up Bastion session (authToken length=64)</span>
+<span class="cm">INFO  | Bastion session cleaned up successfully</span></pre>
+</section>
+
+<!-- ── SECTION 10: IMPLEMENTATION NOTES ── -->
+<section id="notes">
+  <h2><span class="section-num">10</span> Implementation Notes</h2>
+
+  <h3>One WebSocket per TCP client</h3>
+  <p>Each RDP client connection must have its own independent WebSocket. The WebSocket cannot be shared. The <code>TcpListener</code> accept loop should spawn a new task per connection, each independently executing steps 2–5.</p>
+
+  <h3>Bastion node load balancing</h3>
+  <p>The <code>nodeId</code> returned identifies which Bastion scale unit handled the request. On subsequent connections the <code>nodeId</code> may differ, indicating round-robin load balancing across scale units. Each <code>nodeId</code> must be paired with its corresponding <code>websocketToken</code> — never mix tokens and node IDs from different requests.</p>
+
+  <h3>Port auto-selection</h3>
+  <p>If the configured local port is already in use, the application increments the port number up to 100 times to find an available one, then falls back to an OS-assigned port. The <code>LocalPortChanged</code> event is fired to notify the UI of the new port.</p>
+
+  <h3>TCP NoDelay</h3>
+  <p>Set <code>tcpClient.NoDelay = true</code> on all accepted connections to disable Nagle's algorithm. Without this, interactive RDP sessions exhibit noticeable input lag due to packet coalescing.</p>
+
+  <h3>Buffer sizing</h3>
+  <p>Use a 4096-byte buffer — matching what the CLI uses internally. Use <code>ArrayPool&lt;byte&gt;</code> to rent buffers rather than allocating per-connection, to avoid GC pressure during long sessions.</p>
+</section>
+
+<!-- ── SECTION 11: SOURCES ── -->
+<section id="sources">
+  <h2><span class="section-num">11</span> Sources</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Source</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>azext_bastion/tunnel.py</td><td>Python source of the Azure CLI bastion extension v1.4.3. Read directly from <code>%USERPROFILE%\.azure\cliextensions\bastion\azext_bastion\tunnel.py</code> on a machine with the extension installed. This is the definitive source for the protocol.</td></tr>
+      <tr><td>Live debug capture</td><td><code>az network bastion tunnel --debug</code> run with <code>mstsc</code> connecting, to capture the exact form body fields, HTTP status codes, and token field names in the <code>_get_auth_token()</code> call.</td></tr>
+      <tr><td>Live validation</td><td>Validated against Azure Bastion Standard SKU, West Europe region. Both Azure VM resource ID and on-premises IP over ExpressRoute were tested successfully.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout info">
+    <span class="ci">ℹ️</span>
+    <p>This document is part of the <strong>Azure Bastion RDP Connector</strong> project by Timothy van der Ham. The application is available on the <a href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T" target="_blank">Microsoft Store</a>. The native tunnel implementation is contained in <code>NativeBastionTunnel.cs</code>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Azure Bastion RDP Connector · Native Tunnel Technical Reference · Timothy van der Ham · 2026
+  &nbsp;·&nbsp; <a href="index.html">← Back to user documentation</a>
+</footer>
+</div>
+
+<script>
+// Active nav highlight on scroll
+const sections = document.querySelectorAll('section[id], div.hero');
+const navLinks = document.querySelectorAll('nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const match = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0.25, rootMargin: '-10% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
