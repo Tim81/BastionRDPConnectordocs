@@ -751,7 +751,7 @@
         <tr><td>Windows 10/11 (x64)</td><td>Available via the Microsoft Store as a native x64 executable</td></tr>
         <tr><td>macOS 12 Monterey or later <span class="badge orange">v3.1.2+ · not yet public</span></td><td>Supported as of v3.1.2 for Apple Silicon (arm64) and Intel (x64). Public release planned for a future update.</td></tr>
         <tr><td>Remote Desktop client (Windows)</td><td>Built into Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Remote Desktop client (macOS)</td><td><a href="https://apps.apple.com/app/microsoft-remote-desktop/id1295203466" target="_blank" style="color:var(--azure);">Microsoft Remote Desktop</a> from the Mac App Store. <strong>Tunnel mode only</strong> — RD Gateway is not supported by the Windows App — this is a limitation of Microsoft's RDP client for macOS, not of macOS itself.</td></tr>
+        <tr><td>Remote Desktop client (macOS)</td><td><a href="https://apps.apple.com/app/microsoft-remote-desktop/id1295203466" target="_blank" style="color:var(--azure);">Microsoft Remote Desktop</a> from the Mac App Store. <strong>Tunnel mode only</strong> — RD Gateway is not supported by the Windows App on macOS. More precisely: Azure Bastion exposes an RD Gateway endpoint that the Windows App cannot connect through — this is a limitation of the Windows App itself, unrelated to RD Gateway support in other scenarios.</td></tr>
         <tr><td>Azure CLI <span class="badge orange">v2.x only</span></td><td>No longer required as of v3.0. Only needed if you are running version 2.x. Download from <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
