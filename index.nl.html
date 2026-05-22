@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.0.0 · Documentatie</div>
+    <div class="version">v3.3.0 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -682,7 +682,9 @@
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Naslag</div>
+      <a href="#about">Over &amp; Diagnostiek</a>
       <a href="#settings">Instellingen en opslag</a>
+      <a href="#whats-new">Wat is nieuw in v3.3</a>
       <a href="#troubleshooting">Problemen oplossen</a>
     </div>
   </nav>
@@ -1059,17 +1061,44 @@
   <!-- ── TAB 2: AZURE VM ─────────────────── -->
   <section id="tab-vm">
     <h2><span class="icon">🖥️</span> Tabblad Azure VM</h2>
-    <p>Gebruik dit tabblad om door uw Azure Virtual Machines te bladeren en er direct mee verbinding te maken. De applicatie kan gestopte VM's automatisch starten en ondersteunt beide verbindingsmethoden.</p>
+    <p>Gebruik dit tabblad om door uw Azure Virtual Machines te bladeren en er direct mee verbinding te maken. De applicatie kan gestopte VM's automatisch starten en ondersteunt beide verbindingsmethoden. <span class="badge blue">v3.3</span> Het tabblad gebruikt een <strong>twee-kolommenindeling</strong>: verbindingsinstellingen links, VM-selectie rechts.</p>
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestopt (gede-alloceerd)</div>
       </div>
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM actief — Verbinden ingeschakeld</div>
       </div>
+    </div>
+
+    <h3>Twee-kolommenindeling <span class="badge blue">v3.3</span></h3>
+    <p>Het tabblad Azure VM is verdeeld in twee kolommen:</p>
+    <table class="field-table">
+      <thead><tr><th>Kolom</th><th>Inhoud</th></tr></thead>
+      <tbody>
+        <tr><td>Links — Verbindingsinstellingen</td><td>Verbindingsmethode keuzerondjes, Monitor Configuratie, Entra ID Authenticatie selectievakje, Doelpoort en Lokale poort (Tunnelmodus).</td></tr>
+        <tr><td>Rechts — VM-selectie</td><td>Keuzerondjes voor VM-zoekmodus, lijst/filter voor virtuele machines, Status-indicator, Verbinden-knop.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>VM-zoekmodi <span class="badge blue">v3.3</span></h3>
+    <p>Twee keuzerondjes bovenaan de VM-selectiekolom bepalen hoe VM's worden geladen:</p>
+    <table class="field-table">
+      <thead><tr><th>Modus</th><th>Gedrag</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VM Subscription</strong> (standaard)</td><td>Toont direct alle VM's uit de geselecteerde subscription. Typ in het filtervak om de lijst op naam te filteren. Het subscription-dropdown toont alleen subscriptions die daadwerkelijk VM's bevatten.</td></tr>
+        <tr><td><strong>Alle subscriptions</strong></td><td>Zoekt over <em>alle</em> Azure-subscriptions waarover u toegang heeft, via <strong>Azure Resource Graph</strong>. Vereist minimaal 3 tekens voordat resultaten worden getoond. VM's laden over 200 subscriptions in 2–4 seconden in plaats van 30–60 seconden.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Azure Resource Graph</strong> — Vanaf v3.3 gebruikt het laden van VM's de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions. Dit vervangt de vorige aanpak waarbij elk subscription afzonderlijk werd bevraagd, waardoor scenario's met meerdere subscriptions aanzienlijk sneller zijn.</p>
     </div>
 
     <div class="ui-card">
@@ -1078,34 +1107,42 @@
         Tabblad Azure VM
       </div>
       <div class="ui-card-body">
-        <div class="ui-section">Verbindingsmethode</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" checked readonly> Tunnel
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" readonly> RD Gateway
-          </label>
-        </div>
-        <div class="ui-section">Monitor Configuratie</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Enkel beeldscherm</label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle beeldschermen</label>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">VM Subscription</span>
-          <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">Virtuele machine</span>
-          <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
-        </div>
-        <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
-          <div class="ui-dot green"></div>
-          <span style="font-size:12px; color:var(--green); font-weight:600;">Actief</span>
-          <span style="font-size:13px; margin-left:4px;">🔄</span>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <div class="ui-section">Verbindingsmethode</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" checked readonly> Tunnel
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" readonly> RD Gateway
+              </label>
+            </div>
+            <div class="ui-section">Monitor Configuratie</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Enkel beeldscherm</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle beeldschermen</label>
+            </div>
+          </div>
+          <div>
+            <div class="ui-section">VM-zoekmodus</div>
+            <div style="display:flex; gap:16px; margin-bottom:10px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> VM Subscription</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle subscriptions</label>
+            </div>
+            <div class="ui-row">
+              <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
+            </div>
+            <div class="ui-row" style="margin-top:6px;">
+              <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
+              <span class="ui-btn secondary" style="margin-left:8px;">Ververs</span>
+            </div>
+            <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
+              <div class="ui-dot green"></div>
+              <span style="font-size:12px; color:var(--green); font-weight:600;">Actief</span>
+              <span style="font-size:13px; margin-left:4px;">🔄</span>
+            </div>
+          </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
           <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Doel poort</div><div class="ui-field">3389</div></div>
@@ -1122,16 +1159,32 @@
     <table class="field-table">
       <thead><tr><th>Veld</th><th>Beschrijving</th></tr></thead>
       <tbody>
-        <tr><td>Verbindingsmethode</td><td>Kies <strong>Tunnel</strong> of <strong>RD Gateway</strong>. Zie de <a href="#method-comparison">vergelijkingssectie</a> voor advies.</td></tr>
+        <tr><td>Verbindingsmethode</td><td>Kies <strong>Tunnel</strong> of <strong>RD Gateway</strong>. Zie de <a href="#method-comparison">vergelijkingssectie</a> voor advies. Standaard: <strong>RD Gateway</strong> op Windows, <strong>Tunnel</strong> op macOS.</td></tr>
         <tr><td>Monitor Configuratie</td><td>Selecteer <strong>Enkel beeldscherm</strong> (alleen primair scherm) of <strong>Alle beeldschermen</strong> (over alle schermen). Alleen voor RD Gateway-modus.</td></tr>
         <tr><td>Entra ID Authenticatie</td><td>Optioneel selectievakje (alleen in RD Gateway-modus). Schakelt Entra ID SSO in. Zie <a href="#entraid">Entra ID Authenticatie</a>.</td></tr>
-        <tr><td>VM Subscription</td><td>De subscription die de doel-VM bevat. Kan afwijken van de Bastion Subscription.</td></tr>
-        <tr><td>Virtuele machine</td><td>De specifieke VM waarmee verbinding moet worden gemaakt. De lijst wordt ingevuld na het selecteren van een subscription.</td></tr>
+        <tr><td>VM-zoekmodus</td><td><strong>VM Subscription</strong> — VM's van één subscription weergeven. <strong>Alle subscriptions</strong> — zoekopdracht over meerdere subscriptions via Azure Resource Graph (minimaal 3 tekens vereist). <span class="badge blue">v3.3</span></td></tr>
+        <tr><td>VM Subscription / filter</td><td>De subscription met de doel-VM (VM Subscription-modus) of een zoekfilter (modus Alle subscriptions). Kan afwijken van de Bastion Subscription.</td></tr>
+        <tr><td>Virtuele machine</td><td>De specifieke VM waarmee verbinding moet worden gemaakt.</td></tr>
         <tr><td>Status</td><td>Toont de huidige VM-status met een gekleurde stip: 🟢 Actief · 🔴 Gestopt/Gede-alloceerd · 🟠 Starten/Stoppen/Overig</td></tr>
         <tr><td>Doel poort</td><td>RDP-poort op de VM (alleen Tunnelmodus).</td></tr>
         <tr><td>Lokale poort</td><td>Lokale tunnelpoort (alleen Tunnelmodus).</td></tr>
       </tbody>
     </table>
+
+    <h3>Preflight-controles <span class="badge blue">v3.3</span></h3>
+    <p>Voordat een verbinding tot stand wordt gebracht, valideert de app automatisch het volgende:</p>
+    <table class="field-table">
+      <thead><tr><th>Controle</th><th>Wat er gebeurt als het mislukt</th></tr></thead>
+      <tbody>
+        <tr><td>Bastion SKU</td><td>Als de geselecteerde Bastion de Basic SKU gebruikt, wordt een fout getoond met een koppeling naar de Azure Portal. De Basic SKU ondersteunt geen tunneling of RD Gateway.</td></tr>
+        <tr><td>Bastion-functievlaggen</td><td>Native client-ondersteuning en op IP gebaseerde verbinding moeten ingeschakeld zijn op de Bastion-resource. De app waarschuwt als een van beide ontbreekt.</td></tr>
+        <tr><td>VM-energiestatus</td><td>Als de VM gestopt of gede-alloceerd is, wordt de gebruiker geïnformeerd vóór de verbindingspoging.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Preflight-controles zijn <strong>fail-open</strong> — als de controle zelf mislukt (bijv. een netwerkprobleem voorkomt het ophalen van Bastion-metagegevens), verloopt de verbindingspoging normaal in plaats van te worden geblokkeerd.</p>
+    </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
@@ -1232,6 +1285,13 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>De Tunnelmodus is de enige methode beschikbaar op het tabblad <strong>IP-adres</strong>. Deze ondersteunt meerdere gelijktijdige tunnels naar verschillende doelen.</p>
+    </div>
+
+    <h3>Automatisch herverbinden <span class="badge blue">v3.3</span></h3>
+    <p>Als de WebSocket-verbinding met Azure Bastion onverwacht wordt verbroken — bijvoorbeeld door een netwerkstoring of Bastion-onderhoud — maakt de tunnel automatisch opnieuw verbinding. De app probeert dit tot <strong>5 keer</strong> met exponentieel uitstel. Uw RDP-sessie blijft verbonden gedurende het herverbindingsvenster; u zult de onderbreking doorgaans niet merken.</p>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Als alle 5 herverbindingspogingen mislukken, wordt de tunnel gestopt en verschijnt een foutmelding in het systeemvak. U kunt vervolgens handmatig opnieuw verbinding maken via het tabblad <strong>Azure VM</strong> of <strong>Actieve Tunnels</strong>.</p>
     </div>
   </section>
 
@@ -1484,6 +1544,25 @@
     </ol>
   </section>
 
+  <!-- ── ABOUT / DIAGNOSTICS ─────────────────────────── -->
+  <section id="about">
+    <h2><span class="icon">ℹ️</span> Over &amp; Diagnostiek <span class="badge blue">v3.3</span></h2>
+    <p>Een nieuwe <strong>ℹ-knop</strong> in de bovenste balk opent het Dialoogvenster Info. Dit toont de applicatieversie, platforminformatie en twee diagnostische acties:</p>
+
+    <table class="field-table">
+      <thead><tr><th>Actie</th><th>Beschrijving</th></tr></thead>
+      <tbody>
+        <tr><td>Logboekmap openen</td><td>Opent de map met <code>debug.log</code> in Windows Verkenner (of Finder op macOS). Handig wanneer u het logboekbestand moet vinden om naar ondersteuning te sturen.</td></tr>
+        <tr><td>Diagnostische info kopiëren</td><td>Kopieert een diagnostisch pakket naar het klembord: systeeminformatie (besturingssysteem, app-versie, platform) plus de laatste 100 KB van het al geredigeerde foutopsporingslogboek. Plak dit in een ondersteuningsverzoek of GitHub-issue.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>Het diagnostische logboek is <strong>al geredigeerd</strong> — bearer-tokens, JWT's, wachtwoorden en API-sleutels worden automatisch vervangen voordat ze naar schijf worden geschreven. Subscription-ID's, resource-ID's, GUID's en IP-adressen worden bewaard omdat ze nodig zijn voor probleemoplossing en geen geheimen zijn.</p>
+    </div>
+  </section>
+
   <!-- ── SETTINGS ─────────────────────────── -->
   <section id="settings">
     <h2><span class="icon">💾</span> Instellingen en opslag</h2>
@@ -1521,6 +1600,24 @@
         <tr><td>Verbindingsmethode</td><td><span class="badge orange">Per tenant</span></td><td>Tunnel of RD Gateway</td></tr>
         <tr><td>Monitormodus</td><td><span class="badge orange">Per tenant</span></td><td>Enkel beeldscherm of alle beeldschermen</td></tr>
         <tr><td>Entra ID Authenticatie</td><td><span class="badge orange">Per tenant</span></td><td>Aan/uit voor RD Gateway SSO</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── WHAT'S NEW ─────────────────────────── -->
+  <section id="whats-new">
+    <h2><span class="icon">🚀</span> Wat is nieuw in v3.3</h2>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Azure Resource Graph VM-laden</td><td>VM's over 200 subscriptions laden in <strong>2–4 seconden</strong> in plaats van 30–60 seconden. Gebruikt de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions.</td></tr>
+        <tr><td>VM-zoekopdracht over meerdere subscriptions</td><td>Nieuwe radio-knop <em>Alle subscriptions</em> doorzoekt tegelijk al uw Azure-subscriptions. Vereist minimaal 3 tekens. Het subscription-dropdown toont nu alleen subscriptions die daadwerkelijk VM's bevatten.</td></tr>
+        <tr><td>Twee-kolommenindeling Azure VM tabblad</td><td>Verbindingsinstellingen (methode, monitor, Entra ID-auth) staan in de linkerkolom; VM-selectie staat in de rechterkolom. De indeling is overzichtelijker en past meer informatie zonder te scrollen.</td></tr>
+        <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open.</td></tr>
+        <tr><td>Automatisch herverbinden tunnel</td><td>Als de WebSocket-verbinding wegvalt, maakt de tunnel automatisch opnieuw verbinding — tot 5 keer met exponentieel uitstel. RDP-sessies blijven verbonden gedurende het herverbindingsvenster.</td></tr>
+        <tr><td>Dialoogvenster Info &amp; diagnostisch pakket</td><td>Nieuwe ℹ-knop in de bovenste balk. Opent het Dialoogvenster Info met <em>Logboekmap openen</em> en <em>Diagnostische info kopiëren</em> (systeeminfo + laatste 100 KB van geredigeerd logboek).</td></tr>
+        <tr><td>Standaard verbindingsmethode per platform</td><td>Windows gebruikt standaard <strong>RD Gateway</strong>; macOS gebruikt standaard <strong>Tunnel</strong> (macOS Extern bureaublad ondersteunt geen RD Gateway). De standaard geldt alleen als er nog geen voorkeur is opgeslagen.</td></tr>
+        <tr><td>Ondersteuning voor HD Ready-schermen</td><td>Het venster is nu 580×760 pixels (was ~540×700). Past zonder schuifbalk op 1280×720 HD Ready-schermen.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1618,7 +1715,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.0.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

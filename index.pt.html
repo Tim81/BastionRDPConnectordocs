@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.0.0 · Documentação</div>
+    <div class="version">v3.3.0 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -682,7 +682,9 @@
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Referência</div>
+      <a href="#about">Sobre &amp; Diagnósticos</a>
       <a href="#settings">Definições e persistência</a>
+      <a href="#whats-new">Novidades da v3.3</a>
       <a href="#troubleshooting">Resolução de problemas</a>
     </div>
   </nav>
@@ -1072,17 +1074,44 @@
   <!-- ── TAB 2: AZURE VM ─────────────────── -->
   <section id="tab-vm">
     <h2><span class="icon">🖥️</span> Separador Azure VM</h2>
-    <p>Utilize este separador para navegar pelas suas Máquinas Virtuais do Azure e ligar-se diretamente a elas. A aplicação pode iniciar automaticamente VMs paradas e suporta ambos os métodos de ligação.</p>
+    <p>Utilize este separador para navegar pelas suas Máquinas Virtuais do Azure e ligar-se diretamente a elas. A aplicação pode iniciar automaticamente VMs paradas e suporta ambos os métodos de ligação. <span class="badge blue">v3.3</span> O separador utiliza uma <strong>disposição de duas colunas</strong>: definições de ligação à esquerda, seleção de VM à direita.</p>
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM parada (desalocada)</div>
       </div>
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM em execução – Ligar ativado</div>
       </div>
+    </div>
+
+    <h3>Disposição de duas colunas <span class="badge blue">v3.3</span></h3>
+    <p>O separador Azure VM está dividido em duas colunas:</p>
+    <table class="field-table">
+      <thead><tr><th>Coluna</th><th>Conteúdo</th></tr></thead>
+      <tbody>
+        <tr><td>Esquerda — Definições de ligação</td><td>Botões de opção para o método de ligação, configuração de monitor, caixa de verificação de autenticação Entra ID, porta de destino e porta local (modo de túnel).</td></tr>
+        <tr><td>Direita — Seleção de VM</td><td>Botões de opção para o modo de pesquisa de VM, lista/filtro de máquinas virtuais, indicador de estado de energia, botão Ligar.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Modos de pesquisa de VM <span class="badge blue">v3.3</span></h3>
+    <p>Um par de botões de opção no topo da coluna de seleção de VM controla a forma como as VMs são carregadas:</p>
+    <table class="field-table">
+      <thead><tr><th>Modo</th><th>Comportamento</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Subscrição VM</strong> (predefinição)</td><td>Mostra imediatamente todas as VMs da subscrição selecionada. Escreva no campo de filtro para restringir a lista por nome. A lista pendente de subscrições mostra apenas as que contêm VMs.</td></tr>
+        <tr><td><strong>Todas as subscrições</strong></td><td>Pesquisa em <em>todas</em> as suas subscrições do Azure através do <strong>Azure Resource Graph</strong>. Requer pelo menos 3 carateres antes de mostrar resultados. O carregamento de VMs em 200 subscrições demora 2–4 segundos em vez de 30–60 segundos.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Azure Resource Graph</strong> — Na v3.3, o carregamento de VMs utiliza a API Azure Resource Graph para consultas entre subscrições. Isto substitui a abordagem anterior de chamar individualmente cada subscrição, tornando os cenários de múltiplas subscrições consideravelmente mais rápidos.</p>
     </div>
 
     <div class="ui-card">
@@ -1091,34 +1120,42 @@
         Sep. Azure VM
       </div>
       <div class="ui-card-body">
-        <div class="ui-section">Método de ligação</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" checked readonly> Tunnel
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" readonly> RD Gateway
-          </label>
-        </div>
-        <div class="ui-section">Configuração de monitor</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Monitor único</label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Todos os monitores</label>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">VM Subscription</span>
-          <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Atualizar</span>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">Máquina virtual</span>
-          <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Atualizar</span>
-        </div>
-        <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
-          <div class="ui-dot green"></div>
-          <span style="font-size:12px; color:var(--green); font-weight:600;">Em execução</span>
-          <span style="font-size:13px; margin-left:4px;">🔄</span>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <div class="ui-section">Método de ligação</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" checked readonly> Tunnel
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" readonly> RD Gateway
+              </label>
+            </div>
+            <div class="ui-section">Configuração de monitor</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Monitor único</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Todos os monitores</label>
+            </div>
+          </div>
+          <div>
+            <div class="ui-section">Modo de pesquisa de VM</div>
+            <div style="display:flex; gap:16px; margin-bottom:10px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Subscrição VM</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Todas as subscrições</label>
+            </div>
+            <div class="ui-row">
+              <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
+            </div>
+            <div class="ui-row" style="margin-top:6px;">
+              <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
+              <span class="ui-btn secondary" style="margin-left:8px;">Atualizar</span>
+            </div>
+            <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
+              <div class="ui-dot green"></div>
+              <span style="font-size:12px; color:var(--green); font-weight:600;">Em execução</span>
+              <span style="font-size:13px; margin-left:4px;">🔄</span>
+            </div>
+          </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
           <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Porta de destino</div><div class="ui-field">3389</div></div>
@@ -1135,16 +1172,32 @@
     <table class="field-table">
       <thead><tr><th>Campo</th><th>Descrição</th></tr></thead>
       <tbody>
-        <tr><td>Método de ligação</td><td>Escolha <strong>Túnel</strong> ou <strong>RD Gateway</strong>. Consulte a <a href="#method-comparison">secção de comparação</a> para orientação.</td></tr>
+        <tr><td>Método de ligação</td><td>Escolha <strong>Túnel</strong> ou <strong>RD Gateway</strong>. Consulte a <a href="#method-comparison">secção de comparação</a> para orientação. Predefinição: <strong>RD Gateway</strong> no Windows, <strong>Túnel</strong> no macOS.</td></tr>
         <tr><td>Configuração de monitores</td><td>Selecione <strong>Monitor único</strong> (apenas ecrã principal) ou <strong>Todos os monitores</strong> (em todos os monitores). Aplica-se apenas ao modo RD Gateway.</td></tr>
         <tr><td>Autenticação Entra ID</td><td>Caixa de verificação opcional (visível apenas no modo RD Gateway). Ativa SSO Entra ID. Ver <a href="#entraid">Autenticação Entra ID</a>.</td></tr>
-        <tr><td>Subscrição VM</td><td>A subscrição que contém a VM de destino. Pode diferir da subscrição de Bastion (o acesso entre subscrições é suportado).</td></tr>
-        <tr><td>Máquina virtual</td><td>A VM específica à qual ligar. A lista é preenchida após selecionar uma subscrição.</td></tr>
+        <tr><td>Modo de pesquisa de VM</td><td><strong>Subscrição VM</strong> — listar VMs de uma subscrição. <strong>Todas as subscrições</strong> — pesquisa entre subscrições via Azure Resource Graph (mín. 3 carateres necessários). <span class="badge blue">v3.3</span></td></tr>
+        <tr><td>Subscrição VM / filtro</td><td>A subscrição que contém a VM de destino (modo Subscrição VM) ou um filtro de pesquisa (modo Todas as subscrições). Pode diferir da subscrição de Bastion.</td></tr>
+        <tr><td>Máquina virtual</td><td>A VM específica à qual ligar.</td></tr>
         <tr><td>Estado de energia</td><td>Mostra o estado atual da VM com um ponto codificado por cor: 🟢 Em execução · 🔴 Parada/Desalocada · 🟠 A iniciar/A parar/Outro</td></tr>
         <tr><td>Porta de destino</td><td>Porta RDP na VM (apenas modo de túnel).</td></tr>
         <tr><td>Porta local</td><td>Porta de túnel local (apenas modo de túnel).</td></tr>
       </tbody>
     </table>
+
+    <h3>Verificações preliminares <span class="badge blue">v3.3</span></h3>
+    <p>Antes de estabelecer uma ligação, a aplicação valida automaticamente o seguinte:</p>
+    <table class="field-table">
+      <thead><tr><th>Verificação</th><th>O que acontece se falhar</th></tr></thead>
+      <tbody>
+        <tr><td>SKU do Bastion</td><td>Se o Bastion selecionado utilizar o SKU Básico, é apresentado um erro com uma ligação ao portal do Azure. O SKU Básico não suporta tunelamento nem RD Gateway.</td></tr>
+        <tr><td>Sinalizadores de funcionalidades do Bastion</td><td>O suporte a clientes nativos e a ligação baseada em IP devem estar ativados no recurso Bastion. A aplicação avisa se algum estiver em falta.</td></tr>
+        <tr><td>Estado de energia da VM</td><td>Se a VM estiver parada ou desalocada, o utilizador é informado antes da tentativa de ligação.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>As verificações preliminares são <strong>fail-open</strong> — se a própria verificação falhar (p. ex., um problema de rede impede a obtenção de metadados do Bastion), a tentativa de ligação prossegue normalmente em vez de ser bloqueada.</p>
+    </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
@@ -1245,6 +1298,13 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>O modo de túnel é o único método disponível no separador <strong>Endereço IP</strong>. Suporta múltiplos túneis simultâneos para diferentes destinos.</p>
+    </div>
+
+    <h3>Reconexão automática <span class="badge blue">v3.3</span></h3>
+    <p>Se a ligação WebSocket ao Azure Bastion for interrompida inesperadamente — por exemplo devido a uma falha de rede ou manutenção do Bastion — o túnel reconecta-se automaticamente. A aplicação tenta até <strong>5 vezes</strong> com recuo exponencial. A sua sessão RDP permanece ligada durante a janela de reconexão; normalmente não notará a interrupção.</p>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Se todas as 5 tentativas de reconexão falharem, o túnel é parado e é apresentada uma notificação de erro na bandeja do sistema. Pode então reconectar-se manualmente a partir do separador <strong>Azure VM</strong> ou <strong>Túneis ativos</strong>.</p>
     </div>
   </section>
 
@@ -1497,6 +1557,25 @@
     </ol>
   </section>
 
+  <!-- ── ABOUT / DIAGNOSTICS ─────────────────────────── -->
+  <section id="about">
+    <h2><span class="icon">ℹ️</span> Sobre &amp; Diagnósticos <span class="badge blue">v3.3</span></h2>
+    <p>Um novo <strong>botão ℹ</strong> na barra superior abre a caixa de diálogo Sobre. Mostra a versão da aplicação, informações da plataforma e duas ações de diagnóstico:</p>
+
+    <table class="field-table">
+      <thead><tr><th>Ação</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>Abrir pasta de registos</td><td>Abre o diretório que contém <code>debug.log</code> no Explorador do Windows (ou Finder no macOS). Útil quando precisa de localizar o ficheiro de registo para enviar para o suporte.</td></tr>
+        <tr><td>Copiar informações de diagnóstico</td><td>Copia um pacote de diagnóstico para a área de transferência: informações do sistema (SO, versão da app, plataforma) mais os últimos 100 KB do registo de depuração já redigido. Cole numa solicitação de suporte ou numa issue do GitHub.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>O registo de diagnóstico já está <strong>redigido</strong> — tokens Bearer, JWT, palavras-passe e chaves de API são automaticamente substituídos antes de serem escritos em disco. Os IDs de subscrição, IDs de recurso, GUIDs e endereços IP são mantidos porque são necessários para a resolução de problemas e não são segredos.</p>
+    </div>
+  </section>
+
   <!-- ── SETTINGS ─────────────────────────── -->
   <section id="settings">
     <h2><span class="icon">💾</span> Definições e persistência</h2>
@@ -1533,6 +1612,24 @@
         <tr><td>Método de ligação</td><td><span class="badge orange">Por inquilino</span></td><td>Túnel ou RD Gateway</td></tr>
         <tr><td>Modo de monitor</td><td><span class="badge orange">Por inquilino</span></td><td>Monitor único ou todos os monitores</td></tr>
         <tr><td>Autenticação Entra ID</td><td><span class="badge orange">Por inquilino</span></td><td>Ativar/desativar SSO de RD Gateway</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── WHAT'S NEW ─────────────────────────── -->
+  <section id="whats-new">
+    <h2><span class="icon">🚀</span> Novidades da v3.3</h2>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Carregamento de VM com Azure Resource Graph</td><td>As VMs de 200 subscrições carregam em <strong>2–4 segundos</strong> em vez de 30–60 segundos. Utiliza a API Azure Resource Graph para consultas entre subscrições.</td></tr>
+        <tr><td>Pesquisa de VM entre subscrições</td><td>Novo botão de opção <em>Todas as subscrições</em> que pesquisa em todas as suas subscrições do Azure ao mesmo tempo. Requer pelo menos 3 carateres. A lista pendente de subscrições agora mostra apenas as que contêm VMs.</td></tr>
+        <tr><td>Disposição de duas colunas do separador Azure VM</td><td>As definições de ligação (método, monitor, auth Entra ID) estão na coluna esquerda; a seleção de VM está na coluna direita. A disposição é mais clara e mostra mais informação sem deslocamento.</td></tr>
+        <tr><td>Verificações preliminares</td><td>Antes de ligar, a aplicação verifica automaticamente o SKU do Bastion, os sinalizadores de funcionalidades do Bastion (cliente nativo / ligação baseada em IP) e o estado de energia da VM. As verificações são fail-open.</td></tr>
+        <tr><td>Reconexão automática do túnel</td><td>Se a ligação WebSocket for interrompida, o túnel reconecta-se automaticamente — até 5 vezes com recuo exponencial. As sessões RDP permanecem ligadas durante a janela de reconexão.</td></tr>
+        <tr><td>Caixa de diálogo Sobre &amp; pacote de diagnóstico</td><td>Novo botão ℹ na barra superior. Abre a caixa de diálogo Sobre com <em>Abrir pasta de registos</em> e <em>Copiar informações de diagnóstico</em> (info do sistema + últimos 100 KB do registo redigido).</td></tr>
+        <tr><td>Método de ligação predefinido por plataforma</td><td>O Windows utiliza <strong>RD Gateway</strong> por predefinição; o macOS utiliza <strong>Túnel</strong> por predefinição (o Ambiente de Trabalho Remoto do macOS não suporta RD Gateway). A predefinição aplica-se apenas se não tiver sido guardada nenhuma preferência.</td></tr>
+        <tr><td>Suporte para ecrãs HD Ready</td><td>A janela tem agora 580×760 píxeis (antes ~540×700). Cabe sem barra de deslocamento em ecrãs 1280×720 HD Ready.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1622,7 +1719,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.0.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

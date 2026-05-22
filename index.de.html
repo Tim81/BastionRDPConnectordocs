@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.0.0 · Dokumentation</div>
+    <div class="version">v3.3.0 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -682,7 +682,9 @@
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Referenz</div>
+      <a href="#about">Info &amp; Diagnose</a>
       <a href="#settings">Einstellungen und Speicherung</a>
+      <a href="#whats-new">Neuigkeiten in v3.3</a>
       <a href="#troubleshooting">Fehlerbehebung</a>
     </div>
   </nav>
@@ -1066,17 +1068,44 @@
   <!-- ── TAB 2: AZURE VM ─────────────────── -->
   <section id="tab-vm">
     <h2><span class="icon">🖥️</span> Registerkarte Azure VM</h2>
-    <p>Verwenden Sie diese Registerkarte, um Ihre Azure Virtual Machines zu durchsuchen und eine direkte Verbindung herzustellen. Die Anwendung kann gestoppte VMs automatisch starten und unterstützt beide Verbindungsmethoden.</p>
+    <p>Verwenden Sie diese Registerkarte, um Ihre Azure Virtual Machines zu durchsuchen und eine direkte Verbindung herzustellen. Die Anwendung kann gestoppte VMs automatisch starten und unterstützt beide Verbindungsmethoden. <span class="badge blue">v3.3</span> Die Registerkarte verwendet ein <strong>zweispaltiges Layout</strong>: Verbindungseinstellungen links, VM-Auswahl rechts.</p>
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestoppt (freigegeben)</div>
       </div>
       <div style="text-align:center;">
+        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM läuft – Verbinden aktiviert</div>
       </div>
+    </div>
+
+    <h3>Zweispaltiges Layout <span class="badge blue">v3.3</span></h3>
+    <p>Die Registerkarte Azure VM ist in zwei Spalten unterteilt:</p>
+    <table class="field-table">
+      <thead><tr><th>Spalte</th><th>Inhalt</th></tr></thead>
+      <tbody>
+        <tr><td>Links — Verbindungseinstellungen</td><td>Optionsschaltflächen für Verbindungsmethode, Monitor-Konfiguration, Kontrollkästchen für Entra ID-Authentifizierung, Zielport und lokaler Port (Tunnelmodus).</td></tr>
+        <tr><td>Rechts — VM-Auswahl</td><td>Optionsschaltflächen für VM-Suchmodus, Liste/Filter für virtuelle Maschinen, Energiestatus-Anzeige, Schaltfläche Verbinden.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>VM-Suchmodi <span class="badge blue">v3.3</span></h3>
+    <p>Ein Paar Optionsschaltflächen oben in der VM-Auswahlspalte steuert, wie VMs geladen werden:</p>
+    <table class="field-table">
+      <thead><tr><th>Modus</th><th>Verhalten</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VM Subscription</strong> (Standard)</td><td>Zeigt sofort alle VMs aus der ausgewählten Subscription an. Tippen Sie in das Filterfeld, um die Liste nach Name einzuschränken. Das Subscription-Dropdown zeigt nur Subscriptions, die tatsächlich VMs enthalten.</td></tr>
+        <tr><td><strong>Alle Subscriptions</strong></td><td>Sucht über <em>alle</em> Azure-Subscriptions, auf die Sie Zugriff haben, mithilfe von <strong>Azure Resource Graph</strong>. Mindestens 3 Zeichen erforderlich, bevor Ergebnisse angezeigt werden. VMs über 200 Subscriptions werden in 2–4 Sekunden statt 30–60 Sekunden geladen.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p><strong>Azure Resource Graph</strong> — Ab v3.3 verwendet das Laden von VMs die Azure Resource Graph API für abonnementübergreifende Abfragen. Dies ersetzt den bisherigen Ansatz, bei dem jede Subscription einzeln abgefragt wurde, und macht Szenarien mit mehreren Subscriptions deutlich schneller.</p>
     </div>
 
     <div class="ui-card">
@@ -1085,34 +1114,42 @@
         Reg. Azure VM
       </div>
       <div class="ui-card-body">
-        <div class="ui-section">Verbindungsmethode</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" checked readonly> Tunnel
-          </label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;">
-            <input type="radio" readonly> RD Gateway
-          </label>
-        </div>
-        <div class="ui-section">Monitor-Konfiguration</div>
-        <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Einzelner Monitor</label>
-          <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle Monitore</label>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">VM Subscription</span>
-          <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Aktualisieren</span>
-        </div>
-        <div class="ui-row">
-          <span class="ui-label">Virtuelle Maschine</span>
-          <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
-          <span class="ui-btn secondary" style="margin-left:8px;">Aktualisieren</span>
-        </div>
-        <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
-          <div class="ui-dot green"></div>
-          <span style="font-size:12px; color:var(--green); font-weight:600;">Wird ausgeführt</span>
-          <span style="font-size:13px; margin-left:4px;">🔄</span>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <div class="ui-section">Verbindungsmethode</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" checked readonly> Tunnel
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;">
+                <input type="radio" readonly> RD Gateway
+              </label>
+            </div>
+            <div class="ui-section">Monitor-Konfiguration</div>
+            <div style="display:flex; gap:16px; margin-bottom:14px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> Einzelner Monitor</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle Monitore</label>
+            </div>
+          </div>
+          <div>
+            <div class="ui-section">VM-Suchmodus</div>
+            <div style="display:flex; gap:16px; margin-bottom:10px; font-size:13px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" checked readonly> VM Subscription</label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:default;"><input type="radio" readonly> Alle Subscriptions</label>
+            </div>
+            <div class="ui-row">
+              <div class="ui-field" style="flex:1;">Contoso Dev (Current)</div>
+            </div>
+            <div class="ui-row" style="margin-top:6px;">
+              <div class="ui-field" style="flex:1;">vm-dev-web-01</div>
+              <span class="ui-btn secondary" style="margin-left:8px;">Aktualisieren</span>
+            </div>
+            <div style="margin: 8px 0 14px; display:flex; align-items:center; gap:8px;">
+              <div class="ui-dot green"></div>
+              <span style="font-size:12px; color:var(--green); font-weight:600;">Wird ausgeführt</span>
+              <span style="font-size:13px; margin-left:4px;">🔄</span>
+            </div>
+          </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
           <div><div style="font-size:11px; color:var(--ink-faint); margin-bottom:4px;">Zielport</div><div class="ui-field">3389</div></div>
@@ -1129,16 +1166,32 @@
     <table class="field-table">
       <thead><tr><th>Feld</th><th>Beschreibung</th></tr></thead>
       <tbody>
-        <tr><td>Verbindungsmethode</td><td>Wählen Sie <strong>Tunnel</strong> oder <strong>RD Gateway</strong>. Siehe den <a href="#method-comparison">Vergleichsabschnitt</a> für Orientierung.</td></tr>
+        <tr><td>Verbindungsmethode</td><td>Wählen Sie <strong>Tunnel</strong> oder <strong>RD Gateway</strong>. Siehe den <a href="#method-comparison">Vergleichsabschnitt</a> für Orientierung. Standard: <strong>RD Gateway</strong> unter Windows, <strong>Tunnel</strong> unter macOS.</td></tr>
         <tr><td>Monitor-Konfiguration</td><td>Wählen Sie <strong>Einzelner Monitor</strong> (nur primärer Bildschirm) oder <strong>Alle Monitore</strong> (über alle Monitore). Gilt nur im RD Gateway-Modus.</td></tr>
         <tr><td>Entra ID-Authentifizierung</td><td>Optionales Kontrollkästchen (nur im RD Gateway-Modus sichtbar). Aktiviert Entra ID SSO. Siehe <a href="#entraid">Entra ID-Authentifizierung</a>.</td></tr>
-        <tr><td>VM Subscription</td><td>Die Subscription, die die Ziel-VM enthält. Kann sich von der Bastion-Subscription unterscheiden (abonnementübergreifender Zugriff wird unterstützt).</td></tr>
-        <tr><td>Virtuelle Maschine</td><td>Die spezifische VM, mit der eine Verbindung hergestellt werden soll. Die Liste wird nach der Auswahl einer Subscription gefüllt.</td></tr>
+        <tr><td>VM-Suchmodus</td><td><strong>VM Subscription</strong> — VMs einer Subscription anzeigen. <strong>Alle Subscriptions</strong> — abonnementübergreifende Suche über Azure Resource Graph (mind. 3 Zeichen erforderlich). <span class="badge blue">v3.3</span></td></tr>
+        <tr><td>VM Subscription / Filter</td><td>Die Subscription mit der Ziel-VM (VM Subscription-Modus) oder ein Suchfilter (Modus Alle Subscriptions). Kann sich von der Bastion-Subscription unterscheiden.</td></tr>
+        <tr><td>Virtuelle Maschine</td><td>Die spezifische VM, mit der eine Verbindung hergestellt werden soll.</td></tr>
         <tr><td>Energiestatus</td><td>Zeigt den aktuellen VM-Status mit einem farbcodierten Punkt: 🟢 Wird ausgeführt · 🔴 Gestoppt/Freigegeben · 🟠 Starten/Stoppen/Sonstiges</td></tr>
         <tr><td>Zielport</td><td>RDP-Port auf der VM (nur Tunnelmodus).</td></tr>
         <tr><td>Lokaler Port</td><td>Lokaler Tunnelport (nur Tunnelmodus).</td></tr>
       </tbody>
     </table>
+
+    <h3>Preflight-Prüfungen <span class="badge blue">v3.3</span></h3>
+    <p>Vor dem Herstellen einer Verbindung prüft die App automatisch Folgendes:</p>
+    <table class="field-table">
+      <thead><tr><th>Prüfung</th><th>Was passiert bei Fehler</th></tr></thead>
+      <tbody>
+        <tr><td>Bastion-SKU</td><td>Wenn der ausgewählte Bastion die Basic-SKU verwendet, wird ein Fehler mit einem Link zum Azure Portal angezeigt. Die Basic-SKU unterstützt kein Tunneling oder RD Gateway.</td></tr>
+        <tr><td>Bastion-Feature-Flags</td><td>Native Client-Unterstützung und IP-basierte Verbindung müssen auf der Bastion-Ressource aktiviert sein. Die App warnt, wenn eines fehlt.</td></tr>
+        <tr><td>VM-Energiestatus</td><td>Wenn die VM gestoppt oder freigegeben ist, wird der Benutzer vor dem Verbindungsversuch informiert.</td></tr>
+      </tbody>
+    </table>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Preflight-Prüfungen sind <strong>fail-open</strong> — wenn die Prüfung selbst fehlschlägt (z. B. ein Netzwerkproblem verhindert das Abrufen von Bastion-Metadaten), wird der Verbindungsversuch normal fortgesetzt statt blockiert zu werden.</p>
+    </div>
 
     <div class="callout tip">
       <span class="ci">💡</span>
@@ -1239,6 +1292,13 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>Der Tunnelmodus ist die einzige Methode, die auf der Registerkarte <strong>IP-Adresse</strong> verfügbar ist. Er unterstützt mehrere gleichzeitige Tunnel zu verschiedenen Zielen.</p>
+    </div>
+
+    <h3>Automatische Wiederverbindung <span class="badge blue">v3.3</span></h3>
+    <p>Wenn die WebSocket-Verbindung zu Azure Bastion unerwartet abbricht — zum Beispiel durch einen Netzwerkausfall oder Bastion-Wartung — verbindet sich der Tunnel automatisch neu. Die App versucht dies bis zu <strong>5 Mal</strong> mit exponentiellem Backoff. Ihre RDP-Sitzung bleibt während des Wiederverbindungsfensters verbunden; Sie werden die Unterbrechung in der Regel nicht bemerken.</p>
+    <div class="callout tip">
+      <span class="ci">💡</span>
+      <p>Wenn alle 5 Wiederverbindungsversuche fehlschlagen, wird der Tunnel gestoppt und eine Fehlermeldung im Systembereich angezeigt. Sie können dann manuell über die Registerkarte <strong>Azure VM</strong> oder <strong>Aktive Tunnel</strong> eine neue Verbindung herstellen.</p>
     </div>
   </section>
 
@@ -1491,6 +1551,25 @@
     </ol>
   </section>
 
+  <!-- ── ABOUT / DIAGNOSTICS ─────────────────────────── -->
+  <section id="about">
+    <h2><span class="icon">ℹ️</span> Info &amp; Diagnose <span class="badge blue">v3.3</span></h2>
+    <p>Eine neue <strong>ℹ-Schaltfläche</strong> in der oberen Leiste öffnet den Info-Dialog. Er zeigt die Anwendungsversion, Plattforminformationen und zwei Diagnoseaktionen:</p>
+
+    <table class="field-table">
+      <thead><tr><th>Aktion</th><th>Beschreibung</th></tr></thead>
+      <tbody>
+        <tr><td>Protokollordner öffnen</td><td>Öffnet das Verzeichnis mit <code>debug.log</code> im Windows Explorer (oder Finder unter macOS). Nützlich, wenn Sie die Protokolldatei für den Support suchen müssen.</td></tr>
+        <tr><td>Diagnoseinformationen kopieren</td><td>Kopiert ein Diagnosepaket in die Zwischenablage: Systeminformationen (Betriebssystem, App-Version, Plattform) sowie die letzten 100 KB des bereits redigierten Debug-Protokolls. In eine Supportanfrage oder ein GitHub-Issue einfügen.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="ci">ℹ️</span>
+      <p>Das Diagnoseprotokoll ist <strong>bereits redigiert</strong> — Bearer-Token, JWTs, Passwörter und API-Schlüssel werden automatisch ersetzt, bevor sie auf die Festplatte geschrieben werden. Subscription-IDs, Ressourcen-IDs, GUIDs und IP-Adressen bleiben erhalten, da sie für die Fehlerbehebung benötigt werden und keine Geheimnisse sind.</p>
+    </div>
+  </section>
+
   <!-- ── SETTINGS ─────────────────────────── -->
   <section id="settings">
     <h2><span class="icon">💾</span> Einstellungen und Speicherung</h2>
@@ -1528,6 +1607,24 @@
         <tr><td>Verbindungsmethode</td><td><span class="badge orange">Pro Mandant</span></td><td>Tunnel oder RD Gateway</td></tr>
         <tr><td>Monitormodus</td><td><span class="badge orange">Pro Mandant</span></td><td>Einzelner oder alle Monitore</td></tr>
         <tr><td>Entra ID-Authentifizierung</td><td><span class="badge orange">Pro Mandant</span></td><td>Ein/Aus für RD Gateway SSO</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── WHAT'S NEW ─────────────────────────── -->
+  <section id="whats-new">
+    <h2><span class="icon">🚀</span> Neuigkeiten in v3.3</h2>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Azure Resource Graph VM-Laden</td><td>VMs über 200 Subscriptions laden in <strong>2–4 Sekunden</strong> statt 30–60 Sekunden. Verwendet die Azure Resource Graph API für abonnementübergreifende Abfragen.</td></tr>
+        <tr><td>VM-Suche über mehrere Subscriptions</td><td>Neuer Optionsknopf <em>Alle Subscriptions</em> durchsucht gleichzeitig alle Ihre Azure-Subscriptions. Mindestens 3 Zeichen erforderlich. Das Subscription-Dropdown zeigt jetzt nur Subscriptions, die tatsächlich VMs enthalten.</td></tr>
+        <tr><td>Zweispaltiges Layout Registerkarte Azure VM</td><td>Verbindungseinstellungen (Methode, Monitor, Entra ID-Auth) befinden sich in der linken Spalte; VM-Auswahl in der rechten Spalte. Das Layout ist übersichtlicher und zeigt mehr Informationen ohne Scrollen.</td></tr>
+        <tr><td>Preflight-Prüfungen</td><td>Vor dem Verbinden prüft die App automatisch Bastion-SKU, Bastion-Feature-Flags (nativer Client / IP-basierte Verbindung) und VM-Energiestatus. Prüfungen sind fail-open.</td></tr>
+        <tr><td>Automatische Tunnel-Wiederverbindung</td><td>Wenn die WebSocket-Verbindung abbricht, verbindet sich der Tunnel automatisch neu — bis zu 5 Mal mit exponentiellem Backoff. RDP-Sitzungen bleiben während des Wiederverbindungsfensters verbunden.</td></tr>
+        <tr><td>Info-Dialog &amp; Diagnosepaket</td><td>Neue ℹ-Schaltfläche in der oberen Leiste. Öffnet den Info-Dialog mit <em>Protokollordner öffnen</em> und <em>Diagnoseinformationen kopieren</em> (Systeminfo + letzte 100 KB des redigierten Protokolls).</td></tr>
+        <tr><td>Standard-Verbindungsmethode nach Plattform</td><td>Windows verwendet standardmäßig <strong>RD Gateway</strong>; macOS verwendet standardmäßig <strong>Tunnel</strong> (macOS Remote Desktop unterstützt kein RD Gateway). Standard gilt nur, wenn noch keine Einstellung gespeichert wurde.</td></tr>
+        <tr><td>Unterstützung für HD-Ready-Bildschirme</td><td>Das Fenster ist jetzt 580×760 Pixel (zuvor ~540×700). Passt ohne Scrollleiste auf 1280×720 HD-Ready-Bildschirme.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1625,7 +1722,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.0.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 
