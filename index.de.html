@@ -1079,16 +1079,17 @@
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestoppt (freigegeben)</div>
       </div>
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM läuft – Verbinden aktiviert</div>
       </div>
     </div>
+
+    <!-- Tunnel mode screenshot -->
+    <img src="screen-vm-tunnel.png" alt="Azure VM-Tab – Tunnel-Modus" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Zweispaltiges Layout <span class="badge blue">v3.3</span></h3>
     <p>Die Registerkarte Azure VM ist in zwei Spalten unterteilt:</p>
@@ -1114,6 +1115,8 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Ab v3.3 verwendet das Laden von VMs die Azure Resource Graph API für abonnementübergreifende Abfragen. Dies ersetzt den bisherigen Ansatz, bei dem jede Subscription einzeln abgefragt wurde, und macht Szenarien mit mehreren Subscriptions deutlich schneller.</p>
     </div>
+
+    <img src="screen-vm-allsubs.png" alt="Azure VM-Tab – Alle Abonnements suchen" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1562,6 +1565,8 @@
   <section id="about">
     <h2><span class="icon">ℹ️</span> Info &amp; Diagnose <span class="badge blue">v3.3</span></h2>
     <p>Eine neue <strong>ℹ-Schaltfläche</strong> in der oberen Leiste öffnet den Info-Dialog. Er zeigt die Anwendungsversion, Plattforminformationen und zwei Diagnoseaktionen:</p>
+
+    <img src="screen-about.png" alt="Über-Dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Aktion</th><th>Beschreibung</th></tr></thead>

@@ -1072,16 +1072,17 @@
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestopt (gede-alloceerd)</div>
       </div>
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM actief — Verbinden ingeschakeld</div>
       </div>
     </div>
+
+    <!-- Tunnel mode screenshot -->
+    <img src="screen-vm-tunnel.png" alt="Azure VM tab – Tunnel-modus" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Twee-kolommenindeling <span class="badge blue">v3.3</span></h3>
     <p>Het tabblad Azure VM is verdeeld in twee kolommen:</p>
@@ -1107,6 +1108,8 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Vanaf v3.3 gebruikt het laden van VM's de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions. Dit vervangt de vorige aanpak waarbij elk subscription afzonderlijk werd bevraagd, waardoor scenario's met meerdere subscriptions aanzienlijk sneller zijn.</p>
     </div>
+
+    <img src="screen-vm-allsubs.png" alt="Azure VM tab – Alle subscriptions zoeken" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1555,6 +1558,8 @@
   <section id="about">
     <h2><span class="icon">ℹ️</span> Over &amp; Diagnostiek <span class="badge blue">v3.3</span></h2>
     <p>Een nieuwe <strong>ℹ-knop</strong> in de bovenste balk opent het Dialoogvenster Info. Dit toont de applicatieversie, platforminformatie en twee diagnostische acties:</p>
+
+    <img src="screen-about.png" alt="Over-dialoogvenster" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Actie</th><th>Beschrijving</th></tr></thead>

@@ -1072,16 +1072,17 @@
 
     <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM stopped (deallocated)</div>
       </div>
       <div style="text-align:center;">
-        <!-- TODO: update screenshot for v3.3 two-column layout -->
         <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
         <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM running – Connect enabled</div>
       </div>
     </div>
+
+    <!-- Tunnel mode screenshot -->
+    <img src="screen-vm-tunnel.png" alt="Azure VM tab – Tunnel mode" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Two-column layout <span class="badge blue">v3.3</span></h3>
     <p>The Azure VM tab is divided into two columns:</p>
@@ -1107,6 +1108,8 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — In v3.3, VM loading uses the Azure Resource Graph API for cross-subscription queries. This replaces the previous approach of calling each subscription's ARM endpoint individually, making multi-subscription scenarios dramatically faster.</p>
     </div>
+
+    <img src="screen-vm-allsubs.png" alt="Azure VM tab – All subscriptions search" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1555,6 +1558,8 @@
   <section id="about">
     <h2><span class="icon">ℹ️</span> About &amp; Diagnostics <span class="badge blue">v3.3</span></h2>
     <p>A new <strong>ℹ button</strong> in the top bar opens the About dialog. It shows the application version, platform information, and two diagnostic actions:</p>
+
+    <img src="screen-about.png" alt="About dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
