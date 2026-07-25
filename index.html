@@ -1628,7 +1628,7 @@
         <tr><td>Ten sessions of log history</td><td><code>debug.log</code> was previously overwritten each time the application started. The last ten sessions are now kept as <code>debug.0.log</code> through <code>debug.9.log</code>, so the log from the run where a problem happened survives a restart.</td></tr>
         <tr><td>Diagnostic bundle covers past sessions</td><td><em>Copy Diagnostic Info</em> now includes the archived session logs as well as the current one, newest first, up to about 1 MB.</td></tr>
         <tr><td>Cleanup finishes before the window closes</td><td>Active tunnels are closed and temporary <code>.rdp</code> files are deleted before the window closes. Logging out runs the same cleanup instead of ending the process immediately.</td></tr>
-        <tr><td>Sign-in data moved</td><td>The embedded sign-in browser kept its profile next to the application file, which stopped the application working from a write-protected folder such as <code>Program Files</code>. It now uses <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Sign-in browser storage moved</td><td>The embedded sign-in browser kept its profile next to the application file, which stopped the application working from a write-protected folder such as <code>Program Files</code>. It now uses <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. The token cache location is unchanged.</td></tr>
         <tr><td>Updated components</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
       </tbody>
     </table>

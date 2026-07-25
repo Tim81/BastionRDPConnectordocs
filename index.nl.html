@@ -1629,7 +1629,7 @@
         <tr><td>Tien sessies logboekgeschiedenis</td><td><code>debug.log</code> werd voorheen overschreven bij elke start van de applicatie. De laatste tien sessies worden nu bewaard als <code>debug.0.log</code> tot en met <code>debug.9.log</code>, zodat het logboek van de sessie waarin een probleem optrad een herstart overleeft.</td></tr>
         <tr><td>Diagnostisch pakket omvat eerdere sessies</td><td><em>Diagnostische info kopiëren</em> bevat nu ook de gearchiveerde sessielogboeken naast het huidige, nieuwste eerst, tot ongeveer 1 MB.</td></tr>
         <tr><td>Opruimen voltooit vóór het sluiten van het venster</td><td>Actieve tunnels worden gesloten en tijdelijke <code>.rdp</code>-bestanden worden verwijderd vóór het venster sluit. Afmelden doorloopt dezelfde opruiming in plaats van het proces direct te beëindigen.</td></tr>
-        <tr><td>Aanmeldgegevens verplaatst</td><td>De ingebouwde aanmeldingsbrowser bewaarde zijn profiel naast het applicatiebestand, waardoor de applicatie niet werkte vanuit een schrijfbeveiligde map zoals <code>Program Files</code>. Deze gebruikt nu <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Opslag van aanmeldbrowser verplaatst</td><td>De ingebouwde aanmeldingsbrowser bewaarde zijn profiel naast het applicatiebestand, waardoor de applicatie niet werkte vanuit een schrijfbeveiligde map zoals <code>Program Files</code>. Deze gebruikt nu <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. De locatie van de tokencache is ongewijzigd.</td></tr>
         <tr><td>Bijgewerkte componenten</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
       </tbody>
     </table>

@@ -1635,7 +1635,7 @@
         <tr><td>Zehn Sitzungen Protokollverlauf</td><td><code>debug.log</code> wurde bisher bei jedem Start der Anwendung überschrieben. Die letzten zehn Sitzungen werden jetzt als <code>debug.0.log</code> bis <code>debug.9.log</code> aufbewahrt, sodass das Protokoll des Laufs, bei dem ein Problem auftrat, einen Neustart übersteht.</td></tr>
         <tr><td>Diagnosepaket umfasst frühere Sitzungen</td><td><em>Diagnoseinformationen kopieren</em> enthält jetzt auch die archivierten Sitzungsprotokolle zusätzlich zum aktuellen, neuestes zuerst, bis zu etwa 1 MB.</td></tr>
         <tr><td>Bereinigung schließt vor dem Schließen des Fensters ab</td><td>Aktive Tunnel werden geschlossen und temporäre <code>.rdp</code>-Dateien gelöscht, bevor das Fenster schließt. Das Abmelden durchläuft dieselbe Bereinigung, statt den Prozess sofort zu beenden.</td></tr>
-        <tr><td>Anmeldedaten verschoben</td><td>Der integrierte Anmeldebrowser bewahrte sein Profil neben der Anwendungsdatei auf, wodurch die Anwendung nicht aus einem schreibgeschützten Ordner wie <code>Program Files</code> funktionierte. Er verwendet jetzt <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Speicher des Anmeldebrowsers verschoben</td><td>Der integrierte Anmeldebrowser bewahrte sein Profil neben der Anwendungsdatei auf, wodurch die Anwendung nicht aus einem schreibgeschützten Ordner wie <code>Program Files</code> funktionierte. Er verwendet jetzt <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. Der Speicherort des Token-Caches bleibt unverändert.</td></tr>
         <tr><td>Aktualisierte Komponenten</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
       </tbody>
     </table>
