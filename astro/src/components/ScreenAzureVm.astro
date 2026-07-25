@@ -9,7 +9,7 @@ const { platform = 'windows', caption } = Astro.props as Props;
 const mac = platform === 'macos';
 const client = mac ? 'Windows App' : 'mstsc';
 const defaultCaption = mac
-  ? 'The Azure VM tab on macOS. Tunnel is the default here, because the Windows App does not support Bastion as a gateway.'
+  ? 'The Azure VM tab on macOS. Tunnel is the default. RD Gateway can still be selected, and the application warns before using it.'
   : 'The Azure VM tab on Windows. RD Gateway is the default.';
 const cap = caption ?? defaultCaption;
 const id = `s-${platform}`;

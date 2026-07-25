@@ -189,7 +189,7 @@ The Azure VM tab lists virtual machines by name instead of asking for an address
       <text class="ui-p" x="10" y="362">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
-  <figcaption><b>macOS</b> The Azure VM tab on macOS. Tunnel is the default here, because the Windows App does not support Bastion as a gateway.</figcaption>
+  <figcaption><b>macOS</b> The Azure VM tab on macOS. Tunnel is the default. RD Gateway can still be selected, and the application warns before using it.</figcaption>
 </figure>
 
 The default applies only until you pick a method yourself; after that, your choice is saved per tenant and restored the next time you open the app.

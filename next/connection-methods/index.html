@@ -35,7 +35,7 @@
 <h3 id="when-to-use-it">When to use it</h3>
 <ul>
 <li>You are connecting to an IP address rather than picking a VM.</li>
-<li>You are on macOS, where the Windows App does not support Bastion as a gateway.</li>
+<li>You are on macOS, where an RD Gateway session drops after a few seconds. See <a href="#rd-gateway-on-macos">RD Gateway on macOS</a>.</li>
 <li>You want several sessions open at once, each on its own local port.</li>
 </ul>
 <h2 id="rd-gateway">RD Gateway</h2>
@@ -45,6 +45,12 @@
 <span class="eyebrow">Cross-tenant sign-in</span>
 <p>When the virtual machine sits in a different tenant from the account you signed in with, the application turns off Entra ID authentication in the generated file. Leaving it on returns <code>AADSTS293004</code> and the session does not open.</p>
 </div>
+<h3 id="rd-gateway-on-macos">RD Gateway on macOS</h3>
+<p>RD Gateway is selectable on macOS and the connection does open. It then drops after roughly ten to fifteen seconds with error <code>0x3000064</code>.</p>
+<p>The cause is a cipher mismatch, not a configuration mistake. The macOS client’s TLS stack offers only RSA cipher suites, and Azure Bastion’s gateway presents ECDSA. Neither side can meet the other, so the session is torn down shortly after it starts. This is a client limitation on Microsoft’s side with no setting that works around it.</p>
+<p>Microsoft supports Bastion’s RD Gateway path with the Windows client. It is not a supported combination with the Windows App on macOS.</p>
+<p>Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a prompt naming the error code and offering Tunnel instead. Answering yes still makes the attempt, so the behaviour can be checked rather than taken on trust.</p>
+<p>Use Tunnel on macOS. It reaches the same machines and is the default there for this reason.</p>
 <h2 id="comparison">Comparison</h2>
 <table>
 <thead>
@@ -126,4 +132,4 @@
 </tr>
 </tbody>
 </table>
-<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/sign-in/"><span class="dir">Previous</span><span class="ttl">Sign in</span></a><a class="next" href="/BastionRDPConnectordocs/next/connect-ip/"><span class="dir">Next</span><span class="ttl">Connect to an IP address</span></a></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#tunnel">Tunnel</a></li><li><a class="sub" href="#when-to-use-it">When to use it</a></li><li><a href="#rd-gateway">RD Gateway</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#ports">Ports</a></li></ul></aside></div></main></body></html>
+<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/sign-in/"><span class="dir">Previous</span><span class="ttl">Sign in</span></a><a class="next" href="/BastionRDPConnectordocs/next/connect-ip/"><span class="dir">Next</span><span class="ttl">Connect to an IP address</span></a></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#tunnel">Tunnel</a></li><li><a class="sub" href="#when-to-use-it">When to use it</a></li><li><a href="#rd-gateway">RD Gateway</a></li><li><a class="sub" href="#rd-gateway-on-macos">RD Gateway on macOS</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#ports">Ports</a></li></ul></aside></div></main></body></html>

@@ -54,7 +54,7 @@ If the WebSocket drops, the tunnel reconnects on its own, up to five times with 
 ### When to use it
 
 - You are connecting to an IP address rather than picking a VM.
-- You are on macOS, where the Windows App does not support Bastion as a gateway.
+- You are on macOS, where an RD Gateway session drops after a few seconds. See [RD Gateway on macOS](#rd-gateway-on-macos).
 - You want several sessions open at once, each on its own local port.
 
 ## RD Gateway
@@ -67,6 +67,18 @@ This is the shorter path, and on Windows it is the default. It only works when B
 <span class="eyebrow">Cross-tenant sign-in</span>
 <p>When the virtual machine sits in a different tenant from the account you signed in with, the application turns off Entra ID authentication in the generated file. Leaving it on returns <code>AADSTS293004</code> and the session does not open.</p>
 </div>
+
+### RD Gateway on macOS
+
+RD Gateway is selectable on macOS and the connection does open. It then drops after roughly ten to fifteen seconds with error `0x3000064`.
+
+The cause is a cipher mismatch, not a configuration mistake. The macOS client's TLS stack offers only RSA cipher suites, and Azure Bastion's gateway presents ECDSA. Neither side can meet the other, so the session is torn down shortly after it starts. This is a client limitation on Microsoft's side with no setting that works around it.
+
+Microsoft supports Bastion's RD Gateway path with the Windows client. It is not a supported combination with the Windows App on macOS.
+
+Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a prompt naming the error code and offering Tunnel instead. Answering yes still makes the attempt, so the behaviour can be checked rather than taken on trust.
+
+Use Tunnel on macOS. It reaches the same machines and is the default there for this reason.
 
 ## Comparison
 

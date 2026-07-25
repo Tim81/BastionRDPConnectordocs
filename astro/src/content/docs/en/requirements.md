@@ -14,7 +14,7 @@ The application is self-contained. It does not need .NET installed separately, a
 | Windows 10 or later, x64 | Installed from the Microsoft Store |
 | macOS 12 Monterey or later | Supported since 3.1.2 for Apple Silicon and Intel, but not yet publicly available |
 | Remote desktop client, Windows | `mstsc.exe`, already part of Windows |
-| Remote desktop client, macOS | The Windows App, from the Mac App Store. It only supports Tunnel: Azure Bastion exposes an RD Gateway endpoint that the Windows App cannot connect through |
+| Remote desktop client, macOS | The Windows App, from the Mac App Store. Use Tunnel with it. An RD Gateway session opens and then drops after a few seconds with error `0x3000064`, a cipher mismatch Microsoft does not support on this client |
 
 <div class="callout note">
 <span class="eyebrow">Note</span>
