@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Documentation</div>
+    <div class="version">v3.3.4 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Language</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Reference</div>
       <a href="#about">About &amp; Diagnostics</a>
       <a href="#settings">Settings &amp; Persistence</a>
-      <a href="#whats-new">What's New in v3.3</a>
+      <a href="#whats-new">What's New</a>
       <a href="#troubleshooting">Troubleshooting</a>
     </div>
   </nav>
@@ -866,6 +866,7 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>The application stores authentication tokens in a private cache file at <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. This is a per-machine, non-roaming file — it is not shared with Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">In v2.x this file was stored at <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> and shared with the Azure CLI.</small></p>
+      <p>The embedded sign-in browser's profile is stored at <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1564,8 +1565,8 @@
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td>Open Log Folder</td><td>Opens the directory containing <code>debug.log</code> in Windows Explorer (or Finder on macOS). Useful when you need to locate the log file to send to support.</td></tr>
-        <tr><td>Copy Diagnostic Info</td><td>Copies a diagnostic bundle to the clipboard: system information (OS, app version, platform) plus the last 100 KB of the already-redacted debug log. Paste this into a support request or GitHub issue.</td></tr>
+        <tr><td>Open Log Folder</td><td>Opens the directory containing <code>debug.log</code> in Windows Explorer (or Finder on macOS). It also holds up to ten archived session logs, <code>debug.0.log</code> through <code>debug.9.log</code>. Useful when you need to locate the log file to send to support.</td></tr>
+        <tr><td>Copy Diagnostic Info</td><td>Copies a diagnostic bundle to the clipboard: system information (OS, app version, platform) plus the current debug log and the archived session logs, newest first, each capped at 100 KB and the whole bundle bounded at roughly 1 MB. All entries are already redacted.</td></tr>
       </tbody>
     </table>
 
@@ -1617,7 +1618,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> What's New in v3.3</h2>
+    <h2><span class="icon">🚀</span> What's New</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>System tray icon restored</td><td>The tray icon did not appear on Windows in versions 3.2 through 3.3.3. Minimising to the tray, tunnel notifications, and the tray context menu now work as this documentation describes.</td></tr>
+        <tr><td>Ten sessions of log history</td><td><code>debug.log</code> was previously overwritten each time the application started. The last ten sessions are now kept as <code>debug.0.log</code> through <code>debug.9.log</code>, so the log from the run where a problem happened survives a restart.</td></tr>
+        <tr><td>Diagnostic bundle covers past sessions</td><td><em>Copy Diagnostic Info</em> now includes the archived session logs as well as the current one, newest first, up to about 1 MB.</td></tr>
+        <tr><td>Cleanup finishes before the window closes</td><td>Active tunnels are closed and temporary <code>.rdp</code> files are deleted before the window closes. Logging out runs the same cleanup instead of ending the process immediately.</td></tr>
+        <tr><td>Sign-in data moved</td><td>The embedded sign-in browser kept its profile next to the application file, which stopped the application working from a write-protected folder such as <code>Program Files</code>. It now uses <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Updated components</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Feature</th><th>Details</th></tr></thead>
       <tbody>
@@ -1726,7 +1742,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
 </footer>
 </div>
 

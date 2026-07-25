@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Documentação</div>
+    <div class="version">v3.3.4 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Referência</div>
       <a href="#about">Sobre &amp; Diagnósticos</a>
       <a href="#settings">Definições e persistência</a>
-      <a href="#whats-new">Novidades da v3.3</a>
+      <a href="#whats-new">Novidades</a>
       <a href="#troubleshooting">Resolução de problemas</a>
     </div>
   </nav>
@@ -872,7 +872,7 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>A aplicação armazena os tokens de autenticação num ficheiro de cache privado: <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Este ficheiro não é itinerante e é específico da máquina — não é partilhado com o Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">Na v2.x, este ficheiro era armazenado em <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> e partilhado com o Azure CLI.</small> <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">Na v2.x, este ficheiro era armazenado em <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> e partilhado com o Azure CLI.</small></p>
-      
+      <p>O perfil do navegador de início de sessão incorporado é armazenado em <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1577,8 +1577,8 @@
     <table class="field-table">
       <thead><tr><th>Ação</th><th>Descrição</th></tr></thead>
       <tbody>
-        <tr><td>Abrir pasta de registos</td><td>Abre o diretório que contém <code>debug.log</code> no Explorador do Windows (ou Finder no macOS). Útil quando precisa de localizar o ficheiro de registo para enviar para o suporte.</td></tr>
-        <tr><td>Copiar informações de diagnóstico</td><td>Copia um pacote de diagnóstico para a área de transferência: informações do sistema (SO, versão da app, plataforma) mais os últimos 100 KB do registo de depuração já redigido. Cole numa solicitação de suporte ou numa issue do GitHub.</td></tr>
+        <tr><td>Abrir pasta de registos</td><td>Abre o diretório que contém <code>debug.log</code> no Explorador do Windows (ou Finder no macOS). Também contém até dez registos de sessões arquivadas, de <code>debug.0.log</code> a <code>debug.9.log</code>. Útil quando precisa de localizar o ficheiro de registo para enviar para o suporte.</td></tr>
+        <tr><td>Copiar informações de diagnóstico</td><td>Copia um pacote de diagnóstico para a área de transferência: informações do sistema (SO, versão da app, plataforma) mais o registo de depuração atual e os registos de sessões arquivadas, do mais recente ao mais antigo, cada um limitado a 100 KB e o pacote completo limitado a cerca de 1 MB. Tudo já vem redigido.</td></tr>
       </tbody>
     </table>
 
@@ -1630,7 +1630,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> Novidades da v3.3</h2>
+    <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Ícone da área de notificação restaurado</td><td>O ícone da área de notificação não aparecia no Windows nas versões 3.2 a 3.3.3. Minimizar para a área de notificação, as notificações de túnel e o menu de contexto da área de notificação agora funcionam conforme descrito nesta documentação.</td></tr>
+        <tr><td>Dez sessões de histórico de registos</td><td>O <code>debug.log</code> era anteriormente substituído sempre que a aplicação iniciava. As últimas dez sessões são agora mantidas como <code>debug.0.log</code> a <code>debug.9.log</code>, para que o registo da execução em que ocorreu um problema sobreviva a um reinício.</td></tr>
+        <tr><td>Pacote de diagnóstico abrange sessões anteriores</td><td><em>Copiar informações de diagnóstico</em> agora inclui os registos de sessões arquivadas além do atual, do mais recente ao mais antigo, até cerca de 1 MB.</td></tr>
+        <tr><td>Limpeza conclui antes de a janela fechar</td><td>Os túneis ativos são fechados e os ficheiros <code>.rdp</code> temporários são eliminados antes de a janela fechar. Terminar sessão executa a mesma limpeza em vez de encerrar o processo de imediato.</td></tr>
+        <tr><td>Dados de início de sessão movidos</td><td>O navegador de início de sessão incorporado mantinha o seu perfil junto ao ficheiro da aplicação, o que impedia a aplicação de funcionar a partir de uma pasta protegida contra escrita como <code>Program Files</code>. Agora utiliza <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Componentes atualizados</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
       <tbody>
@@ -1731,7 +1746,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

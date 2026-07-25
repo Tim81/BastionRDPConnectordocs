@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Documentation</div>
+    <div class="version">v3.3.4 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Langue</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Référence</div>
       <a href="#about">À propos &amp; Diagnostics</a>
       <a href="#settings">Paramètres et persistance</a>
-      <a href="#whats-new">Nouveautés de la v3.3</a>
+      <a href="#whats-new">Nouveautés</a>
       <a href="#troubleshooting">Dépannage</a>
     </div>
   </nav>
@@ -871,7 +871,7 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>L'application stocke les jetons d'authentification dans un fichier de cache privé : <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Ce fichier est non-itinérant et spécifique à la machine — il n'est pas partagé avec Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">En v2.x, ce fichier était stocké dans <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> et partagé avec Azure CLI.</small></p>
-      
+      <p>Le profil du navigateur de connexion intégré est stocké dans <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1570,8 +1570,8 @@
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td>Ouvrir le dossier des journaux</td><td>Ouvre le répertoire contenant <code>debug.log</code> dans l'Explorateur Windows (ou le Finder sur macOS). Utile lorsque vous devez localiser le fichier journal pour l'envoyer au support.</td></tr>
-        <tr><td>Copier les infos de diagnostic</td><td>Copie un bundle de diagnostic dans le presse-papiers : informations système (OS, version de l'app, plateforme) ainsi que les 100 derniers Ko du journal de débogage déjà épuré. À coller dans une demande de support ou une issue GitHub.</td></tr>
+        <tr><td>Ouvrir le dossier des journaux</td><td>Ouvre le répertoire contenant <code>debug.log</code> dans l'Explorateur Windows (ou le Finder sur macOS). Contient aussi jusqu'à dix journaux de session archivés, de <code>debug.0.log</code> à <code>debug.9.log</code>. Utile lorsque vous devez localiser le fichier journal pour l'envoyer au support.</td></tr>
+        <tr><td>Copier les infos de diagnostic</td><td>Copie un bundle de diagnostic dans le presse-papiers : informations système (OS, version de l'app, plateforme) ainsi que le journal de débogage actuel et les journaux de session archivés, du plus récent au plus ancien, chacun limité à 100 Ko et l'ensemble du bundle limité à environ 1 Mo. Tout est déjà épuré.</td></tr>
       </tbody>
     </table>
 
@@ -1624,7 +1624,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> Nouveautés de la v3.3</h2>
+    <h2><span class="icon">🚀</span> Nouveautés</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td>Icône de la zone de notification restaurée</td><td>L'icône de la zone de notification n'apparaissait pas sous Windows dans les versions 3.2 à 3.3.3. La réduction vers la zone de notification, les notifications de tunnel et le menu contextuel fonctionnent désormais comme le décrit cette documentation.</td></tr>
+        <tr><td>Historique de dix sessions de journaux</td><td><code>debug.log</code> était auparavant écrasé à chaque démarrage de l'application. Les dix dernières sessions sont désormais conservées sous <code>debug.0.log</code> à <code>debug.9.log</code>, si bien que le journal de la session où un problème s'est produit survit à un redémarrage.</td></tr>
+        <tr><td>Le bundle de diagnostic couvre les sessions passées</td><td><em>Copier les infos de diagnostic</em> inclut désormais les journaux de session archivés en plus du journal actuel, du plus récent au plus ancien, jusqu'à environ 1 Mo.</td></tr>
+        <tr><td>Le nettoyage se termine avant la fermeture de la fenêtre</td><td>Les tunnels actifs sont fermés et les fichiers <code>.rdp</code> temporaires sont supprimés avant la fermeture de la fenêtre. La déconnexion exécute le même nettoyage au lieu de terminer le processus immédiatement.</td></tr>
+        <tr><td>Données de connexion déplacées</td><td>Le navigateur de connexion intégré conservait son profil à côté du fichier de l'application, ce qui empêchait l'application de fonctionner depuis un dossier protégé en écriture tel que <code>Program Files</code>. Il utilise désormais <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Composants mis à jour</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
       <tbody>
@@ -1733,7 +1748,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
 </footer>
 </div>
 

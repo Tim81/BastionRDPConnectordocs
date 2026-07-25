@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Dokumentation</div>
+    <div class="version">v3.3.4 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Referenz</div>
       <a href="#about">Info &amp; Diagnose</a>
       <a href="#settings">Einstellungen und Speicherung</a>
-      <a href="#whats-new">Neuigkeiten in v3.3</a>
+      <a href="#whats-new">Neuigkeiten</a>
       <a href="#troubleshooting">Fehlerbehebung</a>
     </div>
   </nav>
@@ -872,7 +872,7 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>Die Anwendung speichert Authentifizierungstoken in einer privaten Cache-Datei: <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Diese Datei ist nicht-roaming und gerätespezifisch — sie wird nicht mit der Azure CLI geteilt. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">In v2.x wurde diese Datei unter <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> gespeichert und mit der Azure CLI geteilt.</small></p>
-      
+      <p>Das Profil des integrierten Anmeldebrowsers wird unter <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code> gespeichert. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1571,8 +1571,8 @@
     <table class="field-table">
       <thead><tr><th>Aktion</th><th>Beschreibung</th></tr></thead>
       <tbody>
-        <tr><td>Protokollordner öffnen</td><td>Öffnet das Verzeichnis mit <code>debug.log</code> im Windows Explorer (oder Finder unter macOS). Nützlich, wenn Sie die Protokolldatei für den Support suchen müssen.</td></tr>
-        <tr><td>Diagnoseinformationen kopieren</td><td>Kopiert ein Diagnosepaket in die Zwischenablage: Systeminformationen (Betriebssystem, App-Version, Plattform) sowie die letzten 100 KB des bereits redigierten Debug-Protokolls. In eine Supportanfrage oder ein GitHub-Issue einfügen.</td></tr>
+        <tr><td>Protokollordner öffnen</td><td>Öffnet das Verzeichnis mit <code>debug.log</code> im Windows Explorer (oder Finder unter macOS). Enthält außerdem bis zu zehn archivierte Sitzungsprotokolle, <code>debug.0.log</code> bis <code>debug.9.log</code>. Nützlich, wenn Sie die Protokolldatei für den Support suchen müssen.</td></tr>
+        <tr><td>Diagnoseinformationen kopieren</td><td>Kopiert ein Diagnosepaket in die Zwischenablage: Systeminformationen (Betriebssystem, App-Version, Plattform) sowie das aktuelle Debug-Protokoll und die archivierten Sitzungsprotokolle, neuestes zuerst, jeweils auf 100 KB begrenzt und das gesamte Paket auf rund 1 MB begrenzt. Alles ist bereits redigiert.</td></tr>
       </tbody>
     </table>
 
@@ -1625,7 +1625,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> Neuigkeiten in v3.3</h2>
+    <h2><span class="icon">🚀</span> Neuigkeiten</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Symbol im Benachrichtigungsbereich wiederhergestellt</td><td>Das Symbol im Benachrichtigungsbereich erschien unter Windows in den Versionen 3.2 bis 3.3.3 nicht. Minimieren in den Benachrichtigungsbereich, Tunnel-Benachrichtigungen und das Kontextmenü funktionieren jetzt wie in dieser Dokumentation beschrieben.</td></tr>
+        <tr><td>Zehn Sitzungen Protokollverlauf</td><td><code>debug.log</code> wurde bisher bei jedem Start der Anwendung überschrieben. Die letzten zehn Sitzungen werden jetzt als <code>debug.0.log</code> bis <code>debug.9.log</code> aufbewahrt, sodass das Protokoll des Laufs, bei dem ein Problem auftrat, einen Neustart übersteht.</td></tr>
+        <tr><td>Diagnosepaket umfasst frühere Sitzungen</td><td><em>Diagnoseinformationen kopieren</em> enthält jetzt auch die archivierten Sitzungsprotokolle zusätzlich zum aktuellen, neuestes zuerst, bis zu etwa 1 MB.</td></tr>
+        <tr><td>Bereinigung schließt vor dem Schließen des Fensters ab</td><td>Aktive Tunnel werden geschlossen und temporäre <code>.rdp</code>-Dateien gelöscht, bevor das Fenster schließt. Das Abmelden durchläuft dieselbe Bereinigung, statt den Prozess sofort zu beenden.</td></tr>
+        <tr><td>Anmeldedaten verschoben</td><td>Der integrierte Anmeldebrowser bewahrte sein Profil neben der Anwendungsdatei auf, wodurch die Anwendung nicht aus einem schreibgeschützten Ordner wie <code>Program Files</code> funktionierte. Er verwendet jetzt <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Aktualisierte Komponenten</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
       <tbody>
@@ -1734,7 +1749,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 

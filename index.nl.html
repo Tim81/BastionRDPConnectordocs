@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Documentatie</div>
+    <div class="version">v3.3.4 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Naslag</div>
       <a href="#about">Over &amp; Diagnostiek</a>
       <a href="#settings">Instellingen en opslag</a>
-      <a href="#whats-new">Wat is nieuw in v3.3</a>
+      <a href="#whats-new">Wat is nieuw</a>
       <a href="#troubleshooting">Problemen oplossen</a>
     </div>
   </nav>
@@ -866,6 +866,7 @@
     <div class="callout info">
       <span class="ci">ℹ️</span>
       <p>De applicatie slaat authenticatietokens op in een privé-cachebestand: <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Dit bestand is niet-roaming en apparaatspecifiek — het wordt niet gedeeld met Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">In v2.x werd dit bestand opgeslagen in <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> en gedeeld met de Azure CLI.</small></p>
+      <p>Het profiel van de ingebouwde aanmeldingsbrowser wordt opgeslagen in <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1564,8 +1565,8 @@
     <table class="field-table">
       <thead><tr><th>Actie</th><th>Beschrijving</th></tr></thead>
       <tbody>
-        <tr><td>Logboekmap openen</td><td>Opent de map met <code>debug.log</code> in Windows Verkenner (of Finder op macOS). Handig wanneer u het logboekbestand moet vinden om naar ondersteuning te sturen.</td></tr>
-        <tr><td>Diagnostische info kopiëren</td><td>Kopieert een diagnostisch pakket naar het klembord: systeeminformatie (besturingssysteem, app-versie, platform) plus de laatste 100 KB van het al geredigeerde foutopsporingslogboek. Plak dit in een ondersteuningsverzoek of GitHub-issue.</td></tr>
+        <tr><td>Logboekmap openen</td><td>Opent de map met <code>debug.log</code> in Windows Verkenner (of Finder op macOS). Deze map bevat ook tot tien gearchiveerde sessielogboeken, <code>debug.0.log</code> tot en met <code>debug.9.log</code>. Handig wanneer u het logboekbestand moet vinden om naar ondersteuning te sturen.</td></tr>
+        <tr><td>Diagnostische info kopiëren</td><td>Kopieert een diagnostisch pakket naar het klembord: systeeminformatie (besturingssysteem, app-versie, platform) plus het huidige foutopsporingslogboek en de gearchiveerde sessielogboeken, nieuwste eerst, elk beperkt tot 100 KB en het volledige pakket tot ongeveer 1 MB. Alles is al geredigeerd.</td></tr>
       </tbody>
     </table>
 
@@ -1618,7 +1619,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> Wat is nieuw in v3.3</h2>
+    <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Systeemvakpictogram hersteld</td><td>Het systeemvakpictogram verscheen niet op Windows in de versies 3.2 tot en met 3.3.3. Minimaliseren naar het systeemvak, tunnelmeldingen en het contextmenu van het systeemvak werken nu zoals in deze documentatie beschreven.</td></tr>
+        <tr><td>Tien sessies logboekgeschiedenis</td><td><code>debug.log</code> werd voorheen overschreven bij elke start van de applicatie. De laatste tien sessies worden nu bewaard als <code>debug.0.log</code> tot en met <code>debug.9.log</code>, zodat het logboek van de sessie waarin een probleem optrad een herstart overleeft.</td></tr>
+        <tr><td>Diagnostisch pakket omvat eerdere sessies</td><td><em>Diagnostische info kopiëren</em> bevat nu ook de gearchiveerde sessielogboeken naast het huidige, nieuwste eerst, tot ongeveer 1 MB.</td></tr>
+        <tr><td>Opruimen voltooit vóór het sluiten van het venster</td><td>Actieve tunnels worden gesloten en tijdelijke <code>.rdp</code>-bestanden worden verwijderd vóór het venster sluit. Afmelden doorloopt dezelfde opruiming in plaats van het proces direct te beëindigen.</td></tr>
+        <tr><td>Aanmeldgegevens verplaatst</td><td>De ingebouwde aanmeldingsbrowser bewaarde zijn profiel naast het applicatiebestand, waardoor de applicatie niet werkte vanuit een schrijfbeveiligde map zoals <code>Program Files</code>. Deze gebruikt nu <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Bijgewerkte componenten</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Functie</th><th>Details</th></tr></thead>
       <tbody>
@@ -1727,7 +1743,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

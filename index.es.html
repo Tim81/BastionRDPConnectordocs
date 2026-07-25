@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.0 · Documentación</div>
+    <div class="version">v3.3.4 · Documentación</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -684,7 +684,7 @@
       <div class="nav-group-label">Referencia</div>
       <a href="#about">Acerca de &amp; Diagnósticos</a>
       <a href="#settings">Configuración y persistencia</a>
-      <a href="#whats-new">Novedades de la v3.3</a>
+      <a href="#whats-new">Novedades</a>
       <a href="#troubleshooting">Solución de problemas</a>
     </div>
   </nav>
@@ -873,6 +873,7 @@
       <span class="ci">ℹ️</span>
       <p>La aplicación almacena los tokens de autenticación en un archivo de caché privado: <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Este archivo no es itinerante y es específico de la máquina — no se comparte con Azure CLI. <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">En v2.x, este archivo se almacenaba en <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> y se compartía con Azure CLI.</small> <span class="badge orange">v3.0+</span><br/><small style="color:var(--ink-faint);">En v2.x, este archivo se almacenaba en <code>%USERPROFILE%\.azure\msal_token_cache.bin</code> y se compartía con Azure CLI.</small></p>
       <p style="margin-top:8px;">Dado que estos archivos se comparten con Azure CLI, la aplicación puede reutilizar una sesión <code>az login</code> existente y viceversa.</p>
+      <p>El perfil del navegador de inicio de sesión integrado se almacena en <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. <span class="badge orange">v3.3.4+</span></p>
     </div>
 
     <div class="callout tip">
@@ -1577,8 +1578,8 @@
     <table class="field-table">
       <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
       <tbody>
-        <tr><td>Abrir carpeta de registros</td><td>Abre el directorio que contiene <code>debug.log</code> en el Explorador de Windows (o Finder en macOS). Útil cuando necesita localizar el archivo de registro para enviarlo a soporte.</td></tr>
-        <tr><td>Copiar información de diagnóstico</td><td>Copia un paquete de diagnóstico al portapapeles: información del sistema (SO, versión de la app, plataforma) más los últimos 100 KB del registro de depuración ya redactado. Péguelo en una solicitud de soporte o en un issue de GitHub.</td></tr>
+        <tr><td>Abrir carpeta de registros</td><td>Abre el directorio que contiene <code>debug.log</code> en el Explorador de Windows (o Finder en macOS). También contiene hasta diez registros de sesiones archivadas, de <code>debug.0.log</code> a <code>debug.9.log</code>. Útil cuando necesita localizar el archivo de registro para enviarlo a soporte.</td></tr>
+        <tr><td>Copiar información de diagnóstico</td><td>Copia un paquete de diagnóstico al portapapeles: información del sistema (SO, versión de la app, plataforma) más el registro de depuración actual y los registros de sesiones archivadas, del más reciente al más antiguo, cada uno limitado a 100 KB y el paquete completo limitado a aproximadamente 1 MB. Todo ya está redactado.</td></tr>
       </tbody>
     </table>
 
@@ -1631,7 +1632,22 @@
 
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
-    <h2><span class="icon">🚀</span> Novedades de la v3.3</h2>
+    <h2><span class="icon">🚀</span> Novedades</h2>
+
+    <h3>v3.3.4</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td>Icono de la bandeja del sistema restaurado</td><td>El icono de la bandeja no aparecía en Windows en las versiones 3.2 a 3.3.3. Minimizar a la bandeja, las notificaciones de túnel y el menú contextual de la bandeja ahora funcionan tal como se describe en esta documentación.</td></tr>
+        <tr><td>Diez sesiones de historial de registros</td><td><code>debug.log</code> se sobrescribía anteriormente cada vez que se iniciaba la aplicación. Las últimas diez sesiones ahora se conservan como <code>debug.0.log</code> a <code>debug.9.log</code>, de modo que el registro de la ejecución en la que ocurrió un problema sobrevive a un reinicio.</td></tr>
+        <tr><td>El paquete de diagnóstico cubre sesiones anteriores</td><td><em>Copiar información de diagnóstico</em> ahora incluye los registros de sesiones archivadas además del actual, del más reciente al más antiguo, hasta aproximadamente 1 MB.</td></tr>
+        <tr><td>La limpieza finaliza antes de cerrar la ventana</td><td>Los túneles activos se cierran y los archivos <code>.rdp</code> temporales se eliminan antes de que se cierre la ventana. Cerrar sesión ejecuta la misma limpieza en lugar de terminar el proceso de inmediato.</td></tr>
+        <tr><td>Datos de inicio de sesión reubicados</td><td>El navegador de inicio de sesión integrado guardaba su perfil junto al archivo de la aplicación, lo que impedía que la aplicación funcionara desde una carpeta protegida contra escritura como <code>Program Files</code>. Ahora usa <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</td></tr>
+        <tr><td>Componentes actualizados</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3</h3>
     <table class="field-table">
       <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
       <tbody>
@@ -1732,7 +1748,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
 </footer>
 </div>
 
