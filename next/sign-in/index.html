@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in · Azure Bastion RDP Connector</title><meta name="description" content="What happens the first time you open the application, how the token cache works, and how tenant and subscription selection fit together."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/" aria-current="page">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Get started<span>/</span>Sign in</p><h1>Sign in</h1><p>The application signs you in with MSAL, the same library Azure CLI and Visual Studio use for interactive sign-in. It opens the login page in an embedded browser: WebView2 on Windows, WKWebView on macOS. There is no separate browser window and no copy-pasted device code.</p>
+<h2 id="signing-in">Signing in</h2>
+<p>What you see depends on whether a token is already cached on your machine.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No cached token</td>
+<td>The Microsoft sign-in page opens right away.</td>
+</tr>
+<tr>
+<td>A valid cached token</td>
+<td>The app signs in silently. No login window appears, and you go straight to tenant selection if your account has more than one.</td>
+</tr>
+<tr>
+<td>An expired token, or a Conditional Access policy that requires re-authentication</td>
+<td>The login window opens again, so you can satisfy whatever your organisation requires, for example daily MFA.</td>
+</tr>
+</tbody>
+</table>
+<p>Pick <strong>Work or school account</strong>, enter your account, and complete MFA if your organisation asks for it.</p>
+<div class="callout note">
+<span class="eyebrow">Note</span>
+<p>The token cache lives at <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. It is per-machine and does not roam, and it is separate from the Azure CLI cache. The embedded browser's own profile sits alongside it, in <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</p>
+</div>
+<h2 id="choosing-a-tenant">Choosing a tenant</h2>
+<!-- Mirrors src/components/ScreenSignIn.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-signin-win">
+      <title id="s-signin-win">The tenant selection dialog on Windows. Three tenants are listed, each with a radio button and its tenant ID. One is selected. An OK button confirms the choice.</title>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
+<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;Select tenant&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-l" x="10" y="42"&gt;Your account has access to more than&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-l" x="10" y="54"&gt;one tenant. Choose one to continue.&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="68" width="280" height="42" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-ro on" cx="24" cy="88" r="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-rd" cx="24" cy="88" r="2"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="36" y="86"&gt;Contoso Production&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="36" y="98"&gt;5f8a2c14-…-tenant&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="114" width="280" height="42" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-ro" cx="24" cy="134" r="4"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="36" y="132"&gt;Contoso Dev&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="36" y="144"&gt;b2c19e07-…-tenant&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="160" width="280" height="42" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-ro" cx="24" cy="180" r="4"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="36" y="178"&gt;Fabrikam (Lighthouse)&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="36" y="190"&gt;9e4d3a51-…-tenant&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="10" y="222"&gt;Settings are stored separately per&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="10" y="233"&gt;tenant and restored when you switch back.&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-bt" x="240" y="337" text-anchor="middle"&gt;OK&lt;/text&gt;</span></span>
+<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+  </div>
+  <figcaption><b>Windows</b> The tenant selection dialog on Windows. It appears once, right after sign-in, only when the account can see more than one tenant. The dialog looks the same on macOS aside from the window chrome.</figcaption>
+</figure>
+<p>This dialog appears when your account has access to more than one Entra ID tenant, for example through Azure Lighthouse. Pick the tenant whose resources you want to work with and select <strong>OK</strong>. If that tenant needs MFA and your cached token does not already satisfy it, you get one more authentication prompt.</p>
+<p>You can switch tenants at any time while the app is running. Settings, meaning the last subscription, Bastion host, and VM you used, are stored separately per tenant and come back automatically when you switch back.</p>
+<h2 id="selecting-a-subscription">Selecting a subscription</h2>
+<p>Once a tenant is chosen, the main window loads with a <strong>Bastion subscription</strong> shown at the top. If your account has several subscriptions and the one that is picked does not contain the Bastion host you need, select <strong>Change</strong> to open the picker.</p>
+<div class="callout note">
+<span class="eyebrow">Note</span>
+<p>The Bastion subscription at the top is the one that holds your Bastion resource. On the Azure VM tab, the VM subscription can be a different one entirely. Cross-subscription connections work without extra setup.</p>
+</div>
+<p>Your token stays on disk between launches, so you are not asked to sign in again unless the session expires or a Conditional Access policy requires it. To force a fresh sign-in, select <strong>Logout</strong> in the top bar. It removes the cached token and clears the MSAL state in one step, and the next launch starts from a blank sign-in.</p>
+<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/install/"><span class="dir">Previous</span><span class="ttl">Install</span></a><a class="next" href="/BastionRDPConnectordocs/next/connection-methods/"><span class="dir">Next</span><span class="ttl">Connection methods</span></a></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#signing-in">Signing in</a></li><li><a href="#choosing-a-tenant">Choosing a tenant</a></li><li><a href="#selecting-a-subscription">Selecting a subscription</a></li></ul></aside></div></main></body></html>

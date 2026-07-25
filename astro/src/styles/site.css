@@ -211,6 +211,55 @@ figure svg { display: block; width: 100%; height: auto; }
 figcaption { font-size: 13px; color: var(--text-3); margin-top: 9px; }
 figcaption b { font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); font-weight: 500; margin-right: 7px; }
 
+/* ── Schematic application screens ────────────────────────────
+   Drawn, not screenshotted, so they stay legible at any size, do
+   not carry a tenant's real resource names, and do not go stale
+   the moment a control moves. The vocabulary below mirrors the
+   real window: 640x760, a top bar, a Bastion picker, three tabs. */
+
+.appshot { margin: 22px 0 26px; max-width: 74ch; }
+.appshot .frame {
+  border: 1px solid var(--rule); border-radius: 8px;
+  background: var(--paper-2); padding: 18px;
+}
+.appshot svg { display: block; width: 100%; height: auto; max-width: 460px; margin: 0 auto; }
+.appshot figcaption { font-size: 13px; color: var(--text-3); margin-top: 10px; }
+.appshot figcaption b {
+  font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text-2); font-weight: 500; margin-right: 7px;
+}
+
+/* Window chrome */
+.ui-win   { fill: #fff; stroke: #C4CCD6; stroke-width: 1; }
+.ui-bar   { fill: #F3F5F8; }
+.ui-title { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8.5px; fill: var(--text-2); }
+
+/* Controls */
+.ui-field { fill: #fff; stroke: #CBD3DC; stroke-width: 1; }
+.ui-panel { fill: #F8FAFC; stroke: var(--rule-soft); stroke-width: 1; }
+.ui-btn   { fill: var(--azure); }
+.ui-btn-2 { fill: #fff; stroke: #CBD3DC; stroke-width: 1; }
+.ui-tabon { fill: #fff; }
+.ui-tabup { stroke: var(--azure); stroke-width: 2; }
+
+/* Text inside the mock */
+.ui-l  { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8px; fill: var(--text-2); }
+.ui-v  { font-family: 'DM Mono', monospace; font-size: 8px; fill: var(--text); }
+.ui-p  { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8px; fill: var(--text-3); }
+.ui-bt { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8.5px; font-weight: 600; fill: #fff; }
+.ui-tb { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8.5px; fill: var(--text); }
+.ui-tb.off { fill: var(--text-3); }
+
+/* State dots reuse the application's own meanings */
+.ui-run  { fill: var(--live); }
+.ui-stop { fill: var(--halt); }
+
+/* Radio and checkbox marks */
+.ui-ro   { fill: #fff; stroke: #9AA5B2; stroke-width: 1; }
+.ui-ro.on { stroke: var(--azure); }
+.ui-rd   { fill: var(--azure); }
+.ui-ck   { fill: var(--azure); }
+
 .n-box  { fill: var(--paper); stroke: var(--rule); stroke-width: 1.25; }
 .n-hop  { fill: var(--ink); stroke: var(--ink); }
 .n-t    { font-family: 'DM Mono', monospace; font-size: 11px; fill: var(--text); }

@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Requirements · Azure Bastion RDP Connector</title><meta name="description" content="What has to be true on your machine and in Azure before Azure Bastion RDP Connector can open a session."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/" aria-current="page">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Get started<span>/</span>Requirements</p><h1>Requirements</h1><p>The application is self-contained. It does not need .NET installed separately, and since 3.0 it does not need Azure CLI. What it does need is a supported operating system, a remote desktop client, and a Bastion host configured to accept native client connections.</p>
+<h2 id="on-your-machine">On your machine</h2>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 10 or later, x64</td>
+<td>Installed from the Microsoft Store</td>
+</tr>
+<tr>
+<td>macOS 12 Monterey or later</td>
+<td>Supported since 3.1.2 for Apple Silicon and Intel, but not yet publicly available</td>
+</tr>
+<tr>
+<td>Remote desktop client, Windows</td>
+<td><code>mstsc.exe</code>, already part of Windows</td>
+</tr>
+<tr>
+<td>Remote desktop client, macOS</td>
+<td>The Windows App, from the Mac App Store. It only supports Tunnel: Azure Bastion exposes an RD Gateway endpoint that the Windows App cannot connect through</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Note</span>
+<p>Azure CLI is not required. Earlier versions called <code>az network bastion tunnel</code>; since 3.0 the tunnel is built natively with .NET. If you are still running a 2.x build, Azure CLI and the <code>azure-bastion</code> extension are still needed.</p>
+</div>
+<h2 id="in-azure">In Azure</h2>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bastion, Standard or Premium SKU</td>
+<td>Basic and Developer SKUs do not support the native client</td>
+</tr>
+<tr>
+<td>Native client support, enabled on the Bastion host</td>
+<td>Turned on separately from the SKU choice</td>
+</tr>
+<tr>
+<td>IP-based connection, enabled on the Bastion host</td>
+<td>Only needed if you plan to use the IP address tab</td>
+</tr>
+<tr>
+<td>Reader role on the Bastion resource and its virtual network</td>
+<td>The minimum needed to list Bastion hosts and connect through them</td>
+</tr>
+<tr>
+<td>Reader role on the target virtual machine</td>
+<td>Needed to list and connect to that VM. Virtual Machine Contributor or higher is needed to start a stopped VM</td>
+</tr>
+<tr>
+<td>An Azure subscription</td>
+<td>The application lists every subscription your account can see</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Note</span>
+<p>The application checks the Bastion SKU and its feature flags before connecting, and names the missing one if a check fails. These checks fail open: if the check itself cannot complete, for example because of a transient network problem, the connection attempt still proceeds.</p>
+</div>
+<h2 id="network-reachability">Network reachability</h2>
+<p>A target only needs to be reachable from Bastion’s virtual network. It does not need to be an Azure VM, and it does not need to be in Azure at all.</p>
+<ul>
+<li>Bastion deployed in the same virtual network, or one peered to it, is the simple case.</li>
+<li>In a hub-and-spoke or landing zone setup, Bastion often sits in a centralised connectivity landing zone and reaches spoke virtual networks through Azure Virtual WAN. In that topology the Bastion resource is not visible from inside an individual spoke in the Azure Portal, even though it can still reach VMs there. This application is built for exactly that case: pick the shared Bastion once, then connect to a VM in any spoke it can reach.</li>
+<li>On-premises machines are reachable too, over a site-to-site VPN or ExpressRoute, and so are Windows systems in other clouds, as long as a route exists.</li>
+</ul>
+<p>If you are not sure whether a Bastion host can reach a particular target, ask whoever manages your network. The application has no way to see routes that are not exposed through the APIs it calls.</p>
+<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/overview/"><span class="dir">Previous</span><span class="ttl">Overview</span></a><a class="next" href="/BastionRDPConnectordocs/next/install/"><span class="dir">Next</span><span class="ttl">Install</span></a></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#on-your-machine">On your machine</a></li><li><a href="#in-azure">In Azure</a></li><li><a href="#network-reachability">Network reachability</a></li></ul></aside></div></main></body></html>

@@ -28,35 +28,35 @@ export const nav: NavGroup[] = [
     title: 'Get started',
     entries: [
       { title: 'Overview', slug: 'overview' },
-      { title: 'Requirements', slug: null },
-      { title: 'Install', slug: null },
-      { title: 'Sign in', slug: null },
+      { title: 'Requirements', slug: 'requirements' },
+      { title: 'Install', slug: 'install' },
+      { title: 'Sign in', slug: 'sign-in' },
     ],
   },
   {
     title: 'Connect',
     entries: [
       { title: 'Connection methods', slug: 'connection-methods' },
-      { title: 'Connect to an IP address', slug: null },
-      { title: 'Connect to an Azure VM', slug: null },
-      { title: 'Active tunnels', slug: null },
+      { title: 'Connect to an IP address', slug: 'connect-ip' },
+      { title: 'Connect to an Azure VM', slug: 'connect-vm' },
+      { title: 'Active tunnels', slug: 'active-tunnels' },
     ],
   },
   {
     title: 'Configure',
     entries: [
-      { title: 'Monitors', slug: null },
-      { title: 'Entra ID authentication', slug: null },
-      { title: 'Multiple tenants', slug: null },
-      { title: 'Files and settings', slug: null },
+      { title: 'Monitors', slug: 'monitors' },
+      { title: 'Entra ID authentication', slug: 'entra-id' },
+      { title: 'Multiple tenants', slug: 'tenants' },
+      { title: 'Files and settings', slug: 'files-and-settings' },
     ],
   },
   {
     title: 'Reference',
     entries: [
-      { title: 'Troubleshooting', slug: null },
-      { title: 'Diagnostics', slug: null },
-      { title: 'Release notes', slug: null },
+      { title: 'Troubleshooting', slug: 'troubleshooting' },
+      { title: 'Diagnostics', slug: 'diagnostics' },
+      { title: 'Release notes', slug: 'release-notes' },
     ],
   },
 ];
