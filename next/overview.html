@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Overview · Azure Bastion RDP Connector</title>
+<meta name="description" content="Connect to Azure virtual machines and IP addresses through Azure Bastion using the Windows or macOS remote desktop client."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site.css"/>
+</head>
+<body>
+
+<nav class="rail" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <div class="brand-name">RDP Connector</div>
+    <div class="brand-sub">Azure Bastion</div>
+  </a>
+
+  <div class="verpick">
+    <label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label>
+    <select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select>
+  </div>
+
+  <div class="search">
+    <input type="search" placeholder="Search documentation" aria-label="Search documentation"/>
+  </div>
+
+  <div class="rail-group">
+    <span class="eyebrow">Get started</span>
+    <a class="nav" href="overview.html" aria-current="page">Overview</a>
+    <a class="nav" href="#">Requirements</a>
+    <a class="nav" href="#">Install</a>
+    <a class="nav" href="#">Sign in</a>
+  </div>
+
+  <div class="rail-group">
+    <span class="eyebrow">Connect</span>
+    <a class="nav" href="connection-methods.html">Connection methods</a>
+    <a class="nav" href="#">Connect to an IP address</a>
+    <a class="nav" href="#">Connect to an Azure VM</a>
+    <a class="nav" href="#">Active tunnels</a>
+  </div>
+
+  <div class="rail-group">
+    <span class="eyebrow">Configure</span>
+    <a class="nav" href="#">Monitors</a>
+    <a class="nav" href="#">Entra ID authentication</a>
+    <a class="nav" href="#">Multiple tenants</a>
+    <a class="nav" href="#">Files and settings</a>
+  </div>
+
+  <div class="rail-group">
+    <span class="eyebrow">Reference</span>
+    <a class="nav" href="#">Troubleshooting</a>
+    <a class="nav" href="#">Diagnostics</a>
+    <a class="nav" href="#">Release notes</a>
+  </div>
+</nav>
+
+<main class="page">
+<div class="cols">
+<article>
+
+  <p class="crumb"><a href="index.html">Home</a><span>/</span><a href="overview.html">Docs</a><span>/</span>Get started<span>/</span>Overview</p>
+
+  <h1>Overview</h1>
+  <p>Azure Bastion RDP Connector opens a remote desktop session to an Azure virtual machine that has no public IP address, using the remote desktop client already installed on your computer.</p>
+
+  <h2 id="what">What it does</h2>
+  <p>A virtual machine behind Azure Bastion is not reachable from your network. It has no public IP address, and port 3389 is not open to the internet. Bastion is the only route in.</p>
+  <p>This application asks Bastion for that route and hands the result to your remote desktop client. You pick a VM from a list, or type an IP address, and the session opens. You do not copy connection strings, manage certificates, or open firewall ports.</p>
+  <p>Azure CLI is not required. Earlier versions called <code>az network bastion</code> to build the tunnel. Since 3.0 the application talks to the Bastion and Azure Resource Manager APIs directly, so nothing else needs to be installed.</p>
+
+  <h2 id="reach">What you can reach</h2>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Target</th><th>How you choose it</th><th>Requires</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Azure VM</td><td>Pick from a list of virtual machines in your subscriptions</td><td>Reader access to the VM</td></tr>
+      <tr><td class="k">IP address</td><td>Type any address reachable from the Bastion virtual network</td><td>IP-based connection enabled on the Bastion host</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The IP address route reaches anything in the virtual network or peered to it, including machines that are not Azure VMs at all.</p>
+
+  <h2 id="methods">Two ways to connect</h2>
+  <p>The application offers two connection methods. They reach the same machine and differ in how the session is carried.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Method</th><th>Carries the session over</th><th>Works with IP addresses</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Tunnel</td><td>A local port forwarded through a WebSocket to Bastion</td><td class="yes">Yes</td></tr>
+      <tr><td class="k">RD Gateway</td><td>An .rdp file that points at Bastion as a gateway</td><td class="no">No</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><a href="connection-methods.html">Connection methods</a> explains when to use each one, and why the default differs between Windows and macOS.</p>
+
+  <h2 id="requirements">Before you start</h2>
+  <ul>
+    <li>An Azure Bastion host with the Standard or Premium SKU. The Basic and Developer SKUs do not support the native client.</li>
+    <li><b>Native client support</b> enabled on that Bastion host.</li>
+    <li>Reader access to the Bastion host and to the virtual machines you want to reach.</li>
+    <li>Windows 10 or later, or macOS 12 or later.</li>
+  </ul>
+
+  <div class="callout note">
+    <span class="eyebrow">Note</span>
+    <p>The application checks the Bastion SKU and its feature flags before it connects, and tells you which one is missing if a check fails. These checks fail open, so a check that cannot complete does not stop you connecting.</p>
+  </div>
+
+  <h2 id="install">Where things are stored</h2>
+  <p>Settings roam with your Windows profile. Sign-in data and logs stay on the machine.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Path</th><th>Holds</th></tr></thead>
+    <tbody>
+      <tr><td class="k">%APPDATA%\BastionRDPConnector</td><td><code>settings.json</code>: last used subscription, Bastion, VM, and language</td></tr>
+      <tr><td class="k">%LOCALAPPDATA%\BastionRDPConnector</td><td>Sign-in token cache, the sign-in browser profile, and <code>debug.log</code> with the last ten sessions</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="meta">Applies to 3.3.4 · Last reviewed 25 July 2026</p>
+
+  <div class="pager">
+    <span></span>
+    <a class="next" href="connection-methods.html"><span class="dir">Next</span><span class="ttl">Connection methods</span></a>
+  </div>
+
+</article>
+
+<aside class="toc" aria-label="On this page">
+  <span class="eyebrow">On this page</span>
+  <ul>
+    <li><a href="#what">What it does</a></li>
+    <li><a href="#reach">What you can reach</a></li>
+    <li><a href="#methods">Two ways to connect</a></li>
+    <li><a href="#requirements">Before you start</a></li>
+    <li><a href="#install">Where things are stored</a></li>
+  </ul>
+</aside>
+</div>
+</main>
+
+</body>
+</html>

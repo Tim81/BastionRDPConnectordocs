@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Azure Bastion RDP Connector</title>
+<meta name="description" content="Open a remote desktop session to an Azure VM that has no public IP, using the RDP client already on your computer. No Azure CLI, no certificates, no firewall rules."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<link rel="stylesheet" href="assets/home.css"/>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="index.html">
+    <div class="brand-name">RDP Connector</div>
+    <div class="brand-sub">Azure Bastion</div>
+  </a>
+  <nav>
+    <a class="hide-s" href="overview.html">Documentation</a>
+    <a class="hide-s" href="connection-methods.html">How it connects</a>
+    <a class="btn" href="#get">Download</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="grid">
+    <div>
+      <span class="eyebrow">Windows and macOS</span>
+      <h1>Your VM has no public IP. Connect to it anyway.</h1>
+      <p class="sell">Pick a virtual machine, or type an address. The remote desktop client you already use opens the session through Azure Bastion. Nothing is exposed to the internet.</p>
+      <div class="cta">
+        <a class="btn" href="#get">Download for Windows</a>
+        <a class="btn ghost" href="overview.html">Read the docs</a>
+      </div>
+      <p class="plat">One file, 49 MB · no installer · nothing else to install</p>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 492 230" role="img" aria-labelledby="ht">
+        <title id="ht">Reaching the same virtual machine two ways. Through the Azure portal the session runs as HTML5 inside a browser tab, after four hops. Through this application the session opens in your own remote desktop client, after two.</title>
+
+        <!-- ── Lane A: the portal ─────────────────────────── -->
+        <text class="lane-t a" x="0" y="14">Azure portal</text>
+
+        <path class="w-slow" d="M62 46 H458"/>
+
+        <rect class="n-dim" x="6" y="32" width="56" height="28" rx="4"/>
+        <text class="n-td" x="34" y="50" text-anchor="middle">Browser</text>
+
+        <rect class="n-dim" x="110" y="32" width="56" height="28" rx="4"/>
+        <text class="n-td" x="138" y="50" text-anchor="middle">Portal</text>
+
+        <rect class="n-dim" x="214" y="32" width="56" height="28" rx="4"/>
+        <text class="n-td" x="242" y="50" text-anchor="middle">Sign in</text>
+
+        <rect class="n-dim" x="318" y="32" width="56" height="28" rx="4"/>
+        <text class="n-td" x="346" y="50" text-anchor="middle">Bastion</text>
+
+        <rect class="n-dim" x="422" y="32" width="56" height="28" rx="4"/>
+        <text class="n-td" x="450" y="50" text-anchor="middle">VM</text>
+
+        <circle class="dot-a" cx="62" cy="46" r="3.2" fill="#6E7889"/>
+
+        <rect class="chip-a" x="6" y="72" width="252" height="22" rx="11"/>
+        <text class="chip-t" x="20" y="87">HTML5 in a browser tab · one screen</text>
+
+        <!-- ── Lane B: this application ───────────────────── -->
+        <text class="lane-t b" x="0" y="140">RDP Connector</text>
+
+        <path class="w-live" d="M62 172 H458"/>
+        <text class="n-s" x="130" y="164" text-anchor="middle">443 outbound</text>
+        <text class="n-s" x="360" y="164" text-anchor="middle">3389 in the vnet</text>
+
+        <rect class="n-box" x="6" y="158" width="56" height="28" rx="4"/>
+        <text class="n-td" x="34" y="176" text-anchor="middle">App</text>
+
+        <rect class="n-box n-hop" x="186" y="158" width="56" height="28" rx="4"/>
+        <text class="n-td" x="214" y="176" text-anchor="middle" fill="#fff">Bastion</text>
+
+        <rect class="n-box" x="422" y="158" width="56" height="28" rx="4"/>
+        <text class="n-td" x="450" y="176" text-anchor="middle">VM</text>
+
+        <circle class="dot-b" cx="62" cy="172" r="3.6" fill="#0F6CBD"/>
+
+        <rect class="chip-b" x="6" y="198" width="266" height="22" rx="11"/>
+        <text class="chip-t b" x="20" y="213">Your own RDP client · all monitors</text>
+      </svg>
+      <p class="cap">Same Bastion host, same API the portal's Connect button uses. The session arrives in mstsc instead of a browser tab.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="inner">
+    <h2>What you get</h2>
+    <p class="sub">The application talks to the Bastion and Azure Resource Manager APIs directly. There is no dependency on Azure CLI and no separate runtime to install.</p>
+    <div class="pts">
+      <div class="pt">
+        <span class="num">2-4s</span>
+        <h3>Find a VM across every subscription</h3>
+        <p>Virtual machines across 200 subscriptions load in a few seconds, using the Azure Resource Graph. Search needs three characters.</p>
+      </div>
+      <div class="pt">
+        <span class="num">0</span>
+        <h3>Firewall rules to open</h3>
+        <p>Your computer makes one outbound connection on 443. Nothing inbound, no public IP on the VM, no certificates to manage.</p>
+      </div>
+      <div class="pt">
+        <span class="num">1</span>
+        <h3>File to run</h3>
+        <p>A single self-contained executable. No installer, no admin rights, no .NET runtime to add first.</p>
+      </div>
+      <div class="pt">
+        <span class="num">2</span>
+        <h3>Ways to connect</h3>
+        <p>A tunnel through a local port reaches any address in the virtual network. RD Gateway is the shorter path for Azure VMs.</p>
+      </div>
+      <div class="pt">
+        <span class="num">6</span>
+        <h3>Languages</h3>
+        <p>English, Dutch, German, French, Spanish and Portuguese, switched while the application is running.</p>
+      </div>
+      <div class="pt">
+        <span class="num">5</span>
+        <h3>Reconnect attempts</h3>
+        <p>If the tunnel drops, it reconnects on its own with a widening gap. An open session survives a short outage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="swap">
+  <h2>What it replaces</h2>
+  <table>
+    <thead><tr><th>Doing this by hand</th><th>With the application</th></tr></thead>
+    <tbody>
+      <tr><td>az network bastion tunnel …</td><td>Pick the VM and press Connect</td></tr>
+      <tr><td>Install and sign in to Azure CLI</td><td>Sign in once, in the application</td></tr>
+      <tr><td>Track which local port maps to which VM</td><td>Active tunnels tab, and the tray menu</td></tr>
+      <tr><td>Open the portal to start a stopped VM</td><td>Start it from the VM list and wait for Running</td></tr>
+      <tr><td>Keep a terminal window open per session</td><td>Close the window, sessions are cleaned up</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="band" id="get">
+  <div class="inner">
+    <h2>Get the application</h2>
+    <p class="sub">Requires an Azure Bastion host on the Standard or Premium SKU with native client support enabled, and Reader access to the machines you want to reach.</p>
+    <div class="cta" style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a class="btn" href="#">Windows · .exe</a>
+      <a class="btn ghost" href="#">macOS · .dmg</a>
+      <a class="btn ghost" href="overview.html">Requirements in full</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="inner">
+    <div>
+      <a href="overview.html">Documentation</a> ·
+      <a href="connection-methods.html">How it connects</a> ·
+      <a href="#">Troubleshooting</a> ·
+      <a href="#">Release notes</a>
+    </div>
+    <div class="legal">v3.3.4 · © 2026 Timothy van der Ham</div>
+  </div>
+</footer>
+
+</body>
+</html>
