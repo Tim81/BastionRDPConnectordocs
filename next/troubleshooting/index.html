@@ -75,7 +75,10 @@
 <h3 id="the-start-button-doesnt-appear-for-a-stopped-vm">The Start button doesn’t appear for a stopped VM</h3>
 <p>Starting a VM needs Virtual Machine Contributor, or an equivalent role; Reader alone isn’t enough. Ask whoever manages your Azure roles to grant it, or start the VM from the Azure portal instead.</p>
 <h3 id="i-got-an-aadsts293004-error">I got an AADSTS293004 error</h3>
-<p>This error means Entra ID authentication was attempted across tenants. For RD Gateway, the application checks the VM’s tenant against your signed-in account and <a href="../entra-id/">turns Entra ID authentication off automatically</a> when they differ, so this shouldn’t happen on a fresh connection. If you still see it, reconnect from the Azure VM tab rather than reusing an old <code>.rdp</code> file. A file saved from a previous version, or opened outside the application, won’t have the automatic check applied.</p>
+<p>Azure AD returns this when <a href="../entra-id/">Entra ID authentication</a> is used against a virtual machine in a different tenant from your signed-in account, which is the usual case with Azure Lighthouse.</p>
+<p>Clear the Entra ID auth checkbox on the Azure VM tab and connect again. The setting is off by default, so if you are seeing this, it was turned on at some point and saved for this tenant.</p>
+<p>You may see it in the log without the connection failing. When Bastion refuses an Entra ID request, the application asks again with the setting off and uses that file, so the session still opens after one extra round trip.</p>
+<p>If the error appears when opening a saved <code>.rdp</code> file directly, reconnect from the Azure VM tab instead. A file kept from an earlier session carries whatever setting was used when it was written.</p>
 <h2 id="sign-in-and-reset">Sign-in and reset</h2>
 <h3 id="i-keep-getting-asked-to-sign-in-again">I keep getting asked to sign in again</h3>
 <p>Your organisation’s Conditional Access policy may require re-authentication on a schedule, or MFA on every sign-in. That’s expected. Complete the prompt when it appears; the application doesn’t control how often your tenant asks for this.</p>

@@ -43,7 +43,7 @@
 <p>This is the shorter path, and on Windows it is the default. It only works when Bastion can resolve the target itself, which means it works for Azure VMs and not for typed IP addresses.</p>
 <div class="callout warn">
 <span class="eyebrow">Cross-tenant sign-in</span>
-<p>When the virtual machine sits in a different tenant from the account you signed in with, the application turns off Entra ID authentication in the generated file. Leaving it on returns <code>AADSTS293004</code> and the session does not open.</p>
+<p>Entra ID authentication is off by default and should stay off when the virtual machine belongs to a different tenant from the account you signed in with, which is the usual case with Azure Lighthouse. Azure AD returns <code>AADSTS293004</code> for that combination. If you turn it on anyway and Bastion refuses, the application asks again with the setting off, so the session still opens. See <a href="../entra-id/">Entra ID authentication</a>.</p>
 </div>
 <h3 id="rd-gateway-on-macos">RD Gateway on macOS</h3>
 <p>RD Gateway is selectable on macOS and the connection does open. It then drops after roughly ten to fifteen seconds with error <code>0x3000064</code>.</p>
@@ -84,7 +84,7 @@
 <tr>
 <td>Entra ID authentication</td>
 <td>Not applicable</td>
-<td>On by default, off across tenants</td>
+<td>Off by default, optional</td>
 </tr>
 <tr>
 <td>Default on Windows</td>

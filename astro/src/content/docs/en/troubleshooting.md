@@ -95,7 +95,13 @@ Starting a VM needs Virtual Machine Contributor, or an equivalent role; Reader a
 
 ### I got an AADSTS293004 error
 
-This error means Entra ID authentication was attempted across tenants. For RD Gateway, the application checks the VM's tenant against your signed-in account and [turns Entra ID authentication off automatically](../entra-id/) when they differ, so this shouldn't happen on a fresh connection. If you still see it, reconnect from the Azure VM tab rather than reusing an old `.rdp` file. A file saved from a previous version, or opened outside the application, won't have the automatic check applied.
+Azure AD returns this when [Entra ID authentication](../entra-id/) is used against a virtual machine in a different tenant from your signed-in account, which is the usual case with Azure Lighthouse.
+
+Clear the Entra ID auth checkbox on the Azure VM tab and connect again. The setting is off by default, so if you are seeing this, it was turned on at some point and saved for this tenant.
+
+You may see it in the log without the connection failing. When Bastion refuses an Entra ID request, the application asks again with the setting off and uses that file, so the session still opens after one extra round trip.
+
+If the error appears when opening a saved `.rdp` file directly, reconnect from the Azure VM tab instead. A file kept from an earlier session carries whatever setting was used when it was written.
 
 ## Sign-in and reset
 

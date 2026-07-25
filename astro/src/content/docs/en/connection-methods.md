@@ -65,7 +65,7 @@ This is the shorter path, and on Windows it is the default. It only works when B
 
 <div class="callout warn">
 <span class="eyebrow">Cross-tenant sign-in</span>
-<p>When the virtual machine sits in a different tenant from the account you signed in with, the application turns off Entra ID authentication in the generated file. Leaving it on returns <code>AADSTS293004</code> and the session does not open.</p>
+<p>Entra ID authentication is off by default and should stay off when the virtual machine belongs to a different tenant from the account you signed in with, which is the usual case with Azure Lighthouse. Azure AD returns <code>AADSTS293004</code> for that combination. If you turn it on anyway and Bastion refuses, the application asks again with the setting off, so the session still opens. See <a href="../entra-id/">Entra ID authentication</a>.</p>
 </div>
 
 ### RD Gateway on macOS
@@ -88,7 +88,7 @@ Use Tunnel on macOS. It reaches the same machines and is the default there for t
 | Connect to an IP address | Yes | No |
 | Opens a local port | Yes, one per session | No |
 | Reconnects automatically | Yes, up to 5 attempts | No |
-| Entra ID authentication | Not applicable | On by default, off across tenants |
+| Entra ID authentication | Not applicable | Off by default, optional |
 | Default on Windows | No | Yes |
 | Default on macOS | Yes | No |
 | Requires Azure CLI | No | No |
