@@ -103,13 +103,17 @@ a:hover { color: var(--azure); }
 }
 
 .brand { display: block; padding: 0 22px 16px; text-decoration: none; }
+/* nowrap because Syne 800 is wide enough to break "RDP Connector" across two
+   lines inside the rail, which the live site does not do. */
 .brand-name {
   font-family: 'Syne', system-ui, sans-serif;
-  font-weight: 800; font-size: 18px; letter-spacing: -.02em; color: #fff;
+  font-weight: 800; font-size: 17px; letter-spacing: -.025em; color: #fff;
+  white-space: nowrap;
 }
+/* Sits above the product name and is azure blue, matching the live site. */
 .brand-sub {
-  font-family: 'DM Mono', monospace; font-size: 10px;
-  letter-spacing: .14em; text-transform: uppercase; color: var(--on-ink-2); margin-top: 3px;
+  font-family: 'DM Mono', monospace; font-size: 10.5px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--azure); margin-bottom: 4px;
 }
 
 .verpick { padding: 0 22px 16px; }

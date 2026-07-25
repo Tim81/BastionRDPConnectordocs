@@ -7,7 +7,7 @@
   backdrop-filter: saturate(180%) blur(8px); z-index: 10;
 }
 .top .brand-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.02em; color: var(--text); }
-.top .brand-sub  { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 2px; }
+.top .brand-sub  { font-family: 'DM Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--azure); margin-bottom: 2px; margin-top: 0; }
 .top a.brand { text-decoration: none; }
 .top nav { display: flex; align-items: center; gap: 22px; }
 /* Scoped to :not(.btn) so the nav link colour cannot outrank the button.
