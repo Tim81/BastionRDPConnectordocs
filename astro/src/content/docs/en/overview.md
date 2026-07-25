@@ -1,17 +1,17 @@
 ---
 title: Overview
-description: Connect to Azure virtual machines and IP addresses through Azure Bastion using the Windows or macOS remote desktop client.
+description: Open a remote desktop session through Azure Bastion to an Azure virtual machine, or to any Windows system the Bastion network can route to.
 appliesTo: '3.3.4'
 lastReviewed: '2026-07-25'
 ---
 
-Azure Bastion RDP Connector opens a remote desktop session to an Azure virtual machine that has no public IP address, using the remote desktop client already installed on your computer.
+Azure Bastion RDP Connector opens a remote desktop session through Azure Bastion, using the remote desktop client already installed on your computer. Azure virtual machines are picked by name. Anything else is reached by address, which includes on-premises machines and machines in other clouds.
 
 ## What it does
 
-A virtual machine behind Azure Bastion is not reachable from your network. It has no public IP address, and port 3389 is not open to the internet. Bastion is the only route in.
+Azure Bastion is a route into a network, not only into Azure. It reaches whatever its own virtual network can reach, so a machine does not have to be an Azure VM, or even in Azure, to be reachable through it.
 
-This application asks Bastion for that route and hands the result to your remote desktop client. You pick a VM from a list, or type an IP address, and the session opens. You do not copy connection strings, manage certificates, or open firewall ports.
+This application asks Bastion for that route and hands the result to your remote desktop client. You do not copy connection strings, manage certificates, or open firewall ports.
 
 Azure CLI is not required. Earlier versions called `az network bastion` to build the tunnel. Since 3.0 the application talks to the Bastion and Azure Resource Manager APIs directly, so nothing else needs to be installed.
 
@@ -19,10 +19,18 @@ Azure CLI is not required. Earlier versions called `az network bastion` to build
 
 | Target | How you choose it | Requires |
 | --- | --- | --- |
-| Azure VM | Pick from a list of virtual machines in your subscriptions | Reader access to the VM |
-| IP address | Type any address reachable from the Bastion virtual network | IP-based connection enabled on the Bastion host |
+| Azure virtual machine | Pick it by name from the Azure VM tab, across your subscriptions | Reader access to the VM |
+| Anything else | Type its address on the IP address tab | IP-based connection enabled on the Bastion host |
 
-The IP address route reaches anything in the virtual network or peered to it, including machines that are not Azure VMs at all.
+The address route is the broader of the two. It reaches any system the Bastion virtual network can route to:
+
+- Azure virtual machines, in the same virtual network or peered to it
+- On-premises Windows servers and desktops, over a site-to-site VPN or ExpressRoute
+- Windows systems in other clouds, such as AWS, or in a private cloud
+
+Anything with a route and a listening RDP port is reachable. Whether it runs in Azure is beside the point.
+
+Microsoft documents the on-premises case directly: Bastion's IP-based connection "allows for connectivity to on-premises-based machines if hybrid connectivity exists between the Azure Bastion resource and the machine that you want to connect to." See [Connect to a VM via a specified private IP address](https://learn.microsoft.com/en-us/azure/bastion/connect-ip-address).
 
 ## Two ways to connect
 

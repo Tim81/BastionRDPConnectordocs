@@ -57,26 +57,34 @@ a.btn.ghost:hover { border-color: var(--azure); background: var(--azure-wash); c
   .diagram .dot-a { animation: laneA 5.6s linear .4s infinite; }
   .diagram .dot-b { animation: laneB 5.6s linear .4s infinite; }
 
+  /* Five hops for the portal, three for the application, on one clock.
+     The pause at hop three is the search step, which is where the time
+     actually goes in a large estate. */
   @keyframes laneA {
     0%    { opacity: 0; transform: translateX(0); }
-    4%    { opacity: 1; }
-    20%   { transform: translateX(104px); }
-    28%   { transform: translateX(104px); }
-    44%   { transform: translateX(208px); }
-    52%   { transform: translateX(208px); }
-    68%   { transform: translateX(312px); }
-    76%   { transform: translateX(312px); }
-    92%   { opacity: 1; transform: translateX(396px); }
-    100%  { opacity: 0; transform: translateX(396px); }
+    3%    { opacity: 1; }
+    14%   { transform: translateX(80px); }
+    20%   { transform: translateX(80px); }
+    31%   { transform: translateX(160px); }
+    52%   { transform: translateX(160px); }
+    63%   { transform: translateX(240px); }
+    69%   { transform: translateX(240px); }
+    80%   { transform: translateX(320px); }
+    86%   { transform: translateX(320px); }
+    96%   { opacity: 1; transform: translateX(344px); }
+    100%  { opacity: 0; transform: translateX(344px); }
   }
   @keyframes laneB {
     0%    { opacity: 0; transform: translateX(0); }
-    4%    { opacity: 1; }
-    22%   { transform: translateX(152px); }
-    30%   { transform: translateX(152px); }
-    48%   { opacity: 1; transform: translateX(396px); }
-    54%   { opacity: 0; transform: translateX(396px); }
-    100%  { opacity: 0; transform: translateX(396px); }
+    3%    { opacity: 1; }
+    14%   { transform: translateX(80px); }
+    20%   { transform: translateX(80px); }
+    31%   { transform: translateX(160px); }
+    37%   { transform: translateX(160px); }
+    46%   { opacity: 1; transform: translateX(184px); }
+    56%   { opacity: 1; transform: translateX(184px); }
+    62%   { opacity: 0; transform: translateX(184px); }
+    100%  { opacity: 0; transform: translateX(184px); }
   }
 }
 
@@ -107,10 +115,27 @@ a.btn.ghost:hover { border-color: var(--azure); background: var(--azure-wash); c
 .swap tbody td:first-child { font-family: 'DM Mono', monospace; font-size: 13px; }
 
 .foot { border-top: 1px solid var(--rule-soft); }
-.foot .inner { max-width: 1120px; margin: 0 auto; padding: 30px 40px 44px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.foot .inner {
+  max-width: 1120px; margin: 0 auto; padding: 30px 40px 44px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px 28px; flex-wrap: wrap;
+}
 .foot a { color: var(--text-2); text-decoration: none; font-size: 14px; }
 .foot a:hover { color: var(--azure-deep); }
-.foot .legal { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--text-3); }
+
+/* Separators are drawn between list items rather than typed into the markup,
+   so the spacing either side of the dot is symmetrical and the dot is not
+   part of the link's hit area or hover colour. */
+.foot-links { display: flex; flex-wrap: wrap; align-items: baseline; list-style: none; margin: 0; padding: 0; }
+.foot-links li { display: flex; align-items: baseline; }
+.foot-links li:not(:last-child)::after {
+  content: '\00B7';
+  color: var(--text-3);
+  margin: 0 13px;
+}
+
+.foot .legal { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--text-3); margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; }
+.foot .legal span + span::before { content: '\00B7'; color: var(--text-3); margin: 0 10px; }
 
 @media (max-width: 900px) {
   .top { padding: 14px 18px; }

@@ -4,7 +4,7 @@ import { pageHref } from '../nav';
 ---
 <LandingLayout
   title="Azure Bastion RDP Connector"
-  description="Open a remote desktop session to an Azure VM that has no public IP, using the RDP client already on your computer. No Azure CLI, no certificates, no firewall rules."
+  description="Open a remote desktop session through Azure Bastion using the RDP client already on your computer. Azure VMs by name, and anything else the Bastion network can route to by address, including on-premises and other clouds."
 >
 
 <section class="hero">
@@ -12,7 +12,7 @@ import { pageHref } from '../nav';
     <div>
       <span class="eyebrow">Windows &#183; Microsoft Store</span>
       <h1>Pick the VM by name. Even when the portal cannot.</h1>
-      <p class="sell">Connect through Azure Bastion from your own remote desktop client. It finds your virtual machines across every subscription and landing zone, including the ones the portal's Connect button will not offer you.</p>
+      <p class="sell">Connect through Azure Bastion from your own remote desktop client. Azure virtual machines are found across every subscription and landing zone, including the ones the portal's Connect button will not offer you. Everything else is reached by address: on-premises servers over VPN or ExpressRoute, and Windows systems in other clouds.</p>
       <div class="cta">
         <a class="btn" href="https://apps.microsoft.com/detail/9N9MJ1V43Z6T">Get it from Microsoft Store</a>
         <a class="btn ghost" href={pageHref('overview')}>Read the docs</a>
@@ -21,56 +21,64 @@ import { pageHref } from '../nav';
     </div>
 
     <div class="diagram">
-      <svg viewBox="0 0 492 230" role="img" aria-labelledby="ht">
-        <title id="ht">Reaching the same virtual machine two ways. Through the Azure portal the session runs as HTML5 inside a browser tab, after four hops. Through this application the session opens in your own remote desktop client, after two.</title>
+      <svg viewBox="0 0 500 236" role="img" aria-labelledby="ht">
+        <title id="ht">The steps to open a session on the same machine. In the Azure portal: open a browser, sign in, search the estate for the virtual machine, open its Connect blade, enter credentials, and work in a browser tab. In this application: open it, sign in, pick the machine from a list, and the session opens in your own remote desktop client.</title>
 
         <!-- ── Lane A: the portal ─────────────────────────── -->
-        <text class="lane-t a" x="0" y="14">Azure portal</text>
+        <text class="lane-t a" x="0" y="14">In the Azure portal</text>
 
-        <path class="w-slow" d="M62 46 H458"/>
+        <path class="w-slow" d="M70 48 H414"/>
 
-        <rect class="n-dim" x="6" y="32" width="56" height="28" rx="4"/>
-        <text class="n-td" x="34" y="50" text-anchor="middle">Browser</text>
+        <rect class="n-dim" x="6" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="38" y="52" text-anchor="middle">Browser</text>
 
-        <rect class="n-dim" x="110" y="32" width="56" height="28" rx="4"/>
-        <text class="n-td" x="138" y="50" text-anchor="middle">Portal</text>
+        <rect class="n-dim" x="86" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="118" y="52" text-anchor="middle">Sign in</text>
 
-        <rect class="n-dim" x="214" y="32" width="56" height="28" rx="4"/>
-        <text class="n-td" x="242" y="50" text-anchor="middle">Sign in</text>
+        <rect class="n-dim" x="166" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="198" y="52" text-anchor="middle">Search</text>
 
-        <rect class="n-dim" x="318" y="32" width="56" height="28" rx="4"/>
-        <text class="n-td" x="346" y="50" text-anchor="middle">Bastion</text>
+        <rect class="n-dim" x="246" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="278" y="52" text-anchor="middle">Connect</text>
 
-        <rect class="n-dim" x="422" y="32" width="56" height="28" rx="4"/>
-        <text class="n-td" x="450" y="50" text-anchor="middle">VM</text>
+        <rect class="n-dim" x="326" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="358" y="52" text-anchor="middle">Sign in</text>
 
-        <circle class="dot-a" cx="62" cy="46" r="3.2" fill="#6E7889"/>
+        <rect class="n-dim" x="406" y="34" width="64" height="28" rx="4"/>
+        <text class="n-td" x="438" y="52" text-anchor="middle">Tab</text>
 
-        <rect class="chip-a" x="6" y="72" width="252" height="22" rx="11"/>
-        <text class="chip-t" x="20" y="87">HTML5 client in a browser tab</text>
+        <circle class="dot-a" cx="70" cy="48" r="3.2" fill="#6E7889"/>
+
+        <text class="n-s" x="198" y="76" text-anchor="middle">find it among every resource</text>
+
+        <rect class="chip-a" x="6" y="88" width="238" height="22" rx="11"/>
+        <text class="chip-t" x="20" y="103">Session runs in a browser tab</text>
 
         <!-- ── Lane B: this application ───────────────────── -->
-        <text class="lane-t b" x="0" y="140">RDP Connector</text>
+        <text class="lane-t b" x="0" y="150">In this application</text>
 
-        <path class="w-live" d="M62 172 H458"/>
-        <text class="n-s" x="130" y="164" text-anchor="middle">443 outbound</text>
-        <text class="n-s" x="360" y="164" text-anchor="middle">3389 in the vnet</text>
+        <path class="w-live" d="M70 184 H254"/>
 
-        <rect class="n-box" x="6" y="158" width="56" height="28" rx="4"/>
-        <text class="n-td" x="34" y="176" text-anchor="middle">App</text>
+        <rect class="n-box" x="6" y="170" width="64" height="28" rx="4"/>
+        <text class="n-td" x="38" y="188" text-anchor="middle">Open</text>
 
-        <rect class="n-box n-hop" x="186" y="158" width="56" height="28" rx="4"/>
-        <text class="n-td" x="214" y="176" text-anchor="middle" fill="#fff">Bastion</text>
+        <rect class="n-box" x="86" y="170" width="64" height="28" rx="4"/>
+        <text class="n-td" x="118" y="188" text-anchor="middle">Sign in</text>
 
-        <rect class="n-box" x="422" y="158" width="56" height="28" rx="4"/>
-        <text class="n-td" x="450" y="176" text-anchor="middle">VM</text>
+        <rect class="n-box n-hop" x="166" y="170" width="64" height="28" rx="4"/>
+        <text class="n-td" x="198" y="188" text-anchor="middle" fill="#fff">Pick</text>
 
-        <circle class="dot-b" cx="62" cy="172" r="3.6" fill="#0F6CBD"/>
+        <rect class="n-box" x="246" y="170" width="64" height="28" rx="4"/>
+        <text class="n-td" x="278" y="188" text-anchor="middle">mstsc</text>
 
-        <rect class="chip-b" x="6" y="198" width="266" height="22" rx="11"/>
-        <text class="chip-t b" x="20" y="213">Your own RDP client, over TLS on 443</text>
+        <circle class="dot-b" cx="70" cy="184" r="3.6" fill="#0F6CBD"/>
+
+        <text class="n-s" x="198" y="212" text-anchor="middle">from a list, already loaded</text>
+
+        <rect class="chip-b" x="326" y="170" width="168" height="22" rx="11"/>
+        <text class="chip-t b" x="340" y="185">Your own RDP client</text>
       </svg>
-      <p class="cap">Same Bastion host, same API the portal's Connect button uses. The session arrives in mstsc instead of a browser tab.</p>
+      <p class="cap">Same Bastion host either way. The difference is finding the machine: the portal searches your whole estate, the application lists your machines across every subscription.</p>
     </div>
   </div>
 </section>
@@ -96,9 +104,9 @@ import { pageHref } from '../nav';
         <p>The Store handles it. Nothing else is needed: no Azure CLI, no .NET runtime, no certificates.</p>
       </div>
       <div class="pt">
-        <span class="num">2</span>
-        <h3>Ways to connect</h3>
-        <p>A tunnel through a local port reaches any address in the virtual network. RD Gateway is the shorter path for Azure VMs.</p>
+        <span class="num">3</span>
+        <h3>Kinds of target</h3>
+        <p>Azure virtual machines by name. On-premises servers over VPN or ExpressRoute. Windows systems in AWS or a private cloud, by address.</p>
       </div>
       <div class="pt">
         <span class="num">6</span>
