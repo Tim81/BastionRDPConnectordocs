@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Troubleshooting · Azure Bastion RDP Connector</title><meta name="description" content="Common problems, in the words you'd use to describe them, and what to check for each one."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/" aria-current="page">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Troubleshooting</p><h1>Troubleshooting</h1><h2 id="before-you-connect">Before you connect</h2>
+<h3 id="i-launched-the-app-again-and-nothing-happened">I launched the app again and nothing happened</h3>
+<p>The application allows only one running instance. If it’s already open, minimised, or sitting in the system tray, launching it a second time brings the existing window to the front instead of opening a new one. Check the system tray, on Windows, for the application icon.</p>
+<!-- Mirrors src/components/ScreenTray.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tray-win">
+      <title id="s-tray-win">The Windows system tray context menu, expanded. Two open tunnels are listed, each with Connect and Stop controls. Below them, About and Exit.</title>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
+<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-l" x="10" y="40"&gt;System tray, right-click menu&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-run" cx="22" cy="63" r="3.5"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="32" y="67"&gt;vm-dev-web-01&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="32" y="80"&gt;localhost:55000 · open 4m 12s&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;rect class="ui-btn-2" x="194" y="59" width="46" height="15" rx="3"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="200" y="70"&gt;Connect&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="252" y="70"&gt;Stop&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/&gt;</span></span>
+<span class="line"><span>  &lt;circle class="ui-run" cx="22" cy="121" r="3.5"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="32" y="125"&gt;10.20.4.15&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="32" y="138"&gt;localhost:55001 · open 41s&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;rect class="ui-btn-2" x="194" y="117" width="46" height="15" rx="3"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="200" y="128"&gt;Connect&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="252" y="128"&gt;Stop&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="20" y="190"&gt;About&lt;/text&gt;</span></span>
+<span class="line"><span>  &lt;text class="ui-tb" x="20" y="212"&gt;Exit&lt;/text&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  &lt;text class="ui-p" x="10" y="352"&gt;Double-click the tray icon to restore the main window.&lt;/text&gt;</span></span>
+<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+  </div>
+  <figcaption><b>Windows</b> The system tray context menu on Windows, expanded. Each open tunnel gets its own Connect and Stop controls, followed by About and Exit.</figcaption>
+</figure>
+<p>Closing the main window, or minimising it, doesn’t exit the application. Both hide the window and leave it running in the tray, so any open tunnels stay connected. Right-click the tray icon and select <strong>Exit</strong> to close it completely. The tray icon is Windows only; macOS has no tray icon by design.</p>
+<h3 id="no-subscriptions-appear-or-the-bastion-list-is-empty">No subscriptions appear, or the Bastion list is empty</h3>
+<p>This usually means either your account has no role assignment on any subscription, or the tenant you’re in doesn’t contain a Bastion resource. Try:</p>
+<ul>
+<li>Select <strong>Refresh</strong> next to the Bastion field.</li>
+<li>Select <strong>Change</strong> to pick a different subscription.</li>
+<li>Sign out and back in, in case your session expired.</li>
+<li>Ask whoever manages your Azure roles to confirm you have Reader on the Bastion host and its virtual network.</li>
+</ul>
+<h2 id="connecting">Connecting</h2>
+<h3 id="mstsc-opens-but-the-connection-fails-for-an-azure-vm-over-rd-gateway">mstsc opens, but the connection fails for an Azure VM over RD Gateway</h3>
+<p>Check that:</p>
+<ul>
+<li>The VM’s power state shows <strong>Running</strong>, and give the guest OS a minute or two after that to finish booting.</li>
+<li>The Bastion host is Standard or Premium SKU. Basic doesn’t support the native client.</li>
+<li>No network security group rule blocks inbound traffic from Bastion to the VM on port 3389.</li>
+<li>A route exists from Bastion to the VM, whether that’s the same virtual network, a peering, or Virtual WAN.</li>
+</ul>
+<h3 id="mstsc-opens-but-the-connection-fails-for-an-azure-vm-over-tunnel">mstsc opens, but the connection fails for an Azure VM over Tunnel</h3>
+<p>Everything above still applies, plus:</p>
+<ul>
+<li>Check the <a href="../active-tunnels/">Active tunnels</a> tab. If the tunnel isn’t listed, or shows as stopped, try connecting again to start a new one.</li>
+<li>If the local port you configured was already in use, the application picked the next free one automatically. Check the port shown on the Active tunnels tab against the one your client is using.</li>
+</ul>
+<h3 id="the-connection-fails-when-i-type-an-ip-address">The connection fails when I type an IP address</h3>
+<ul>
+<li>Confirm the address is reachable from the Bastion virtual network, not just from your own machine. For on-premises targets that means a working site-to-site VPN or ExpressRoute; for another cloud, a VPN connection into Azure.</li>
+<li>Confirm the target port. 3389 is standard for RDP, but a non-Azure or on-premises host may listen on something else.</li>
+<li>Check for a host firewall on the target blocking inbound RDP from the Bastion subnet.</li>
+</ul>
+<h3 id="the-start-button-doesnt-appear-for-a-stopped-vm">The Start button doesn’t appear for a stopped VM</h3>
+<p>Starting a VM needs Virtual Machine Contributor, or an equivalent role; Reader alone isn’t enough. Ask whoever manages your Azure roles to grant it, or start the VM from the Azure portal instead.</p>
+<h3 id="i-got-an-aadsts293004-error">I got an AADSTS293004 error</h3>
+<p>This error means Entra ID authentication was attempted across tenants. For RD Gateway, the application checks the VM’s tenant against your signed-in account and <a href="../entra-id/">turns Entra ID authentication off automatically</a> when they differ, so this shouldn’t happen on a fresh connection. If you still see it, reconnect from the Azure VM tab rather than reusing an old <code>.rdp</code> file. A file saved from a previous version, or opened outside the application, won’t have the automatic check applied.</p>
+<h2 id="sign-in-and-reset">Sign-in and reset</h2>
+<h3 id="i-keep-getting-asked-to-sign-in-again">I keep getting asked to sign in again</h3>
+<p>Your organisation’s Conditional Access policy may require re-authentication on a schedule, or MFA on every sign-in. That’s expected. Complete the prompt when it appears; the application doesn’t control how often your tenant asks for this.</p>
+<h3 id="i-want-to-start-over-from-a-clean-slate">I want to start over from a clean slate</h3>
+<p>Select <strong>Logout</strong> in the top bar to clear your sign-in state; it removes the token cache and the MSAL state in one step. To also reset preferences, close the application and delete <code>%APPDATA%\BastionRDPConnector\settings.json</code>. <a href="../files-and-settings/">Files and settings</a> covers what each file holds and where they live.</p>
+<h3 id="i-need-to-send-a-log-to-support">I need to send a log to support</h3>
+<p>Open <strong>About</strong> and select <strong>Copy Diagnostic Info</strong>, or <strong>Open Log Folder</strong> to find the files directly. <a href="../diagnostics/">Diagnostics</a> covers what’s in the bundle and how it’s redacted.</p>
+<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/files-and-settings/"><span class="dir">Previous</span><span class="ttl">Files and settings</span></a><a class="next" href="/BastionRDPConnectordocs/next/diagnostics/"><span class="dir">Next</span><span class="ttl">Diagnostics</span></a></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#before-you-connect">Before you connect</a></li><li><a class="sub" href="#i-launched-the-app-again-and-nothing-happened">I launched the app again and nothing happened</a></li><li><a class="sub" href="#no-subscriptions-appear-or-the-bastion-list-is-empty">No subscriptions appear, or the Bastion list is empty</a></li><li><a href="#connecting">Connecting</a></li><li><a class="sub" href="#mstsc-opens-but-the-connection-fails-for-an-azure-vm-over-rd-gateway">mstsc opens, but the connection fails for an Azure VM over RD Gateway</a></li><li><a class="sub" href="#mstsc-opens-but-the-connection-fails-for-an-azure-vm-over-tunnel">mstsc opens, but the connection fails for an Azure VM over Tunnel</a></li><li><a class="sub" href="#the-connection-fails-when-i-type-an-ip-address">The connection fails when I type an IP address</a></li><li><a class="sub" href="#the-start-button-doesnt-appear-for-a-stopped-vm">The Start button doesn’t appear for a stopped VM</a></li><li><a class="sub" href="#i-got-an-aadsts293004-error">I got an AADSTS293004 error</a></li><li><a href="#sign-in-and-reset">Sign-in and reset</a></li><li><a class="sub" href="#i-keep-getting-asked-to-sign-in-again">I keep getting asked to sign in again</a></li><li><a class="sub" href="#i-want-to-start-over-from-a-clean-slate">I want to start over from a clean slate</a></li><li><a class="sub" href="#i-need-to-send-a-log-to-support">I need to send a log to support</a></li></ul></aside></div></main></body></html>

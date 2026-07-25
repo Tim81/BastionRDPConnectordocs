@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Release notes · Azure Bastion RDP Connector</title><meta name="description" content="What changed in each recent release of Azure Bastion RDP Connector."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/" aria-current="page">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Release notes</p><h1>Release notes</h1><h2 id="334">3.3.4</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System tray icon restored</td>
+<td>The tray icon didn’t appear on Windows in versions 3.2 through 3.3.3. Minimising to the tray, tunnel notifications, and the tray context menu work again as this documentation describes.</td>
+</tr>
+<tr>
+<td>Ten sessions of log history</td>
+<td><code>debug.log</code> used to be overwritten on every start. The last ten sessions are now kept as <code>debug.0.log</code> through <code>debug.9.log</code>, so the log from the run where a problem happened survives a restart.</td>
+</tr>
+<tr>
+<td>Diagnostic bundle covers past sessions</td>
+<td>Copy Diagnostic Info now includes the archived session logs alongside the current one, newest first, up to about 1 MB.</td>
+</tr>
+<tr>
+<td>Cleanup finishes before the window closes</td>
+<td>Active tunnels close and temporary <code>.rdp</code> files delete before the window closes. Logging out runs the same cleanup instead of ending the process immediately.</td>
+</tr>
+<tr>
+<td>Sign-in browser profile moved</td>
+<td>The embedded sign-in browser used to keep its profile next to the application file, which broke sign-in when the app ran from a write-protected folder such as Program Files. It now lives at <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. The token cache location is unchanged.</td>
+</tr>
+<tr>
+<td>Updated components</td>
+<td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33">3.3</h2>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Resource Graph VM loading</td>
+<td>VMs across roughly 200 subscriptions load in 2 to 4 seconds, against 30 to 60 seconds before. Cross-subscription queries use the Azure Resource Graph API instead of querying each subscription in turn.</td>
+</tr>
+<tr>
+<td>Cross-subscription VM search</td>
+<td>The All subscriptions mode on the Azure VM tab searches across every subscription your account can see. It needs at least three characters before it returns results, and the subscription dropdown now only lists subscriptions that actually contain VMs.</td>
+</tr>
+<tr>
+<td>Two-column Azure VM tab</td>
+<td>Connection method, monitor mode, and Entra ID auth sit in the left column; VM selection sits in the right column.</td>
+</tr>
+<tr>
+<td>Pre-flight checks</td>
+<td>Before connecting, the application checks the Bastion SKU, its feature flags, and the VM’s power state. These checks fail open: a check that can’t complete doesn’t block the connection.</td>
+</tr>
+<tr>
+<td>Tunnel auto-reconnect</td>
+<td>If the WebSocket connection drops, the tunnel reconnects on its own, up to five times with a widening gap between attempts. Most RDP sessions stay connected through a reconnect this short.</td>
+</tr>
+<tr>
+<td>About dialog and diagnostic bundle</td>
+<td>The i button in the top bar, Open Log Folder, and Copy Diagnostic Info all shipped in this release.</td>
+</tr>
+<tr>
+<td>Platform default connection method</td>
+<td>RD Gateway became the default on Windows, and Tunnel the default on macOS, because the Windows App on macOS can’t use Bastion as a gateway. The default only applies until you pick a method yourself.</td>
+</tr>
+<tr>
+<td>HD Ready screen support</td>
+<td>The window grew to 580×760, up from roughly 540×700, and now fits without a scrollbar on 1280×720 displays.</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/diagnostics/"><span class="dir">Previous</span><span class="ttl">Diagnostics</span></a><span></span></div></article><aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#334">3.3.4</a></li><li><a href="#33">3.3</a></li></ul></aside></div></main></body></html>
