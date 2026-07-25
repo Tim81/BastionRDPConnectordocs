@@ -91,8 +91,16 @@ a.btn.ghost:hover { border-color: var(--azure); background: var(--azure-wash); c
 .pt p { font-size: 14.5px; color: var(--text-2); margin: 0; max-width: none; }
 .pt .num { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--azure); letter-spacing: -.02em; display: block; margin-bottom: 4px; }
 
+/* Sticky header is 86px tall, so anchored sections need to clear it. */
+.band, .swap { scroll-margin-top: 88px; }
+
 .swap { max-width: 1120px; margin: 0 auto; padding: 54px 40px; }
 .swap h2 { font-size: 23px; font-weight: 650; margin: 0 0 22px; }
+
+/* Hold figures at their native viewBox width. Letting an SVG stretch to the
+   container scales its type with it, so two figures on one page end up at
+   different text sizes. */
+.swap figure .frame svg { max-width: 700px; margin: 0 auto; }
 .swap table { border-collapse: collapse; width: 100%; font-size: 14.5px; max-width: 780px; }
 .swap thead th { text-align: left; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-2); padding: 9px 13px; border-bottom: 1px solid var(--rule); }
 .swap tbody td { padding: 10px 13px; border-bottom: 1px solid var(--rule-soft); }

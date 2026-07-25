@@ -29,8 +29,8 @@
   <div class="grid">
     <div>
       <span class="eyebrow">Windows and macOS</span>
-      <h1>Your VM has no public IP. Connect to it anyway.</h1>
-      <p class="sell">Pick a virtual machine, or type an address. The remote desktop client you already use opens the session through Azure Bastion. Nothing is exposed to the internet.</p>
+      <h1>Pick the VM by name. Even when the portal cannot.</h1>
+      <p class="sell">Connect through Azure Bastion from your own remote desktop client. It finds your virtual machines across every subscription and landing zone, including the ones the portal's Connect button will not offer you.</p>
       <div class="cta">
         <a class="btn" href="#get">Download for Windows</a>
         <a class="btn ghost" href="overview.html">Read the docs</a>
@@ -130,6 +130,66 @@
       </div>
     </div>
   </div>
+</section>
+
+<section class="swap" id="landingzone">
+  <h2>If your Bastion sits in a Connectivity landing zone</h2>
+  <p style="color:var(--text-2);max-width:62ch;">This is the case the application was written for. A Cloud Adoption Framework estate puts one Bastion in the Connectivity landing zone and joins everything through a Virtual WAN hub. The network works. The portal does not follow it.</p>
+
+  <figure style="max-width:none;margin:26px 0 22px;">
+    <div class="frame">
+      <svg viewBox="0 0 700 250" role="img" aria-labelledby="lzt">
+        <title id="lzt">A central Bastion in the Connectivity landing zone reaches virtual machines in spoke landing zones through the Virtual WAN hub. The Azure portal does not enumerate those machines across the hub, so the Connect button does not offer Bastion.</title>
+
+        <!-- hub -->
+        <circle cx="350" cy="125" r="42" fill="#10141C"/>
+        <text class="n-td" x="350" y="121" text-anchor="middle" fill="#fff">vWAN</text>
+        <text class="n-td" x="350" y="136" text-anchor="middle" fill="#98A2B3">hub</text>
+
+        <!-- connectivity LZ with bastion -->
+        <path class="w-live" d="M170 125 H308"/>
+        <rect class="n-box" x="24" y="98" width="146" height="54" rx="5"/>
+        <text class="n-td" x="97" y="118" text-anchor="middle">Connectivity LZ</text>
+        <rect class="n-box n-hop" x="52" y="124" width="90" height="20" rx="4"/>
+        <text class="n-td" x="97" y="138" text-anchor="middle" fill="#fff">Bastion</text>
+
+        <!-- spokes -->
+        <path class="w-live" d="M392 106 L520 56"/>
+        <path class="w-live" d="M392 125 H520"/>
+        <path class="w-live" d="M392 144 L520 194"/>
+
+        <rect class="n-box" x="520" y="34" width="150" height="44" rx="5"/>
+        <text class="n-td" x="595" y="52" text-anchor="middle">Spoke LZ · prod</text>
+        <text class="n-s" x="595" y="68" text-anchor="middle">10.20.1.0/24</text>
+
+        <rect class="n-box" x="520" y="103" width="150" height="44" rx="5"/>
+        <text class="n-td" x="595" y="121" text-anchor="middle">Spoke LZ · test</text>
+        <text class="n-s" x="595" y="137" text-anchor="middle">10.30.1.0/24</text>
+
+        <rect class="n-box" x="520" y="172" width="150" height="44" rx="5"/>
+        <text class="n-td" x="595" y="190" text-anchor="middle">Spoke LZ · dev</text>
+        <text class="n-s" x="595" y="206" text-anchor="middle">10.40.1.0/24</text>
+
+        <text class="n-s" x="350" y="196" text-anchor="middle">routing reaches every spoke</text>
+        <text class="n-s" x="350" y="234" text-anchor="middle" fill="#C4314B">portal discovery stops at the hub</text>
+        <path class="w-dead" d="M180 216 H520" stroke="#C4314B" stroke-dasharray="5 5"/>
+      </svg>
+    </div>
+    <figcaption><b>Figure</b> Traffic crosses the hub. The portal's resource discovery does not.</figcaption>
+  </figure>
+
+  <div class="tw" style="max-width:780px;">
+  <table>
+    <thead><tr><th>In the portal</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>Open the Bastion resource</td><td>Its VM list does not enumerate machines across the hub</td></tr>
+      <tr><td>Open the VM, press Connect</td><td>Bastion is not offered, because the VM cannot see it</td></tr>
+      <tr><td>Fall back to Connect by IP address</td><td>You type the private IP yourself, and the session still runs in a browser tab</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="max-width:62ch;">The application does its own lookup. It reads your virtual machines from Azure Resource Graph, which is not bound by the topology, and asks the central Bastion for the connection. You pick the machine by name from any landing zone, and the session opens in your remote desktop client.</p>
 </section>
 
 <section class="swap">
