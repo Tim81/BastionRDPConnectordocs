@@ -1,91 +1,74 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Connect to an Azure VM · Azure Bastion RDP Connector</title><meta name="description" content="Pick a virtual machine by name, across one subscription or all of them, check its power state, start it if needed, and connect."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/" aria-current="page">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Connect<span>/</span>Connect to an Azure VM</p><h1>Connect to an Azure VM</h1><p>The Azure VM tab lists virtual machines by name instead of asking for an address. It splits into two columns: connection settings on the left, VM selection on the right. Which connection method is selected by default depends on the platform, so both are shown below.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Connect to an Azure VM · Azure Bastion RDP Connector</title><meta name="description" content="Pick a virtual machine by name, across one subscription or all of them, check its power state, start it if needed, and connect."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Language</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/connect-vm/" aria-current="page">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/connect-vm/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/connect-vm/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/connect-vm/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/connect-vm/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/connect-vm/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Getting started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connection methods</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/" aria-current="page">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Features</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Connection methods<span>/</span>Connect to an Azure VM</p><h1>Connect to an Azure VM</h1><p>The Azure VM tab lists virtual machines by name instead of asking for an address. It splits into two columns: connection settings on the left, VM selection on the right. Which connection method is selected by default depends on the platform, so both are shown below.</p>
 <h2 id="the-azure-vm-tab">The Azure VM tab</h2>
 <!-- Mirrors src/components/ScreenAzureVm.astro -->
 <figure class="appshot">
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-vm-win">
       <title id="s-vm-win">The Azure VM tab on Windows. A subscription and Bastion host are chosen at the top. The tab holds the connection method, monitor layout, Entra ID option, a searchable list of virtual machines, the power state of the selected machine, and the Connect button.</title>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
-<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="40"&gt;Subscription&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="55"&gt;Production - West Europe&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="204" y="55"&gt;Change&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="250" y="55"&gt;i&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="270" y="55"&gt;out&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="76"&gt;Bastion host&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="91"&gt;bastion-hub-weu&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="273" y="91"&gt;↻&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="14" y="115"&gt;IP address&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="76" y="115"&gt;Azure VM&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;line class="ui-tabup" x1="72" y1="120" x2="132" y2="120"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="142" y="115"&gt;Active tunnels&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="130" width="134" height="96" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="17" y="144"&gt;Connection method&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="22" cy="155" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="158"&gt;Tunnel&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="22" cy="169" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-rd" cx="22" cy="169" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="172"&gt;RD Gateway&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="17" y="190"&gt;Monitors&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="22" cy="200" r="4"/&gt;&lt;circle class="ui-rd" cx="22" cy="200" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="203"&gt;Single&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="80" cy="200" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="89" y="203"&gt;All&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-ck" x="18" y="213" width="8" height="8" rx="2"/&gt;</span></span>
-<span class="line"><span>  &lt;path d="M20 217 l2 2 l4 -4" stroke="#fff" stroke-width="1.2" fill="none"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="220"&gt;Entra ID auth&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="158" cy="138" r="4"/&gt;&lt;circle class="ui-rd" cx="158" cy="138" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="167" y="141"&gt;This subscription&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="158" cy="152" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="167" y="155"&gt;All subscriptions&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="162" width="138" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="157" y="172"&gt;Search by name&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="180" width="138" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="157" y="190"&gt;Filter by tag&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="198" width="138" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="157" y="209"&gt;vm-app-prod-01&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="152" y="218" width="138" height="30" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-run" cx="161" cy="233" r="3.5"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="170" y="236"&gt;Running&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="248" y="226" width="36" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="254" y="236"&gt;Start&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="268"&gt;Target port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="272" width="60" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="283"&gt;3389&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="80" y="268"&gt;Local port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="80" y="272" width="60" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="85" y="283"&gt;55001&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="306"&gt;Opens in mstsc&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn" x="10" y="320" width="280" height="26" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-bt" x="150" y="337" text-anchor="middle"&gt;Connect&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="362"&gt;EN · NL · DE · FR · ES · PT&lt;/text&gt;</span></span>
-<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Subscription</text>
+      <rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="55">Production - West Europe</text>
+      <rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/>
+      <text class="ui-tb" x="204" y="55">Change</text>
+      <rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/>
+      <text class="ui-tb" x="250" y="55">i</text>
+      <rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="270" y="55">out</text>
+      <text class="ui-l" x="10" y="76">Bastion host</text>
+      <rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
+      <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="273" y="91">↻</text>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb off" x="14" y="115">IP address</text>
+      <text class="ui-tb" x="76" y="115">Azure VM</text>
+      <line class="ui-tabup" x1="72" y1="120" x2="132" y2="120"/>
+      <text class="ui-tb off" x="142" y="115">Active tunnels</text>
+      <rect class="ui-panel" x="10" y="130" width="134" height="96" rx="4"/>
+      <text class="ui-l" x="17" y="144">Connection method</text>
+      <circle class="ui-ro" cx="22" cy="155" r="4"/>
+      <text class="ui-tb" x="31" y="158">Tunnel</text>
+      <circle class="ui-ro on" cx="22" cy="169" r="4"/>
+      <circle class="ui-rd" cx="22" cy="169" r="2"/>
+      <text class="ui-tb" x="31" y="172">RD Gateway</text>
+      <text class="ui-l" x="17" y="190">Monitors</text>
+      <circle class="ui-ro on" cx="22" cy="200" r="4"/><circle class="ui-rd" cx="22" cy="200" r="2"/>
+      <text class="ui-tb" x="31" y="203">Single</text>
+      <circle class="ui-ro" cx="80" cy="200" r="4"/>
+      <text class="ui-tb" x="89" y="203">All</text>
+      <rect class="ui-ck" x="18" y="213" width="8" height="8" rx="2"/>
+      <path d="M20 217 l2 2 l4 -4" stroke="#fff" stroke-width="1.2" fill="none"/>
+      <text class="ui-tb" x="31" y="220">Entra ID auth</text>
+      <circle class="ui-ro on" cx="158" cy="138" r="4"/><circle class="ui-rd" cx="158" cy="138" r="2"/>
+      <text class="ui-tb" x="167" y="141">VM Subscription</text>
+      <circle class="ui-ro" cx="158" cy="152" r="4"/>
+      <text class="ui-tb" x="167" y="155">All subscriptions</text>
+      <rect class="ui-field" x="152" y="162" width="138" height="14" rx="3"/>
+      <text class="ui-p" x="157" y="172">Search by name</text>
+      <rect class="ui-field" x="152" y="180" width="138" height="14" rx="3"/>
+      <text class="ui-p" x="157" y="190">Filter by tag</text>
+      <rect class="ui-field" x="152" y="198" width="138" height="15" rx="3"/>
+      <text class="ui-v" x="157" y="209">vm-app-prod-01</text>
+      <rect class="ui-panel" x="152" y="218" width="138" height="30" rx="4"/>
+      <circle class="ui-run" cx="161" cy="233" r="3.5"/>
+      <text class="ui-tb" x="170" y="236">Running</text>
+      <rect class="ui-btn-2" x="248" y="226" width="36" height="14" rx="3"/>
+      <text class="ui-tb" x="254" y="236">Start</text>
+      <text class="ui-l" x="10" y="268">Target port</text>
+      <rect class="ui-field" x="10" y="272" width="60" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="283">3389</text>
+      <text class="ui-l" x="80" y="268">Local port</text>
+      <rect class="ui-field" x="80" y="272" width="60" height="15" rx="3"/>
+      <text class="ui-v" x="85" y="283">55001</text>
+      <text class="ui-p" x="10" y="306">Opens in mstsc</text>
+      <rect class="ui-btn" x="10" y="320" width="280" height="26" rx="4"/>
+      <text class="ui-bt" x="150" y="337" text-anchor="middle">Connect</text>
+      <text class="ui-p" x="10" y="362">EN · NL · DE · FR · ES · PT</text>
+    </svg>
   </div>
   <figcaption><b>Windows</b> The Azure VM tab on Windows. RD Gateway is the default.</figcaption>
 </figure>
@@ -93,89 +76,72 @@
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-vm-mac">
       <title id="s-vm-mac">The Azure VM tab on macOS. A subscription and Bastion host are chosen at the top. The tab holds the connection method, monitor layout, Entra ID option, a searchable list of virtual machines, the power state of the selected machine, and the Connect button.</title>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="8"/&gt;</span></span>
-<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V24 H2 Z"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle cx="14" cy="13" r="4" fill="#FF5F57"/&gt;</span></span>
-<span class="line"><span>  &lt;circle cx="27" cy="13" r="4" fill="#FEBC2E"/&gt;</span></span>
-<span class="line"><span>  &lt;circle cx="40" cy="13" r="4" fill="#28C840"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-title" x="150" y="16" text-anchor="middle"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="40"&gt;Subscription&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="55"&gt;Production - West Europe&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="204" y="55"&gt;Change&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="250" y="55"&gt;i&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="270" y="55"&gt;out&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="76"&gt;Bastion host&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="91"&gt;bastion-hub-weu&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="273" y="91"&gt;↻&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="14" y="115"&gt;IP address&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="76" y="115"&gt;Azure VM&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;line class="ui-tabup" x1="72" y1="120" x2="132" y2="120"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="142" y="115"&gt;Active tunnels&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="130" width="134" height="96" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="17" y="144"&gt;Connection method&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="22" cy="155" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-rd" cx="22" cy="155" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="158"&gt;Tunnel&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="22" cy="169" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="172"&gt;RD Gateway&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="17" y="190"&gt;Monitors&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="22" cy="200" r="4"/&gt;&lt;circle class="ui-rd" cx="22" cy="200" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="203"&gt;Single&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="80" cy="200" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="89" y="203"&gt;All&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-ck" x="18" y="213" width="8" height="8" rx="2"/&gt;</span></span>
-<span class="line"><span>  &lt;path d="M20 217 l2 2 l4 -4" stroke="#fff" stroke-width="1.2" fill="none"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="31" y="220"&gt;Entra ID auth&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;circle class="ui-ro on" cx="158" cy="138" r="4"/&gt;&lt;circle class="ui-rd" cx="158" cy="138" r="2"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="167" y="141"&gt;This subscription&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-ro" cx="158" cy="152" r="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="167" y="155"&gt;All subscriptions&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="162" width="138" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="157" y="172"&gt;Search by name&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="180" width="138" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="157" y="190"&gt;Filter by tag&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="152" y="198" width="138" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="157" y="209"&gt;vm-app-prod-01&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="152" y="218" width="138" height="30" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-run" cx="161" cy="233" r="3.5"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="170" y="236"&gt;Running&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="248" y="226" width="36" height="14" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="254" y="236"&gt;Start&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="268"&gt;Target port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="272" width="60" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="283"&gt;3389&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="80" y="268"&gt;Local port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="80" y="272" width="60" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="85" y="283"&gt;55001&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="306"&gt;Opens in Windows App&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn" x="10" y="320" width="280" height="26" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-bt" x="150" y="337" text-anchor="middle"&gt;Connect&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="362"&gt;EN · NL · DE · FR · ES · PT&lt;/text&gt;</span></span>
-<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="8"/>
+      <path class="ui-bar" d="M2 2 H298 V24 H2 Z"/>
+      <circle cx="14" cy="13" r="4" fill="#FF5F57"/>
+      <circle cx="27" cy="13" r="4" fill="#FEBC2E"/>
+      <circle cx="40" cy="13" r="4" fill="#28C840"/>
+      <text class="ui-title" x="150" y="16" text-anchor="middle">Azure Bastion RDP Connector</text>
+      <text class="ui-l" x="10" y="40">Subscription</text>
+      <rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="55">Production - West Europe</text>
+      <rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/>
+      <text class="ui-tb" x="204" y="55">Change</text>
+      <rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/>
+      <text class="ui-tb" x="250" y="55">i</text>
+      <rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="270" y="55">out</text>
+      <text class="ui-l" x="10" y="76">Bastion host</text>
+      <rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
+      <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="273" y="91">↻</text>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb off" x="14" y="115">IP address</text>
+      <text class="ui-tb" x="76" y="115">Azure VM</text>
+      <line class="ui-tabup" x1="72" y1="120" x2="132" y2="120"/>
+      <text class="ui-tb off" x="142" y="115">Active tunnels</text>
+      <rect class="ui-panel" x="10" y="130" width="134" height="96" rx="4"/>
+      <text class="ui-l" x="17" y="144">Connection method</text>
+      <circle class="ui-ro on" cx="22" cy="155" r="4"/>
+      <circle class="ui-rd" cx="22" cy="155" r="2"/>
+      <text class="ui-tb" x="31" y="158">Tunnel</text>
+      <circle class="ui-ro" cx="22" cy="169" r="4"/>
+      <text class="ui-tb" x="31" y="172">RD Gateway</text>
+      <text class="ui-l" x="17" y="190">Monitors</text>
+      <circle class="ui-ro on" cx="22" cy="200" r="4"/><circle class="ui-rd" cx="22" cy="200" r="2"/>
+      <text class="ui-tb" x="31" y="203">Single</text>
+      <circle class="ui-ro" cx="80" cy="200" r="4"/>
+      <text class="ui-tb" x="89" y="203">All</text>
+      <rect class="ui-ck" x="18" y="213" width="8" height="8" rx="2"/>
+      <path d="M20 217 l2 2 l4 -4" stroke="#fff" stroke-width="1.2" fill="none"/>
+      <text class="ui-tb" x="31" y="220">Entra ID auth</text>
+      <circle class="ui-ro on" cx="158" cy="138" r="4"/><circle class="ui-rd" cx="158" cy="138" r="2"/>
+      <text class="ui-tb" x="167" y="141">VM Subscription</text>
+      <circle class="ui-ro" cx="158" cy="152" r="4"/>
+      <text class="ui-tb" x="167" y="155">All subscriptions</text>
+      <rect class="ui-field" x="152" y="162" width="138" height="14" rx="3"/>
+      <text class="ui-p" x="157" y="172">Search by name</text>
+      <rect class="ui-field" x="152" y="180" width="138" height="14" rx="3"/>
+      <text class="ui-p" x="157" y="190">Filter by tag</text>
+      <rect class="ui-field" x="152" y="198" width="138" height="15" rx="3"/>
+      <text class="ui-v" x="157" y="209">vm-app-prod-01</text>
+      <rect class="ui-panel" x="152" y="218" width="138" height="30" rx="4"/>
+      <circle class="ui-run" cx="161" cy="233" r="3.5"/>
+      <text class="ui-tb" x="170" y="236">Running</text>
+      <rect class="ui-btn-2" x="248" y="226" width="36" height="14" rx="3"/>
+      <text class="ui-tb" x="254" y="236">Start</text>
+      <text class="ui-l" x="10" y="268">Target port</text>
+      <rect class="ui-field" x="10" y="272" width="60" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="283">3389</text>
+      <text class="ui-l" x="80" y="268">Local port</text>
+      <rect class="ui-field" x="80" y="272" width="60" height="15" rx="3"/>
+      <text class="ui-v" x="85" y="283">55001</text>
+      <text class="ui-p" x="10" y="306">Opens in Windows App</text>
+      <rect class="ui-btn" x="10" y="320" width="280" height="26" rx="4"/>
+      <text class="ui-bt" x="150" y="337" text-anchor="middle">Connect</text>
+      <text class="ui-p" x="10" y="362">EN · NL · DE · FR · ES · PT</text>
+    </svg>
   </div>
   <figcaption><b>macOS</b> The Azure VM tab on macOS. Tunnel is the default. RD Gateway can still be selected, and the application warns before using it.</figcaption>
 </figure>
@@ -191,7 +157,7 @@
 </thead>
 <tbody>
 <tr>
-<td>This subscription (default)</td>
+<td>VM Subscription (default)</td>
 <td>Lists every VM in the selected subscription right away. Type in the filter box to narrow it by name. The subscription dropdown only shows subscriptions that actually contain VMs.</td>
 </tr>
 <tr>

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Descripción general · Azure Bastion RDP Connector</title><meta name="description" content="Abra una sesión de escritorio remoto a través de Azure Bastion hacia una máquina virtual de Azure, o hacia cualquier sistema Windows al que la red de Bastion pueda enrutar."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Idioma</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/overview/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/overview/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/overview/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/overview/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/overview/" aria-current="page">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/overview/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Introducción</span><a class="nav" href="/BastionRDPConnectordocs/next/es/overview/" aria-current="page">Descripción general</a><a class="nav" href="/BastionRDPConnectordocs/next/es/requirements/">Requisitos previos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/install/">Instalación</a><a class="nav" href="/BastionRDPConnectordocs/next/es/sign-in/">Primer inicio de sesión</a></div><div class="rail-group"><span class="eyebrow">Métodos de conexión</span><a class="nav" href="/BastionRDPConnectordocs/next/es/connection-methods/">Métodos de conexión</a><a class="nav" href="/BastionRDPConnectordocs/next/es/connect-ip/">Conectarse a una dirección IP</a><a class="nav" href="/BastionRDPConnectordocs/next/es/connect-vm/">Conectarse a una VM de Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/es/active-tunnels/">Túneles activos</a></div><div class="rail-group"><span class="eyebrow">Funciones</span><a class="nav" href="/BastionRDPConnectordocs/next/es/monitors/">Monitores</a><a class="nav" href="/BastionRDPConnectordocs/next/es/entra-id/">Autenticación Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/es/tenants/">Varios inquilinos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/files-and-settings/">Archivos y configuración</a></div><div class="rail-group"><span class="eyebrow">Referencia</span><a class="nav" href="/BastionRDPConnectordocs/next/es/troubleshooting/">Solución de problemas</a><a class="nav" href="/BastionRDPConnectordocs/next/es/diagnostics/">Diagnósticos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/release-notes/">Notas de la versión</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Inicio</a><span>/</span><a href="/BastionRDPConnectordocs/next/es/overview/">Documentación</a><span>/</span>Introducción<span>/</span>Descripción general</p><h1>Descripción general</h1><p>Azure Bastion RDP Connector abre una sesión de escritorio remoto a través de Azure Bastion, usando el cliente de escritorio remoto ya instalado en su equipo. Las máquinas virtuales de Azure se eligen por nombre. Cualquier otro destino se alcanza por dirección, lo que incluye máquinas locales y máquinas en otras nubes.</p>
+<h2 id="qué-hace">Qué hace</h2>
+<p>Azure Bastion es una ruta hacia una red, no solo hacia Azure. Llega a todo lo que su propia red virtual pueda alcanzar, así que una máquina no tiene que ser una VM de Azure, ni siquiera estar en Azure, para ser alcanzable a través de él.</p>
+<p>Esta aplicación le pide a Bastion esa ruta y entrega el resultado a su cliente de escritorio remoto. Usted no copia cadenas de conexión, no gestiona certificados ni abre puertos de firewall.</p>
+<p>Azure CLI no es necesario. Las versiones anteriores llamaban a <code>az network bastion</code> para construir el túnel. Desde la 3.0 la aplicación habla directamente con las API de Bastion y Azure Resource Manager, por lo que no es necesario instalar nada más.</p>
+<h2 id="a-qué-puede-llegar">A qué puede llegar</h2>
+<table>
+<thead>
+<tr>
+<th>Destino</th>
+<th>Cómo se elige</th>
+<th>Requiere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Máquina virtual de Azure</td>
+<td>Elegirla por nombre desde la pestaña Azure VM, en todas sus suscripciones</td>
+<td>Acceso de lector a la VM</td>
+</tr>
+<tr>
+<td>Cualquier otro destino</td>
+<td>Escribir su dirección en la pestaña Dirección IP</td>
+<td>Conexión basada en IP habilitada en el host de Bastion</td>
+</tr>
+</tbody>
+</table>
+<p>La ruta por dirección es la más amplia de las dos. Llega a cualquier sistema al que la red virtual de Bastion pueda enrutar:</p>
+<ul>
+<li>Máquinas virtuales de Azure, en la misma red virtual o emparejadas con ella</li>
+<li>Servidores y equipos de escritorio Windows locales, a través de una VPN de sitio a sitio o ExpressRoute</li>
+<li>Sistemas Windows en otras nubes, como AWS, o en una nube privada</li>
+</ul>
+<p>Todo lo que tenga una ruta y un puerto RDP en escucha es alcanzable. Que se ejecute en Azure o no es irrelevante.</p>
+<p>Microsoft documenta directamente el caso local: la conexión basada en IP de Bastion “permite la conectividad a máquinas locales si existe conectividad híbrida entre el recurso de Azure Bastion y la máquina a la que desea conectarse”. Consulte <a href="https://learn.microsoft.com/en-us/azure/bastion/connect-ip-address">Conectarse a una VM mediante una dirección IP privada especificada</a>.</p>
+<h2 id="dos-formas-de-conectarse">Dos formas de conectarse</h2>
+<p>La aplicación ofrece dos métodos de conexión. Llegan a la misma máquina y se diferencian en cómo se transporta la sesión.</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Transporta la sesión mediante</th>
+<th>Funciona con direcciones IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Túnel</td>
+<td>Un puerto local reenviado a través de un WebSocket hacia Bastion</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>RD Gateway</td>
+<td>Un archivo .rdp que apunta a Bastion como puerta de enlace</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../connection-methods/">Métodos de conexión</a> explica cuándo usar cada uno, y por qué el predeterminado difiere entre Windows y macOS.</p>
+<h2 id="antes-de-empezar">Antes de empezar</h2>
+<ul>
+<li>Un host de Azure Bastion con SKU Estándar o Premium. Las SKU Basic y Developer no admiten el cliente nativo.</li>
+<li><strong>Compatibilidad con cliente nativo</strong> habilitada en ese host de Bastion.</li>
+<li>Acceso de lector al host de Bastion y a las máquinas virtuales a las que desea llegar.</li>
+<li>Windows 10 o posterior. Instalado desde la Microsoft Store.</li>
+<li>Existe una versión para macOS, compatible desde la 3.1.2 para Apple Silicon e Intel, pero aún no está disponible públicamente.</li>
+</ul>
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>La aplicación comprueba la SKU de Bastion y sus marcadores de características antes de conectar, e indica cuál falta si una comprobación no se cumple. Estas comprobaciones son fail-open, por lo que una comprobación que no puede completarse no le impide conectarse.</p>
+</div>
+<h2 id="dónde-se-almacenan-las-cosas">Dónde se almacenan las cosas</h2>
+<p>La configuración se sincroniza con su perfil de Windows. Los datos de inicio de sesión y los registros permanecen en el equipo.</p>
+<table>
+<thead>
+<tr>
+<th>Ruta</th>
+<th>Contiene</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%APPDATA%\BastionRDPConnector</code></td>
+<td><code>settings.json</code>: última suscripción, Bastion, VM e idioma utilizados</td>
+</tr>
+<tr>
+<td><code>%LOCALAPPDATA%\BastionRDPConnector</code></td>
+<td>Caché de tokens de inicio de sesión, el perfil del navegador de inicio de sesión y <code>debug.log</code> con las últimas diez sesiones</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">Se aplica a 3.3.4 · Última revisión 2026-07-25</p><div class="pager"><span></span><a class="next" href="/BastionRDPConnectordocs/next/es/requirements/"><span class="dir">Siguiente</span><span class="ttl">Requisitos previos</span></a></div></article><aside class="toc" aria-label="En esta página"><span class="eyebrow">En esta página</span><ul><li><a href="#qué-hace">Qué hace</a></li><li><a href="#a-qué-puede-llegar">A qué puede llegar</a></li><li><a href="#dos-formas-de-conectarse">Dos formas de conectarse</a></li><li><a href="#antes-de-empezar">Antes de empezar</a></li><li><a href="#dónde-se-almacenan-las-cosas">Dónde se almacenan las cosas</a></li></ul></aside></div></main></body></html>

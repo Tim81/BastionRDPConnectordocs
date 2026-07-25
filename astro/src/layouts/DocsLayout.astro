@@ -2,7 +2,8 @@
 import Rail from '../components/Rail.astro';
 import Toc from '../components/Toc.astro';
 import Pager from '../components/Pager.astro';
-import { baseHref, pageHref, groupTitleFor } from '../nav';
+import { baseHref, pageHref, groupKeyFor } from '../nav';
+import { t } from '../i18n';
 import '../styles/site.css';
 
 interface Heading {
@@ -17,13 +18,15 @@ interface Props {
   appliesTo: string;
   lastReviewed: string;
   slug: string;
+  locale: string;
   headings: Heading[];
 }
 
-const { title, description, appliesTo, lastReviewed, slug, headings } = Astro.props;
-const groupTitle = groupTitleFor(slug);
+const { title, description, appliesTo, lastReviewed, slug, locale, headings } = Astro.props;
+const groupKey = groupKeyFor(slug);
+const groupTitle = groupKey ? t(locale, `group.${groupKey}`) : '';
 ---
-<html lang="en">
+<html lang={locale}>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,24 +38,24 @@ const groupTitle = groupTitleFor(slug);
 </head>
 <body>
 
-<Rail current={slug} />
+<Rail current={slug} locale={locale} />
 
 <main class="page">
 <div class="cols">
 <article>
 
-  <p class="crumb"><a href={baseHref()}>Home</a><span>/</span><a href={pageHref('overview')}>Docs</a><span>/</span>{groupTitle}<span>/</span>{title}</p>
+  <p class="crumb"><a href={baseHref()}>{t(locale, 'home')}</a><span>/</span><a href={pageHref('overview', locale)}>{t(locale, 'docs')}</a><span>/</span>{groupTitle}<span>/</span>{title}</p>
 
   <h1>{title}</h1>
   <slot />
 
-  <p class="meta">Applies to {appliesTo} · Last reviewed {lastReviewed}</p>
+  <p class="meta">{t(locale, 'appliesTo')} {appliesTo} · {t(locale, 'lastReviewed')} {lastReviewed}</p>
 
-  <Pager current={slug} />
+  <Pager current={slug} locale={locale} />
 
 </article>
 
-<Toc headings={headings} />
+<Toc headings={headings} locale={locale} />
 </div>
 </main>
 

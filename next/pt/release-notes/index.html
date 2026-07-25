@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Notas de versão · Azure Bastion RDP Connector</title><meta name="description" content="O que mudou em cada versão recente do Azure Bastion RDP Connector."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Idioma</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/release-notes/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/release-notes/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/release-notes/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/release-notes/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/release-notes/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/release-notes/" aria-current="page">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Introdução</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/overview/">Visão geral</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/requirements/">Pré-requisitos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/install/">Instalação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/sign-in/">Primeiro início de sessão</a></div><div class="rail-group"><span class="eyebrow">Métodos de ligação</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/connection-methods/">Métodos de ligação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-ip/">Ligar a um endereço IP</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-vm/">Ligar a uma VM do Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/active-tunnels/">Túneis ativos</a></div><div class="rail-group"><span class="eyebrow">Funcionalidades</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/monitors/">Monitores</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/entra-id/">Autenticação Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/tenants/">Múltiplos inquilinos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/files-and-settings/">Ficheiros e definições</a></div><div class="rail-group"><span class="eyebrow">Referência</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Resolução de problemas</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/diagnostics/">Diagnósticos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/release-notes/" aria-current="page">Notas de versão</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Início</a><span>/</span><a href="/BastionRDPConnectordocs/next/pt/overview/">Documentação</a><span>/</span>Referência<span>/</span>Notas de versão</p><h1>Notas de versão</h1><h2 id="334">3.3.4</h2>
+<table>
+<thead>
+<tr>
+<th>Alteração</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ícone da área de notificação restaurado</td>
+<td>O ícone da área de notificação não aparecia no Windows nas versões 3.2 a 3.3.3. Minimizar para a área de notificação, as notificações de túnel e o menu de contexto da área de notificação voltam a funcionar como esta documentação descreve.</td>
+</tr>
+<tr>
+<td>Dez sessões de histórico de registos</td>
+<td>O <code>debug.log</code> costumava ser substituído em cada arranque. As últimas dez sessões são agora mantidas como <code>debug.0.log</code> a <code>debug.9.log</code>, para que o registo da execução em que ocorreu um problema sobreviva a um reinício.</td>
+</tr>
+<tr>
+<td>Pacote de diagnóstico abrange sessões anteriores</td>
+<td>Copiar informações de diagnóstico agora inclui os registos de sessões arquivadas ao lado do atual, das mais recentes para as mais antigas, até cerca de 1 MB.</td>
+</tr>
+<tr>
+<td>A limpeza conclui antes de a janela fechar</td>
+<td>Os túneis ativos fecham e os ficheiros <code>.rdp</code> temporários são eliminados antes de a janela fechar. Terminar sessão executa a mesma limpeza em vez de encerrar o processo de imediato.</td>
+</tr>
+<tr>
+<td>Perfil do navegador de início de sessão movido</td>
+<td>O navegador de início de sessão incorporado costumava manter o seu perfil junto ao ficheiro da aplicação, o que impedia o início de sessão quando a aplicação corria a partir de uma pasta protegida contra escrita, como a Program Files. Agora vive em <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. A localização da cache de tokens não muda.</td>
+</tr>
+<tr>
+<td>Componentes atualizados</td>
+<td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33">3.3</h2>
+<table>
+<thead>
+<tr>
+<th>Alteração</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carregamento de VMs com Azure Resource Graph</td>
+<td>As VMs de cerca de 200 subscrições carregam em 2 a 4 segundos, em vez de 30 a 60 segundos antes. As consultas entre subscrições utilizam a API Azure Resource Graph em vez de consultar cada subscrição uma a uma.</td>
+</tr>
+<tr>
+<td>Pesquisa de VMs entre subscrições</td>
+<td>O modo Todas as subscrições no separador Azure VM pesquisa em todas as subscrições que a sua conta consegue ver. Requer pelo menos três carateres antes de devolver resultados, e a lista pendente de subscrições agora só mostra as que efetivamente contêm VMs.</td>
+</tr>
+<tr>
+<td>Separador Azure VM em duas colunas</td>
+<td>Método de ligação, modo de monitor e auth Entra ID ficam na coluna esquerda; a seleção de VM fica na coluna direita.</td>
+</tr>
+<tr>
+<td>Verificações preliminares</td>
+<td>Antes de ligar, a aplicação verifica o SKU do Bastion, os seus indicadores de funcionalidades, e o estado de energia da VM. Estas verificações são fail-open: uma verificação que não consiga concluir não bloqueia a ligação.</td>
+</tr>
+<tr>
+<td>Reconexão automática do túnel</td>
+<td>Se a ligação WebSocket cair, o túnel reconecta-se sozinho, até cinco vezes com um intervalo crescente entre tentativas. A maioria das sessões RDP mantém-se ligada ao longo de uma reconexão tão curta.</td>
+</tr>
+<tr>
+<td>Caixa de diálogo Sobre e pacote de diagnóstico</td>
+<td>O botão i na barra superior, Abrir pasta de registos, e Copiar informações de diagnóstico foram todos lançados nesta versão.</td>
+</tr>
+<tr>
+<td>Método de ligação predefinido por plataforma</td>
+<td>O RD Gateway tornou-se a predefinição no Windows, e o Túnel a predefinição no macOS, porque a Windows App no macOS não consegue utilizar o Bastion como gateway. A predefinição só se aplica até escolher um método por si mesmo.</td>
+</tr>
+<tr>
+<td>Suporte a ecrãs HD Ready</td>
+<td>A janela cresceu para 580×760, a partir de aproximadamente 540×700, e agora cabe sem barra de deslocamento em ecrãs de 1280×720.</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">Aplica-se a 3.3.4 · Última revisão 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/pt/diagnostics/"><span class="dir">Anterior</span><span class="ttl">Diagnósticos</span></a><span></span></div></article><aside class="toc" aria-label="Nesta página"><span class="eyebrow">Nesta página</span><ul><li><a href="#334">3.3.4</a></li><li><a href="#33">3.3</a></li></ul></aside></div></main></body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Overzicht · Azure Bastion RDP Connector</title><meta name="description" content="Open een externe bureaubladsessie via Azure Bastion naar een Azure-VM, of naar elk Windows-systeem dat het Bastion-netwerk kan bereiken."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Taal</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/overview/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/overview/" aria-current="page">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/overview/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/overview/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/overview/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/overview/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Aan de slag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/overview/" aria-current="page">Overzicht</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/requirements/">Vereisten</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/install/">Installatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/sign-in/">Eerste aanmelding</a></div><div class="rail-group"><span class="eyebrow">Verbindingsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/connection-methods/">Verbindingsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-ip/">Verbinden met een IP-adres</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-vm/">Verbinden met een Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/active-tunnels/">Actieve tunnels</a></div><div class="rail-group"><span class="eyebrow">Functies</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/entra-id/">Entra ID-authenticatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/tenants/">Meerdere tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/files-and-settings/">Bestanden en instellingen</a></div><div class="rail-group"><span class="eyebrow">Naslag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Problemen oplossen</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/diagnostics/">Diagnostiek</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/release-notes/">Wat is nieuw</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/nl/overview/">Documentatie</a><span>/</span>Aan de slag<span>/</span>Overzicht</p><h1>Overzicht</h1><p>Azure Bastion RDP Connector opent een externe bureaubladsessie via Azure Bastion, met de remote desktop-client die al op uw computer is geïnstalleerd. Azure-VM’s worden op naam gekozen. Al het andere wordt bereikt via een adres, waaronder on-premises machines en machines in andere clouds vallen.</p>
+<h2 id="wat-het-doet">Wat het doet</h2>
+<p>Azure Bastion is een route naar een netwerk, niet alleen naar Azure. Het bereikt alles wat het eigen virtuele netwerk kan bereiken, dus een machine hoeft geen Azure-VM te zijn, of zelfs maar in Azure te staan, om er via bereikbaar te zijn.</p>
+<p>Deze applicatie vraagt Bastion om die route en geeft het resultaat door aan uw remote desktop-client. U kopieert geen verbindingsreeksen, beheert geen certificaten en opent geen firewallpoorten.</p>
+<p>Azure CLI is niet vereist. Eerdere versies riepen <code>az network bastion</code> aan om de tunnel op te bouwen. Sinds 3.0 communiceert de applicatie rechtstreeks met de Bastion- en Azure Resource Manager-API’s, dus er hoeft niets anders geïnstalleerd te worden.</p>
+<h2 id="wat-u-kunt-bereiken">Wat u kunt bereiken</h2>
+<table>
+<thead>
+<tr>
+<th>Doel</th>
+<th>Hoe u het kiest</th>
+<th>Vereist</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure-VM</td>
+<td>Kies op naam vanuit het tabblad Azure VM, over al uw subscriptions</td>
+<td>Reader-toegang tot de VM</td>
+</tr>
+<tr>
+<td>Al het andere</td>
+<td>Typ het adres op het tabblad IP-adres</td>
+<td>Op IP gebaseerde verbinding ingeschakeld op de Bastion-host</td>
+</tr>
+</tbody>
+</table>
+<p>De adresroute is de breedste van de twee. Deze bereikt elk systeem waar het virtuele netwerk van Bastion een route naartoe heeft:</p>
+<ul>
+<li>Azure-VM’s, in hetzelfde virtuele netwerk of daaraan gepeerd</li>
+<li>On-premises Windows-servers en -werkstations, via een site-to-site VPN of ExpressRoute</li>
+<li>Windows-systemen in andere clouds, zoals AWS, of in een private cloud</li>
+</ul>
+<p>Alles met een route en een luisterende RDP-poort is bereikbaar. Of het in Azure draait, doet er niet toe.</p>
+<p>Microsoft documenteert het on-premises scenario rechtstreeks: de op IP gebaseerde verbinding van Bastion “allows for connectivity to on-premises-based machines if hybrid connectivity exists between the Azure Bastion resource and the machine that you want to connect to.” Zie <a href="https://learn.microsoft.com/en-us/azure/bastion/connect-ip-address">Connect to a VM via a specified private IP address</a>.</p>
+<h2 id="twee-manieren-om-verbinding-te-maken">Twee manieren om verbinding te maken</h2>
+<p>De applicatie biedt twee verbindingsmethoden. Ze bereiken dezelfde machine en verschillen in hoe de sessie wordt overgebracht.</p>
+<table>
+<thead>
+<tr>
+<th>Methode</th>
+<th>Draagt de sessie via</th>
+<th>Werkt met IP-adressen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tunnel</td>
+<td>Een lokale poort doorgestuurd via een WebSocket naar Bastion</td>
+<td>Ja</td>
+</tr>
+<tr>
+<td>RD Gateway</td>
+<td>Een .rdp-bestand dat naar Bastion als gateway wijst</td>
+<td>Nee</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../connection-methods/">Verbindingsmethoden</a> legt uit wanneer u welke methode gebruikt, en waarom de standaard verschilt tussen Windows en macOS.</p>
+<h2 id="voordat-u-begint">Voordat u begint</h2>
+<ul>
+<li>Een Azure Bastion-host met de Standard- of Premium-SKU. De Basic- en Developer-SKU’s ondersteunen de native client niet.</li>
+<li><strong>Native client-ondersteuning</strong> ingeschakeld op die Bastion-host.</li>
+<li>Reader-toegang tot de Bastion-host en tot de virtuele machines die u wilt bereiken.</li>
+<li>Windows 10 of hoger. Geïnstalleerd vanuit de Microsoft Store.</li>
+<li>Er bestaat een macOS-build, ondersteund sinds 3.1.2 voor Apple Silicon en Intel, maar deze is nog niet publiek beschikbaar.</li>
+</ul>
+<div class="callout note">
+<span class="eyebrow">Opmerking</span>
+<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en laat weten welke ontbreekt als een controle mislukt. Deze controles zijn fail-open, dus een controle die niet kan worden voltooid, weerhoudt u er niet van om verbinding te maken.</p>
+</div>
+<h2 id="waar-dingen-worden-opgeslagen">Waar dingen worden opgeslagen</h2>
+<p>Instellingen roamen mee met uw Windows-profiel. Aanmeldgegevens en logboeken blijven op de machine.</p>
+<table>
+<thead>
+<tr>
+<th>Pad</th>
+<th>Bevat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%APPDATA%\BastionRDPConnector</code></td>
+<td><code>settings.json</code>: laatst gebruikte subscription, Bastion, VM en taal</td>
+</tr>
+<tr>
+<td><code>%LOCALAPPDATA%\BastionRDPConnector</code></td>
+<td>Aanmeldtokencache, het aanmeldbrowserprofiel en <code>debug.log</code> met de laatste tien sessies</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">Geldt voor 3.3.4 · Laatst gecontroleerd 2026-07-25</p><div class="pager"><span></span><a class="next" href="/BastionRDPConnectordocs/next/nl/requirements/"><span class="dir">Volgende</span><span class="ttl">Vereisten</span></a></div></article><aside class="toc" aria-label="Op deze pagina"><span class="eyebrow">Op deze pagina</span><ul><li><a href="#wat-het-doet">Wat het doet</a></li><li><a href="#wat-u-kunt-bereiken">Wat u kunt bereiken</a></li><li><a href="#twee-manieren-om-verbinding-te-maken">Twee manieren om verbinding te maken</a></li><li><a href="#voordat-u-begint">Voordat u begint</a></li><li><a href="#waar-dingen-worden-opgeslagen">Waar dingen worden opgeslagen</a></li></ul></aside></div></main></body></html>

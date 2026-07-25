@@ -1,23 +1,29 @@
 ---
 // Previous/next are derived by locating the current slug inside `flatNav`
-// (the flattened `nav.ts` order) — not hardcoded per page.
+// (the flattened `nav.ts` order), not hardcoded per page. Titles come from
+// the target locale's own frontmatter, the same way `Rail.astro` resolves
+// them, with the English title in `nav.ts` as fallback.
 
-import { flatNav, pageHref } from '../nav';
+import { flatNav, pageHref, titlesForLocale, resolveTitle } from '../nav';
+import { t } from '../i18n';
 
 interface Props {
   current: string;
+  locale: string;
 }
 
-const { current } = Astro.props;
+const { current, locale } = Astro.props;
 const idx = flatNav.findIndex((e) => e.slug === current);
 const prev = idx > 0 ? flatNav[idx - 1] : null;
 const next = idx >= 0 && idx < flatNav.length - 1 ? flatNav[idx + 1] : null;
+
+const titles = await titlesForLocale(locale);
 ---
 <div class="pager">
   {prev ? (
-    <a href={pageHref(prev.slug)}><span class="dir">Previous</span><span class="ttl">{prev.title}</span></a>
+    <a href={pageHref(prev.slug, locale)}><span class="dir">{t(locale, 'previous')}</span><span class="ttl">{resolveTitle(titles, prev)}</span></a>
   ) : <span></span>}
   {next ? (
-    <a class="next" href={pageHref(next.slug)}><span class="dir">Next</span><span class="ttl">{next.title}</span></a>
+    <a class="next" href={pageHref(next.slug, locale)}><span class="dir">{t(locale, 'next')}</span><span class="ttl">{resolveTitle(titles, next)}</span></a>
   ) : <span></span>}
 </div>

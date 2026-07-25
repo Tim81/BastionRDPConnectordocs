@@ -11,7 +11,18 @@
  * render in the rail as inert placeholders, matching the prototype, but they
  * are excluded from the pager's previous/next flattening since there is
  * nothing to page to.
+ *
+ * The `title` on each entry is English, and stays that way even where
+ * translations exist. It is the fallback shown when a locale has no
+ * Markdown file for that slug yet. The actual per-locale title comes from
+ * that file's own frontmatter, read via `titlesForLocale` below. Group
+ * headings work the same way in spirit but have no English fallback text
+ * here at all: `group.key` maps to a label in `src/i18n.ts`.
  */
+
+import { getCollection } from 'astro:content';
+
+export type GroupKey = 'start' | 'connect' | 'configure' | 'reference';
 
 export interface NavEntry {
   title: string;
@@ -19,13 +30,13 @@ export interface NavEntry {
 }
 
 export interface NavGroup {
-  title: string;
+  key: GroupKey;
   entries: NavEntry[];
 }
 
 export const nav: NavGroup[] = [
   {
-    title: 'Get started',
+    key: 'start',
     entries: [
       { title: 'Overview', slug: 'overview' },
       { title: 'Requirements', slug: 'requirements' },
@@ -34,7 +45,7 @@ export const nav: NavGroup[] = [
     ],
   },
   {
-    title: 'Connect',
+    key: 'connect',
     entries: [
       { title: 'Connection methods', slug: 'connection-methods' },
       { title: 'Connect to an IP address', slug: 'connect-ip' },
@@ -43,7 +54,7 @@ export const nav: NavGroup[] = [
     ],
   },
   {
-    title: 'Configure',
+    key: 'configure',
     entries: [
       { title: 'Monitors', slug: 'monitors' },
       { title: 'Entra ID authentication', slug: 'entra-id' },
@@ -52,7 +63,7 @@ export const nav: NavGroup[] = [
     ],
   },
   {
-    title: 'Reference',
+    key: 'reference',
     entries: [
       { title: 'Troubleshooting', slug: 'troubleshooting' },
       { title: 'Diagnostics', slug: 'diagnostics' },
@@ -66,14 +77,14 @@ export const flatNav: { title: string; slug: string }[] = nav
   .flatMap((group) => group.entries)
   .filter((entry): entry is { title: string; slug: string } => entry.slug !== null);
 
-/** The group heading a slug lives under, for the breadcrumb. */
-export function groupTitleFor(slug: string): string {
-  const group = nav.find((g) => g.entries.some((e) => e.slug === slug));
-  return group?.title ?? '';
+/** The group key a slug lives under, for the breadcrumb. Translate it with `t(locale, \`group.${key}\`)` from `src/i18n.ts`. */
+export function groupKeyFor(slug: string): GroupKey | undefined {
+  return nav.find((g) => g.entries.some((e) => e.slug === slug))?.key;
 }
 
 /**
- * Base-aware root href, e.g. `/BastionRDPConnectordocs/next/`.
+ * Base-aware root href, e.g. `/BastionRDPConnectordocs/next/`. Always
+ * English. The landing page this points at has no translation yet.
  * `import.meta.env.BASE_URL` reflects the `base` set in astro.config.mjs —
  * reading it here means nothing in the project hardcodes the subpath.
  */
@@ -82,8 +93,53 @@ export function baseHref(): string {
   return `${base}/`;
 }
 
-/** Base-aware href for an English docs page, e.g. `/BastionRDPConnectordocs/next/overview/`. */
-export function pageHref(slug: string): string {
+/**
+ * Base-aware href for a docs page, e.g. `/BastionRDPConnectordocs/next/overview/`
+ * for English or `/BastionRDPConnectordocs/next/nl/overview/` for Dutch.
+ * `locale` is optional and defaults to English, which keeps every existing
+ * single-argument call (the landing page, `LandingLayout`) working as-is.
+ * English has no prefix, per `prefixDefaultLocale: false` in astro.config.mjs.
+ */
+export function pageHref(slug: string, locale?: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-  return `${base}/${slug}/`;
+  const prefix = locale && locale !== 'en' ? `${locale}/` : '';
+  return `${base}/${prefix}${slug}/`;
+}
+
+/**
+ * Page titles for one locale, keyed by the locale-independent slug used
+ * throughout `nav.ts`. Read straight from each Markdown file's own
+ * frontmatter `title`. Translating a page's name in the sidebar means
+ * editing that one file, not a second slug-to-title table here.
+ */
+export async function titlesForLocale(locale: string): Promise<Map<string, string>> {
+  const entries = await getCollection('docs');
+  const titles = new Map<string, string>();
+  for (const entry of entries) {
+    const [entryLocale, ...rest] = entry.id.split('/');
+    if (entryLocale === locale) {
+      titles.set(rest.join('/'), entry.data.title);
+    }
+  }
+  return titles;
+}
+
+/** Resolves a nav entry's title for `locale`, falling back to the English title in `nav.ts` when that locale has no file for the slug yet. */
+export function resolveTitle(titles: Map<string, string>, entry: NavEntry): string {
+  return (entry.slug ? titles.get(entry.slug) : undefined) ?? entry.title;
+}
+
+/**
+ * Which locales have a translation of `slug`, used by the language
+ * switcher to link to the equivalent page only where one exists, and to
+ * that locale's overview otherwise, instead of a URL that would 404.
+ */
+export async function localesWithSlug(slug: string): Promise<Set<string>> {
+  const entries = await getCollection('docs');
+  const withSlug = new Set<string>();
+  for (const entry of entries) {
+    const [entryLocale, ...rest] = entry.id.split('/');
+    if (rest.join('/') === slug) withSlug.add(entryLocale);
+  }
+  return withSlug;
 }

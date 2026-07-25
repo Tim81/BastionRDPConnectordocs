@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Première connexion · Azure Bastion RDP Connector</title><meta name="description" content="Ce qui se passe la première fois que vous ouvrez l'application, comment fonctionne le cache de jetons, et comment s'articulent la sélection du locataire et de l'abonnement."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Langue</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/sign-in/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/sign-in/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/sign-in/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/sign-in/" aria-current="page">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/sign-in/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/sign-in/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Démarrage</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/overview/">Aperçu</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/requirements/">Prérequis</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/sign-in/" aria-current="page">Première connexion</a></div><div class="rail-group"><span class="eyebrow">Méthodes de connexion</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/connection-methods/">Méthodes de connexion</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-ip/">Se connecter à une adresse IP</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-vm/">Se connecter à une VM Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/active-tunnels/">Tunnels actifs</a></div><div class="rail-group"><span class="eyebrow">Fonctionnalités</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/monitors/">Moniteurs</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/entra-id/">Authentification Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/tenants/">Plusieurs locataires</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/files-and-settings/">Fichiers et paramètres</a></div><div class="rail-group"><span class="eyebrow">Référence</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Dépannage</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/release-notes/">Nouveautés</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Accueil</a><span>/</span><a href="/BastionRDPConnectordocs/next/fr/overview/">Documentation</a><span>/</span>Démarrage<span>/</span>Première connexion</p><h1>Première connexion</h1><p>L’application vous connecte avec MSAL, la même bibliothèque qu’Azure CLI et Visual Studio utilisent pour la connexion interactive. Elle ouvre la page de connexion dans un navigateur intégré : WebView2 sur Windows, WKWebView sur macOS. Il n’y a pas de fenêtre de navigateur séparée ni de code d’appareil à copier-coller.</p>
+<h2 id="se-connecter">Se connecter</h2>
+<p>Ce que vous voyez dépend de la présence ou non d’un jeton déjà en cache sur votre machine.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Ce qui se passe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aucun jeton en cache</td>
+<td>La page de connexion Microsoft s’ouvre immédiatement.</td>
+</tr>
+<tr>
+<td>Un jeton en cache valide</td>
+<td>L’application se connecte silencieusement. Aucune fenêtre de connexion n’apparaît, et vous passez directement à la sélection du locataire si votre compte en a plusieurs.</td>
+</tr>
+<tr>
+<td>Un jeton expiré, ou une politique d’accès conditionnel qui exige une réauthentification</td>
+<td>La fenêtre de connexion s’ouvre à nouveau, afin que vous puissiez satisfaire aux exigences de votre organisation, par exemple une MFA quotidienne.</td>
+</tr>
+</tbody>
+</table>
+<p>Sélectionnez <strong>Compte professionnel ou scolaire</strong>, saisissez votre compte, et effectuez la MFA si votre organisation l’exige.</p>
+<div class="callout note">
+<span class="eyebrow">Remarque</span>
+<p>Le cache de jetons se trouve dans <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Il est spécifique à la machine et ne suit pas votre profil en itinérance, et il est distinct du cache d'Azure CLI. Le profil propre au navigateur intégré se trouve juste à côté, dans <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</p>
+</div>
+<h2 id="choisir-un-locataire">Choisir un locataire</h2>
+<!-- Mirrors src/components/ScreenSignIn.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-signin-win">
+      <title id="s-signin-win">La boîte de dialogue de sélection du locataire sur Windows. Trois locataires sont listés, chacun avec un bouton radio et son identifiant de locataire. L'un d'eux est sélectionné. Un bouton OK confirme le choix.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Sélectionner un locataire</text>
+      <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="42">Votre compte a accès à plus d'un</text>
+      <text class="ui-l" x="10" y="54">locataire. Choisissez-en un pour continuer.</text>
+      <rect class="ui-panel" x="10" y="68" width="280" height="42" rx="4"/>
+      <circle class="ui-ro on" cx="24" cy="88" r="4"/>
+      <circle class="ui-rd" cx="24" cy="88" r="2"/>
+      <text class="ui-tb" x="36" y="86">Contoso Production</text>
+      <text class="ui-p" x="36" y="98">5f8a2c14-…-tenant</text>
+      <rect class="ui-panel" x="10" y="114" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="134" r="4"/>
+      <text class="ui-tb" x="36" y="132">Contoso Dev</text>
+      <text class="ui-p" x="36" y="144">b2c19e07-…-tenant</text>
+      <rect class="ui-panel" x="10" y="160" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="180" r="4"/>
+      <text class="ui-tb" x="36" y="178">Fabrikam (Lighthouse)</text>
+      <text class="ui-p" x="36" y="190">9e4d3a51-…-tenant</text>
+      <text class="ui-p" x="10" y="222">Les paramètres sont stockés séparément par</text>
+      <text class="ui-p" x="10" y="233">locataire et restaurés lorsque vous y revenez.</text>
+      <rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/>
+      <text class="ui-bt" x="240" y="337" text-anchor="middle">OK</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> La boîte de dialogue de sélection du locataire sur Windows. Elle apparaît une fois, juste après la connexion, uniquement lorsque le compte peut voir plus d'un locataire. La boîte de dialogue a la même apparence sur macOS, hormis l'habillage de la fenêtre.</figcaption>
+</figure>
+<p>Cette boîte de dialogue apparaît lorsque votre compte a accès à plus d’un locataire Entra ID, par exemple via Azure Lighthouse. Sélectionnez le locataire dont vous souhaitez utiliser les ressources et sélectionnez <strong>OK</strong>. Si ce locataire nécessite la MFA et que votre jeton en cache ne la satisfait pas déjà, vous obtenez une invite d’authentification supplémentaire.</p>
+<p>Vous pouvez changer de locataire à tout moment pendant que l’application est en cours d’exécution. Les paramètres, c’est-à-dire le dernier abonnement, l’hôte Bastion et la VM utilisés, sont stockés séparément par locataire et reviennent automatiquement lorsque vous y revenez.</p>
+<h2 id="choisir-un-abonnement">Choisir un abonnement</h2>
+<p>Une fois le locataire choisi, la fenêtre principale se charge avec un <strong>abonnement Bastion</strong> affiché en haut. Si votre compte a plusieurs abonnements et que celui présélectionné ne contient pas l’hôte Bastion dont vous avez besoin, sélectionnez <strong>Modifier</strong> pour ouvrir le sélecteur.</p>
+<div class="callout note">
+<span class="eyebrow">Remarque</span>
+<p>L'abonnement Bastion affiché en haut est celui qui contient votre ressource Bastion. Sur l'onglet Azure VM, l'abonnement VM peut être totalement différent. Les connexions inter-abonnements fonctionnent sans configuration supplémentaire.</p>
+</div>
+<p>Votre jeton reste sur le disque entre les lancements, si bien que vous n’êtes pas invité à vous reconnecter, sauf si la session expire ou qu’une politique d’accès conditionnel l’exige. Pour forcer une nouvelle connexion, sélectionnez <strong>Se déconnecter</strong> dans la barre supérieure. Cela supprime le jeton en cache et efface l’état MSAL en une seule étape, et le prochain lancement démarre avec une connexion vierge.</p>
+<p class="meta">S&#39;applique à 3.3.4 · Dernière révision 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/fr/install/"><span class="dir">Précédent</span><span class="ttl">Installation</span></a><a class="next" href="/BastionRDPConnectordocs/next/fr/connection-methods/"><span class="dir">Suivant</span><span class="ttl">Méthodes de connexion</span></a></div></article><aside class="toc" aria-label="Sur cette page"><span class="eyebrow">Sur cette page</span><ul><li><a href="#se-connecter">Se connecter</a></li><li><a href="#choisir-un-locataire">Choisir un locataire</a></li><li><a href="#choisir-un-abonnement">Choisir un abonnement</a></li></ul></aside></div></main></body></html>

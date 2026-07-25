@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Nouveautés · Azure Bastion RDP Connector</title><meta name="description" content="Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Langue</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/release-notes/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/release-notes/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/release-notes/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/release-notes/" aria-current="page">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/release-notes/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/release-notes/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Démarrage</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/overview/">Aperçu</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/requirements/">Prérequis</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/sign-in/">Première connexion</a></div><div class="rail-group"><span class="eyebrow">Méthodes de connexion</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/connection-methods/">Méthodes de connexion</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-ip/">Se connecter à une adresse IP</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-vm/">Se connecter à une VM Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/active-tunnels/">Tunnels actifs</a></div><div class="rail-group"><span class="eyebrow">Fonctionnalités</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/monitors/">Moniteurs</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/entra-id/">Authentification Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/tenants/">Plusieurs locataires</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/files-and-settings/">Fichiers et paramètres</a></div><div class="rail-group"><span class="eyebrow">Référence</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Dépannage</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/release-notes/" aria-current="page">Nouveautés</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Accueil</a><span>/</span><a href="/BastionRDPConnectordocs/next/fr/overview/">Documentation</a><span>/</span>Référence<span>/</span>Nouveautés</p><h1>Nouveautés</h1><h2 id="334">3.3.4</h2>
+<table>
+<thead>
+<tr>
+<th>Modification</th>
+<th>Détails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Icône de la zone de notification restaurée</td>
+<td>L’icône de la zone de notification n’apparaissait pas sous Windows dans les versions 3.2 à 3.3.3. La réduction vers la zone de notification, les notifications de tunnel et le menu contextuel fonctionnent désormais comme le décrit cette documentation.</td>
+</tr>
+<tr>
+<td>Historique de dix sessions de journaux</td>
+<td><code>debug.log</code> était auparavant écrasé à chaque démarrage. Les dix dernières sessions sont désormais conservées sous <code>debug.0.log</code> à <code>debug.9.log</code>, si bien que le journal de la session où un problème s’est produit survit à un redémarrage.</td>
+</tr>
+<tr>
+<td>Le bundle de diagnostic couvre les sessions passées</td>
+<td>Copier les informations de diagnostic inclut désormais les journaux de session archivés en plus du journal actuel, du plus récent au plus ancien, jusqu’à environ 1 Mo.</td>
+</tr>
+<tr>
+<td>Le nettoyage se termine avant la fermeture de la fenêtre</td>
+<td>Les tunnels actifs sont fermés et les fichiers <code>.rdp</code> temporaires sont supprimés avant la fermeture de la fenêtre. La déconnexion exécute le même nettoyage au lieu de terminer le processus immédiatement.</td>
+</tr>
+<tr>
+<td>Profil du navigateur de connexion déplacé</td>
+<td>Le navigateur de connexion intégré conservait auparavant son profil à côté du fichier de l’application, ce qui empêchait la connexion lorsque l’application s’exécutait depuis un dossier protégé en écriture tel que Program Files. Il se trouve désormais dans <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. L’emplacement du cache de jetons est inchangé.</td>
+</tr>
+<tr>
+<td>Composants mis à jour</td>
+<td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33">3.3</h2>
+<table>
+<thead>
+<tr>
+<th>Modification</th>
+<th>Détails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chargement des VM via Azure Resource Graph</td>
+<td>Les VM réparties sur environ 200 abonnements se chargent en 2 à 4 secondes, contre 30 à 60 secondes auparavant. Les requêtes inter-abonnements utilisent l’API Azure Resource Graph au lieu d’interroger chaque abonnement l’un après l’autre.</td>
+</tr>
+<tr>
+<td>Recherche de VM inter-abonnements</td>
+<td>Le mode Tous les abonnements de l’onglet Azure VM recherche dans tous les abonnements que votre compte peut voir. Il nécessite au moins trois caractères avant de retourner des résultats, et la liste déroulante des abonnements n’affiche désormais que ceux qui contiennent effectivement des VM.</td>
+</tr>
+<tr>
+<td>Onglet Azure VM à deux colonnes</td>
+<td>La méthode de connexion, le mode moniteur et l’authentification Entra ID se trouvent dans la colonne de gauche ; la sélection de la VM se trouve dans la colonne de droite.</td>
+</tr>
+<tr>
+<td>Vérifications pré-connexion</td>
+<td>Avant de se connecter, l’application vérifie le SKU Bastion, ses indicateurs de fonctionnalités et l’état d’alimentation de la VM. Ces vérifications sont fail-open : une vérification qui ne peut pas aboutir ne bloque pas la connexion.</td>
+</tr>
+<tr>
+<td>Reconnexion automatique du tunnel</td>
+<td>Si la connexion WebSocket est interrompue, le tunnel se reconnecte automatiquement, jusqu’à cinq fois avec un délai exponentiel entre les tentatives. La plupart des sessions RDP restent connectées pendant une reconnexion aussi courte.</td>
+</tr>
+<tr>
+<td>Boîte de dialogue À propos et bundle de diagnostic</td>
+<td>Le bouton i dans la barre supérieure, Ouvrir le dossier de journal et Copier les informations de diagnostic ont tous été introduits dans cette version.</td>
+</tr>
+<tr>
+<td>Méthode de connexion par défaut selon la plateforme</td>
+<td>RD Gateway est devenu la méthode par défaut sous Windows, et Tunnel sous macOS, car Windows App sur macOS ne peut pas utiliser Bastion comme passerelle. La valeur par défaut ne s’applique que tant que vous n’avez pas choisi de méthode vous-même.</td>
+</tr>
+<tr>
+<td>Support des écrans HD Ready</td>
+<td>La fenêtre est passée à 580×760, contre environ 540×700 auparavant, et s’affiche désormais sans barre de défilement sur les écrans 1280×720.</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">S&#39;applique à 3.3.4 · Dernière révision 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/fr/diagnostics/"><span class="dir">Précédent</span><span class="ttl">Diagnostics</span></a><span></span></div></article><aside class="toc" aria-label="Sur cette page"><span class="eyebrow">Sur cette page</span><ul><li><a href="#334">3.3.4</a></li><li><a href="#33">3.3</a></li></ul></aside></div></main></body></html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bestanden en instellingen · Azure Bastion RDP Connector</title><meta name="description" content="Waar de applicatie uw voorkeuren, uw aanmeldstatus en de logboeken bewaart, en wat er in elk bestand staat."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Taal</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/files-and-settings/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/files-and-settings/" aria-current="page">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/files-and-settings/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/files-and-settings/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/files-and-settings/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/files-and-settings/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Aan de slag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/overview/">Overzicht</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/requirements/">Vereisten</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/install/">Installatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/sign-in/">Eerste aanmelding</a></div><div class="rail-group"><span class="eyebrow">Verbindingsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/connection-methods/">Verbindingsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-ip/">Verbinden met een IP-adres</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-vm/">Verbinden met een Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/active-tunnels/">Actieve tunnels</a></div><div class="rail-group"><span class="eyebrow">Functies</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/entra-id/">Entra ID-authenticatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/tenants/">Meerdere tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/files-and-settings/" aria-current="page">Bestanden en instellingen</a></div><div class="rail-group"><span class="eyebrow">Naslag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Problemen oplossen</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/diagnostics/">Diagnostiek</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/release-notes/">Wat is nieuw</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/nl/overview/">Documentatie</a><span>/</span>Functies<span>/</span>Bestanden en instellingen</p><h1>Bestanden en instellingen</h1><p>De applicatie schrijft naar twee aparte mappen onder uw gebruikersprofiel. U bewerkt deze bestanden nooit rechtstreeks; de applicatie leest en schrijft ze zelf.</p>
+<h2 id="instellingen-roaming-per-tenant">Instellingen: roaming, per tenant</h2>
+<p><code>%APPDATA%\BastionRDPConnector\settings.json</code> bevat uw voorkeuren: de laatst gebruikte subscription, Bastion-host, VM en IP-adres, verbindingsmethode, monitormodus, Entra ID-authenticatie, en uw taalkeuze.</p>
+<p>Deze map roamt mee met uw Windows-profiel, dus dezelfde voorkeuren volgen u tussen machines op een domein of Entra ID-gekoppeld netwerk dat <code>%APPDATA%</code> synchroniseert.</p>
+<p>Het meeste in dit bestand wordt <a href="../tenants/">apart per tenant opgeslagen</a>. Taal is de enige instelling die globaal is.</p>
+<p>Instellingen worden atomair weggeschreven: de applicatie schrijft eerst een tijdelijk bestand en vervangt dan in één stap het echte bestand. Als een schrijfactie halverwege wordt onderbroken, bijvoorbeeld doordat het proces wordt gedood, verliest u hoogstens de voorkeur van die ene opslagactie, niet het hele bestand.</p>
+<h2 id="lokale-data-aanmeldstatus-en-logboeken">Lokale data: aanmeldstatus en logboeken</h2>
+<p><code>%LOCALAPPDATA%\BastionRDPConnector\</code> roamt niet. Deze bevat:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Doel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>msal_token_cache.bin</code></td>
+<td>Uw gecachede aanmeldtoken. Privé voor deze applicatie, los van de eigen cache van de Azure CLI.</td>
+</tr>
+<tr>
+<td><code>WebView2\</code></td>
+<td>Het eigen profiel van de ingebouwde aanmeldbrowser: cookies, cache en lokale opslag voor de aanmeldpagina.</td>
+</tr>
+<tr>
+<td><code>debug.log</code></td>
+<td>Het logboek van de huidige sessie.</td>
+</tr>
+<tr>
+<td><code>debug.0.log</code> tot en met <code>debug.9.log</code></td>
+<td>De vorige tien sessies, bewaard sinds 3.3.4. Daarvoor overschreef elke start het ene logboekbestand.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../diagnostics/">Diagnostiek</a> behandelt wat het debug logboek bevat en hoe u het naar support krijgt zonder dat het geheimen bevat.</p>
+<div class="callout note">
+<span class="eyebrow">Opmerking</span>
+<p>Tijdelijke <code>.rdp</code>-bestanden, gegenereerd voor RD Gateway-verbindingen, staan onder <code>%TEMP%\BastionRDPConnector\</code> en worden verwijderd wanneer de applicatie sluit.</p>
+</div>
+<h2 id="opnieuw-instellen">Opnieuw instellen</h2>
+<p>Het verwijderen van <code>settings.json</code> zet elke voorkeur terug naar de standaardwaarde. U blijft aangemeld; er verandert niets aan uw tokencache.</p>
+<p>Het verwijderen van <code>msal_token_cache.bin</code>, of het selecteren van <strong>Afmelden</strong> in de bovenste balk, meldt u af en wist de gecachede token. Afmelden is de veiligere optie: het verwijdert de tokencache en wist de in-memory status van MSAL in één stap, en de volgende start begint met een lege aanmelding.</p>
+<p>Om beide opnieuw in te stellen, sluit u eerst de applicatie en verwijdert u dan beide bestanden. Het verwijderen van het ene heeft geen invloed op het andere.</p>
+<p class="meta">Geldt voor 3.3.4 · Laatst gecontroleerd 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/nl/tenants/"><span class="dir">Vorige</span><span class="ttl">Meerdere tenants</span></a><a class="next" href="/BastionRDPConnectordocs/next/nl/troubleshooting/"><span class="dir">Volgende</span><span class="ttl">Problemen oplossen</span></a></div></article><aside class="toc" aria-label="Op deze pagina"><span class="eyebrow">Op deze pagina</span><ul><li><a href="#instellingen-roaming-per-tenant">Instellingen: roaming, per tenant</a></li><li><a href="#lokale-data-aanmeldstatus-en-logboeken">Lokale data: aanmeldstatus en logboeken</a></li><li><a href="#opnieuw-instellen">Opnieuw instellen</a></li></ul></aside></div></main></body></html>

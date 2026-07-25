@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Méthodes de connexion · Azure Bastion RDP Connector</title><meta name="description" content="Tunnel et RD Gateway comparés : comment chacun achemine la session, quelles cibles ils atteignent, et lequel est la méthode par défaut sous Windows et sur macOS."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Langue</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/connection-methods/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/connection-methods/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/connection-methods/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/connection-methods/" aria-current="page">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/connection-methods/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/connection-methods/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Démarrage</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/overview/">Aperçu</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/requirements/">Prérequis</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/sign-in/">Première connexion</a></div><div class="rail-group"><span class="eyebrow">Méthodes de connexion</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/connection-methods/" aria-current="page">Méthodes de connexion</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-ip/">Se connecter à une adresse IP</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-vm/">Se connecter à une VM Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/active-tunnels/">Tunnels actifs</a></div><div class="rail-group"><span class="eyebrow">Fonctionnalités</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/monitors/">Moniteurs</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/entra-id/">Authentification Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/tenants/">Plusieurs locataires</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/files-and-settings/">Fichiers et paramètres</a></div><div class="rail-group"><span class="eyebrow">Référence</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Dépannage</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/release-notes/">Nouveautés</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Accueil</a><span>/</span><a href="/BastionRDPConnectordocs/next/fr/overview/">Documentation</a><span>/</span>Méthodes de connexion<span>/</span>Méthodes de connexion</p><h1>Méthodes de connexion</h1><p>Les deux méthodes atteignent la même machine virtuelle via le même hôte Bastion. Elles diffèrent par la façon dont la session de bureau à distance est acheminée, et cette différence détermine les cibles que chacune peut atteindre.</p>
+<figure>
+<div class="frame">
+<svg viewBox="0 0 620 186" role="img" aria-labelledby="fig1t">
+  <title id="fig1t">Votre ordinateur ne peut pas atteindre la machine virtuelle directement. Les deux méthodes de connexion passent par l'hôte Azure Bastion.</title>
+  <!-- direct path, blocked -->
+  <path class="w-dead" d="M104 40 H516"/>
+  <line class="w-x" x1="300" y1="30" x2="320" y2="50"/>
+  <line class="w-x" x1="320" y1="30" x2="300" y2="50"/>
+  <text class="n-s" x="310" y="21" text-anchor="middle">aucune IP publique · 3389 fermé</text>
+  <!-- routed path -->
+  <path class="w-live" d="M104 120 H256"/>
+  <path class="w-live" d="M364 120 H516"/>
+  <text class="n-s" x="180" y="112" text-anchor="middle">443 sortant</text>
+  <text class="n-s" x="440" y="112" text-anchor="middle">3389 à l'intérieur du vnet</text>
+  <!-- nodes -->
+  <rect class="n-box" x="8" y="18" width="96" height="124" rx="5"/>
+  <text class="n-t" x="56" y="74" text-anchor="middle">Votre PC</text>
+  <text class="n-s" x="56" y="92" text-anchor="middle">mstsc</text>
+  <rect class="n-box n-hop" x="256" y="96" width="108" height="48" rx="5"/>
+  <text class="n-t on" x="310" y="118" text-anchor="middle">Bastion</text>
+  <text class="n-s" x="310" y="133" text-anchor="middle" fill="#98A2B3">SKU Standard</text>
+  <rect class="n-box" x="516" y="18" width="96" height="124" rx="5"/>
+  <text class="n-t" x="564" y="74" text-anchor="middle">Azure VM</text>
+  <text class="n-s" x="564" y="92" text-anchor="middle">IP privée</text>
+  <text class="n-s" x="310" y="172" text-anchor="middle">Tunnel et RD Gateway empruntent tous deux le chemin du bas</text>
+</svg>
+</div>
+<figcaption><b>Figure 1</b> Le chemin direct n'existe pas. Chaque session est acheminée via l'hôte Bastion sur le port 443.</figcaption>
+</figure>
+<h2 id="tunnel">Tunnel</h2>
+<p>L’application ouvre un WebSocket vers l’hôte Bastion et écoute sur un port local de votre ordinateur. Votre client de bureau à distance se connecte à <code>localhost</code> sur ce port, et le trafic est transmis via le WebSocket.</p>
+<p>Comme la cible n’est jamais qu’une adresse à l’autre bout du tunnel, cette méthode atteint toute adresse IP que le réseau virtuel Bastion peut router. Cela inclut des machines qui ne sont pas des VM Azure.</p>
+<p>Si le WebSocket se coupe, le tunnel se reconnecte automatiquement, jusqu’à cinq tentatives avec un intervalle croissant entre chaque tentative. Une session de bureau à distance ouverte survit à une reconnexion brève.</p>
+<h3 id="quand-lutiliser">Quand l’utiliser</h3>
+<ul>
+<li>Vous vous connectez à une adresse IP plutôt que de choisir une VM.</li>
+<li>Vous êtes sur macOS, où une session RD Gateway se coupe après quelques secondes. Voir <a href="#rd-gateway-sur-macos">RD Gateway sur macOS</a>.</li>
+<li>Vous voulez plusieurs sessions ouvertes en même temps, chacune sur son propre port local.</li>
+</ul>
+<h2 id="rd-gateway">RD Gateway</h2>
+<p>L’application demande à Bastion un fichier <code>.rdp</code> préconfiguré qui désigne Bastion comme passerelle de bureau à distance, puis transmet ce fichier à votre client. Il n’y a ni port local ni processus de tunnel.</p>
+<p>C’est le chemin le plus court, et c’est la méthode par défaut sous Windows. Elle ne fonctionne que lorsque Bastion peut résoudre la cible lui-même, c’est-à-dire pour les VM Azure et non pour les adresses IP saisies.</p>
+<div class="callout warn">
+<span class="eyebrow">Connexion inter-locataires</span>
+<p>L'authentification Entra ID est désactivée par défaut et doit le rester lorsque la machine virtuelle appartient à un locataire différent de celui du compte avec lequel vous vous êtes connecté, ce qui est le cas habituel avec Azure Lighthouse. Azure AD renvoie <code>AADSTS293004</code> pour cette combinaison. Si vous l'activez quand même et que Bastion refuse, l'application réessaie automatiquement avec le paramètre désactivé, afin que la session puisse quand même s'ouvrir. Voir <a href="../entra-id/">Authentification Entra ID</a>.</p>
+</div>
+<h3 id="rd-gateway-sur-macos">RD Gateway sur macOS</h3>
+<p>RD Gateway est sélectionnable sur macOS et la connexion s’établit bien. Elle se coupe ensuite après environ dix à quinze secondes avec l’erreur <code>0x3000064</code>.</p>
+<p>La cause est une incompatibilité de suites cryptographiques, pas une erreur de configuration. La pile TLS du client macOS ne propose que des suites RSA, alors que la passerelle Azure Bastion présente une suite ECDSA. Aucun des deux côtés ne peut s’accorder avec l’autre, si bien que la session est interrompue peu après son démarrage. Il s’agit d’une limitation du client côté Microsoft, sans aucun paramètre permettant de la contourner.</p>
+<p>Microsoft prend en charge le chemin RD Gateway de Bastion avec le client Windows. Ce n’est pas une combinaison prise en charge avec Windows App sur macOS.</p>
+<p>Comme la connexion semble d’abord réussir avant d’échouer, l’application demande confirmation avant de tenter la connexion. Choisir RD Gateway sur macOS affiche une invite qui indique le code d’erreur et propose Tunnel à la place. Répondre oui lance quand même la tentative, afin que le comportement puisse être vérifié plutôt que pris pour acquis.</p>
+<p>Utilisez Tunnel sur macOS. Il atteint les mêmes machines et c’est la méthode par défaut sur cette plateforme pour cette raison.</p>
+<h2 id="comparaison">Comparaison</h2>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th>Tunnel</th>
+<th>RD Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Se connecter à une VM Azure</td>
+<td>Oui</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Se connecter à une adresse IP</td>
+<td>Oui</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Ouvre un port local</td>
+<td>Oui, un par session</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Se reconnecte automatiquement</td>
+<td>Oui, jusqu’à 5 tentatives</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Authentification Entra ID</td>
+<td>Non applicable</td>
+<td>Désactivée par défaut, facultative</td>
+</tr>
+<tr>
+<td>Par défaut sous Windows</td>
+<td>Non</td>
+<td>Oui</td>
+</tr>
+<tr>
+<td>Par défaut sur macOS</td>
+<td>Oui</td>
+<td>Non</td>
+</tr>
+<tr>
+<td>Nécessite Azure CLI</td>
+<td>Non</td>
+<td>Non</td>
+</tr>
+</tbody>
+</table>
+<p>La valeur par défaut ne s’applique que jusqu’à ce que vous choisissiez vous-même une méthode. Ensuite, votre choix est enregistré par locataire et restauré au prochain démarrage de l’application.</p>
+<h2 id="ports">Ports</h2>
+<p>Aucune des deux méthodes n’a besoin de règle de pare-feu entrante. Les deux utilisent le port 443 sortant depuis votre ordinateur vers l’hôte Bastion.</p>
+<table>
+<thead>
+<tr>
+<th>De</th>
+<th>Vers</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Votre ordinateur</td>
+<td>bst-*.bastion.azure.com</td>
+<td>443/TCP sortant</td>
+</tr>
+<tr>
+<td>Votre ordinateur</td>
+<td>login.microsoftonline.com</td>
+<td>443/TCP sortant</td>
+</tr>
+<tr>
+<td>Hôte Bastion</td>
+<td>Machine cible</td>
+<td>3389/TCP à l’intérieur du réseau virtuel</td>
+</tr>
+</tbody>
+</table>
+<p class="meta">S&#39;applique à 3.3.4 · Dernière révision 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/fr/sign-in/"><span class="dir">Précédent</span><span class="ttl">Première connexion</span></a><a class="next" href="/BastionRDPConnectordocs/next/fr/connect-ip/"><span class="dir">Suivant</span><span class="ttl">Se connecter à une adresse IP</span></a></div></article><aside class="toc" aria-label="Sur cette page"><span class="eyebrow">Sur cette page</span><ul><li><a href="#tunnel">Tunnel</a></li><li><a class="sub" href="#quand-lutiliser">Quand l’utiliser</a></li><li><a href="#rd-gateway">RD Gateway</a></li><li><a class="sub" href="#rd-gateway-sur-macos">RD Gateway sur macOS</a></li><li><a href="#comparaison">Comparaison</a></li><li><a href="#ports">Ports</a></li></ul></aside></div></main></body></html>

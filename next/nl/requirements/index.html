@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vereisten · Azure Bastion RDP Connector</title><meta name="description" content="Wat moet kloppen op uw machine en in Azure voordat Azure Bastion RDP Connector een sessie kan openen."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Taal</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/requirements/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/requirements/" aria-current="page">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/requirements/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/requirements/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/requirements/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/requirements/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Aan de slag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/overview/">Overzicht</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/requirements/" aria-current="page">Vereisten</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/install/">Installatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/sign-in/">Eerste aanmelding</a></div><div class="rail-group"><span class="eyebrow">Verbindingsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/connection-methods/">Verbindingsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-ip/">Verbinden met een IP-adres</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/connect-vm/">Verbinden met een Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/active-tunnels/">Actieve tunnels</a></div><div class="rail-group"><span class="eyebrow">Functies</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/entra-id/">Entra ID-authenticatie</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/tenants/">Meerdere tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/files-and-settings/">Bestanden en instellingen</a></div><div class="rail-group"><span class="eyebrow">Naslag</span><a class="nav" href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Problemen oplossen</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/diagnostics/">Diagnostiek</a><a class="nav" href="/BastionRDPConnectordocs/next/nl/release-notes/">Wat is nieuw</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/nl/overview/">Documentatie</a><span>/</span>Aan de slag<span>/</span>Vereisten</p><h1>Vereisten</h1><p>De applicatie is zelfstandig. Er hoeft geen .NET apart geïnstalleerd te worden, en sinds 3.0 is Azure CLI niet nodig. Wat wel nodig is: een ondersteund besturingssysteem, een remote desktop-client, en een Bastion-host die is geconfigureerd om native-clientverbindingen te accepteren.</p>
+<h2 id="op-uw-machine">Op uw machine</h2>
+<table>
+<thead>
+<tr>
+<th>Vereiste</th>
+<th>Opmerkingen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 10 of hoger, x64</td>
+<td>Geïnstalleerd vanuit de Microsoft Store</td>
+</tr>
+<tr>
+<td>macOS 12 Monterey of hoger</td>
+<td>Ondersteund sinds 3.1.2 voor Apple Silicon en Intel, maar nog niet publiek beschikbaar</td>
+</tr>
+<tr>
+<td>Remote desktop-client, Windows</td>
+<td><code>mstsc.exe</code>, al onderdeel van Windows</td>
+</tr>
+<tr>
+<td>Remote desktop-client, macOS</td>
+<td>De Windows App, uit de Mac App Store. Gebruik hiermee Tunnel. Een RD Gateway-sessie opent en valt daarna na een paar seconden weg met fout <code>0x3000064</code>, een cipher-mismatch die Microsoft op deze client niet ondersteunt</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Opmerking</span>
+<p>Azure CLI is niet vereist. Eerdere versies riepen <code>az network bastion tunnel</code> aan; sinds 3.0 wordt de tunnel native opgebouwd met .NET. Als u nog een 2.x-build gebruikt, zijn Azure CLI en de <code>azure-bastion</code>-extensie nog steeds nodig.</p>
+</div>
+<h2 id="in-azure">In Azure</h2>
+<table>
+<thead>
+<tr>
+<th>Vereiste</th>
+<th>Opmerkingen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bastion, Standard- of Premium-SKU</td>
+<td>Basic- en Developer-SKU’s ondersteunen de native client niet</td>
+</tr>
+<tr>
+<td>Native client-ondersteuning, ingeschakeld op de Bastion-host</td>
+<td>Apart ingeschakeld van de SKU-keuze</td>
+</tr>
+<tr>
+<td>Op IP gebaseerde verbinding, ingeschakeld op de Bastion-host</td>
+<td>Alleen nodig als u het tabblad IP-adres wilt gebruiken</td>
+</tr>
+<tr>
+<td>Reader-rol op de Bastion-resource en het bijbehorende virtuele netwerk</td>
+<td>Het minimum dat nodig is om Bastion-hosts weer te geven en er verbinding mee te maken</td>
+</tr>
+<tr>
+<td>Reader-rol op de doel-VM</td>
+<td>Nodig om die VM weer te geven en er verbinding mee te maken. Virtual Machine Contributor of hoger is nodig om een gestopte VM te starten</td>
+</tr>
+<tr>
+<td>Een Azure-subscription</td>
+<td>De applicatie toont elke subscription die uw account kan zien</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Opmerking</span>
+<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en noemt de ontbrekende als een controle mislukt. Deze controles zijn fail-open: als de controle zelf niet kan worden voltooid, bijvoorbeeld door een tijdelijk netwerkprobleem, gaat de verbindingspoging toch door.</p>
+</div>
+<h2 id="netwerkbereikbaarheid">Netwerkbereikbaarheid</h2>
+<p>Een doel hoeft alleen bereikbaar te zijn vanuit het virtuele netwerk van Bastion. Het hoeft geen Azure-VM te zijn, en het hoeft helemaal niet in Azure te staan.</p>
+<ul>
+<li>Bastion geïmplementeerd in hetzelfde virtuele netwerk, of een daaraan gepeerd netwerk, is het eenvoudige geval.</li>
+<li>In een hub-and-spoke- of landing zone-opstelling zit Bastion vaak in een gecentraliseerde connectivity landing zone en bereikt spoke-virtuele netwerken via Azure Virtual WAN. In die topologie is de Bastion-resource niet zichtbaar vanuit een afzonderlijke spoke in de Azure Portal, ook al kan het daar nog steeds VM’s bereiken. Deze applicatie is precies voor dat geval gebouwd: kies de gedeelde Bastion één keer, en maak dan verbinding met een VM in elke spoke die deze kan bereiken.</li>
+<li>On-premises machines zijn ook bereikbaar, via een site-to-site VPN of ExpressRoute, en Windows-systemen in andere clouds ook, zolang er een route bestaat.</li>
+</ul>
+<p>Als u niet zeker weet of een Bastion-host een bepaald doel kan bereiken, vraag het dan aan wie uw netwerk beheert. De applicatie kan geen routes zien die niet via de API’s die het aanroept worden blootgesteld.</p>
+<p class="meta">Geldt voor 3.3.4 · Laatst gecontroleerd 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/nl/overview/"><span class="dir">Vorige</span><span class="ttl">Overzicht</span></a><a class="next" href="/BastionRDPConnectordocs/next/nl/install/"><span class="dir">Volgende</span><span class="ttl">Installatie</span></a></div></article><aside class="toc" aria-label="Op deze pagina"><span class="eyebrow">Op deze pagina</span><ul><li><a href="#op-uw-machine">Op uw machine</a></li><li><a href="#in-azure">In Azure</a></li><li><a href="#netwerkbereikbaarheid">Netwerkbereikbaarheid</a></li></ul></aside></div></main></body></html>

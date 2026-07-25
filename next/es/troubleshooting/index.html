@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Solución de problemas · Azure Bastion RDP Connector</title><meta name="description" content="Problemas frecuentes, descritos con las palabras que usaría para describirlos, y qué comprobar en cada caso."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Idioma</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/troubleshooting/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/troubleshooting/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/troubleshooting/" aria-current="page">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Introducción</span><a class="nav" href="/BastionRDPConnectordocs/next/es/overview/">Descripción general</a><a class="nav" href="/BastionRDPConnectordocs/next/es/requirements/">Requisitos previos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/install/">Instalación</a><a class="nav" href="/BastionRDPConnectordocs/next/es/sign-in/">Primer inicio de sesión</a></div><div class="rail-group"><span class="eyebrow">Métodos de conexión</span><a class="nav" href="/BastionRDPConnectordocs/next/es/connection-methods/">Métodos de conexión</a><a class="nav" href="/BastionRDPConnectordocs/next/es/connect-ip/">Conectarse a una dirección IP</a><a class="nav" href="/BastionRDPConnectordocs/next/es/connect-vm/">Conectarse a una VM de Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/es/active-tunnels/">Túneles activos</a></div><div class="rail-group"><span class="eyebrow">Funciones</span><a class="nav" href="/BastionRDPConnectordocs/next/es/monitors/">Monitores</a><a class="nav" href="/BastionRDPConnectordocs/next/es/entra-id/">Autenticación Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/es/tenants/">Varios inquilinos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/files-and-settings/">Archivos y configuración</a></div><div class="rail-group"><span class="eyebrow">Referencia</span><a class="nav" href="/BastionRDPConnectordocs/next/es/troubleshooting/" aria-current="page">Solución de problemas</a><a class="nav" href="/BastionRDPConnectordocs/next/es/diagnostics/">Diagnósticos</a><a class="nav" href="/BastionRDPConnectordocs/next/es/release-notes/">Notas de la versión</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Inicio</a><span>/</span><a href="/BastionRDPConnectordocs/next/es/overview/">Documentación</a><span>/</span>Referencia<span>/</span>Solución de problemas</p><h1>Solución de problemas</h1><h2 id="antes-de-conectarse">Antes de conectarse</h2>
+<h3 id="volví-a-iniciar-la-aplicación-y-no-pasó-nada">Volví a iniciar la aplicación y no pasó nada</h3>
+<p>La aplicación permite solo una instancia en ejecución. Si ya está abierta, minimizada o en la bandeja del sistema, iniciarla de nuevo trae la ventana existente al frente en lugar de abrir una nueva. Compruebe la bandeja del sistema, en Windows, para ver el icono de la aplicación.</p>
+<!-- Mirrors src/components/ScreenTray.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tray-win">
+      <title id="s-tray-win">El menú contextual de la bandeja del sistema de Windows, desplegado. Se listan dos túneles abiertos, cada uno con controles Conectar y Detener. Debajo, Acerca de y Salir.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Bandeja del sistema, menú del clic derecho</text>
+      <rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="63" r="3.5"/>
+      <text class="ui-tb" x="32" y="67">vm-dev-web-01</text>
+      <text class="ui-p" x="32" y="80">localhost:55000 · abierto 4m 12s</text>
+      <rect class="ui-btn-2" x="194" y="59" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="70">Conectar</text>
+      <rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="70">Detener</text>
+      <rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="121" r="3.5"/>
+      <text class="ui-tb" x="32" y="125">10.20.4.15</text>
+      <text class="ui-p" x="32" y="138">localhost:55001 · abierto 41s</text>
+      <rect class="ui-btn-2" x="194" y="117" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="128">Conectar</text>
+      <rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="128">Detener</text>
+      <line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb" x="20" y="190">Acerca de</text>
+      <text class="ui-tb" x="20" y="212">Salir</text>
+      <text class="ui-p" x="10" y="352">Haga doble clic en el icono de la bandeja para restaurar la ventana principal.</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> El menú contextual de la bandeja del sistema en Windows, desplegado. Cada túnel abierto tiene sus propios controles Conectar y Detener, seguidos de Acerca de y Salir.</figcaption>
+</figure>
+<p>Cerrar la ventana principal, o minimizarla, no cierra la aplicación. Ambas acciones ocultan la ventana y la dejan ejecutándose en la bandeja, por lo que los túneles abiertos siguen conectados. Haga clic derecho en el icono de la bandeja y seleccione <strong>Salir</strong> para cerrarla por completo. El icono de la bandeja es exclusivo de Windows; macOS no tiene icono de bandeja por diseño.</p>
+<h3 id="no-aparecen-suscripciones-o-la-lista-de-bastion-está-vacía">No aparecen suscripciones, o la lista de Bastion está vacía</h3>
+<p>Esto normalmente significa que su cuenta no tiene ninguna asignación de rol en ninguna suscripción, o que el inquilino en el que está no contiene ningún recurso de Bastion. Intente:</p>
+<ul>
+<li>Seleccionar <strong>Actualizar</strong> junto al campo de Bastion.</li>
+<li>Seleccionar <strong>Cambiar</strong> para elegir una suscripción distinta.</li>
+<li>Cerrar sesión y volver a iniciarla, por si su sesión caducó.</li>
+<li>Pedir a quien administre sus roles de Azure que confirme que tiene el rol Lector en el host de Bastion y su red virtual.</li>
+</ul>
+<h2 id="conectar">Conectar</h2>
+<h3 id="mstsc-se-abre-pero-la-conexión-falla-para-una-vm-de-azure-por-rd-gateway">mstsc se abre, pero la conexión falla para una VM de Azure por RD Gateway</h3>
+<p>Compruebe lo siguiente:</p>
+<ul>
+<li>El estado de energía de la VM muestra <strong>En ejecución</strong>, y déle al sistema operativo invitado uno o dos minutos después de eso para terminar de arrancar.</li>
+<li>El host de Bastion es SKU Estándar o Premium. Basic no admite el cliente nativo.</li>
+<li>Ninguna regla de grupo de seguridad de red bloquea el tráfico entrante de Bastion hacia la VM en el puerto 3389.</li>
+<li>Existe una ruta de Bastion a la VM, ya sea la misma red virtual, un emparejamiento o Virtual WAN.</li>
+</ul>
+<h3 id="mstsc-se-abre-pero-la-conexión-falla-para-una-vm-de-azure-por-túnel">mstsc se abre, pero la conexión falla para una VM de Azure por Túnel</h3>
+<p>Todo lo anterior sigue aplicando, además de:</p>
+<ul>
+<li>Compruebe la pestaña <a href="../active-tunnels/">Túneles activos</a>. Si el túnel no aparece listado, o figura como detenido, intente conectarse de nuevo para iniciar uno nuevo.</li>
+<li>Si el puerto local que configuró ya estaba en uso, la aplicación eligió automáticamente el siguiente puerto libre. Compare el puerto mostrado en la pestaña Túneles activos con el que está usando su cliente.</li>
+</ul>
+<h3 id="la-conexión-falla-cuando-escribo-una-dirección-ip">La conexión falla cuando escribo una dirección IP</h3>
+<ul>
+<li>Confirme que la dirección es accesible desde la red virtual de Bastion, no solo desde su propio equipo. Para destinos locales eso significa una VPN de sitio a sitio o ExpressRoute funcionando; para otra nube, una conexión VPN hacia Azure.</li>
+<li>Confirme el puerto de destino. El 3389 es estándar para RDP, pero un host que no sea de Azure o que sea local puede escuchar en otro puerto.</li>
+<li>Compruebe si hay un firewall de host en el destino que bloquee el RDP entrante desde la subred de Bastion.</li>
+</ul>
+<h3 id="el-botón-iniciar-no-aparece-para-una-vm-detenida">El botón Iniciar no aparece para una VM detenida</h3>
+<p>Iniciar una VM requiere el rol Virtual Machine Contributor, o un rol equivalente; el rol Lector por sí solo no basta. Pida a quien administre sus roles de Azure que se lo otorgue, o inicie la VM desde el portal de Azure en su lugar.</p>
+<h3 id="recibí-un-error-aadsts293004">Recibí un error AADSTS293004</h3>
+<p>Azure AD devuelve esto cuando se usa <a href="../entra-id/">autenticación Entra ID</a> contra una máquina virtual en un inquilino distinto al de la cuenta con la que inició sesión, que es el caso habitual con Azure Lighthouse.</p>
+<p>Desmarque la casilla de autenticación Entra ID en la pestaña Azure VM y conéctese de nuevo. La opción está desactivada de forma predeterminada, así que si ve esto, se activó en algún momento y se guardó para este inquilino.</p>
+<p>Puede ver este error en el registro sin que la conexión llegue a fallar. Cuando Bastion rechaza una solicitud con Entra ID, la aplicación vuelve a pedirlo con la opción desactivada y usa ese archivo, de modo que la sesión igualmente se abre tras un viaje de ida y vuelta adicional.</p>
+<p>Si el error aparece al abrir directamente un archivo <code>.rdp</code> guardado, vuelva a conectarse desde la pestaña Azure VM en su lugar. Un archivo conservado de una sesión anterior lleva consigo la opción que estaba activa cuando se escribió.</p>
+<h2 id="inicio-de-sesión-y-restablecimiento">Inicio de sesión y restablecimiento</h2>
+<h3 id="me-sigue-pidiendo-iniciar-sesión-otra-vez">Me sigue pidiendo iniciar sesión otra vez</h3>
+<p>La política de Acceso Condicional de su organización puede exigir reautenticación con cierta frecuencia, o MFA en cada inicio de sesión. Eso es lo esperado. Complete el aviso cuando aparezca; la aplicación no controla con qué frecuencia su inquilino lo solicita.</p>
+<h3 id="quiero-empezar-de-cero">Quiero empezar de cero</h3>
+<p>Seleccione <strong>Cerrar sesión</strong> en la barra superior para borrar su estado de inicio de sesión; elimina la caché de tokens y el estado de MSAL en un solo paso. Para restablecer también las preferencias, cierre la aplicación y elimine <code>%APPDATA%\BastionRDPConnector\settings.json</code>. <a href="../files-and-settings/">Archivos y configuración</a> cubre qué contiene cada archivo y dónde se encuentra.</p>
+<h3 id="necesito-enviar-un-registro-a-soporte">Necesito enviar un registro a soporte</h3>
+<p>Abra <strong>Acerca de</strong> y seleccione <strong>Copiar información de diagnóstico</strong>, o <strong>Abrir carpeta de registros</strong> para encontrar los archivos directamente. <a href="../diagnostics/">Diagnósticos</a> cubre qué contiene el paquete y cómo se redacta.</p>
+<p class="meta">Se aplica a 3.3.4 · Última revisión 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/es/files-and-settings/"><span class="dir">Anterior</span><span class="ttl">Archivos y configuración</span></a><a class="next" href="/BastionRDPConnectordocs/next/es/diagnostics/"><span class="dir">Siguiente</span><span class="ttl">Diagnósticos</span></a></div></article><aside class="toc" aria-label="En esta página"><span class="eyebrow">En esta página</span><ul><li><a href="#antes-de-conectarse">Antes de conectarse</a></li><li><a class="sub" href="#volví-a-iniciar-la-aplicación-y-no-pasó-nada">Volví a iniciar la aplicación y no pasó nada</a></li><li><a class="sub" href="#no-aparecen-suscripciones-o-la-lista-de-bastion-está-vacía">No aparecen suscripciones, o la lista de Bastion está vacía</a></li><li><a href="#conectar">Conectar</a></li><li><a class="sub" href="#mstsc-se-abre-pero-la-conexión-falla-para-una-vm-de-azure-por-rd-gateway">mstsc se abre, pero la conexión falla para una VM de Azure por RD Gateway</a></li><li><a class="sub" href="#mstsc-se-abre-pero-la-conexión-falla-para-una-vm-de-azure-por-túnel">mstsc se abre, pero la conexión falla para una VM de Azure por Túnel</a></li><li><a class="sub" href="#la-conexión-falla-cuando-escribo-una-dirección-ip">La conexión falla cuando escribo una dirección IP</a></li><li><a class="sub" href="#el-botón-iniciar-no-aparece-para-una-vm-detenida">El botón Iniciar no aparece para una VM detenida</a></li><li><a class="sub" href="#recibí-un-error-aadsts293004">Recibí un error AADSTS293004</a></li><li><a href="#inicio-de-sesión-y-restablecimiento">Inicio de sesión y restablecimiento</a></li><li><a class="sub" href="#me-sigue-pidiendo-iniciar-sesión-otra-vez">Me sigue pidiendo iniciar sesión otra vez</a></li><li><a class="sub" href="#quiero-empezar-de-cero">Quiero empezar de cero</a></li><li><a class="sub" href="#necesito-enviar-un-registro-a-soporte">Necesito enviar un registro a soporte</a></li></ul></aside></div></main></body></html>

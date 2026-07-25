@@ -1,40 +1,31 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Diagnostics · Azure Bastion RDP Connector</title><meta name="description" content="What the About dialog shows, what Copy Diagnostic Info collects, and what stays out of it."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/" aria-current="page">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Diagnostics</p><h1>Diagnostics</h1><p>An <strong>i</strong> button in the top bar opens the About dialog. It shows the application version, a line about your platform, and two actions for getting information out of the application when something needs troubleshooting.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Diagnostics · Azure Bastion RDP Connector</title><meta name="description" content="What the About dialog shows, what Copy Diagnostic Info collects, and what stays out of it."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Language</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/diagnostics/" aria-current="page">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/diagnostics/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/diagnostics/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/diagnostics/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/diagnostics/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/diagnostics/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Getting started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connection methods</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Features</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/" aria-current="page">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Diagnostics</p><h1>Diagnostics</h1><p>An <strong>i</strong> button in the top bar opens the About dialog. It shows the application version, a line about your platform, and two actions for getting information out of the application when something needs troubleshooting.</p>
 <h2 id="the-about-dialog">The About dialog</h2>
 <!-- Mirrors src/components/ScreenAbout.astro -->
 <figure class="appshot">
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-about-win">
       <title id="s-about-win">The About dialog on Windows. It lists the application name, version, and platform, then two buttons: Open Log Folder and Copy Diagnostic Info.</title>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
-<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;About&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="10" y="46"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="60"&gt;Version 3.3.4&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="72"&gt;Windows 11 · x64&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="104"&gt;Diagnostics&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="10" y="110" width="280" height="24" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="150" y="126" text-anchor="middle"&gt;Open Log Folder&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="148"&gt;Opens the folder holding debug.log&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="159"&gt;and its ten archived sessions.&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="10" y="170" width="280" height="24" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="150" y="186" text-anchor="middle"&gt;Copy Diagnostic Info&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="208"&gt;Copies system info, the current log,&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="219"&gt;and archived sessions to the clipboard.&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="230"&gt;Already redacted, capped at ~1 MB.&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-bt" x="240" y="337" text-anchor="middle"&gt;Close&lt;/text&gt;</span></span>
-<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">About</text>
+      <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
+      <text class="ui-p" x="10" y="60">Version 3.3.4</text>
+      <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
+      <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-l" x="10" y="104">Diagnostics</text>
+      <rect class="ui-btn-2" x="10" y="110" width="280" height="24" rx="4"/>
+      <text class="ui-tb" x="150" y="126" text-anchor="middle">Open Log Folder</text>
+      <text class="ui-p" x="10" y="148">Opens the folder holding debug.log</text>
+      <text class="ui-p" x="10" y="159">and its ten archived sessions.</text>
+      <rect class="ui-btn-2" x="10" y="170" width="280" height="24" rx="4"/>
+      <text class="ui-tb" x="150" y="186" text-anchor="middle">Copy Diagnostic Info</text>
+      <text class="ui-p" x="10" y="208">Copies system info, the current log,</text>
+      <text class="ui-p" x="10" y="219">and archived sessions to the clipboard.</text>
+      <text class="ui-p" x="10" y="230">Already redacted, capped at ~1 MB.</text>
+      <rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/>
+      <text class="ui-bt" x="240" y="337" text-anchor="middle">Close</text>
+    </svg>
   </div>
   <figcaption><b>Windows</b> The About dialog on Windows. It shows the application version and platform, and offers Open Log Folder and Copy Diagnostic Info.</figcaption>
 </figure>

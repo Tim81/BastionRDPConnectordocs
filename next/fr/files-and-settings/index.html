@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fichiers et paramètres · Azure Bastion RDP Connector</title><meta name="description" content="Où l'application conserve vos préférences, votre état de connexion et ses journaux, et ce que contient chaque fichier."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Langue</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/files-and-settings/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/files-and-settings/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/files-and-settings/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/files-and-settings/" aria-current="page">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/files-and-settings/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/files-and-settings/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Démarrage</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/overview/">Aperçu</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/requirements/">Prérequis</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/sign-in/">Première connexion</a></div><div class="rail-group"><span class="eyebrow">Méthodes de connexion</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/connection-methods/">Méthodes de connexion</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-ip/">Se connecter à une adresse IP</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-vm/">Se connecter à une VM Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/active-tunnels/">Tunnels actifs</a></div><div class="rail-group"><span class="eyebrow">Fonctionnalités</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/monitors/">Moniteurs</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/entra-id/">Authentification Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/tenants/">Plusieurs locataires</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/files-and-settings/" aria-current="page">Fichiers et paramètres</a></div><div class="rail-group"><span class="eyebrow">Référence</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Dépannage</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/release-notes/">Nouveautés</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Accueil</a><span>/</span><a href="/BastionRDPConnectordocs/next/fr/overview/">Documentation</a><span>/</span>Fonctionnalités<span>/</span>Fichiers et paramètres</p><h1>Fichiers et paramètres</h1><p>L’application écrit dans deux dossiers distincts sous votre profil utilisateur. Vous ne modifiez jamais ces fichiers directement ; l’application les lit et les écrit elle-même.</p>
+<h2 id="paramètres--itinérants-par-locataire">Paramètres : itinérants, par locataire</h2>
+<p><code>%APPDATA%\BastionRDPConnector\settings.json</code> contient vos préférences : le dernier abonnement, hôte Bastion, VM et adresse IP utilisés, la méthode de connexion, le mode moniteur, l’authentification Entra ID, et votre choix de langue.</p>
+<p>Ce dossier suit votre profil Windows en itinérance, si bien que les mêmes préférences vous suivent d’une machine à l’autre sur un domaine ou un réseau joint à Entra ID qui synchronise <code>%APPDATA%</code>.</p>
+<p>La plupart du contenu de ce fichier est <a href="../tenants/">stocké séparément par locataire</a>. La langue est le seul paramètre global.</p>
+<p>Les écritures de paramètres sont atomiques : l’application écrit d’abord un fichier temporaire, puis remplace le fichier réel en une seule étape. Si une écriture est interrompue en cours de route, par exemple parce que le processus est arrêté brutalement, vous ne perdez au maximum que la préférence de cette sauvegarde, pas tout le fichier.</p>
+<h2 id="données-locales--état-de-connexion-et-journaux">Données locales : état de connexion et journaux</h2>
+<p><code>%LOCALAPPDATA%\BastionRDPConnector\</code> n’est pas itinérant. Il contient :</p>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>msal_token_cache.bin</code></td>
+<td>Votre jeton de connexion mis en cache. Privé à cette application, distinct du propre cache d’Azure CLI.</td>
+</tr>
+<tr>
+<td><code>WebView2\</code></td>
+<td>Le profil propre du navigateur de connexion intégré : cookies, cache et stockage local pour la page de connexion.</td>
+</tr>
+<tr>
+<td><code>debug.log</code></td>
+<td>Le journal de la session en cours.</td>
+</tr>
+<tr>
+<td><code>debug.0.log</code> à <code>debug.9.log</code></td>
+<td>Les dix sessions précédentes, conservées depuis la 3.3.4. Avant cela, chaque lancement écrasait l’unique fichier journal.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../diagnostics/">Diagnostics</a> explique ce que contient le journal de débogage et comment le transmettre au support sans qu’il ne porte de secrets.</p>
+<div class="callout note">
+<span class="eyebrow">Remarque</span>
+<p>Les fichiers <code>.rdp</code> temporaires, générés pour les connexions RD Gateway, se trouvent sous <code>%TEMP%\BastionRDPConnector\</code> et sont supprimés à la fermeture de l'application.</p>
+</div>
+<h2 id="réinitialisation">Réinitialisation</h2>
+<p>La suppression de <code>settings.json</code> ramène toutes les préférences à leur valeur par défaut. Vous restez connecté ; rien ne change au niveau de votre cache de jetons.</p>
+<p>La suppression de <code>msal_token_cache.bin</code>, ou le fait de sélectionner <strong>Se déconnecter</strong> dans la barre supérieure, vous déconnecte et efface le jeton mis en cache. Se déconnecter est l’option la plus sûre : elle supprime le cache de jetons et efface l’état en mémoire de MSAL en une seule étape, et le prochain lancement démarre par une connexion vierge.</p>
+<p>Pour réinitialiser les deux, fermez d’abord l’application, puis supprimez les deux fichiers. Supprimer l’un n’affecte pas l’autre.</p>
+<p class="meta">S&#39;applique à 3.3.4 · Dernière révision 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/fr/tenants/"><span class="dir">Précédent</span><span class="ttl">Plusieurs locataires</span></a><a class="next" href="/BastionRDPConnectordocs/next/fr/troubleshooting/"><span class="dir">Suivant</span><span class="ttl">Dépannage</span></a></div></article><aside class="toc" aria-label="Sur cette page"><span class="eyebrow">Sur cette page</span><ul><li><a href="#paramètres--itinérants-par-locataire">Paramètres : itinérants, par locataire</a></li><li><a href="#données-locales--état-de-connexion-et-journaux">Données locales : état de connexion et journaux</a></li><li><a href="#réinitialisation">Réinitialisation</a></li></ul></aside></div></main></body></html>

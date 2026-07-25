@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Erste Anmeldung · Azure Bastion RDP Connector</title><meta name="description" content="Was beim ersten Öffnen der Anwendung passiert, wie der Token-Cache funktioniert und wie Mandanten- und Subscription-Auswahl zusammenspielen."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Sprache</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/sign-in/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/sign-in/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/sign-in/" aria-current="page">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/sign-in/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/sign-in/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/sign-in/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Erste Schritte</span><a class="nav" href="/BastionRDPConnectordocs/next/de/overview/">Übersicht</a><a class="nav" href="/BastionRDPConnectordocs/next/de/requirements/">Voraussetzungen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/de/sign-in/" aria-current="page">Erste Anmeldung</a></div><div class="rail-group"><span class="eyebrow">Verbindungsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/de/connection-methods/">Verbindungsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-ip/">Verbindung zu einer IP-Adresse herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-vm/">Verbindung zu einer Azure-VM herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/active-tunnels/">Aktive Tunnel</a></div><div class="rail-group"><span class="eyebrow">Funktionen</span><a class="nav" href="/BastionRDPConnectordocs/next/de/monitors/">Monitore</a><a class="nav" href="/BastionRDPConnectordocs/next/de/entra-id/">Entra ID-Authentifizierung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/tenants/">Mehrere Mandanten</a><a class="nav" href="/BastionRDPConnectordocs/next/de/files-and-settings/">Dateien und Einstellungen</a></div><div class="rail-group"><span class="eyebrow">Referenz</span><a class="nav" href="/BastionRDPConnectordocs/next/de/troubleshooting/">Fehlerbehebung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/diagnostics/">Diagnose</a><a class="nav" href="/BastionRDPConnectordocs/next/de/release-notes/">Versionshinweise</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Start</a><span>/</span><a href="/BastionRDPConnectordocs/next/de/overview/">Dokumentation</a><span>/</span>Erste Schritte<span>/</span>Erste Anmeldung</p><h1>Erste Anmeldung</h1><p>Die Anwendung meldet Sie mit MSAL an, derselben Bibliothek, die Azure CLI und Visual Studio für die interaktive Anmeldung verwenden. Sie öffnet die Anmeldeseite in einem eingebetteten Browser: WebView2 unter Windows, WKWebView unter macOS. Es gibt kein separates Browserfenster und keinen Gerätecode zum Kopieren und Einfügen.</p>
+<h2 id="anmelden">Anmelden</h2>
+<p>Was Sie sehen, hängt davon ab, ob bereits ein Token auf Ihrem Computer zwischengespeichert ist.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Was passiert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kein zwischengespeicherter Token</td>
+<td>Die Microsoft-Anmeldeseite öffnet sich sofort.</td>
+</tr>
+<tr>
+<td>Ein gültiger zwischengespeicherter Token</td>
+<td>Die App meldet sich still an. Es erscheint kein Anmeldefenster, und Sie gelangen direkt zur Mandantenauswahl, falls Ihr Konto mehr als einen hat.</td>
+</tr>
+<tr>
+<td>Ein abgelaufener Token, oder eine Conditional-Access-Richtlinie, die eine erneute Authentifizierung erfordert</td>
+<td>Das Anmeldefenster öffnet sich erneut, damit Sie erfüllen können, was Ihre Organisation verlangt, zum Beispiel tägliche MFA.</td>
+</tr>
+</tbody>
+</table>
+<p>Wählen Sie <strong>Geschäfts-, Schul- oder Unikonto</strong>, geben Sie Ihr Konto ein und schließen Sie MFA ab, falls Ihre Organisation dies verlangt.</p>
+<div class="callout note">
+<span class="eyebrow">Hinweis</span>
+<p>Der Token-Cache liegt unter <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. Er ist gerätespezifisch, wandert nicht mit und ist getrennt vom Azure CLI-Cache. Das eigene Profil des eingebetteten Browsers liegt direkt daneben, unter <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</p>
+</div>
+<h2 id="einen-mandanten-auswählen">Einen Mandanten auswählen</h2>
+<!-- Mirrors src/components/ScreenSignIn.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-signin-win">
+      <title id="s-signin-win">Der Mandantenauswahldialog unter Windows. Drei Mandanten werden aufgelistet, jeweils mit Optionsfeld und Mandanten-ID. Einer ist ausgewählt. Eine OK-Schaltfläche bestätigt die Auswahl.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Mandant auswählen</text>
+      <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="42">Ihr Konto hat Zugriff auf mehr als</text>
+      <text class="ui-l" x="10" y="54">einen Mandanten. Wählen Sie einen aus, um fortzufahren.</text>
+      <rect class="ui-panel" x="10" y="68" width="280" height="42" rx="4"/>
+      <circle class="ui-ro on" cx="24" cy="88" r="4"/>
+      <circle class="ui-rd" cx="24" cy="88" r="2"/>
+      <text class="ui-tb" x="36" y="86">Contoso Production</text>
+      <text class="ui-p" x="36" y="98">5f8a2c14-…-tenant</text>
+      <rect class="ui-panel" x="10" y="114" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="134" r="4"/>
+      <text class="ui-tb" x="36" y="132">Contoso Dev</text>
+      <text class="ui-p" x="36" y="144">b2c19e07-…-tenant</text>
+      <rect class="ui-panel" x="10" y="160" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="180" r="4"/>
+      <text class="ui-tb" x="36" y="178">Fabrikam (Lighthouse)</text>
+      <text class="ui-p" x="36" y="190">9e4d3a51-…-tenant</text>
+      <text class="ui-p" x="10" y="222">Einstellungen werden separat pro</text>
+      <text class="ui-p" x="10" y="233">Mandant gespeichert und beim Zurückwechseln wiederhergestellt.</text>
+      <rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/>
+      <text class="ui-bt" x="240" y="337" text-anchor="middle">OK</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> Der Mandantenauswahldialog unter Windows. Er erscheint einmal, direkt nach der Anmeldung, nur wenn das Konto mehr als einen Mandanten sehen kann. Der Dialog sieht unter macOS bis auf den Fensterrahmen gleich aus.</figcaption>
+</figure>
+<p>Dieser Dialog erscheint, wenn Ihr Konto Zugriff auf mehr als einen Entra ID-Mandanten hat, zum Beispiel über Azure Lighthouse. Wählen Sie den Mandanten aus, mit dessen Ressourcen Sie arbeiten möchten, und wählen Sie <strong>OK</strong>. Wenn dieser Mandant MFA benötigt und Ihr zwischengespeicherter Token dies noch nicht erfüllt, erhalten Sie eine weitere Authentifizierungsaufforderung.</p>
+<p>Sie können jederzeit, während die App läuft, den Mandanten wechseln. Einstellungen – also die zuletzt verwendete Subscription, der Bastion-Host und die VM – werden separat pro Mandant gespeichert und kommen automatisch zurück, wenn Sie zurückwechseln.</p>
+<h2 id="eine-subscription-auswählen">Eine Subscription auswählen</h2>
+<p>Sobald ein Mandant gewählt ist, lädt das Hauptfenster mit der <strong>Bastion Subscription</strong> oben angezeigt. Wenn Ihr Konto mehrere Subscriptions hat und die ausgewählte nicht den benötigten Bastion-Host enthält, wählen Sie <strong>Ändern</strong>, um die Auswahl zu öffnen.</p>
+<div class="callout note">
+<span class="eyebrow">Hinweis</span>
+<p>Die Bastion Subscription oben ist diejenige, die Ihre Bastion-Ressource enthält. Auf der Registerkarte Azure VM kann die VM Subscription eine völlig andere sein. Abonnementübergreifende Verbindungen funktionieren ohne zusätzliche Einrichtung.</p>
+</div>
+<p>Ihr Token bleibt zwischen den Starts auf der Festplatte, sodass Sie nicht erneut zur Anmeldung aufgefordert werden, es sei denn, die Sitzung läuft ab oder eine Conditional-Access-Richtlinie verlangt es. Um eine neue Anmeldung zu erzwingen, wählen Sie <strong>Abmelden</strong> in der oberen Leiste. Das entfernt den zwischengespeicherten Token und leert den MSAL-Zustand in einem Schritt, und der nächste Start beginnt mit einer leeren Anmeldung.</p>
+<p class="meta">Gilt für 3.3.4 · Zuletzt geprüft 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/de/install/"><span class="dir">Zurück</span><span class="ttl">Installation</span></a><a class="next" href="/BastionRDPConnectordocs/next/de/connection-methods/"><span class="dir">Weiter</span><span class="ttl">Verbindungsmethoden</span></a></div></article><aside class="toc" aria-label="Auf dieser Seite"><span class="eyebrow">Auf dieser Seite</span><ul><li><a href="#anmelden">Anmelden</a></li><li><a href="#einen-mandanten-auswählen">Einen Mandanten auswählen</a></li><li><a href="#eine-subscription-auswählen">Eine Subscription auswählen</a></li></ul></aside></div></main></body></html>

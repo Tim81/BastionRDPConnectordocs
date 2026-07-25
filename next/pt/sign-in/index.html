@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Primeiro início de sessão · Azure Bastion RDP Connector</title><meta name="description" content="O que acontece da primeira vez que abre a aplicação, como funciona a cache de tokens, e como se articulam a seleção de inquilino e de subscrição."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Idioma</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/sign-in/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/sign-in/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/sign-in/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/sign-in/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/sign-in/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/sign-in/" aria-current="page">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Introdução</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/overview/">Visão geral</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/requirements/">Pré-requisitos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/install/">Instalação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/sign-in/" aria-current="page">Primeiro início de sessão</a></div><div class="rail-group"><span class="eyebrow">Métodos de ligação</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/connection-methods/">Métodos de ligação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-ip/">Ligar a um endereço IP</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-vm/">Ligar a uma VM do Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/active-tunnels/">Túneis ativos</a></div><div class="rail-group"><span class="eyebrow">Funcionalidades</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/monitors/">Monitores</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/entra-id/">Autenticação Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/tenants/">Múltiplos inquilinos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/files-and-settings/">Ficheiros e definições</a></div><div class="rail-group"><span class="eyebrow">Referência</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Resolução de problemas</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/diagnostics/">Diagnósticos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/release-notes/">Notas de versão</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Início</a><span>/</span><a href="/BastionRDPConnectordocs/next/pt/overview/">Documentação</a><span>/</span>Introdução<span>/</span>Primeiro início de sessão</p><h1>Primeiro início de sessão</h1><p>A aplicação inicia a sua sessão com o MSAL, a mesma biblioteca que o Azure CLI e o Visual Studio utilizam para o início de sessão interativo. Abre a página de início de sessão num navegador incorporado: WebView2 no Windows, WKWebView no macOS. Não há uma janela de navegador separada nem um código de dispositivo para copiar e colar.</p>
+<h2 id="iniciar-sessão">Iniciar sessão</h2>
+<p>O que vê depende de já existir ou não um token em cache na sua máquina.</p>
+<table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>O que acontece</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem token em cache</td>
+<td>A página de início de sessão da Microsoft abre de imediato.</td>
+</tr>
+<tr>
+<td>Um token em cache válido</td>
+<td>A aplicação inicia sessão em silêncio. Não aparece nenhuma janela de início de sessão, e passa diretamente para a seleção de inquilino se a sua conta tiver mais do que um.</td>
+</tr>
+<tr>
+<td>Um token expirado, ou uma política de Acesso Condicional que exige reautenticação</td>
+<td>A janela de início de sessão abre novamente, para que possa satisfazer o que a sua organização exigir, por exemplo MFA diária.</td>
+</tr>
+</tbody>
+</table>
+<p>Escolha <strong>Conta profissional ou de estudante</strong>, introduza a sua conta e conclua o MFA se a sua organização o exigir.</p>
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>A cache de tokens fica em <code>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</code>. É específica da máquina e não é itinerante, e está separada da cache do Azure CLI. O perfil do próprio navegador incorporado fica ao lado, em <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>.</p>
+</div>
+<h2 id="escolher-um-inquilino">Escolher um inquilino</h2>
+<!-- Mirrors src/components/ScreenSignIn.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-signin-win">
+      <title id="s-signin-win">A caixa de diálogo de seleção de inquilino no Windows. Estão listados três inquilinos, cada um com um botão de opção e o respetivo ID de inquilino. Um está selecionado. Um botão OK confirma a escolha.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Selecionar inquilino</text>
+      <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="42">A sua conta tem acesso a mais do que</text>
+      <text class="ui-l" x="10" y="54">um inquilino. Escolha um para continuar.</text>
+      <rect class="ui-panel" x="10" y="68" width="280" height="42" rx="4"/>
+      <circle class="ui-ro on" cx="24" cy="88" r="4"/>
+      <circle class="ui-rd" cx="24" cy="88" r="2"/>
+      <text class="ui-tb" x="36" y="86">Contoso Production</text>
+      <text class="ui-p" x="36" y="98">5f8a2c14-…-tenant</text>
+      <rect class="ui-panel" x="10" y="114" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="134" r="4"/>
+      <text class="ui-tb" x="36" y="132">Contoso Dev</text>
+      <text class="ui-p" x="36" y="144">b2c19e07-…-tenant</text>
+      <rect class="ui-panel" x="10" y="160" width="280" height="42" rx="4"/>
+      <circle class="ui-ro" cx="24" cy="180" r="4"/>
+      <text class="ui-tb" x="36" y="178">Fabrikam (Lighthouse)</text>
+      <text class="ui-p" x="36" y="190">9e4d3a51-…-tenant</text>
+      <text class="ui-p" x="10" y="222">As definições são guardadas separadamente por</text>
+      <text class="ui-p" x="10" y="233">inquilino e restauradas quando muda de volta.</text>
+      <rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/>
+      <text class="ui-bt" x="240" y="337" text-anchor="middle">OK</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> A caixa de diálogo de seleção de inquilino no Windows. Aparece uma vez, logo após o início de sessão, apenas quando a conta consegue ver mais do que um inquilino. A caixa de diálogo tem o mesmo aspeto no macOS, à parte a moldura da janela.</figcaption>
+</figure>
+<p>Esta caixa de diálogo aparece quando a sua conta tem acesso a mais do que um inquilino Entra ID, por exemplo através do Azure Lighthouse. Escolha o inquilino cujos recursos pretende utilizar e selecione <strong>OK</strong>. Se esse inquilino exigir MFA e o seu token em cache ainda não a satisfizer, recebe mais um pedido de autenticação.</p>
+<p>Pode mudar de inquilino em qualquer momento enquanto a aplicação está a correr. As definições, ou seja, a última subscrição, anfitrião Bastion e VM que utilizou, são guardadas separadamente por inquilino e regressam automaticamente quando muda de volta.</p>
+<h2 id="selecionar-uma-subscrição">Selecionar uma subscrição</h2>
+<p>Depois de escolhido um inquilino, a janela principal carrega com uma <strong>subscrição de Bastion</strong> apresentada no topo. Se a sua conta tiver várias subscrições e a escolhida não contiver o anfitrião Bastion de que precisa, selecione <strong>Alterar</strong> para abrir o seletor.</p>
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>A subscrição de Bastion no topo é a que contém o seu recurso Bastion. No separador Azure VM, a subscrição da VM pode ser completamente diferente. As ligações entre subscrições funcionam sem configuração adicional.</p>
+</div>
+<p>O seu token mantém-se em disco entre arranques, pelo que não lhe é pedido para iniciar sessão novamente a não ser que a sessão expire ou uma política de Acesso Condicional o exija. Para forçar um novo início de sessão, selecione <strong>Terminar sessão</strong> na barra superior. Remove o token em cache e limpa o estado do MSAL num único passo, e o arranque seguinte começa a partir de um início de sessão em branco.</p>
+<p class="meta">Aplica-se a 3.3.4 · Última revisão 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/pt/install/"><span class="dir">Anterior</span><span class="ttl">Instalação</span></a><a class="next" href="/BastionRDPConnectordocs/next/pt/connection-methods/"><span class="dir">Seguinte</span><span class="ttl">Métodos de ligação</span></a></div></article><aside class="toc" aria-label="Nesta página"><span class="eyebrow">Nesta página</span><ul><li><a href="#iniciar-sessão">Iniciar sessão</a></li><li><a href="#escolher-um-inquilino">Escolher um inquilino</a></li><li><a href="#selecionar-uma-subscrição">Selecionar uma subscrição</a></li></ul></aside></div></main></body></html>

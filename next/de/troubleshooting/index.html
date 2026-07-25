@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Fehlerbehebung · Azure Bastion RDP Connector</title><meta name="description" content="Häufige Probleme, in den Worten, mit denen Sie sie beschreiben würden, und was Sie für jedes einzelne prüfen sollten."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Sprache</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/troubleshooting/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/troubleshooting/" aria-current="page">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/troubleshooting/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Erste Schritte</span><a class="nav" href="/BastionRDPConnectordocs/next/de/overview/">Übersicht</a><a class="nav" href="/BastionRDPConnectordocs/next/de/requirements/">Voraussetzungen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/de/sign-in/">Erste Anmeldung</a></div><div class="rail-group"><span class="eyebrow">Verbindungsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/de/connection-methods/">Verbindungsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-ip/">Verbindung zu einer IP-Adresse herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-vm/">Verbindung zu einer Azure-VM herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/active-tunnels/">Aktive Tunnel</a></div><div class="rail-group"><span class="eyebrow">Funktionen</span><a class="nav" href="/BastionRDPConnectordocs/next/de/monitors/">Monitore</a><a class="nav" href="/BastionRDPConnectordocs/next/de/entra-id/">Entra ID-Authentifizierung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/tenants/">Mehrere Mandanten</a><a class="nav" href="/BastionRDPConnectordocs/next/de/files-and-settings/">Dateien und Einstellungen</a></div><div class="rail-group"><span class="eyebrow">Referenz</span><a class="nav" href="/BastionRDPConnectordocs/next/de/troubleshooting/" aria-current="page">Fehlerbehebung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/diagnostics/">Diagnose</a><a class="nav" href="/BastionRDPConnectordocs/next/de/release-notes/">Versionshinweise</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Start</a><span>/</span><a href="/BastionRDPConnectordocs/next/de/overview/">Dokumentation</a><span>/</span>Referenz<span>/</span>Fehlerbehebung</p><h1>Fehlerbehebung</h1><h2 id="bevor-sie-sich-verbinden">Bevor Sie sich verbinden</h2>
+<h3 id="ich-habe-die-app-erneut-gestartet-und-nichts-ist-passiert">Ich habe die App erneut gestartet, und nichts ist passiert</h3>
+<p>Die Anwendung erlaubt nur eine laufende Instanz. Ist sie bereits geöffnet, minimiert oder befindet sich im Systembenachrichtigungsbereich, bringt ein zweiter Start das vorhandene Fenster in den Vordergrund, statt ein neues zu öffnen. Prüfen Sie unter Windows den Systembenachrichtigungsbereich auf das Anwendungssymbol.</p>
+<!-- Mirrors src/components/ScreenTray.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tray-win">
+      <title id="s-tray-win">Das Kontextmenü des Windows-Systembenachrichtigungsbereichs, aufgeklappt. Zwei offene Tunnel werden aufgelistet, jeweils mit den Schaltflächen Verbinden und Stoppen. Darunter Über und Beenden.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Systembenachrichtigungsbereich, Rechtsklickmenü</text>
+      <rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="63" r="3.5"/>
+      <text class="ui-tb" x="32" y="67">vm-dev-web-01</text>
+      <text class="ui-p" x="32" y="80">localhost:55000 · offen 4m 12s</text>
+      <rect class="ui-btn-2" x="194" y="59" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="70">Verbinden</text>
+      <rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="70">Stoppen</text>
+      <rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="121" r="3.5"/>
+      <text class="ui-tb" x="32" y="125">10.20.4.15</text>
+      <text class="ui-p" x="32" y="138">localhost:55001 · offen 41s</text>
+      <rect class="ui-btn-2" x="194" y="117" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="128">Verbinden</text>
+      <rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="128">Stoppen</text>
+      <line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb" x="20" y="190">Über</text>
+      <text class="ui-tb" x="20" y="212">Beenden</text>
+      <text class="ui-p" x="10" y="352">Doppelklicken Sie auf das Taskleistensymbol, um das Hauptfenster wiederherzustellen.</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> Das Kontextmenü des Systembenachrichtigungsbereichs unter Windows, aufgeklappt. Jeder offene Tunnel erhält eigene Schaltflächen Verbinden und Stoppen, gefolgt von Über und Beenden.</figcaption>
+</figure>
+<p>Das Schließen des Hauptfensters oder das Minimieren beendet die Anwendung nicht. Beides blendet das Fenster nur aus und lässt es im Benachrichtigungsbereich weiterlaufen, sodass offene Tunnel verbunden bleiben. Klicken Sie mit der rechten Maustaste auf das Taskleistensymbol und wählen Sie <strong>Beenden</strong>, um sie vollständig zu schließen. Das Taskleistensymbol gibt es nur unter Windows; macOS hat bewusst kein Taskleistensymbol.</p>
+<h3 id="keine-subscriptions-erscheinen-oder-die-bastion-liste-ist-leer">Keine Subscriptions erscheinen, oder die Bastion-Liste ist leer</h3>
+<p>Das bedeutet meist entweder, dass Ihr Konto keine Rollenzuweisung für eine Subscription hat, oder dass der Mandant, in dem Sie sich befinden, keine Bastion-Ressource enthält. Versuchen Sie:</p>
+<ul>
+<li>Wählen Sie <strong>Aktualisieren</strong> neben dem Bastion-Feld.</li>
+<li>Wählen Sie <strong>Ändern</strong>, um eine andere Subscription auszuwählen.</li>
+<li>Melden Sie sich ab und wieder an, falls Ihre Sitzung abgelaufen ist.</li>
+<li>Bitten Sie, wer Ihre Azure-Rollen verwaltet, zu bestätigen, dass Sie Reader auf dem Bastion-Host und seinem virtuellen Netzwerk haben.</li>
+</ul>
+<h2 id="verbinden">Verbinden</h2>
+<h3 id="mstsc-öffnet-sich-aber-die-verbindung-schlägt-für-eine-azure-vm-über-rd-gateway-fehl">mstsc öffnet sich, aber die Verbindung schlägt für eine Azure-VM über RD Gateway fehl</h3>
+<p>Prüfen Sie Folgendes:</p>
+<ul>
+<li>Der Energiestatus der VM zeigt <strong>Aktiv</strong>, und geben Sie dem Gastbetriebssystem danach ein bis zwei Minuten zum vollständigen Hochfahren.</li>
+<li>Der Bastion-Host hat die Standard- oder Premium-SKU. Basic unterstützt den nativen Client nicht.</li>
+<li>Keine Network Security Group-Regel blockiert eingehenden Datenverkehr von Bastion zur VM auf Port 3389.</li>
+<li>Es besteht eine Route von Bastion zur VM, sei es dasselbe virtuelle Netzwerk, ein Peering oder Virtual WAN.</li>
+</ul>
+<h3 id="mstsc-öffnet-sich-aber-die-verbindung-schlägt-für-eine-azure-vm-über-tunnel-fehl">mstsc öffnet sich, aber die Verbindung schlägt für eine Azure-VM über Tunnel fehl</h3>
+<p>Alles oben Genannte gilt weiterhin, zusätzlich:</p>
+<ul>
+<li>Prüfen Sie die Registerkarte <a href="../active-tunnels/">Aktive Tunnel</a>. Ist der Tunnel nicht aufgelistet oder als gestoppt markiert, versuchen Sie erneut zu verbinden, um einen neuen zu starten.</li>
+<li>War der von Ihnen konfigurierte lokale Port bereits belegt, hat die Anwendung automatisch den nächsten freien gewählt. Vergleichen Sie den auf der Registerkarte Aktive Tunnel angezeigten Port mit dem, den Ihr Client verwendet.</li>
+</ul>
+<h3 id="die-verbindung-schlägt-fehl-wenn-ich-eine-ip-adresse-eingebe">Die Verbindung schlägt fehl, wenn ich eine IP-Adresse eingebe</h3>
+<ul>
+<li>Bestätigen Sie, dass die Adresse vom virtuellen Netzwerk von Bastion aus erreichbar ist, nicht nur von Ihrem eigenen Computer. Für lokale Ziele bedeutet das eine funktionierende Site-to-Site-VPN- oder ExpressRoute-Verbindung; für eine andere Cloud eine VPN-Verbindung nach Azure.</li>
+<li>Bestätigen Sie den Zielport. 3389 ist der Standard für RDP, aber ein Nicht-Azure- oder lokaler Host kann auf etwas anderem lauschen.</li>
+<li>Prüfen Sie, ob eine Host-Firewall auf dem Ziel eingehendes RDP aus dem Bastion-Subnetz blockiert.</li>
+</ul>
+<h3 id="die-schaltfläche-start-erscheint-nicht-für-eine-gestoppte-vm">Die Schaltfläche Start erscheint nicht für eine gestoppte VM</h3>
+<p>Das Starten einer VM erfordert Virtual Machine Contributor oder eine gleichwertige Rolle; Reader allein reicht nicht. Bitten Sie, wer Ihre Azure-Rollen verwaltet, sie zu erteilen, oder starten Sie die VM stattdessen über das Azure-Portal.</p>
+<h3 id="ich-habe-einen-aadsts293004-fehler-erhalten">Ich habe einen AADSTS293004-Fehler erhalten</h3>
+<p>Azure AD gibt diesen Fehler zurück, wenn <a href="../entra-id/">Entra ID-Authentifizierung</a> gegen eine virtuelle Maschine in einem anderen Mandanten als Ihr angemeldetes Konto verwendet wird – der übliche Fall bei Azure Lighthouse.</p>
+<p>Deaktivieren Sie das Entra ID-Auth-Kontrollkästchen auf der Registerkarte Azure VM und verbinden Sie sich erneut. Die Einstellung ist standardmäßig deaktiviert; wenn Sie dies sehen, wurde sie irgendwann aktiviert und für diesen Mandanten gespeichert.</p>
+<p>Sie können dies im Protokoll sehen, ohne dass die Verbindung fehlschlägt. Lehnt Bastion eine Entra ID-Anfrage ab, fragt die Anwendung erneut mit deaktivierter Einstellung an und verwendet diese Datei, sodass die Sitzung nach einem zusätzlichen Roundtrip trotzdem geöffnet wird.</p>
+<p>Erscheint der Fehler beim direkten Öffnen einer gespeicherten <code>.rdp</code>-Datei, verbinden Sie sich stattdessen erneut über die Registerkarte Azure VM. Eine aus einer früheren Sitzung aufbewahrte Datei trägt die Einstellung, die beim Schreiben verwendet wurde.</p>
+<h2 id="anmeldung-und-zurücksetzen">Anmeldung und Zurücksetzen</h2>
+<h3 id="ich-werde-ständig-erneut-zur-anmeldung-aufgefordert">Ich werde ständig erneut zur Anmeldung aufgefordert</h3>
+<p>Die Conditional-Access-Richtlinie Ihrer Organisation kann eine regelmäßige erneute Authentifizierung oder MFA bei jeder Anmeldung erfordern. Das ist zu erwarten. Schließen Sie die Aufforderung ab, wenn sie erscheint; die Anwendung hat keinen Einfluss darauf, wie oft Ihr Mandant dies verlangt.</p>
+<h3 id="ich-möchte-ganz-neu-anfangen">Ich möchte ganz neu anfangen</h3>
+<p>Wählen Sie <strong>Abmelden</strong> in der oberen Leiste, um Ihren Anmeldestatus zu löschen; das entfernt Token-Cache und MSAL-Zustand in einem Schritt. Um auch Präferenzen zurückzusetzen, schließen Sie die Anwendung und löschen Sie <code>%APPDATA%\BastionRDPConnector\settings.json</code>. <a href="../files-and-settings/">Dateien und Einstellungen</a> behandelt, was jede Datei enthält und wo sie liegt.</p>
+<h3 id="ich-muss-ein-protokoll-an-den-support-senden">Ich muss ein Protokoll an den Support senden</h3>
+<p>Öffnen Sie <strong>Über</strong> und wählen Sie <strong>Diagnoseinformationen kopieren</strong>, oder <strong>Protokollordner öffnen</strong>, um die Dateien direkt zu finden. <a href="../diagnostics/">Diagnose</a> behandelt, was im Paket enthalten ist und wie es redigiert wird.</p>
+<p class="meta">Gilt für 3.3.4 · Zuletzt geprüft 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/de/files-and-settings/"><span class="dir">Zurück</span><span class="ttl">Dateien und Einstellungen</span></a><a class="next" href="/BastionRDPConnectordocs/next/de/diagnostics/"><span class="dir">Weiter</span><span class="ttl">Diagnose</span></a></div></article><aside class="toc" aria-label="Auf dieser Seite"><span class="eyebrow">Auf dieser Seite</span><ul><li><a href="#bevor-sie-sich-verbinden">Bevor Sie sich verbinden</a></li><li><a class="sub" href="#ich-habe-die-app-erneut-gestartet-und-nichts-ist-passiert">Ich habe die App erneut gestartet, und nichts ist passiert</a></li><li><a class="sub" href="#keine-subscriptions-erscheinen-oder-die-bastion-liste-ist-leer">Keine Subscriptions erscheinen, oder die Bastion-Liste ist leer</a></li><li><a href="#verbinden">Verbinden</a></li><li><a class="sub" href="#mstsc-öffnet-sich-aber-die-verbindung-schlägt-für-eine-azure-vm-über-rd-gateway-fehl">mstsc öffnet sich, aber die Verbindung schlägt für eine Azure-VM über RD Gateway fehl</a></li><li><a class="sub" href="#mstsc-öffnet-sich-aber-die-verbindung-schlägt-für-eine-azure-vm-über-tunnel-fehl">mstsc öffnet sich, aber die Verbindung schlägt für eine Azure-VM über Tunnel fehl</a></li><li><a class="sub" href="#die-verbindung-schlägt-fehl-wenn-ich-eine-ip-adresse-eingebe">Die Verbindung schlägt fehl, wenn ich eine IP-Adresse eingebe</a></li><li><a class="sub" href="#die-schaltfläche-start-erscheint-nicht-für-eine-gestoppte-vm">Die Schaltfläche Start erscheint nicht für eine gestoppte VM</a></li><li><a class="sub" href="#ich-habe-einen-aadsts293004-fehler-erhalten">Ich habe einen AADSTS293004-Fehler erhalten</a></li><li><a href="#anmeldung-und-zurücksetzen">Anmeldung und Zurücksetzen</a></li><li><a class="sub" href="#ich-werde-ständig-erneut-zur-anmeldung-aufgefordert">Ich werde ständig erneut zur Anmeldung aufgefordert</a></li><li><a class="sub" href="#ich-möchte-ganz-neu-anfangen">Ich möchte ganz neu anfangen</a></li><li><a class="sub" href="#ich-muss-ein-protokoll-an-den-support-senden">Ich muss ein Protokoll an den Support senden</a></li></ul></aside></div></main></body></html>

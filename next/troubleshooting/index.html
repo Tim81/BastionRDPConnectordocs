@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Troubleshooting · Azure Bastion RDP Connector</title><meta name="description" content="Common problems, in the words you'd use to describe them, and what to check for each one."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/" aria-current="page">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Troubleshooting</p><h1>Troubleshooting</h1><h2 id="before-you-connect">Before you connect</h2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Troubleshooting · Azure Bastion RDP Connector</title><meta name="description" content="Common problems, in the words you'd use to describe them, and what to check for each one."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Language</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/troubleshooting/" aria-current="page">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/troubleshooting/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/troubleshooting/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/troubleshooting/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Getting started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connection methods</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Features</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/" aria-current="page">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Reference<span>/</span>Troubleshooting</p><h1>Troubleshooting</h1><h2 id="before-you-connect">Before you connect</h2>
 <h3 id="i-launched-the-app-again-and-nothing-happened">I launched the app again and nothing happened</h3>
 <p>The application allows only one running instance. If it’s already open, minimised, or sitting in the system tray, launching it a second time brings the existing window to the front instead of opening a new one. Check the system tray, on Windows, for the application icon.</p>
 <!-- Mirrors src/components/ScreenTray.astro -->
@@ -6,39 +6,32 @@
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tray-win">
       <title id="s-tray-win">The Windows system tray context menu, expanded. Two open tunnels are listed, each with Connect and Stop controls. Below them, About and Exit.</title>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
-<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="40"&gt;System tray, right-click menu&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-run" cx="22" cy="63" r="3.5"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="32" y="67"&gt;vm-dev-web-01&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="32" y="80"&gt;localhost:55000 · open 4m 12s&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="194" y="59" width="46" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="200" y="70"&gt;Connect&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="252" y="70"&gt;Stop&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;circle class="ui-run" cx="22" cy="121" r="3.5"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="32" y="125"&gt;10.20.4.15&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="32" y="138"&gt;localhost:55001 · open 41s&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="194" y="117" width="46" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="200" y="128"&gt;Connect&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="252" y="128"&gt;Stop&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="20" y="190"&gt;About&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="20" y="212"&gt;Exit&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="352"&gt;Double-click the tray icon to restore the main window.&lt;/text&gt;</span></span>
-<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">System tray, right-click menu</text>
+      <rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="63" r="3.5"/>
+      <text class="ui-tb" x="32" y="67">vm-dev-web-01</text>
+      <text class="ui-p" x="32" y="80">localhost:55000 · open 4m 12s</text>
+      <rect class="ui-btn-2" x="194" y="59" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="70">Connect</text>
+      <rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="70">Stop</text>
+      <rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="121" r="3.5"/>
+      <text class="ui-tb" x="32" y="125">10.20.4.15</text>
+      <text class="ui-p" x="32" y="138">localhost:55001 · open 41s</text>
+      <rect class="ui-btn-2" x="194" y="117" width="46" height="15" rx="3"/>
+      <text class="ui-tb" x="200" y="128">Connect</text>
+      <rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="128">Stop</text>
+      <line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb" x="20" y="190">About</text>
+      <text class="ui-tb" x="20" y="212">Exit</text>
+      <text class="ui-p" x="10" y="352">Double-click the tray icon to restore the main window.</text>
+    </svg>
   </div>
   <figcaption><b>Windows</b> The system tray context menu on Windows, expanded. Each open tunnel gets its own Connect and Stop controls, followed by About and Exit.</figcaption>
 </figure>

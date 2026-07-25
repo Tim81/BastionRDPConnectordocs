@@ -1,12 +1,29 @@
 ---
-import { nav, baseHref, pageHref } from '../nav';
+import { nav, baseHref, pageHref, titlesForLocale, resolveTitle, localesWithSlug } from '../nav';
+import { t, locales, localeNames } from '../i18n';
 
 interface Props {
   /** Slug of the page currently being rendered, e.g. "overview". */
   current: string;
+  /** Locale of the page currently being rendered, e.g. "nl". */
+  locale: string;
 }
 
-const { current } = Astro.props;
+const { current, locale } = Astro.props;
+
+// Each entry's title in the current locale, read from that file's own
+// frontmatter. See `titlesForLocale` in `nav.ts` for why this isn't a
+// hand-maintained table.
+const titles = await titlesForLocale(locale);
+
+// Which locales have a translation of the current page, so the language
+// switcher can fall back to that locale's overview instead of a link that
+// would 404.
+const availableLocales = await localesWithSlug(current);
+
+function hrefForLocale(target: string): string {
+  return availableLocales.has(target) ? pageHref(current, target) : pageHref('overview', target);
+}
 ---
 <nav class="rail" aria-label="Documentation">
   <a class="brand" href={baseHref()}>
@@ -19,17 +36,28 @@ const { current } = Astro.props;
     <select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select>
   </div>
 
+  <div class="langpick">
+    <span class="eyebrow" id="lang-label">{t(locale, 'language')}</span>
+    <ul aria-labelledby="lang-label">
+      {locales.map((loc) => (
+        <li>
+          <a href={hrefForLocale(loc)} aria-current={loc === locale ? 'page' : undefined}>{localeNames[loc]}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
   <div class="search">
     <input type="search" placeholder="Search documentation" aria-label="Search documentation" />
   </div>
 
   {nav.map((group) => (
     <div class="rail-group">
-      <span class="eyebrow">{group.title}</span>
+      <span class="eyebrow">{t(locale, `group.${group.key}`)}</span>
       {group.entries.map((entry) =>
         entry.slug ? (
-          <a class="nav" href={pageHref(entry.slug)} aria-current={entry.slug === current ? 'page' : undefined}>
-            {entry.title}
+          <a class="nav" href={pageHref(entry.slug, locale)} aria-current={entry.slug === current ? 'page' : undefined}>
+            {resolveTitle(titles, entry)}
           </a>
         ) : (
           <a class="nav" href="#">{entry.title}</a>

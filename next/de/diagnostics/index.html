@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Diagnose · Azure Bastion RDP Connector</title><meta name="description" content="Was der Info-Dialog zeigt, was Diagnoseinformationen kopieren sammelt, und was draußen bleibt."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Sprache</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/diagnostics/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/diagnostics/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/diagnostics/" aria-current="page">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/diagnostics/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/diagnostics/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/diagnostics/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Erste Schritte</span><a class="nav" href="/BastionRDPConnectordocs/next/de/overview/">Übersicht</a><a class="nav" href="/BastionRDPConnectordocs/next/de/requirements/">Voraussetzungen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/de/sign-in/">Erste Anmeldung</a></div><div class="rail-group"><span class="eyebrow">Verbindungsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/de/connection-methods/">Verbindungsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-ip/">Verbindung zu einer IP-Adresse herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-vm/">Verbindung zu einer Azure-VM herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/active-tunnels/">Aktive Tunnel</a></div><div class="rail-group"><span class="eyebrow">Funktionen</span><a class="nav" href="/BastionRDPConnectordocs/next/de/monitors/">Monitore</a><a class="nav" href="/BastionRDPConnectordocs/next/de/entra-id/">Entra ID-Authentifizierung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/tenants/">Mehrere Mandanten</a><a class="nav" href="/BastionRDPConnectordocs/next/de/files-and-settings/">Dateien und Einstellungen</a></div><div class="rail-group"><span class="eyebrow">Referenz</span><a class="nav" href="/BastionRDPConnectordocs/next/de/troubleshooting/">Fehlerbehebung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/diagnostics/" aria-current="page">Diagnose</a><a class="nav" href="/BastionRDPConnectordocs/next/de/release-notes/">Versionshinweise</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Start</a><span>/</span><a href="/BastionRDPConnectordocs/next/de/overview/">Dokumentation</a><span>/</span>Referenz<span>/</span>Diagnose</p><h1>Diagnose</h1><p>Eine Schaltfläche <strong>i</strong> in der oberen Leiste öffnet den Info-Dialog. Er zeigt die Anwendungsversion, eine Zeile zu Ihrer Plattform und zwei Aktionen, um Informationen aus der Anwendung zu erhalten, wenn etwas Fehlerbehebung braucht.</p>
+<h2 id="der-info-dialog">Der Info-Dialog</h2>
+<!-- Mirrors src/components/ScreenAbout.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-about-win">
+      <title id="s-about-win">Der Info-Dialog unter Windows. Er listet den Anwendungsnamen, die Version und die Plattform auf, gefolgt von zwei Schaltflächen: Protokollordner öffnen und Diagnoseinformationen kopieren.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Über</text>
+      <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
+      <text class="ui-p" x="10" y="60">Version 3.3.4</text>
+      <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
+      <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-l" x="10" y="104">Diagnose</text>
+      <rect class="ui-btn-2" x="10" y="110" width="280" height="24" rx="4"/>
+      <text class="ui-tb" x="150" y="126" text-anchor="middle">Protokollordner öffnen</text>
+      <text class="ui-p" x="10" y="148">Öffnet den Ordner mit debug.log</text>
+      <text class="ui-p" x="10" y="159">und dessen zehn archivierten Sitzungen.</text>
+      <rect class="ui-btn-2" x="10" y="170" width="280" height="24" rx="4"/>
+      <text class="ui-tb" x="150" y="186" text-anchor="middle">Diagnoseinformationen kopieren</text>
+      <text class="ui-p" x="10" y="208">Kopiert Systeminfo, das aktuelle Protokoll,</text>
+      <text class="ui-p" x="10" y="219">und archivierte Sitzungen in die Zwischenablage.</text>
+      <text class="ui-p" x="10" y="230">Bereits redigiert, begrenzt auf ca. 1 MB.</text>
+      <rect class="ui-btn" x="190" y="320" width="100" height="26" rx="4"/>
+      <text class="ui-bt" x="240" y="337" text-anchor="middle">Schließen</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> Der Info-Dialog unter Windows. Er zeigt die Anwendungsversion und Plattform und bietet Protokollordner öffnen und Diagnoseinformationen kopieren.</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Aktion</th>
+<th>Was sie tut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protokollordner öffnen</td>
+<td>Öffnet den Ordner mit <code>debug.log</code> und dessen zehn archivierten Sitzungen, im Explorer unter Windows oder im Finder unter macOS.</td>
+</tr>
+<tr>
+<td>Diagnoseinformationen kopieren</td>
+<td>Kopiert ein Diagnosepaket in die Zwischenablage.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="was-im-diagnosepaket-enthalten-ist">Was im Diagnosepaket enthalten ist</h2>
+<p>Diagnoseinformationen kopieren erstellt ein Textpaket aus:</p>
+<ul>
+<li>Systeminformationen: Betriebssystem, Anwendungsversion, Plattform.</li>
+<li>Dem <code>debug.log</code> der aktuellen Sitzung.</li>
+<li>Den archivierten Sitzungen, <code>debug.0.log</code> bis <code>debug.9.log</code>, neueste zuerst.</li>
+</ul>
+<p>Jeder Protokolleintrag im Paket ist auf 100 KB begrenzt, und das gesamte Paket wächst nicht über rund 1 MB hinaus. Diese Grenze hält ein Paket aus einer langen Reihe von Sitzungen praktikabel genug, um es in ein Support-Ticket oder eine Chat-Nachricht einzufügen.</p>
+<h2 id="was-redigiert-wird-und-was-nicht">Was redigiert wird, und was nicht</h2>
+<p>Alles im Paket wird redigiert, bevor es die Zwischenablage erreicht, genauso wie es redigiert wird, bevor es überhaupt in <code>debug.log</code> geschrieben wird. Bearer-Token, JWTs, Passwörter und API-Schlüssel werden ersetzt, bevor etwas die Festplatte berührt.</p>
+<p>Subscription-IDs, Ressourcen-IDs, GUIDs und IP-Adressen bleiben erhalten. Sie sind keine Geheimnisse, und ihr Entfernen würde das Protokoll deutlich weniger nützlich machen, um herauszufinden, bei welcher VM, Subscription oder welchem Bastion-Host ein Problem aufgetreten ist.</p>
+<div class="callout note">
+<span class="eyebrow">Hinweis</span>
+<p>Die Redaktion erfolgt beim Schreiben, nicht beim Kopieren. Ein Protokolleintrag wird nie mit einem aktiven Token auf die Festplatte geschrieben, sodass nichts Sensibles in <code>debug.log</code> liegt, das später erst redigiert werden müsste.</p>
+</div>
+<h2 id="ein-protokoll-an-den-support-senden">Ein Protokoll an den Support senden</h2>
+<p>Fügen Sie die Ausgabe von Diagnoseinformationen kopieren direkt in ein Support-Ticket oder eine Chat-Nachricht ein. Ist das Paket abgeschnitten und Sie benötigen das vollständige Protokoll einer Sitzung, verwenden Sie Protokollordner öffnen, um die genaue Datei zu finden und stattdessen anzuhängen.</p>
+<p class="meta">Gilt für 3.3.4 · Zuletzt geprüft 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/de/troubleshooting/"><span class="dir">Zurück</span><span class="ttl">Fehlerbehebung</span></a><a class="next" href="/BastionRDPConnectordocs/next/de/release-notes/"><span class="dir">Weiter</span><span class="ttl">Versionshinweise</span></a></div></article><aside class="toc" aria-label="Auf dieser Seite"><span class="eyebrow">Auf dieser Seite</span><ul><li><a href="#der-info-dialog">Der Info-Dialog</a></li><li><a href="#was-im-diagnosepaket-enthalten-ist">Was im Diagnosepaket enthalten ist</a></li><li><a href="#was-redigiert-wird-und-was-nicht">Was redigiert wird, und was nicht</a></li><li><a href="#ein-protokoll-an-den-support-senden">Ein Protokoll an den Support senden</a></li></ul></aside></div></main></body></html>

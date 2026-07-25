@@ -14,12 +14,12 @@ export async function getStaticPaths() {
     const routeSlug = locale === 'en' ? slug : `${locale}/${slug}`;
     return {
       params: { slug: routeSlug },
-      props: { entry, slug },
+      props: { entry, slug, locale },
     };
   });
 }
 
-const { entry, slug } = Astro.props;
+const { entry, slug, locale } = Astro.props;
 const { Content, headings } = await render(entry);
 ---
 <DocsLayout
@@ -28,6 +28,7 @@ const { Content, headings } = await render(entry);
   appliesTo={entry.data.appliesTo}
   lastReviewed={entry.data.lastReviewed}
   slug={slug}
+  locale={locale}
   headings={headings}
 >
   <Content />

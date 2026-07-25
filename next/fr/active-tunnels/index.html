@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tunnels actifs · Azure Bastion RDP Connector</title><meta name="description" content="Chaque connexion Tunnel ouverte par l'application, avec son port local, sa durée écoulée et des contrôles pour reconnecter votre client RDP ou l'arrêter."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Langue</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/active-tunnels/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/active-tunnels/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/active-tunnels/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/active-tunnels/" aria-current="page">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/active-tunnels/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/active-tunnels/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Démarrage</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/overview/">Aperçu</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/requirements/">Prérequis</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/sign-in/">Première connexion</a></div><div class="rail-group"><span class="eyebrow">Méthodes de connexion</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/connection-methods/">Méthodes de connexion</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-ip/">Se connecter à une adresse IP</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/connect-vm/">Se connecter à une VM Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/active-tunnels/" aria-current="page">Tunnels actifs</a></div><div class="rail-group"><span class="eyebrow">Fonctionnalités</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/monitors/">Moniteurs</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/entra-id/">Authentification Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/tenants/">Plusieurs locataires</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/files-and-settings/">Fichiers et paramètres</a></div><div class="rail-group"><span class="eyebrow">Référence</span><a class="nav" href="/BastionRDPConnectordocs/next/fr/troubleshooting/">Dépannage</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/fr/release-notes/">Nouveautés</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Accueil</a><span>/</span><a href="/BastionRDPConnectordocs/next/fr/overview/">Documentation</a><span>/</span>Méthodes de connexion<span>/</span>Tunnels actifs</p><h1>Tunnels actifs</h1><p>Chaque connexion Tunnel que vous ouvrez, depuis l’onglet Adresse IP ou l’onglet Azure VM, apparaît ici tant qu’elle reste ouverte. Les connexions RD Gateway n’apparaissent pas dans cet onglet, car elles n’ouvrent pas de port local à suivre.</p>
+<h2 id="longlet-tunnels-actifs">L’onglet Tunnels actifs</h2>
+<!-- Mirrors src/components/ScreenActiveTunnels.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tun-win">
+      <title id="s-tun-win">L'onglet Tunnels actifs sur Windows. Un abonnement et un hôte Bastion sont choisis en haut. L'onglet répertorie chaque tunnel ouvert avec son nom, son port local, sa durée écoulée et un contrôle d'arrêt.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Abonnement</text>
+      <rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="55">Production - Europe de l'Ouest</text>
+      <rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/>
+      <text class="ui-tb" x="204" y="55">Modifier</text>
+      <rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/>
+      <text class="ui-tb" x="250" y="55">i</text>
+      <rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="270" y="55">out</text>
+      <text class="ui-l" x="10" y="76">Bastion</text>
+      <rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
+      <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="273" y="91">↻</text>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb off" x="14" y="115">Adresse IP</text>
+      <text class="ui-tb off" x="76" y="115">Azure VM</text>
+      <text class="ui-tb" x="142" y="115">Tunnels actifs</text>
+      <line class="ui-tabup" x1="138" y1="120" x2="230" y2="120"/>
+      <rect class="ui-btn-2" x="246" y="130" width="44" height="15" rx="3"/>
+      <text class="ui-tb" x="256" y="141">Actualiser</text>
+      <rect class="ui-panel" x="10" y="152" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="167" r="3.5"/>
+      <text class="ui-tb" x="32" y="171">vm-dev-web-01</text>
+      <text class="ui-p" x="32" y="184">localhost:55000 · ouvert depuis 4 min 12 s</text>
+      <rect class="ui-btn-2" x="244" y="163" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="174">Arrêter</text>
+      <rect class="ui-panel" x="10" y="210" width="280" height="50" rx="4"/>
+      <circle class="ui-run" cx="22" cy="225" r="3.5"/>
+      <text class="ui-tb" x="32" y="229">10.20.4.15</text>
+      <text class="ui-p" x="32" y="242">localhost:55001 · ouvert depuis 41 s</text>
+      <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
+      <text class="ui-tb" x="252" y="232">Arrêter</text>
+      <text class="ui-p" x="10" y="284">Les tunnels se reconnectent automatiquement si la</text>
+      <text class="ui-p" x="10" y="295">connexion WebSocket est interrompue, jusqu'à cinq tentatives.</text>
+      <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> L'onglet Tunnels actifs sur Windows. Chaque ligne représente un tunnel ouvert, avec son port local, sa durée écoulée et un contrôle d'arrêt. La liste fonctionne de la même façon sur macOS.</figcaption>
+</figure>
+<p>Chaque ligne indique la cible, le port local sur lequel elle écoute et depuis combien de temps elle est ouverte.</p>
+<table>
+<thead>
+<tr>
+<th>Contrôle</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actualiser</td>
+<td>Recharge la liste des tunnels ouverts.</td>
+</tr>
+<tr>
+<td>Connecter RDP</td>
+<td>Relance votre client de bureau à distance sur le port local de ce tunnel. Utile si vous avez fermé la fenêtre RDP sans arrêter le tunnel.</td>
+</tr>
+<tr>
+<td>Arrêter</td>
+<td>Ferme la connexion WebSocket à Bastion et met fin au tunnel.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout warn">
+<span class="eyebrow">Arrêter met fin à la session</span>
+<p>Arrêter un tunnel coupe immédiatement toute session RDP qui l'utilise. Enregistrez votre travail dans la session distante au préalable.</p>
+</div>
+<h2 id="reconnexion">Reconnexion</h2>
+<p>Si la connexion WebSocket à Bastion est interrompue, par exemple à cause d’une brève coupure réseau ou d’une maintenance Bastion, le tunnel se reconnecte automatiquement. Il retente jusqu’à cinq fois, avec un délai croissant entre les tentatives. Votre session RDP reste généralement connectée pendant une reconnexion aussi courte, donc vous ne remarquerez peut-être rien.</p>
+<p>Si les cinq tentatives échouent, le tunnel s’arrête et la zone de notification affiche une notification d’erreur. Ouvrez alors à nouveau l’onglet Azure VM ou l’onglet Adresse IP et reconnectez-vous manuellement.</p>
+<p class="meta">S&#39;applique à 3.3.4 · Dernière révision 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/fr/connect-vm/"><span class="dir">Précédent</span><span class="ttl">Se connecter à une VM Azure</span></a><a class="next" href="/BastionRDPConnectordocs/next/fr/monitors/"><span class="dir">Suivant</span><span class="ttl">Moniteurs</span></a></div></article><aside class="toc" aria-label="Sur cette page"><span class="eyebrow">Sur cette page</span><ul><li><a href="#longlet-tunnels-actifs">L’onglet Tunnels actifs</a></li><li><a href="#reconnexion">Reconnexion</a></li></ul></aside></div></main></body></html>

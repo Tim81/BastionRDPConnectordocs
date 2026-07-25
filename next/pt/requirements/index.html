@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pré-requisitos · Azure Bastion RDP Connector</title><meta name="description" content="O que tem de estar assegurado na sua máquina e no Azure antes de o Azure Bastion RDP Connector conseguir abrir uma sessão."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Idioma</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/requirements/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/requirements/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/requirements/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/requirements/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/requirements/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/requirements/" aria-current="page">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Introdução</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/overview/">Visão geral</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/requirements/" aria-current="page">Pré-requisitos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/install/">Instalação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/sign-in/">Primeiro início de sessão</a></div><div class="rail-group"><span class="eyebrow">Métodos de ligação</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/connection-methods/">Métodos de ligação</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-ip/">Ligar a um endereço IP</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/connect-vm/">Ligar a uma VM do Azure</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/active-tunnels/">Túneis ativos</a></div><div class="rail-group"><span class="eyebrow">Funcionalidades</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/monitors/">Monitores</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/entra-id/">Autenticação Entra ID</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/tenants/">Múltiplos inquilinos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/files-and-settings/">Ficheiros e definições</a></div><div class="rail-group"><span class="eyebrow">Referência</span><a class="nav" href="/BastionRDPConnectordocs/next/pt/troubleshooting/">Resolução de problemas</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/diagnostics/">Diagnósticos</a><a class="nav" href="/BastionRDPConnectordocs/next/pt/release-notes/">Notas de versão</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Início</a><span>/</span><a href="/BastionRDPConnectordocs/next/pt/overview/">Documentação</a><span>/</span>Introdução<span>/</span>Pré-requisitos</p><h1>Pré-requisitos</h1><p>A aplicação é autónoma. Não precisa do .NET instalado separadamente e, desde a 3.0, não precisa do Azure CLI. O que precisa é de um sistema operativo suportado, um cliente de ambiente de trabalho remoto e um anfitrião Bastion configurado para aceitar ligações de cliente nativo.</p>
+<h2 id="na-sua-máquina">Na sua máquina</h2>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 10 ou posterior, x64</td>
+<td>Instalado a partir da Microsoft Store</td>
+</tr>
+<tr>
+<td>macOS 12 Monterey ou posterior</td>
+<td>Suportado desde a 3.1.2 para Apple Silicon e Intel, mas ainda não disponível publicamente</td>
+</tr>
+<tr>
+<td>Cliente de ambiente de trabalho remoto, Windows</td>
+<td><code>mstsc.exe</code>, já incluído no Windows</td>
+</tr>
+<tr>
+<td>Cliente de ambiente de trabalho remoto, macOS</td>
+<td>A Windows App, da Mac App Store. Utilize o modo Túnel com este cliente. Uma sessão RD Gateway abre e depois cai ao fim de alguns segundos com o erro <code>0x3000064</code>, uma incompatibilidade de cifras que a Microsoft não suporta neste cliente</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>Não é necessário o Azure CLI. As versões anteriores chamavam <code>az network bastion tunnel</code>; desde a 3.0 o túnel é construído de forma nativa com .NET. Se ainda estiver a utilizar uma versão 2.x, o Azure CLI e a extensão <code>azure-bastion</code> continuam a ser necessários.</p>
+</div>
+<h2 id="no-azure">No Azure</h2>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bastion, SKU Standard ou Premium</td>
+<td>Os SKUs Basic e Developer não suportam o cliente nativo</td>
+</tr>
+<tr>
+<td>Suporte a cliente nativo, ativado no anfitrião Bastion</td>
+<td>Ativado separadamente da escolha do SKU</td>
+</tr>
+<tr>
+<td>Ligação baseada em IP, ativada no anfitrião Bastion</td>
+<td>Só é necessária se pretender utilizar o separador Endereço IP</td>
+</tr>
+<tr>
+<td>Função Leitor no recurso Bastion e na sua rede virtual</td>
+<td>O mínimo necessário para listar anfitriões Bastion e ligar através deles</td>
+</tr>
+<tr>
+<td>Função Leitor na máquina virtual de destino</td>
+<td>Necessária para listar e ligar a essa VM. É necessário Virtual Machine Contributor ou superior para iniciar uma VM parada</td>
+</tr>
+<tr>
+<td>Uma subscrição do Azure</td>
+<td>A aplicação lista todas as subscrições que a sua conta consegue ver</td>
+</tr>
+</tbody>
+</table>
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>A aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades antes de ligar, e nomeia o que está em falta se uma verificação falhar. Estas verificações são fail-open: se a própria verificação não conseguir concluir, por exemplo devido a um problema de rede transitório, a tentativa de ligação prossegue na mesma.</p>
+</div>
+<h2 id="acessibilidade-de-rede">Acessibilidade de rede</h2>
+<p>Um destino só precisa de ser alcançável a partir da rede virtual do Bastion. Não precisa de ser uma VM do Azure, nem sequer de estar no Azure.</p>
+<ul>
+<li>O Bastion implementado na mesma rede virtual, ou numa emparelhada com ela, é o caso simples.</li>
+<li>Numa configuração hub-and-spoke ou de landing zone, o Bastion está muitas vezes numa landing zone de conectividade centralizada e alcança as redes virtuais spoke através do Azure Virtual WAN. Nessa topologia, o recurso Bastion não é visível a partir de dentro de um spoke individual no Portal do Azure, ainda que continue a conseguir alcançar as VMs aí presentes. Esta aplicação foi construída exatamente para esse caso: escolha o Bastion partilhado uma vez e depois ligue-se a uma VM em qualquer spoke que ele consiga alcançar.</li>
+<li>As máquinas no local também são alcançáveis, através de uma VPN site a site ou ExpressRoute, tal como os sistemas Windows noutras clouds, desde que exista uma rota.</li>
+</ul>
+<p>Se não tiver a certeza se um anfitrião Bastion consegue alcançar um determinado destino, pergunte a quem gere a sua rede. A aplicação não tem forma de ver rotas que não sejam expostas através das APIs que utiliza.</p>
+<p class="meta">Aplica-se a 3.3.4 · Última revisão 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/pt/overview/"><span class="dir">Anterior</span><span class="ttl">Visão geral</span></a><a class="next" href="/BastionRDPConnectordocs/next/pt/install/"><span class="dir">Seguinte</span><span class="ttl">Instalação</span></a></div></article><aside class="toc" aria-label="Nesta página"><span class="eyebrow">Nesta página</span><ul><li><a href="#na-sua-máquina">Na sua máquina</a></li><li><a href="#no-azure">No Azure</a></li><li><a href="#acessibilidade-de-rede">Acessibilidade de rede</a></li></ul></aside></div></main></body></html>

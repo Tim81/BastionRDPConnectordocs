@@ -11,32 +11,26 @@ Both methods reach the same virtual machine through the same Bastion host. They 
 <div class="frame">
 <svg viewBox="0 0 620 186" role="img" aria-labelledby="fig1t">
   <title id="fig1t">Your computer cannot reach the virtual machine directly. Both connection methods route through the Azure Bastion host.</title>
-
   <!-- direct path, blocked -->
   <path class="w-dead" d="M104 40 H516"/>
   <line class="w-x" x1="300" y1="30" x2="320" y2="50"/>
   <line class="w-x" x1="320" y1="30" x2="300" y2="50"/>
   <text class="n-s" x="310" y="21" text-anchor="middle">no public IP · 3389 closed</text>
-
   <!-- routed path -->
   <path class="w-live" d="M104 120 H256"/>
   <path class="w-live" d="M364 120 H516"/>
   <text class="n-s" x="180" y="112" text-anchor="middle">443 outbound</text>
   <text class="n-s" x="440" y="112" text-anchor="middle">3389 inside the vnet</text>
-
   <!-- nodes -->
   <rect class="n-box" x="8" y="18" width="96" height="124" rx="5"/>
   <text class="n-t" x="56" y="74" text-anchor="middle">Your PC</text>
   <text class="n-s" x="56" y="92" text-anchor="middle">mstsc</text>
-
   <rect class="n-box n-hop" x="256" y="96" width="108" height="48" rx="5"/>
   <text class="n-t on" x="310" y="118" text-anchor="middle">Bastion</text>
   <text class="n-s" x="310" y="133" text-anchor="middle" fill="#98A2B3">Standard SKU</text>
-
   <rect class="n-box" x="516" y="18" width="96" height="124" rx="5"/>
   <text class="n-t" x="564" y="74" text-anchor="middle">Azure VM</text>
   <text class="n-s" x="564" y="92" text-anchor="middle">private IP</text>
-
   <text class="n-s" x="310" y="172" text-anchor="middle">Tunnel and RD Gateway both take the lower route</text>
 </svg>
 </div>

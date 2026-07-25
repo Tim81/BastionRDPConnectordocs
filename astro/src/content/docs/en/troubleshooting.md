@@ -16,15 +16,11 @@ The application allows only one running instance. If it's already open, minimise
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-tray-win">
       <title id="s-tray-win">The Windows system tray context menu, expanded. Two open tunnels are listed, each with Connect and Stop controls. Below them, About and Exit.</title>
-
       <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
       <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
-
       <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
       <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
-
       <text class="ui-l" x="10" y="40">System tray, right-click menu</text>
-
       <rect class="ui-panel" x="10" y="48" width="280" height="50" rx="4"/>
       <circle class="ui-run" cx="22" cy="63" r="3.5"/>
       <text class="ui-tb" x="32" y="67">vm-dev-web-01</text>
@@ -33,7 +29,6 @@ The application allows only one running instance. If it's already open, minimise
       <text class="ui-tb" x="200" y="70">Connect</text>
       <rect class="ui-btn-2" x="244" y="59" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="70">Stop</text>
-
       <rect class="ui-panel" x="10" y="106" width="280" height="50" rx="4"/>
       <circle class="ui-run" cx="22" cy="121" r="3.5"/>
       <text class="ui-tb" x="32" y="125">10.20.4.15</text>
@@ -42,12 +37,9 @@ The application allows only one running instance. If it's already open, minimise
       <text class="ui-tb" x="200" y="128">Connect</text>
       <rect class="ui-btn-2" x="244" y="117" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="128">Stop</text>
-
       <line x1="10" y1="170" x2="290" y2="170" stroke="#DCE2EA" stroke-width="1"/>
-
       <text class="ui-tb" x="20" y="190">About</text>
       <text class="ui-tb" x="20" y="212">Exit</text>
-
       <text class="ui-p" x="10" y="352">Double-click the tray icon to restore the main window.</text>
     </svg>
   </div>

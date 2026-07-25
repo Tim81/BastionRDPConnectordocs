@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Verbindung zu einer IP-Adresse herstellen · Azure Bastion RDP Connector</title><meta name="description" content="Die Registerkarte IP-Adresse erreicht alles, wozu das virtuelle Netzwerk von Bastion eine Route hat, nicht nur Azure-VMs, über eine Tunnel-Verbindung."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Sprache</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/connect-ip/">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/connect-ip/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/connect-ip/" aria-current="page">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/connect-ip/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/connect-ip/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/connect-ip/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Erste Schritte</span><a class="nav" href="/BastionRDPConnectordocs/next/de/overview/">Übersicht</a><a class="nav" href="/BastionRDPConnectordocs/next/de/requirements/">Voraussetzungen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/install/">Installation</a><a class="nav" href="/BastionRDPConnectordocs/next/de/sign-in/">Erste Anmeldung</a></div><div class="rail-group"><span class="eyebrow">Verbindungsmethoden</span><a class="nav" href="/BastionRDPConnectordocs/next/de/connection-methods/">Verbindungsmethoden</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-ip/" aria-current="page">Verbindung zu einer IP-Adresse herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/connect-vm/">Verbindung zu einer Azure-VM herstellen</a><a class="nav" href="/BastionRDPConnectordocs/next/de/active-tunnels/">Aktive Tunnel</a></div><div class="rail-group"><span class="eyebrow">Funktionen</span><a class="nav" href="/BastionRDPConnectordocs/next/de/monitors/">Monitore</a><a class="nav" href="/BastionRDPConnectordocs/next/de/entra-id/">Entra ID-Authentifizierung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/tenants/">Mehrere Mandanten</a><a class="nav" href="/BastionRDPConnectordocs/next/de/files-and-settings/">Dateien und Einstellungen</a></div><div class="rail-group"><span class="eyebrow">Referenz</span><a class="nav" href="/BastionRDPConnectordocs/next/de/troubleshooting/">Fehlerbehebung</a><a class="nav" href="/BastionRDPConnectordocs/next/de/diagnostics/">Diagnose</a><a class="nav" href="/BastionRDPConnectordocs/next/de/release-notes/">Versionshinweise</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Start</a><span>/</span><a href="/BastionRDPConnectordocs/next/de/overview/">Dokumentation</a><span>/</span>Verbindungsmethoden<span>/</span>Verbindung zu einer IP-Adresse herstellen</p><h1>Verbindung zu einer IP-Adresse herstellen</h1><p>Verwenden Sie diese Registerkarte, wenn der gewünschte Computer keinen VM-Eintrag hat, den Sie nach Namen auswählen können, oder überhaupt keine Azure-VM ist. Sie erreicht lokale Computer über eine VPN- oder ExpressRoute-Verbindung, Windows-Systeme in anderen Clouds und jede Azure-VM, die Sie lieber direkt adressieren als nachschlagen möchten.</p>
+<h2 id="die-registerkarte-ip-adresse">Die Registerkarte IP-Adresse</h2>
+<!-- Mirrors src/components/ScreenIpAddress.astro -->
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-ip-win">
+      <title id="s-ip-win">Die Registerkarte IP-Adresse unter Windows. Oben werden eine Subscription und ein Bastion-Host ausgewählt. Die Registerkarte enthält ein Adressfeld, den Zielport, den lokalen Port und die Schaltfläche Verbinden.</title>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Subscription</text>
+      <rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="55">Produktion - Westeuropa</text>
+      <rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/>
+      <text class="ui-tb" x="204" y="55">Ändern</text>
+      <rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/>
+      <text class="ui-tb" x="250" y="55">i</text>
+      <rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="270" y="55">ab</text>
+      <text class="ui-l" x="10" y="76">Bastion-Host</text>
+      <rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
+      <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="273" y="91">↻</text>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb" x="14" y="115">IP-Adresse</text>
+      <line class="ui-tabup" x1="10" y1="120" x2="70" y2="120"/>
+      <text class="ui-tb off" x="76" y="115">Azure VM</text>
+      <text class="ui-tb off" x="142" y="115">Aktive Tunnel</text>
+      <rect class="ui-panel" x="10" y="132" width="280" height="112" rx="4"/>
+      <text class="ui-l" x="20" y="150">IP-Adresse</text>
+      <rect class="ui-field" x="20" y="154" width="260" height="16" rx="3"/>
+      <text class="ui-v" x="25" y="165">10.20.4.15</text>
+      <text class="ui-l" x="20" y="185">Zielport</text>
+      <rect class="ui-field" x="20" y="189" width="120" height="15" rx="3"/>
+      <text class="ui-v" x="25" y="200">3389</text>
+      <text class="ui-l" x="160" y="185">Lokaler Port</text>
+      <rect class="ui-field" x="160" y="189" width="120" height="15" rx="3"/>
+      <text class="ui-v" x="165" y="200">55000</text>
+      <text class="ui-p" x="20" y="220">Erreicht jede Adresse, zu der das virtuelle</text>
+      <text class="ui-p" x="20" y="231">Netzwerk von Bastion eine Route hat.</text>
+      <text class="ui-p" x="10" y="268">Öffnet in mstsc</text>
+      <rect class="ui-btn" x="10" y="282" width="280" height="26" rx="4"/>
+      <text class="ui-bt" x="150" y="299" text-anchor="middle">Verbinden</text>
+      <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
+    </svg>
+  </div>
+  <figcaption><b>Windows</b> Die Registerkarte IP-Adresse unter Windows. Tunnel ist hier die einzige verfügbare Methode, da RD Gateway eine eingegebene Adresse nicht auflösen kann. Unter macOS ist das Layout identisch; Verbinden öffnet die Windows App statt mstsc.</figcaption>
+</figure>
+<p>Diese Registerkarte verwendet immer Tunnel. RD Gateway benötigt, dass Bastion das Ziel selbst auflöst, und eine eingegebene Adresse gibt ihm nichts zum Auflösen.</p>
+<h2 id="felder">Felder</h2>
+<table>
+<thead>
+<tr>
+<th>Feld</th>
+<th>Beschreibung</th>
+<th>Standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IP-Adresse</td>
+<td>Die private Adresse des Zielcomputers. Sie muss vom virtuellen Netzwerk des Bastion-Hosts aus erreichbar sein.</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Zielport</td>
+<td>Der RDP-Port, auf dem der Remote-Computer lauscht.</td>
+<td>3389</td>
+</tr>
+<tr>
+<td>Lokaler Port</td>
+<td>Der Port auf Ihrem Computer, an dem der Tunnel lauscht. Ihr Remotedesktop-Client verbindet sich mit <code>localhost:[Lokaler Port]</code>.</td>
+<td>55000</td>
+</tr>
+</tbody>
+</table>
+<p>Zielport und lokaler Port werden mit der Registerkarte Azure VM geteilt. Ändern Sie einen dort, ändert er sich auch hier.</p>
+<h2 id="verbinden">Verbinden</h2>
+<ol>
+<li>Geben Sie die Zieladresse ein.</li>
+<li>Lassen Sie den Zielport auf 3389, es sei denn, der Computer lauscht auf etwas anderem, und ändern Sie den lokalen Port nur, wenn 55000 auf Ihrem Computer bereits belegt ist.</li>
+<li>Wählen Sie <strong>Verbinden</strong>. Die Anwendung öffnet einen WebSocket-Tunnel zu Bastion und startet Ihren Remotedesktop-Client, der auf <code>localhost:[Lokaler Port]</code> zeigt.</li>
+</ol>
+<div class="callout warn">
+<span class="eyebrow">Erreichbarkeit, nicht Benennung</span>
+<p>Die Anwendung kann über Formatprüfungen hinaus nicht bestätigen, dass eine Zieladresse korrekt ist. Kann das virtuelle Netzwerk von Bastion diese Adresse nicht erreichen, öffnet sich der Tunnel zwar, aber der Remotedesktop-Client kann die Verbindung nicht abschließen. Fragen Sie, wer Ihr Netzwerk verwaltet, wenn Sie nicht sicher sind, ob eine Route existiert.</p>
+</div>
+<p class="meta">Gilt für 3.3.4 · Zuletzt geprüft 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/de/connection-methods/"><span class="dir">Zurück</span><span class="ttl">Verbindungsmethoden</span></a><a class="next" href="/BastionRDPConnectordocs/next/de/connect-vm/"><span class="dir">Weiter</span><span class="ttl">Verbindung zu einer Azure-VM herstellen</span></a></div></article><aside class="toc" aria-label="Auf dieser Seite"><span class="eyebrow">Auf dieser Seite</span><ul><li><a href="#die-registerkarte-ip-adresse">Die Registerkarte IP-Adresse</a></li><li><a href="#felder">Felder</a></li><li><a href="#verbinden">Verbinden</a></li></ul></aside></div></main></body></html>

@@ -1,62 +1,50 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Connect to an IP address · Azure Bastion RDP Connector</title><meta name="description" content="The IP address tab reaches anything Bastion's virtual network can route to, not only Azure VMs, over a Tunnel connection."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.BdoLGD6U.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Get started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connect</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/" aria-current="page">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Configure</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Connect<span>/</span>Connect to an IP address</p><h1>Connect to an IP address</h1><p>Use this tab when the machine you want does not have a VM record you can pick by name, or is not an Azure VM at all. It reaches on-premises machines over a VPN or ExpressRoute, Windows systems in other clouds, and any Azure VM you would rather address directly than look up.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Connect to an IP address · Azure Bastion RDP Connector</title><meta name="description" content="The IP address tab reaches anything Bastion's virtual network can route to, not only Azure VMs, over a Tunnel connection."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/site.CKzyaKJh.css"></head><body><nav class="rail" aria-label="Documentation"><a class="brand" href="/BastionRDPConnectordocs/next/"><div class="brand-sub">Azure Bastion</div><div class="brand-name">RDP Connector</div></a><div class="verpick"><label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label><select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select></div><div class="langpick"><span class="eyebrow" id="lang-label">Language</span><ul aria-labelledby="lang-label"><li><a href="/BastionRDPConnectordocs/next/connect-ip/" aria-current="page">English</a></li><li><a href="/BastionRDPConnectordocs/next/nl/connect-ip/">Nederlands</a></li><li><a href="/BastionRDPConnectordocs/next/de/connect-ip/">Deutsch</a></li><li><a href="/BastionRDPConnectordocs/next/fr/connect-ip/">Français</a></li><li><a href="/BastionRDPConnectordocs/next/es/connect-ip/">Español</a></li><li><a href="/BastionRDPConnectordocs/next/pt/connect-ip/">Português</a></li></ul></div><div class="search"><input type="search" placeholder="Search documentation" aria-label="Search documentation"></div><div class="rail-group"><span class="eyebrow">Getting started</span><a class="nav" href="/BastionRDPConnectordocs/next/overview/">Overview</a><a class="nav" href="/BastionRDPConnectordocs/next/requirements/">Requirements</a><a class="nav" href="/BastionRDPConnectordocs/next/install/">Install</a><a class="nav" href="/BastionRDPConnectordocs/next/sign-in/">Sign in</a></div><div class="rail-group"><span class="eyebrow">Connection methods</span><a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/">Connection methods</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-ip/" aria-current="page">Connect to an IP address</a><a class="nav" href="/BastionRDPConnectordocs/next/connect-vm/">Connect to an Azure VM</a><a class="nav" href="/BastionRDPConnectordocs/next/active-tunnels/">Active tunnels</a></div><div class="rail-group"><span class="eyebrow">Features</span><a class="nav" href="/BastionRDPConnectordocs/next/monitors/">Monitors</a><a class="nav" href="/BastionRDPConnectordocs/next/entra-id/">Entra ID authentication</a><a class="nav" href="/BastionRDPConnectordocs/next/tenants/">Multiple tenants</a><a class="nav" href="/BastionRDPConnectordocs/next/files-and-settings/">Files and settings</a></div><div class="rail-group"><span class="eyebrow">Reference</span><a class="nav" href="/BastionRDPConnectordocs/next/troubleshooting/">Troubleshooting</a><a class="nav" href="/BastionRDPConnectordocs/next/diagnostics/">Diagnostics</a><a class="nav" href="/BastionRDPConnectordocs/next/release-notes/">Release notes</a></div></nav><main class="page"><div class="cols"><article><p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Connection methods<span>/</span>Connect to an IP address</p><h1>Connect to an IP address</h1><p>Use this tab when the machine you want does not have a VM record you can pick by name, or is not an Azure VM at all. It reaches on-premises machines over a VPN or ExpressRoute, Windows systems in other clouds, and any Azure VM you would rather address directly than look up.</p>
 <h2 id="the-ip-address-tab">The IP address tab</h2>
 <!-- Mirrors src/components/ScreenIpAddress.astro -->
 <figure class="appshot">
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-ip-win">
       <title id="s-ip-win">The IP address tab on Windows. A subscription and Bastion host are chosen at the top. The tab holds an address field, target port, local port, and the Connect button.</title>
-<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>  &lt;rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/&gt;</span></span>
-<span class="line"><span>  &lt;path class="ui-bar" d="M2 2 H298 V22 H2 Z"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-title" x="10" y="15"&gt;Azure Bastion RDP Connector&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="40"&gt;Subscription&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="55"&gt;Production - West Europe&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="204" y="55"&gt;Change&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="250" y="55"&gt;i&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="270" y="55"&gt;out&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="10" y="76"&gt;Bastion host&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="15" y="91"&gt;bastion-hub-weu&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="273" y="91"&gt;↻&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb" x="14" y="115"&gt;IP address&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;line class="ui-tabup" x1="10" y1="120" x2="70" y2="120"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="76" y="115"&gt;Azure VM&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-tb off" x="142" y="115"&gt;Active tunnels&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-panel" x="10" y="132" width="280" height="112" rx="4"/&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="20" y="150"&gt;IP address&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="20" y="154" width="260" height="16" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="25" y="165"&gt;10.20.4.15&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="20" y="185"&gt;Target port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="20" y="189" width="120" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="25" y="200"&gt;3389&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-l" x="160" y="185"&gt;Local port&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;rect class="ui-field" x="160" y="189" width="120" height="15" rx="3"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-v" x="165" y="200"&gt;55000&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="20" y="220"&gt;Reaches any address the Bastion&lt;/text&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="20" y="231"&gt;virtual network can route to.&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="268"&gt;Opens in mstsc&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;rect class="ui-btn" x="10" y="282" width="280" height="26" rx="4"/&gt;</span></span>
-<span class="line"><span>  &lt;text class="ui-bt" x="150" y="299" text-anchor="middle"&gt;Connect&lt;/text&gt;</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  &lt;text class="ui-p" x="10" y="352"&gt;EN · NL · DE · FR · ES · PT&lt;/text&gt;</span></span>
-<span class="line"><span>&lt;/svg&gt;</span></span></code></pre>
+      <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <text class="ui-title" x="10" y="15">Azure Bastion RDP Connector</text>
+      <path d="M266 9 h7 M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+      <text class="ui-l" x="10" y="40">Subscription</text>
+      <rect class="ui-field" x="10" y="44" width="182" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="55">Production - West Europe</text>
+      <rect class="ui-btn-2" x="197" y="44" width="42" height="15" rx="3"/>
+      <text class="ui-tb" x="204" y="55">Change</text>
+      <rect class="ui-btn-2" x="244" y="44" width="18" height="15" rx="3"/>
+      <text class="ui-tb" x="250" y="55">i</text>
+      <rect class="ui-btn-2" x="266" y="44" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="270" y="55">out</text>
+      <text class="ui-l" x="10" y="76">Bastion host</text>
+      <rect class="ui-field" x="10" y="80" width="252" height="15" rx="3"/>
+      <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
+      <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
+      <text class="ui-tb" x="273" y="91">↻</text>
+      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
+      <text class="ui-tb" x="14" y="115">IP address</text>
+      <line class="ui-tabup" x1="10" y1="120" x2="70" y2="120"/>
+      <text class="ui-tb off" x="76" y="115">Azure VM</text>
+      <text class="ui-tb off" x="142" y="115">Active tunnels</text>
+      <rect class="ui-panel" x="10" y="132" width="280" height="112" rx="4"/>
+      <text class="ui-l" x="20" y="150">IP address</text>
+      <rect class="ui-field" x="20" y="154" width="260" height="16" rx="3"/>
+      <text class="ui-v" x="25" y="165">10.20.4.15</text>
+      <text class="ui-l" x="20" y="185">Target port</text>
+      <rect class="ui-field" x="20" y="189" width="120" height="15" rx="3"/>
+      <text class="ui-v" x="25" y="200">3389</text>
+      <text class="ui-l" x="160" y="185">Local port</text>
+      <rect class="ui-field" x="160" y="189" width="120" height="15" rx="3"/>
+      <text class="ui-v" x="165" y="200">55000</text>
+      <text class="ui-p" x="20" y="220">Reaches any address the Bastion</text>
+      <text class="ui-p" x="20" y="231">virtual network can route to.</text>
+      <text class="ui-p" x="10" y="268">Opens in mstsc</text>
+      <rect class="ui-btn" x="10" y="282" width="280" height="26" rx="4"/>
+      <text class="ui-bt" x="150" y="299" text-anchor="middle">Connect</text>
+      <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
+    </svg>
   </div>
   <figcaption><b>Windows</b> The IP address tab on Windows. Tunnel is the only method available here, because RD Gateway cannot resolve a typed address. On macOS the layout is identical; Connect opens the Windows App instead of mstsc.</figcaption>
 </figure>
