@@ -1,0 +1,23 @@
+---
+// Previous/next are derived by locating the current slug inside `flatNav`
+// (the flattened `nav.ts` order) — not hardcoded per page.
+
+import { flatNav, pageHref } from '../nav';
+
+interface Props {
+  current: string;
+}
+
+const { current } = Astro.props;
+const idx = flatNav.findIndex((e) => e.slug === current);
+const prev = idx > 0 ? flatNav[idx - 1] : null;
+const next = idx >= 0 && idx < flatNav.length - 1 ? flatNav[idx + 1] : null;
+---
+<div class="pager">
+  {prev ? (
+    <a href={pageHref(prev.slug)}><span class="dir">Previous</span><span class="ttl">{prev.title}</span></a>
+  ) : <span></span>}
+  {next ? (
+    <a class="next" href={pageHref(next.slug)}><span class="dir">Next</span><span class="ttl">{next.title}</span></a>
+  ) : <span></span>}
+</div>

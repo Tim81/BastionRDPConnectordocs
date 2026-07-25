@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Connection methods · Azure Bastion RDP Connector</title><meta name="description" content="Tunnel and RD Gateway compared: how each carries the session, which targets they reach, and which one is the default on Windows and macOS."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet"><link rel="stylesheet" href="/BastionRDPConnectordocs/next/_astro/_slug_.CihHvbC2.css"></head> <body> <nav class="rail" aria-label="Documentation"> <a class="brand" href="/BastionRDPConnectordocs/next/"> <div class="brand-name">RDP Connector</div> <div class="brand-sub">Azure Bastion</div> </a> <div class="verpick"> <label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label> <select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select> </div> <div class="search"> <input type="search" placeholder="Search documentation" aria-label="Search documentation"> </div> <div class="rail-group"> <span class="eyebrow">Get started</span> <a class="nav" href="/BastionRDPConnectordocs/next/overview/"> Overview </a><a class="nav" href="#">Requirements</a><a class="nav" href="#">Install</a><a class="nav" href="#">Sign in</a> </div><div class="rail-group"> <span class="eyebrow">Connect</span> <a class="nav" href="/BastionRDPConnectordocs/next/connection-methods/" aria-current="page"> Connection methods </a><a class="nav" href="#">Connect to an IP address</a><a class="nav" href="#">Connect to an Azure VM</a><a class="nav" href="#">Active tunnels</a> </div><div class="rail-group"> <span class="eyebrow">Configure</span> <a class="nav" href="#">Monitors</a><a class="nav" href="#">Entra ID authentication</a><a class="nav" href="#">Multiple tenants</a><a class="nav" href="#">Files and settings</a> </div><div class="rail-group"> <span class="eyebrow">Reference</span> <a class="nav" href="#">Troubleshooting</a><a class="nav" href="#">Diagnostics</a><a class="nav" href="#">Release notes</a> </div> </nav> <main class="page"> <div class="cols"> <article> <p class="crumb"><a href="/BastionRDPConnectordocs/next/">Home</a><span>/</span><a href="/BastionRDPConnectordocs/next/overview/">Docs</a><span>/</span>Connect<span>/</span>Connection methods</p> <h1>Connection methods</h1>  <p>Both methods reach the same virtual machine through the same Bastion host. They differ in how the remote desktop session is carried, and that difference decides which targets each one can reach.</p>
+<figure>
+<div class="frame">
+<svg viewBox="0 0 620 186" role="img" aria-labelledby="fig1t">
+  <title id="fig1t">Your computer cannot reach the virtual machine directly. Both connection methods route through the Azure Bastion host.</title>
+  <!-- direct path, blocked -->
+  <path class="w-dead" d="M104 40 H516"></path>
+  <line class="w-x" x1="300" y1="30" x2="320" y2="50"></line>
+  <line class="w-x" x1="320" y1="30" x2="300" y2="50"></line>
+  <text class="n-s" x="310" y="21" text-anchor="middle">no public IP · 3389 closed</text>
+  <!-- routed path -->
+  <path class="w-live" d="M104 120 H256"></path>
+  <path class="w-live" d="M364 120 H516"></path>
+  <text class="n-s" x="180" y="112" text-anchor="middle">443 outbound</text>
+  <text class="n-s" x="440" y="112" text-anchor="middle">3389 inside the vnet</text>
+  <!-- nodes -->
+  <rect class="n-box" x="8" y="18" width="96" height="124" rx="5"></rect>
+  <text class="n-t" x="56" y="74" text-anchor="middle">Your PC</text>
+  <text class="n-s" x="56" y="92" text-anchor="middle">mstsc</text>
+  <rect class="n-box n-hop" x="256" y="96" width="108" height="48" rx="5"></rect>
+  <text class="n-t on" x="310" y="118" text-anchor="middle">Bastion</text>
+  <text class="n-s" x="310" y="133" text-anchor="middle" fill="#98A2B3">Standard SKU</text>
+  <rect class="n-box" x="516" y="18" width="96" height="124" rx="5"></rect>
+  <text class="n-t" x="564" y="74" text-anchor="middle">Azure VM</text>
+  <text class="n-s" x="564" y="92" text-anchor="middle">private IP</text>
+</svg><p><text class="n-s" x="310" y="172" text-anchor="middle">Tunnel and RD Gateway both take the lower route</text>
+</p>
+</div>
+<figcaption><b>Figure 1</b> The direct path does not exist. Every session is carried through the Bastion host over port 443.</figcaption>
+</figure>
+<h2 id="tunnel">Tunnel</h2>
+<p>The application opens a WebSocket to the Bastion host and listens on a local port on your computer. Your remote desktop client connects to <code>localhost</code> on that port, and traffic is forwarded over the WebSocket.</p>
+<p>Because the target is only ever an address on the far side of the tunnel, this method reaches any IP address the Bastion virtual network can route to. That includes machines that are not Azure VMs.</p>
+<p>If the WebSocket drops, the tunnel reconnects on its own, up to five times with a widening gap between attempts. An open remote desktop session survives a short reconnect.</p>
+<h3 id="when-to-use-it">When to use it</h3>
+<ul>
+<li>You are connecting to an IP address rather than picking a VM.</li>
+<li>You are on macOS, where the Windows App does not support Bastion as a gateway.</li>
+<li>You want several sessions open at once, each on its own local port.</li>
+</ul>
+<h2 id="rd-gateway">RD Gateway</h2>
+<p>The application asks Bastion for a pre-configured <code>.rdp</code> file that names Bastion as the remote desktop gateway, then hands that file to your client. There is no local port and no tunnel process.</p>
+<p>This is the shorter path, and on Windows it is the default. It only works when Bastion can resolve the target itself, which means it works for Azure VMs and not for typed IP addresses.</p>
+<div class="callout warn">
+<span class="eyebrow">Cross-tenant sign-in</span>
+<p>When the virtual machine sits in a different tenant from the account you signed in with, the application turns off Entra ID authentication in the generated file. Leaving it on returns <code>AADSTS293004</code> and the session does not open.</p>
+</div>
+<h2 id="comparison">Comparison</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th> </th><th>Tunnel</th><th>RD Gateway</th></tr></thead><tbody><tr><td>Connect to an Azure VM</td><td>Yes</td><td>Yes</td></tr><tr><td>Connect to an IP address</td><td>Yes</td><td>No</td></tr><tr><td>Opens a local port</td><td>Yes, one per session</td><td>No</td></tr><tr><td>Reconnects automatically</td><td>Yes, up to 5 attempts</td><td>No</td></tr><tr><td>Entra ID authentication</td><td>Not applicable</td><td>On by default, off across tenants</td></tr><tr><td>Default on Windows</td><td>No</td><td>Yes</td></tr><tr><td>Default on macOS</td><td>Yes</td><td>No</td></tr><tr><td>Requires Azure CLI</td><td>No</td><td>No</td></tr></tbody></table>
+<p>The default applies only until you choose a method yourself. After that your choice is saved per tenant and restored the next time you start the application.</p>
+<h2 id="ports">Ports</h2>
+<p>Neither method needs an inbound firewall rule. Both use outbound 443 from your computer to the Bastion host.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>From</th><th>To</th><th>Port</th></tr></thead><tbody><tr><td>Your computer</td><td>bst-*.bastion.azure.com</td><td>443/TCP outbound</td></tr><tr><td>Your computer</td><td>login.microsoftonline.com</td><td>443/TCP outbound</td></tr><tr><td>Bastion host</td><td>Target machine</td><td>3389/TCP inside the virtual network</td></tr></tbody></table>  <p class="meta">Applies to 3.3.4 · Last reviewed 2026-07-25</p> <div class="pager"> <a href="/BastionRDPConnectordocs/next/overview/"><span class="dir">Previous</span><span class="ttl">Overview</span></a> <span></span> </div> </article> <aside class="toc" aria-label="On this page"><span class="eyebrow">On this page</span><ul><li><a href="#tunnel">Tunnel</a></li><li><a class="sub" href="#when-to-use-it">When to use it</a></li><li><a href="#rd-gateway">RD Gateway</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#ports">Ports</a></li></ul></aside> </div> </main> </body></html>

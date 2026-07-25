@@ -1,0 +1,40 @@
+---
+import { nav, baseHref, pageHref } from '../nav';
+
+interface Props {
+  /** Slug of the page currently being rendered, e.g. "overview". */
+  current: string;
+}
+
+const { current } = Astro.props;
+---
+<nav class="rail" aria-label="Documentation">
+  <a class="brand" href={baseHref()}>
+    <div class="brand-name">RDP Connector</div>
+    <div class="brand-sub">Azure Bastion</div>
+  </a>
+
+  <div class="verpick">
+    <label class="eyebrow" for="ver" style="display:block;margin-bottom:5px;">Version</label>
+    <select id="ver"><option>3.3.4 (current)</option><option>3.2</option></select>
+  </div>
+
+  <div class="search">
+    <input type="search" placeholder="Search documentation" aria-label="Search documentation" />
+  </div>
+
+  {nav.map((group) => (
+    <div class="rail-group">
+      <span class="eyebrow">{group.title}</span>
+      {group.entries.map((entry) =>
+        entry.slug ? (
+          <a class="nav" href={pageHref(entry.slug)} aria-current={entry.slug === current ? 'page' : undefined}>
+            {entry.title}
+          </a>
+        ) : (
+          <a class="nav" href="#">{entry.title}</a>
+        )
+      )}
+    </div>
+  ))}
+</nav>

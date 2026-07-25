@@ -1,0 +1,28 @@
+---
+// Built from the `headings` array Astro's content renderer returns for the
+// entry — not hand-maintained. Depth 2 (##) and depth 3 (###) only, matching
+// what the hand-built prototype curated by hand in its `<aside class="toc">`.
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+{items.length > 0 && (
+  <aside class="toc" aria-label="On this page">
+    <span class="eyebrow">On this page</span>
+    <ul>
+      {items.map((h) => (
+        <li><a class={h.depth === 3 ? 'sub' : undefined} href={`#${h.slug}`}>{h.text}</a></li>
+      ))}
+    </ul>
+  </aside>
+)}

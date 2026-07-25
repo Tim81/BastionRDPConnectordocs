@@ -1,0 +1,60 @@
+---
+import Rail from '../components/Rail.astro';
+import Toc from '../components/Toc.astro';
+import Pager from '../components/Pager.astro';
+import { baseHref, pageHref, groupTitleFor } from '../nav';
+import '../styles/site.css';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  appliesTo: string;
+  lastReviewed: string;
+  slug: string;
+  headings: Heading[];
+}
+
+const { title, description, appliesTo, lastReviewed, slug, headings } = Astro.props;
+const groupTitle = groupTitleFor(slug);
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title} · Azure Bastion RDP Connector</title>
+<meta name="description" content={description} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<Rail current={slug} />
+
+<main class="page">
+<div class="cols">
+<article>
+
+  <p class="crumb"><a href={baseHref()}>Home</a><span>/</span><a href={pageHref('overview')}>Docs</a><span>/</span>{groupTitle}<span>/</span>{title}</p>
+
+  <h1>{title}</h1>
+  <slot />
+
+  <p class="meta">Applies to {appliesTo} · Last reviewed {lastReviewed}</p>
+
+  <Pager current={slug} />
+
+</article>
+
+<Toc headings={headings} />
+</div>
+</main>
+
+</body>
+</html>

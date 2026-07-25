@@ -1,0 +1,52 @@
+---
+import { baseHref, pageHref } from '../nav';
+import '../styles/site.css';
+import '../styles/home.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;650&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href={baseHref()}>
+    <div class="brand-name">RDP Connector</div>
+    <div class="brand-sub">Azure Bastion</div>
+  </a>
+  <nav>
+    <a class="hide-s" href={pageHref('overview')}>Documentation</a>
+    <a class="hide-s" href={pageHref('connection-methods')}>How it connects</a>
+    <a class="btn" href="#get">Download</a>
+  </nav>
+</header>
+
+<slot />
+
+<footer class="foot">
+  <div class="inner">
+    <div>
+      <a href={pageHref('overview')}>Documentation</a> ·
+      <a href={pageHref('connection-methods')}>How it connects</a> ·
+      <a href="#">Troubleshooting</a> ·
+      <a href="#">Release notes</a>
+    </div>
+    <div class="legal">v3.3.4 · © 2026 Timothy van der Ham</div>
+  </div>
+</footer>
+
+</body>
+</html>
