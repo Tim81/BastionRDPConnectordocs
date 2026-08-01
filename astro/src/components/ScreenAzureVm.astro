@@ -21,7 +21,7 @@
 // glyphs and selects RD Gateway; macOS draws traffic lights with a centred
 // title and selects Tunnel. That is the real platform default, chosen in
 // MainWindow.Layout.cs when no preference has been saved yet.
-import { s, tw, btnW, fit, wrap, LANG_NAME, LANG_FLAG, type Lang } from './screen';
+import { s, tw, btnW, fit, fitRow, wrap, LANG_NAME, LANG_FLAG, type Lang } from './screen';
 
 interface Props { platform?: 'windows' | 'macos'; lang?: Lang; caption?: string; }
 const { platform = 'windows', lang = 'en', caption } = Astro.props as Props;
@@ -36,7 +36,7 @@ const F_S = 6.1;  // dense right column and button captions
 const F_XS = 5.6; // grey help text
 
 // Row 0 — Logout is a DangerButton; both it and Change hug the right edge.
-const wLogout = btnW(t('Logout'), F_S, 12, 34);
+const wLogout = btnW(t('Logout'), F_S, 12, 34, 'bold');
 const xLogout = 290 - wLogout;
 const wChange = btnW(t('Change'), F_S, 12, 34);
 const xChange = 290 - wChange;
@@ -51,10 +51,21 @@ const wBastionField = xRefresh - 6 - xBastionField;
 const xTab2 = 18 + tw(t('TabIPAddress'), F);
 const xTab3 = xTab2 + tw(t('TabAzureVM'), F) + 10;
 
-// Radio pairs: the second control starts after the first label ends.
-const methodX2 = 16 + 8 + tw(t('ConnectionMethodTunnel'), F) + 10;
-const monitorX2 = 16 + 8 + tw(t('SingleMonitor'), F_S) + 9;
-const vmModeX2 = 161 + 7 + tw(t('SearchCurrentSubscription'), F_S) + 8;
+// Radio pairs. Each row picks the largest size at which both of the
+// application's own labels still fit, then the second control starts where
+// the first label actually ends. The left pairs are bounded by the column
+// divider at x=149, the right pair by the window edge at x=290.
+const methodSize = fitRow(
+  [t('ConnectionMethodTunnel'), t('ConnectionMethodRDGateway')], 133, 26, F);
+const methodX2 = 16 + 8 + tw(t('ConnectionMethodTunnel'), methodSize) + 10;
+
+const monitorSize = fitRow(
+  [t('SingleMonitor'), t('AllMonitors')], 133, 25, F_S);
+const monitorX2 = 16 + 8 + tw(t('SingleMonitor'), monitorSize) + 9;
+
+const vmModeSize = fitRow(
+  [t('SearchCurrentSubscription'), t('SearchAllSubscriptions')], 129, 22, F_S);
+const vmModeX2 = 161 + 7 + tw(t('SearchCurrentSubscription'), vmModeSize) + 8;
 
 // Right column: the two Refresh buttons hug the right edge, combos take the rest.
 const wRefreshVm = btnW(t('Refresh'), F_S, 10, 30);
@@ -67,7 +78,9 @@ const xTargetField = 14 + tw(t('TargetPort'), F_S);
 const xLocalLabel = xTargetField + 46;
 const xLocalField = xLocalLabel + tw(t('LocalPort'), F_S) + 4;
 
-const help = wrap(t('EntraIdAuthInfo'), 46, 3);
+// The help text runs from x=24 to the column divider at x=149.
+const help = wrap(t('EntraIdAuthInfo'), 120, 3, F_XS);
+const wConnect = btnW(t('Connect'), F, 22, 56, 'bold');
 const bottomY = mac ? 262 : 244;
 const id = `s-azurevm-${platform}-${lang}`;
 ---
@@ -128,19 +141,19 @@ const id = `s-azurevm-${platform}-${lang}`;
       <text class="ui-l" x="10" y="127" style={`font-size:${F}px`}>{t('ConnectionMethod')}</text>
       <circle class={mac ? 'ui-ro on' : 'ui-ro'} cx="16" cy="137" r="4"/>
       {mac && <circle class="ui-rd" cx="16" cy="137" r="2"/>}
-      <text class="ui-tb" x="24" y="140" style={`font-size:${F}px`}>{t('ConnectionMethodTunnel')}</text>
+      <text class="ui-tb" x="24" y="140" style={`font-size:${methodSize}px`}>{t('ConnectionMethodTunnel')}</text>
       <circle class={mac ? 'ui-ro' : 'ui-ro on'} cx={methodX2} cy="137" r="4"/>
       {!mac && <circle class="ui-rd" cx={methodX2} cy="137" r="2"/>}
-      <text class="ui-tb" x={methodX2 + 8} y="140" style={`font-size:${F}px`}>{t('ConnectionMethodRDGateway')}</text>
+      <text class="ui-tb" x={methodX2 + 8} y="140" style={`font-size:${methodSize}px`}>{t('ConnectionMethodRDGateway')}</text>
 
       {/* RD Gateway only: monitor configuration and the Entra ID option */}
       {!mac && (
         <>
           <text class="ui-l" x="10" y="158" style={`font-size:${F}px`}>{t('MonitorConfiguration')}</text>
           <circle class="ui-ro on" cx="16" cy="168" r="4"/><circle class="ui-rd" cx="16" cy="168" r="2"/>
-          <text class="ui-tb" x="24" y="171" style={`font-size:${F_S}px`}>{t('SingleMonitor')}</text>
+          <text class="ui-tb" x="24" y="171" style={`font-size:${monitorSize}px`}>{t('SingleMonitor')}</text>
           <circle class="ui-ro" cx={monitorX2} cy="168" r="4"/>
-          <text class="ui-tb" x={monitorX2 + 8} y="171" style={`font-size:${F_S}px`}>{t('AllMonitors')}</text>
+          <text class="ui-tb" x={monitorX2 + 8} y="171" style={`font-size:${monitorSize}px`}>{t('AllMonitors')}</text>
 
           <rect class="ui-ck off" x="12" y="184" width="8" height="8" rx="2"/>
           <text class="ui-tb" x="24" y="191" style={`font-size:${F_S}px`}>{t('UseEntraIdAuth')}</text>
@@ -153,9 +166,9 @@ const id = `s-azurevm-${platform}-${lang}`;
       {/* RIGHT — virtual machine selection */}
       <text class="ui-l" x="156" y="127" style={`font-size:${F}px`}>{t('VirtualMachine')}</text>
       <circle class="ui-ro on" cx="161" cy="137" r="4"/><circle class="ui-rd" cx="161" cy="137" r="2"/>
-      <text class="ui-tb" x="168" y="140" style={`font-size:${F_S}px`}>{t('SearchCurrentSubscription')}</text>
+      <text class="ui-tb" x="168" y="140" style={`font-size:${vmModeSize}px`}>{t('SearchCurrentSubscription')}</text>
       <circle class="ui-ro" cx={vmModeX2} cy="137" r="4"/>
-      <text class="ui-tb" x={vmModeX2 + 7} y="140" style={`font-size:${F_S}px`}>{t('SearchAllSubscriptions')}</text>
+      <text class="ui-tb" x={vmModeX2 + 7} y="140" style={`font-size:${vmModeSize}px`}>{t('SearchAllSubscriptions')}</text>
 
       <rect class="ui-field" x="156" y="146" width={wCombo} height="14" rx="3"/>
       <text class="ui-v" x="161" y="156" style="font-size:5.6px">{fit('Identity - West Europe', wCombo, 5.6)}</text>
@@ -197,8 +210,8 @@ const id = `s-azurevm-${platform}-${lang}`;
       <text class="ui-p" x="16" y={bottomY + 11} style="font-size:5.2px">{LANG_FLAG[lang]}</text>
       <text class="ui-tb" x="27" y={bottomY + 11} style={`font-size:${F_S}px`}>{LANG_NAME[lang]}</text>
 
-      <rect class="ui-btn" x={290 - btnW(t('Connect'), F, 22, 56)} y={bottomY} width={btnW(t('Connect'), F, 22, 56)} height="16" rx="3"/>
-      <text class="ui-bt" x={290 - btnW(t('Connect'), F, 22, 56) / 2} y={bottomY + 11} text-anchor="middle" style={`font-size:${F}px`}>{t('Connect')}</text>
+      <rect class="ui-btn" x={290 - wConnect} y={bottomY} width={wConnect} height="16" rx="3"/>
+      <text class="ui-bt" x={290 - wConnect / 2} y={bottomY + 11} text-anchor="middle" style={`font-size:${F}px`}>{t('Connect')}</text>
     </svg>
   </div>
   {caption && <figcaption><b>{mac ? 'macOS' : 'Windows'}</b> {caption}</figcaption>}
