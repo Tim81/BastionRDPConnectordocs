@@ -1,0 +1,66 @@
+---
+title: Conectarse a una VM de Azure
+description: Elija una máquina virtual por nombre, en una suscripción o en todas ellas, compruebe su estado de energía, inícela si es necesario y conéctese.
+appliesTo: '3.3.5'
+lastReviewed: '2026-08-01'
+---
+import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
+
+
+La pestaña Azure VM lista las máquinas virtuales por nombre en lugar de pedir una dirección. Se divide en dos columnas: configuración de conexión a la izquierda, selección de VM a la derecha. Qué método de conexión está seleccionado de forma predeterminada depende de la plataforma, por lo que ambas se muestran a continuación.
+
+## La pestaña Azure VM
+
+<ScreenAzureVm platform="windows" caption={`La pestaña Azure VM en Windows. RD Gateway es el predeterminado.`} lang="es" />
+
+<ScreenAzureVm platform="macos" caption={`La pestaña Azure VM en macOS. Túnel es el predeterminado. RD Gateway se puede seleccionar igualmente, y la aplicación avisa antes de usarlo.`} lang="es" />
+
+El predeterminado solo se aplica hasta que usted mismo elija un método; después, su elección se guarda por inquilino y se restaura la próxima vez que abra la aplicación.
+
+## Elegir una VM
+
+Un par de botones de opción encima de la lista de VM controla cómo funciona la búsqueda.
+
+| Modo | Comportamiento |
+| --- | --- |
+| Esta suscripción (predeterminado) | Lista de inmediato todas las VM de la suscripción seleccionada. Escriba en el cuadro de filtro para acotarla por nombre. La lista desplegable de suscripciones solo muestra las que realmente contienen VM. |
+| Todas las suscripciones | Busca en todas las suscripciones que su cuenta puede ver, mediante Azure Resource Graph. Requiere al menos tres caracteres antes de devolver resultados. Cargar VM en unas 200 suscripciones tarda de 2 a 4 segundos, frente a los 30 a 60 segundos de consultar cada suscripción por separado. |
+
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>El filtrado por etiqueta funciona junto con el filtro de nombre en ambos modos, de modo que puede acotar aún más una lista larga antes de elegir una VM.</p>
+</div>
+
+## Campos
+
+| Campo | Descripción |
+| --- | --- |
+| Método de conexión | Túnel o RD Gateway. El predeterminado es RD Gateway en Windows y Túnel en macOS. |
+| Monitores | Monitor único o todos los monitores. Solo aplica a RD Gateway. |
+| Autenticación Entra ID | Opcional, se muestra solo para RD Gateway. Habilita el inicio de sesión único cuando su cuenta y la VM comparten inquilino. |
+| Máquina virtual | La VM a la que conectarse, elegida de la lista de la derecha. |
+| Puerto de destino, puerto local | Se usan solo en modo Túnel, y se comparten con la pestaña Dirección IP. |
+
+Antes de conectar, la aplicación comprueba la SKU de Bastion y sus marcadores de características, y el estado de energía de la VM, e indica qué falta si una comprobación no se cumple. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión.
+
+## Estado de energía e inicio de una VM
+
+El estado de energía de la VM seleccionada se muestra junto a su nombre.
+
+| Estado | Significado |
+| --- | --- |
+| En ejecución (verde) | La VM está encendida y lista para aceptar conexiones. |
+| Detenida o desasignada (rojo) | La VM está apagada. Aparece un botón **Iniciar**. |
+| Iniciando, deteniendo u otro (ámbar) | La VM está en un estado intermedio. Se muestra un indicador de progreso mientras la aplicación espera a que se estabilice. |
+
+Para iniciar una VM detenida, seleccione **Iniciar**. El botón se reemplaza por un indicador de progreso mientras la aplicación consulta a Azure el estado actualizado, una vez cada 5 segundos durante un máximo de 5 minutos. Cuando el estado se pone en verde, una notificación confirma que la VM está lista y **Conectar** queda disponible.
+
+<div class="callout warn">
+<span class="eyebrow">Iniciar requiere más que Lector</span>
+<p>Iniciar una VM requiere el rol Virtual Machine Contributor o un rol con derechos equivalentes. Si el botón Iniciar no aparece, lo más probable es que su cuenta solo tenga el rol Lector en esa VM.</p>
+</div>
+
+<div class="callout note">
+<span class="eyebrow">En ejecución no es lo mismo que lista</span>
+<p>En ejecución significa que Azure ha encendido la VM. El sistema operativo invitado todavía necesita uno o dos minutos para terminar de arrancar antes de aceptar conexiones RDP. Si una conexión se rechaza justo después de que el estado se ponga en verde, espere un par de minutos e inténtelo de nuevo. Conectar vuelve a comprobar el estado de energía en el momento en que lo selecciona, incluso si hizo clic justo después de que cambiara el indicador.</p>
+</div>

@@ -1,0 +1,66 @@
+---
+title: Ligar a uma VM do Azure
+description: Escolha uma máquina virtual pelo nome, numa subscrição ou em todas, verifique o seu estado de energia, inicie-a se necessário, e ligue.
+appliesTo: '3.3.5'
+lastReviewed: '2026-08-01'
+---
+import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
+
+
+O separador Azure VM lista as máquinas virtuais pelo nome em vez de pedir um endereço. Divide-se em duas colunas: definições de ligação à esquerda, seleção de VM à direita. O método de ligação selecionado por predefinição depende da plataforma, pelo que ambos são mostrados abaixo.
+
+## O separador Azure VM
+
+<ScreenAzureVm platform="windows" caption={`O separador Azure VM no Windows. RD Gateway é a predefinição.`} lang="pt" />
+
+<ScreenAzureVm platform="macos" caption={`O separador Azure VM no macOS. Túnel é a predefinição. O RD Gateway continua a poder ser selecionado, e a aplicação avisa antes de o utilizar.`} lang="pt" />
+
+A predefinição só se aplica até escolher um método por si mesmo; depois disso, a sua escolha é guardada por inquilino e restaurada da próxima vez que abrir a aplicação.
+
+## Escolher uma VM
+
+Um par de botões de opção por cima da lista de VMs controla o funcionamento da pesquisa.
+
+| Modo | Comportamento |
+| --- | --- |
+| Esta subscrição (predefinição) | Lista de imediato todas as VMs da subscrição selecionada. Escreva na caixa de filtro para restringir por nome. A lista pendente de subscrições só mostra as subscrições que efetivamente contêm VMs. |
+| Todas as subscrições | Pesquisa em todas as subscrições que a sua conta consegue ver, utilizando o Azure Resource Graph. Requer pelo menos três carateres antes de devolver resultados. Carregar VMs em cerca de 200 subscrições demora 2 a 4 segundos, em vez de 30 a 60 segundos quando cada subscrição é consultada uma a uma. |
+
+<div class="callout note">
+<span class="eyebrow">Nota</span>
+<p>O filtro por etiqueta funciona em conjunto com o filtro de nome em ambos os modos, para que possa restringir ainda mais uma lista extensa antes de escolher uma VM.</p>
+</div>
+
+## Campos
+
+| Campo | Descrição |
+| --- | --- |
+| Método de ligação | Túnel ou RD Gateway. A predefinição é RD Gateway no Windows e Túnel no macOS. |
+| Monitores | Monitor único ou todos os monitores. Aplica-se apenas ao RD Gateway. |
+| Auth Entra ID | Opcional, mostrado apenas para o RD Gateway. Ativa o início de sessão único quando a sua conta e a VM partilham o mesmo inquilino. |
+| Máquina virtual | A VM à qual ligar, escolhida na lista à direita. |
+| Porta de destino, porta local | Utilizadas apenas no modo Túnel, e partilhadas com o separador Endereço IP. |
+
+Antes de ligar, a aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades, e o estado de energia da VM, e indica o que está em falta se uma verificação falhar. Estas verificações são fail-open: uma verificação que não consiga concluir não bloqueia a ligação.
+
+## Estado de energia e iniciar uma VM
+
+O estado de energia da VM selecionada aparece junto ao seu nome.
+
+| Estado | Significado |
+| --- | --- |
+| Em execução (verde) | A VM está ligada e pronta para ligações. |
+| Parada ou desalocada (vermelho) | A VM está desligada. Aparece um botão **Iniciar**. |
+| A iniciar, a parar, ou outro (âmbar) | A VM está entre estados. É mostrado um indicador de progresso enquanto a aplicação espera que estabilize. |
+
+Para iniciar uma VM parada, selecione **Iniciar**. O botão é substituído por um indicador de progresso enquanto a aplicação consulta o Azure para obter o estado atualizado, uma vez a cada 5 segundos durante até 5 minutos. Quando o estado fica verde, uma notificação confirma que a VM está pronta e o botão **Ligar** fica disponível.
+
+<div class="callout warn">
+<span class="eyebrow">Iniciar precisa de mais do que Leitor</span>
+<p>Iniciar uma VM requer a função Virtual Machine Contributor ou uma função com direitos equivalentes. Se o botão Iniciar não aparecer, a sua conta provavelmente só tem Leitor nessa VM.</p>
+</div>
+
+<div class="callout note">
+<span class="eyebrow">Em execução não é o mesmo que pronta</span>
+<p>Em execução significa que o Azure ligou a VM. O sistema operativo convidado ainda precisa de um ou dois minutos para terminar o arranque antes de aceitar ligações RDP. Se uma ligação for recusada logo depois de o estado ficar verde, aguarde alguns minutos e tente novamente. O botão Ligar volta a verificar o estado de energia no momento em que o seleciona, mesmo que tenha clicado logo a seguir à mudança do indicador.</p>
+</div>

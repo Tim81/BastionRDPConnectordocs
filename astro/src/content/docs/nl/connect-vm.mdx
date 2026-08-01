@@ -1,0 +1,66 @@
+---
+title: Verbinden met een Azure VM
+description: Kies een virtuele machine op naam, binnen één subscription of over alle, controleer de energiestatus, start deze indien nodig, en maak verbinding.
+appliesTo: '3.3.5'
+lastReviewed: '2026-08-01'
+---
+import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
+
+
+Het tabblad Azure VM toont virtuele machines op naam in plaats van naar een adres te vragen. Het is verdeeld in twee kolommen: verbindingsinstellingen links, VM-selectie rechts. Welke verbindingsmethode standaard geselecteerd is, hangt af van het platform, dus beide worden hieronder getoond.
+
+## Het tabblad Azure VM
+
+<ScreenAzureVm platform="windows" caption={`Het tabblad Azure VM op Windows. RD Gateway is de standaard.`} lang="nl" />
+
+<ScreenAzureVm platform="macos" caption={`Het tabblad Azure VM op macOS. Tunnel is de standaard. RD Gateway kan nog steeds worden gekozen, en de applicatie waarschuwt voordat deze wordt gebruikt.`} lang="nl" />
+
+De standaard geldt alleen totdat u zelf een methode kiest; daarna wordt uw keuze per tenant opgeslagen en hersteld de volgende keer dat u de app opent.
+
+## Een VM kiezen
+
+Een paar keuzerondjes boven de VM-lijst bepaalt hoe het zoeken werkt.
+
+| Modus | Gedrag |
+| --- | --- |
+| VM Subscription (standaard) | Toont direct elke VM in de geselecteerde subscription. Typ in het filtervak om te filteren op naam. Het subscription-dropdown toont alleen subscriptions die daadwerkelijk VM's bevatten. |
+| Alle abonnementen | Zoekt over elke subscription die uw account kan zien, via Azure Resource Graph. Vereist minimaal drie tekens voordat resultaten worden getoond. VM's laden over ongeveer 200 subscriptions duurt 2 tot 4 seconden, tegenover 30 tot 60 seconden wanneer elke subscription apart wordt bevraagd. |
+
+<div class="callout note">
+<span class="eyebrow">Opmerking</span>
+<p>Filteren op tag werkt naast het naamfilter in beide modi, zodat u een grote lijst verder kunt versmallen voordat u een VM kiest.</p>
+</div>
+
+## Velden
+
+| Veld | Beschrijving |
+| --- | --- |
+| Verbindingsmethode | Tunnel of RD Gateway. Standaard is RD Gateway op Windows en Tunnel op macOS. |
+| Monitors | Enkel beeldscherm of alle schermen. Geldt alleen voor RD Gateway. |
+| Entra ID-authenticatie | Optioneel, alleen getoond voor RD Gateway. Schakelt single sign-on in wanneer uw account en de VM dezelfde tenant delen. |
+| Virtuele machine | De VM waarmee verbinding wordt gemaakt, gekozen uit de lijst rechts. |
+| Doelpoort, lokale poort | Alleen gebruikt in Tunnelmodus, en gedeeld met het tabblad IP-adres. |
+
+Voordat er verbinding wordt gemaakt, controleert de applicatie de Bastion-SKU en de bijbehorende functievlaggen, en de energiestatus van de VM, en laat weten wat ontbreekt als een controle mislukt. Deze controles zijn fail-open: een controle die niet kan worden voltooid, blokkeert de verbinding niet.
+
+## Energiestatus en een VM starten
+
+De energiestatus van de geselecteerde VM staat naast de naam.
+
+| Status | Betekenis |
+| --- | --- |
+| Actief (groen) | De VM staat aan en is klaar voor verbindingen. |
+| Gestopt of vrijgegeven (rood) | De VM staat uit. Er verschijnt een knop **Start VM**. |
+| Starten, stoppen of anders (oranje) | De VM bevindt zich tussen statussen in. Er verschijnt een voortgangsindicator terwijl de app wacht tot deze tot rust komt. |
+
+Om een gestopte VM te starten, selecteert u **Start VM**. De knop wordt vervangen door een voortgangsindicator terwijl de applicatie Azure bevraagt op de bijgewerkte status, elke 5 seconden gedurende maximaal 5 minuten. Wanneer de status groen wordt, bevestigt een toastmelding dat de VM klaar is en wordt **Verbinden** beschikbaar.
+
+<div class="callout warn">
+<span class="eyebrow">Starten vereist meer dan Reader</span>
+<p>Om een VM te starten is Virtual Machine Contributor nodig, of een rol met gelijkwaardige rechten. Als de knop Start VM niet verschijnt, heeft uw account op die VM hoogstwaarschijnlijk alleen Reader.</p>
+</div>
+
+<div class="callout note">
+<span class="eyebrow">Actief is niet hetzelfde als klaar</span>
+<p>Actief betekent dat Azure de VM heeft ingeschakeld. Het gastbesturingssysteem heeft nog een minuut of twee nodig om het opstarten te voltooien voordat het RDP-verbindingen accepteert. Als een verbinding meteen wordt geweigerd nadat de status groen is geworden, wacht dan een paar minuten en probeer het opnieuw. Verbinden controleert de energiestatus opnieuw op het moment dat u erop klikt, zelfs als u er direct na het wijzigen van de indicator op klikte.</p>
+</div>

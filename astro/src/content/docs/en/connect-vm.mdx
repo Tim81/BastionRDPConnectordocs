@@ -1,0 +1,66 @@
+---
+title: Connect to an Azure VM
+description: Pick a virtual machine by name, across one subscription or all of them, check its power state, start it if needed, and connect.
+appliesTo: '3.3.5'
+lastReviewed: '2026-08-01'
+---
+import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
+
+
+The Azure VM tab lists virtual machines by name instead of asking for an address. It splits into two columns: connection settings on the left, VM selection on the right. Which connection method is selected by default depends on the platform, so both are shown below.
+
+## The Azure VM tab
+
+<ScreenAzureVm platform="windows" caption={`The Azure VM tab on Windows. RD Gateway is the default.`} lang="en" />
+
+<ScreenAzureVm platform="macos" caption={`The Azure VM tab on macOS. Tunnel is the default. RD Gateway can still be selected, and the application warns before using it.`} lang="en" />
+
+The default applies only until you pick a method yourself; after that, your choice is saved per tenant and restored the next time you open the app.
+
+## Choosing a VM
+
+A pair of radio buttons above the VM list controls how the search works.
+
+| Mode | Behaviour |
+| --- | --- |
+| VM Subscription (default) | Lists every VM in the selected subscription right away. Type in the filter box to narrow it by name. The subscription dropdown only shows subscriptions that actually contain VMs. |
+| All subscriptions | Searches across every subscription your account can see, using Azure Resource Graph. Needs at least three characters before it returns results. Loading VMs across roughly 200 subscriptions takes 2 to 4 seconds, against 30 to 60 seconds when each subscription is queried one at a time. |
+
+<div class="callout note">
+<span class="eyebrow">Note</span>
+<p>Filtering by tag works alongside the name filter in both modes, so you can narrow a large list further before picking a VM.</p>
+</div>
+
+## Fields
+
+| Field | Description |
+| --- | --- |
+| Connection method | Tunnel or RD Gateway. Default is RD Gateway on Windows and Tunnel on macOS. |
+| Monitors | Single monitor or all monitors. Applies to RD Gateway only. |
+| Entra ID auth | Optional, shown for RD Gateway only. Enables single sign-on when your account and the VM share a tenant. |
+| Virtual machine | The VM to connect to, picked from the list on the right. |
+| Target port, local port | Used only in Tunnel mode, and shared with the IP address tab. |
+
+Before connecting, the application checks the Bastion SKU and its feature flags, and the VM's power state, and tells you what is missing if a check fails. These checks fail open: a check that cannot complete does not block the connection.
+
+## Power state and starting a VM
+
+The selected VM's power state shows next to its name.
+
+| State | Meaning |
+| --- | --- |
+| Running (green) | The VM is on and ready for connections. |
+| Stopped or deallocated (red) | The VM is off. A **Start** button appears. |
+| Starting, stopping, or other (amber) | The VM is between states. A progress indicator shows while the app waits for it to settle. |
+
+To start a stopped VM, select **Start**. The button is replaced by a progress indicator while the application polls Azure for the updated state, once every 5 seconds for up to 5 minutes. When the state turns green, a toast notification confirms the VM is ready and **Connect** becomes available.
+
+<div class="callout warn">
+<span class="eyebrow">Starting needs more than Reader</span>
+<p>Starting a VM needs Virtual Machine Contributor or a role with equivalent rights. If the Start button does not appear, your account most likely only has Reader on that VM.</p>
+</div>
+
+<div class="callout note">
+<span class="eyebrow">Running is not the same as ready</span>
+<p>Running means Azure has powered the VM on. The guest operating system still needs a minute or two to finish booting before it accepts RDP connections. If a connection is refused right after the state turns green, wait a couple of minutes and try again. Connect re-checks the power state at the moment you select it, even if you clicked it right after the indicator changed.</p>
+</div>

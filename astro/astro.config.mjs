@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 
+import mdx from '@astrojs/mdx';
+
 // Azure Bastion RDP Connector docs.
 //
 // The built site is served from GitHub Pages at
@@ -16,9 +18,11 @@ export default defineConfig({
   site: 'https://tim81.github.io',
   base: '/BastionRDPConnectordocs/next',
   outDir: '../next',
+
   build: {
     format: 'directory',
   },
+
   i18n: {
     locales: ['en', 'nl', 'de', 'fr', 'es', 'pt'],
     defaultLocale: 'en',
@@ -26,4 +30,6 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
+  integrations: [mdx()],
 });

@@ -1,0 +1,66 @@
+---
+title: Verbindung zu einer Azure-VM herstellen
+description: Wählen Sie eine virtuelle Maschine nach Namen aus, über eine Subscription oder alle hinweg, prüfen Sie ihren Energiestatus, starten Sie sie bei Bedarf, und verbinden Sie sich.
+appliesTo: '3.3.5'
+lastReviewed: '2026-08-01'
+---
+import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
+
+
+Die Registerkarte Azure VM listet virtuelle Maschinen nach Namen auf, statt nach einer Adresse zu fragen. Sie ist in zwei Spalten unterteilt: Verbindungseinstellungen links, VM-Auswahl rechts. Welche Verbindungsmethode standardmäßig ausgewählt ist, hängt von der Plattform ab, daher werden beide unten gezeigt.
+
+## Die Registerkarte Azure VM
+
+<ScreenAzureVm platform="windows" caption={`Die Registerkarte Azure VM unter Windows. RD Gateway ist der Standard.`} lang="de" />
+
+<ScreenAzureVm platform="macos" caption={`Die Registerkarte Azure VM unter macOS. Tunnel ist der Standard. RD Gateway kann weiterhin ausgewählt werden, und die Anwendung warnt vor der Verwendung.`} lang="de" />
+
+Der Standard gilt nur, bis Sie selbst eine Methode wählen; danach wird Ihre Wahl pro Mandant gespeichert und beim nächsten Öffnen der App wiederhergestellt.
+
+## Eine VM auswählen
+
+Ein Paar Optionsfelder über der VM-Liste steuert, wie die Suche funktioniert.
+
+| Modus | Verhalten |
+| --- | --- |
+| VM Subscription (Standard) | Listet sofort jede VM in der ausgewählten Subscription auf. Tippen Sie in das Filterfeld, um nach Namen einzuschränken. Das Subscription-Dropdown zeigt nur Subscriptions, die tatsächlich VMs enthalten. |
+| Alle Subscriptions | Durchsucht mithilfe von Azure Resource Graph jede Subscription, die Ihr Konto sehen kann. Benötigt mindestens drei Zeichen, bevor Ergebnisse zurückgegeben werden. Das Laden von VMs über rund 200 Subscriptions dauert 2 bis 4 Sekunden, gegenüber 30 bis 60 Sekunden, wenn jede Subscription einzeln abgefragt wird. |
+
+<div class="callout note">
+<span class="eyebrow">Hinweis</span>
+<p>Die Filterung nach Tag funktioniert in beiden Modi zusätzlich zum Namensfilter, sodass Sie eine große Liste vor der Auswahl einer VM weiter einschränken können.</p>
+</div>
+
+## Felder
+
+| Feld | Beschreibung |
+| --- | --- |
+| Verbindungsmethode | Tunnel oder RD Gateway. Standard ist RD Gateway unter Windows und Tunnel unter macOS. |
+| Monitore | Einzelner Monitor oder alle Monitore. Gilt nur für RD Gateway. |
+| Entra ID-Auth | Optional, wird nur bei RD Gateway angezeigt. Aktiviert Single Sign-On, wenn Ihr Konto und die VM denselben Mandanten teilen. |
+| Virtuelle Maschine | Die VM, mit der eine Verbindung hergestellt wird, ausgewählt aus der Liste rechts. |
+| Zielport, lokaler Port | Nur im Tunnel-Modus verwendet, und mit der Registerkarte IP-Adresse geteilt. |
+
+Vor dem Verbinden prüft die Anwendung die Bastion-SKU und ihre Feature-Flags sowie den Energiestatus der VM und nennt Ihnen, was fehlt, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, blockiert die Verbindung nicht.
+
+## Energiestatus und eine VM starten
+
+Der Energiestatus der ausgewählten VM wird neben ihrem Namen angezeigt.
+
+| Status | Bedeutung |
+| --- | --- |
+| Aktiv (grün) | Die VM ist eingeschaltet und bereit für Verbindungen. |
+| Beendet oder freigegeben (rot) | Die VM ist ausgeschaltet. Eine Schaltfläche **Start** erscheint. |
+| Wird gestartet, wird beendet oder ein anderer Zwischenzustand (orange) | Die VM befindet sich zwischen zwei Zuständen. Ein Fortschrittsindikator wird angezeigt, während die App auf den endgültigen Zustand wartet. |
+
+Um eine gestoppte VM zu starten, wählen Sie **Start**. Die Schaltfläche wird durch einen Fortschrittsindikator ersetzt, während die Anwendung Azure alle 5 Sekunden für bis zu 5 Minuten nach dem aktualisierten Zustand abfragt. Wird der Status grün, bestätigt eine Toast-Benachrichtigung, dass die VM bereit ist, und **Verbinden** wird verfügbar.
+
+<div class="callout warn">
+<span class="eyebrow">Starten erfordert mehr als Reader</span>
+<p>Das Starten einer VM erfordert Virtual Machine Contributor oder eine Rolle mit gleichwertigen Rechten. Erscheint die Schaltfläche Start nicht, hat Ihr Konto auf dieser VM höchstwahrscheinlich nur Reader.</p>
+</div>
+
+<div class="callout note">
+<span class="eyebrow">Aktiv bedeutet nicht sofort bereit</span>
+<p>Aktiv bedeutet, dass Azure die VM eingeschaltet hat. Das Gastbetriebssystem benötigt noch ein bis zwei Minuten zum vollständigen Hochfahren, bevor es RDP-Verbindungen annimmt. Wird eine Verbindung unmittelbar nach dem Grünwerden des Status abgelehnt, warten Sie ein paar Minuten und versuchen Sie es erneut. Verbinden prüft den Energiestatus erneut in dem Moment, in dem Sie die Schaltfläche wählen, selbst wenn Sie direkt nach der Änderung des Indikators geklickt haben.</p>
+</div>

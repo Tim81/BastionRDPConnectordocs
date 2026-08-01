@@ -271,6 +271,21 @@ figcaption b { font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spac
 .ui-ro.on { stroke: var(--azure); }
 .ui-rd   { fill: var(--azure); }
 .ui-ck   { fill: var(--azure); }
+/* Unchecked box. Use EntraID Authentication ships off, so the schematics
+   need an empty box as often as a ticked one. */
+.ui-ck.off { fill: #fff; stroke: #9AA5B2; stroke-width: 1; }
+
+/* Logout carries the application's DangerButton class */
+.ui-btn-d { fill: var(--halt); }
+
+/* Dropdown chevrons on ComboBox fields */
+.ui-chev { stroke: #7B8794; stroke-width: 1; fill: none; }
+
+/* The window is drawn at roughly 0.47 scale, so control labels that sit
+   side by side in a column need the smaller step to stay in their box. */
+.ui-tb.sm { font-size: 7px; }
+.ui-v.sm  { font-size: 6.8px; }
+.ui-p.sm  { font-size: 7px; }
 
 .n-box  { fill: var(--paper); stroke: var(--rule); stroke-width: 1.25; }
 .n-hop  { fill: var(--ink); stroke: var(--ink); }
