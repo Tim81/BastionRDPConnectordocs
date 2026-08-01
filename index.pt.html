@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Documentação</div>
+    <div class="version">v3.3.5 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -1604,7 +1604,7 @@
         <tr><td>Perfil Azure <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Antes da v3.0: lista de subscrições e informações do utilizador com sessão iniciada. Partilhado com o Azure CLI.</td></tr>
         <tr><td>Configuração de cloud <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Antes da v3.0: configuração de endpoints de cloud Azure. Partilhado com o Azure CLI.</td></tr>
         <tr><td>Cache HTTP <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Antes da v3.0: cache de resposta HTTP. Partilhado com o Azure CLI.</td></tr>
-        <tr><td>Registo de depuração</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registo de diagnóstico para resolução de problemas. Limpo em cada arranque da aplicação.</td></tr>
+        <tr><td>Registo de depuração</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registo de diagnóstico para resolução de problemas. Rodado em cada arranque da aplicação: a sessão anterior passa a <code>debug.0.log</code> e os arquivos mais antigos deslizam até <code>debug.9.log</code>, que é descartado.</td></tr>
         <tr><td>Ficheiros RDP temporários</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Ficheiros RDP temporários criados por ligações RD Gateway. Eliminados quando a aplicação fecha.</td></tr>
       </tbody>
     </table>
@@ -1631,6 +1631,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td><em>Log</em> deixa de ser traduzido em alemão, francês e espanhol</td><td>O botão <em>Abrir pasta de log</em> e a mensagem de falha de ligação traduziam <em>log</em> como <em>Protokoll</em>, <em>journal</em> e <em>registro</em>, que se leem como um diário de bordo comum em vez do termo técnico. Ambos passam a manter o estrangeirismo: <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. O português já usava <em>log</em>; o inglês e o neerlandês não mudam.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.4</h3>
     <table class="field-table">
@@ -1746,7 +1754,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

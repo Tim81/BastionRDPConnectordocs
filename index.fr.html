@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Documentation</div>
+    <div class="version">v3.3.5 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Langue</div>
@@ -1570,8 +1570,8 @@
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td>Ouvrir le dossier des journaux</td><td>Ouvre le répertoire contenant <code>debug.log</code> dans l'Explorateur Windows (ou le Finder sur macOS). Contient aussi jusqu'à dix journaux de session archivés, de <code>debug.0.log</code> à <code>debug.9.log</code>. Utile lorsque vous devez localiser le fichier journal pour l'envoyer au support.</td></tr>
-        <tr><td>Copier les infos de diagnostic</td><td>Copie un bundle de diagnostic dans le presse-papiers : informations système (OS, version de l'app, plateforme) ainsi que le journal de débogage actuel et les journaux de session archivés, du plus récent au plus ancien, chacun limité à 100 Ko et l'ensemble du bundle limité à environ 1 Mo. Tout est déjà épuré.</td></tr>
+        <tr><td>Ouvrir le dossier de log</td><td>Ouvre le répertoire contenant <code>debug.log</code> dans l'Explorateur Windows (ou le Finder sur macOS). Contient aussi jusqu'à dix journaux de session archivés, de <code>debug.0.log</code> à <code>debug.9.log</code>. Utile lorsque vous devez localiser le fichier journal pour l'envoyer au support.</td></tr>
+        <tr><td>Copier les informations de diagnostic</td><td>Copie un bundle de diagnostic dans le presse-papiers : informations système (OS, version de l'app, plateforme) ainsi que le journal de débogage actuel et les journaux de session archivés, du plus récent au plus ancien, chacun limité à 100 Ko et l'ensemble du bundle limité à environ 1 Mo. Tout est déjà épuré.</td></tr>
       </tbody>
     </table>
 
@@ -1598,7 +1598,7 @@
         <tr><td>Profil Azure <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Avant v3.0 : liste des abonnements et informations de l'utilisateur connecté. Partagé avec Azure CLI.</td></tr>
         <tr><td>Configuration cloud <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Avant v3.0 : configuration des points de terminaison Azure cloud. Partagé avec Azure CLI.</td></tr>
         <tr><td>Cache HTTP <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Avant v3.0 : cache de réponse HTTP. Partagé avec Azure CLI.</td></tr>
-        <tr><td>Journal de débogage</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Journal de diagnostic pour le dépannage. Effacé à chaque démarrage de l'application.</td></tr>
+        <tr><td>Journal de débogage</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Journal de diagnostic pour le dépannage. Permuté à chaque démarrage de l'application : la session précédente devient <code>debug.0.log</code> et les archives plus anciennes glissent jusqu'à <code>debug.9.log</code>, qui est supprimé.</td></tr>
         <tr><td>Fichiers RDP temporaires</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Fichiers RDP temporaires créés par les connexions RD Gateway. Supprimés à la fermeture de l'application.</td></tr>
       </tbody>
     </table>
@@ -1626,13 +1626,21 @@
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Nouveautés</h2>
 
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td><em>Log</em> n'est plus traduit en allemand, français et espagnol</td><td>Le bouton <em>Ouvrir le dossier de log</em> et le message d'échec de connexion rendaient <em>log</em> par <em>Protokoll</em>, <em>journal</em> et <em>registro</em>, ce qui évoque un carnet de bord ordinaire plutôt que le terme technique. Les deux conservent désormais l'emprunt : <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. L'anglais, le néerlandais et le portugais sont inchangés.</td></tr>
+      </tbody>
+    </table>
+
     <h3>v3.3.4</h3>
     <table class="field-table">
       <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
       <tbody>
         <tr><td>Icône de la zone de notification restaurée</td><td>L'icône de la zone de notification n'apparaissait pas sous Windows dans les versions 3.2 à 3.3.3. La réduction vers la zone de notification, les notifications de tunnel et le menu contextuel fonctionnent désormais comme le décrit cette documentation.</td></tr>
         <tr><td>Historique de dix sessions de journaux</td><td><code>debug.log</code> était auparavant écrasé à chaque démarrage de l'application. Les dix dernières sessions sont désormais conservées sous <code>debug.0.log</code> à <code>debug.9.log</code>, si bien que le journal de la session où un problème s'est produit survit à un redémarrage.</td></tr>
-        <tr><td>Le bundle de diagnostic couvre les sessions passées</td><td><em>Copier les infos de diagnostic</em> inclut désormais les journaux de session archivés en plus du journal actuel, du plus récent au plus ancien, jusqu'à environ 1 Mo.</td></tr>
+        <tr><td>Le bundle de diagnostic couvre les sessions passées</td><td><em>Copier les informations de diagnostic</em> inclut désormais les journaux de session archivés en plus du journal actuel, du plus récent au plus ancien, jusqu'à environ 1 Mo.</td></tr>
         <tr><td>Le nettoyage se termine avant la fermeture de la fenêtre</td><td>Les tunnels actifs sont fermés et les fichiers <code>.rdp</code> temporaires sont supprimés avant la fermeture de la fenêtre. La déconnexion exécute le même nettoyage au lieu de terminer le processus immédiatement.</td></tr>
         <tr><td>Stockage du navigateur de connexion déplacé</td><td>Le navigateur de connexion intégré conservait son profil à côté du fichier de l'application, ce qui empêchait l'application de fonctionner depuis un dossier protégé en écriture tel que <code>Program Files</code>. Il utilise désormais <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. L'emplacement du cache de jetons est inchangé.</td></tr>
         <tr><td>Composants mis à jour</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
@@ -1648,7 +1656,7 @@
         <tr><td>Disposition en deux colonnes de l'onglet Azure VM</td><td>Les paramètres de connexion (méthode, moniteur, auth Entra ID) sont dans la colonne gauche ; la sélection de VM est dans la colonne droite. La disposition est plus claire et affiche plus d'informations sans défilement.</td></tr>
         <tr><td>Vérifications pré-connexion</td><td>Avant de se connecter, l'application vérifie automatiquement la SKU Bastion, les indicateurs de fonctionnalités Bastion (client natif / connexion basée sur IP) et l'état d'alimentation de la VM. Les vérifications sont fail-open.</td></tr>
         <tr><td>Reconnexion automatique du tunnel</td><td>Si la connexion WebSocket est interrompue, le tunnel se reconnecte automatiquement — jusqu'à 5 fois avec délai exponentiel. Les sessions RDP restent connectées pendant la fenêtre de reconnexion.</td></tr>
-        <tr><td>Boîte de dialogue À propos &amp; bundle de diagnostic</td><td>Nouveau bouton ℹ dans la barre supérieure. Ouvre la boîte de dialogue À propos avec <em>Ouvrir le dossier des journaux</em> et <em>Copier les infos de diagnostic</em> (infos système + 100 derniers Ko du journal épuré).</td></tr>
+        <tr><td>Boîte de dialogue À propos &amp; bundle de diagnostic</td><td>Nouveau bouton ℹ dans la barre supérieure. Ouvre la boîte de dialogue À propos avec <em>Ouvrir le dossier de log</em> et <em>Copier les informations de diagnostic</em> (infos système + 100 derniers Ko du journal épuré).</td></tr>
         <tr><td>Méthode de connexion par défaut selon la plateforme</td><td>Windows utilise <strong>RD Gateway</strong> par défaut ; macOS utilise <strong>Tunnel</strong> par défaut (l'application Windows sur macOS ne prend pas en charge Azure Bastion en tant que RD Gateway). La valeur par défaut s'applique uniquement si aucune préférence n'a été enregistrée.</td></tr>
         <tr><td>Support des écrans HD Ready</td><td>La fenêtre est maintenant de 580×760 pixels (était ~540×700). S'adapte sans barre de défilement aux écrans 1280×720 HD Ready.</td></tr>
       </tbody>
@@ -1748,7 +1756,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
 </footer>
 </div>
 

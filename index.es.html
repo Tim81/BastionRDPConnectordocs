@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Documentación</div>
+    <div class="version">v3.3.5 · Documentación</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -1578,7 +1578,7 @@
     <table class="field-table">
       <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
       <tbody>
-        <tr><td>Abrir carpeta de registros</td><td>Abre el directorio que contiene <code>debug.log</code> en el Explorador de Windows (o Finder en macOS). También contiene hasta diez registros de sesiones archivadas, de <code>debug.0.log</code> a <code>debug.9.log</code>. Útil cuando necesita localizar el archivo de registro para enviarlo a soporte.</td></tr>
+        <tr><td>Abrir carpeta de log</td><td>Abre el directorio que contiene <code>debug.log</code> en el Explorador de Windows (o Finder en macOS). También contiene hasta diez registros de sesiones archivadas, de <code>debug.0.log</code> a <code>debug.9.log</code>. Útil cuando necesita localizar el archivo de registro para enviarlo a soporte.</td></tr>
         <tr><td>Copiar información de diagnóstico</td><td>Copia un paquete de diagnóstico al portapapeles: información del sistema (SO, versión de la app, plataforma) más el registro de depuración actual y los registros de sesiones archivadas, del más reciente al más antiguo, cada uno limitado a 100 KB y el paquete completo limitado a aproximadamente 1 MB. Todo ya está redactado.</td></tr>
       </tbody>
     </table>
@@ -1606,7 +1606,7 @@
         <tr><td>Perfil Azure <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Antes de v3.0: lista de suscripciones e información del usuario conectado. Compartido con Azure CLI.</td></tr>
         <tr><td>Configuración cloud <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Antes de v3.0: configuración de punto de conexión de Azure cloud. Compartido con Azure CLI.</td></tr>
         <tr><td>Caché HTTP <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Antes de v3.0: caché de respuesta HTTP. Compartido con Azure CLI.</td></tr>
-        <tr><td>Registro de depuración</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registro de diagnóstico para solución de problemas. Borrado en cada inicio de la aplicación.</td></tr>
+        <tr><td>Registro de depuración</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registro de diagnóstico para solución de problemas. Rota en cada inicio de la aplicación: la sesión anterior pasa a <code>debug.0.log</code> y los archivos más antiguos se desplazan hasta <code>debug.9.log</code>, que se descarta.</td></tr>
         <tr><td>Archivos RDP temporales</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Archivos RDP temporales creados por conexiones RD Gateway. Eliminados cuando la aplicación se cierra.</td></tr>
       </tbody>
     </table>
@@ -1634,6 +1634,14 @@
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novedades</h2>
 
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td><em>Log</em> deja de traducirse en alemán, francés y español</td><td>El botón <em>Abrir carpeta de log</em> y el mensaje de conexión fallida traducían <em>log</em> como <em>Protokoll</em>, <em>journal</em> y <em>registro</em>, que se leen como un cuaderno de bitácora corriente en lugar del término técnico. Ambos mantienen ahora el préstamo: <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. El inglés, el neerlandés y el portugués no cambian.</td></tr>
+      </tbody>
+    </table>
+
     <h3>v3.3.4</h3>
     <table class="field-table">
       <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
@@ -1656,7 +1664,7 @@
         <tr><td>Diseño de dos columnas de la pestaña Azure VM</td><td>La configuración de conexión (método, monitor, auth Entra ID) está en la columna izquierda; la selección de VM está en la columna derecha. El diseño es más claro y muestra más información sin desplazamiento.</td></tr>
         <tr><td>Comprobaciones preliminares</td><td>Antes de conectar, la aplicación verifica automáticamente la SKU de Bastion, los marcadores de características de Bastion (cliente nativo / conexión basada en IP) y el estado de energía de la VM. Las comprobaciones son fail-open.</td></tr>
         <tr><td>Reconexión automática del túnel</td><td>Si la conexión WebSocket se interrumpe, el túnel se reconecta automáticamente — hasta 5 veces con retroceso exponencial. Las sesiones RDP permanecen conectadas durante la ventana de reconexión.</td></tr>
-        <tr><td>Cuadro de diálogo Acerca de &amp; paquete de diagnóstico</td><td>Nuevo botón ℹ en la barra superior. Abre el cuadro de diálogo Acerca de con <em>Abrir carpeta de registros</em> y <em>Copiar información de diagnóstico</em> (info del sistema + últimos 100 KB del registro redactado).</td></tr>
+        <tr><td>Cuadro de diálogo Acerca de &amp; paquete de diagnóstico</td><td>Nuevo botón ℹ en la barra superior. Abre el cuadro de diálogo Acerca de con <em>Abrir carpeta de log</em> y <em>Copiar información de diagnóstico</em> (info del sistema + últimos 100 KB del registro redactado).</td></tr>
         <tr><td>Método de conexión predeterminado por plataforma</td><td>Windows usa <strong>RD Gateway</strong> de forma predeterminada; macOS usa <strong>Túnel</strong> de forma predeterminada (la aplicación Windows en macOS no admite Azure Bastion como RD Gateway). El valor predeterminado se aplica solo si no se ha guardado ninguna preferencia.</td></tr>
         <tr><td>Compatibilidad con pantallas HD Ready</td><td>La ventana ahora mide 580×760 píxeles (antes ~540×700). Cabe sin barra de desplazamiento en pantallas 1280×720 HD Ready.</td></tr>
       </tbody>
@@ -1748,7 +1756,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
 </footer>
 </div>
 

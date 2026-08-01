@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Documentation</div>
+    <div class="version">v3.3.5 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Language</div>
@@ -1592,7 +1592,7 @@
         <tr><td>Azure profile <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Pre-v3.0: subscription list and signed-in user info. Shared with Azure CLI.</td></tr>
         <tr><td>Cloud config <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Pre-v3.0: Azure cloud endpoint configuration. Shared with Azure CLI.</td></tr>
         <tr><td>HTTP cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Pre-v3.0: HTTP response cache. Shared with Azure CLI.</td></tr>
-                                <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log for troubleshooting. Cleared on every application start.</td></tr>
+                                <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log for troubleshooting. Rotated on every application start: the previous session becomes <code>debug.0.log</code> and the older archives shift down to <code>debug.9.log</code>, which is discarded.</td></tr>
         <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Deleted when the application closes.</td></tr>
       </tbody>
     </table>
@@ -1619,6 +1619,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> What's New</h2>
+
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>"Log" kept untranslated in German, French and Spanish</td><td>The <em>Open Log Folder</em> button and the failed-connection message rendered "log" as <em>Protokoll</em>, <em>journal</em> and <em>registro</em>, which read as an ordinary logbook rather than the technical term. Both now keep the loanword and inflect only the surrounding grammar: <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. English, Dutch and Portuguese are unchanged.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.4</h3>
     <table class="field-table">
@@ -1742,7 +1750,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
 </footer>
 </div>
 

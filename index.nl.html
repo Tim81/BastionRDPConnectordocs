@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Documentatie</div>
+    <div class="version">v3.3.5 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -1565,7 +1565,7 @@
     <table class="field-table">
       <thead><tr><th>Actie</th><th>Beschrijving</th></tr></thead>
       <tbody>
-        <tr><td>Logboekmap openen</td><td>Opent de map met <code>debug.log</code> in Windows Verkenner (of Finder op macOS). Deze map bevat ook tot tien gearchiveerde sessielogboeken, <code>debug.0.log</code> tot en met <code>debug.9.log</code>. Handig wanneer u het logboekbestand moet vinden om naar ondersteuning te sturen.</td></tr>
+        <tr><td>Open logmap</td><td>Opent de map met <code>debug.log</code> in Windows Verkenner (of Finder op macOS). Deze map bevat ook tot tien gearchiveerde sessielogboeken, <code>debug.0.log</code> tot en met <code>debug.9.log</code>. Handig wanneer u het logboekbestand moet vinden om naar ondersteuning te sturen.</td></tr>
         <tr><td>Diagnostische info kopiëren</td><td>Kopieert een diagnostisch pakket naar het klembord: systeeminformatie (besturingssysteem, app-versie, platform) plus het huidige foutopsporingslogboek en de gearchiveerde sessielogboeken, nieuwste eerst, elk beperkt tot 100 KB en het volledige pakket tot ongeveer 1 MB. Alles is al geredigeerd.</td></tr>
       </tbody>
     </table>
@@ -1593,7 +1593,7 @@
         <tr><td>Azure-profiel <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Vóór v3.0: subscription-lijst en aangemelde gebruikersinformatie. Gedeeld met Azure CLI.</td></tr>
         <tr><td>Cloudconfiguratie <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Vóór v3.0: Azure-cloud-eindpuntconfiguratie. Gedeeld met Azure CLI.</td></tr>
         <tr><td>HTTP-cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Vóór v3.0: HTTP-antwoordcache. Gedeeld met Azure CLI.</td></tr>
-        <tr><td>Debug logboek</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostisch logboek. Wordt gewist bij elke start van de applicatie.</td></tr>
+        <tr><td>Debug logboek</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostisch logboek. Rouleert bij elke start van de applicatie: de vorige sessie wordt <code>debug.0.log</code> en de oudere archieven schuiven door tot <code>debug.9.log</code>, dat vervalt.</td></tr>
         <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Verwijderd bij afsluiten.</td></tr>
       </tbody>
     </table>
@@ -1621,6 +1621,14 @@
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
 
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><em>Log</em> blijft onvertaald in het Duits, Frans en Spaans</td><td>De knop <em>Open logmap</em> en de melding bij een mislukte verbinding gaven <em>log</em> weer als <em>Protokoll</em>, <em>journal</em> en <em>registro</em>, wat eerder als een gewoon logboek leest dan als de technische term. Beide houden nu het leenwoord aan: <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. Nederlands, Engels en Portugees zijn ongewijzigd — die gebruikten het woord al.</td></tr>
+      </tbody>
+    </table>
+
     <h3>v3.3.4</h3>
     <table class="field-table">
       <thead><tr><th>Functie</th><th>Details</th></tr></thead>
@@ -1643,7 +1651,7 @@
         <tr><td>Twee-kolommenindeling Azure VM tabblad</td><td>Verbindingsinstellingen (methode, monitor, Entra ID-auth) staan in de linkerkolom; VM-selectie staat in de rechterkolom. De indeling is overzichtelijker en past meer informatie zonder te scrollen.</td></tr>
         <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open.</td></tr>
         <tr><td>Automatisch herverbinden tunnel</td><td>Als de WebSocket-verbinding wegvalt, maakt de tunnel automatisch opnieuw verbinding — tot 5 keer met exponentieel uitstel. RDP-sessies blijven verbonden gedurende het herverbindingsvenster.</td></tr>
-        <tr><td>Dialoogvenster Info &amp; diagnostisch pakket</td><td>Nieuwe ℹ-knop in de bovenste balk. Opent het Dialoogvenster Info met <em>Logboekmap openen</em> en <em>Diagnostische info kopiëren</em> (systeeminfo + laatste 100 KB van geredigeerd logboek).</td></tr>
+        <tr><td>Dialoogvenster Info &amp; diagnostisch pakket</td><td>Nieuwe ℹ-knop in de bovenste balk. Opent het Dialoogvenster Info met <em>Open logmap</em> en <em>Diagnostische info kopiëren</em> (systeeminfo + laatste 100 KB van geredigeerd logboek).</td></tr>
         <tr><td>Standaard verbindingsmethode per platform</td><td>Windows gebruikt standaard <strong>RD Gateway</strong>; macOS gebruikt standaard <strong>Tunnel</strong> (de Windows App op macOS ondersteunt Azure Bastion als RD Gateway niet). De standaard geldt alleen als er nog geen voorkeur is opgeslagen.</td></tr>
         <tr><td>Ondersteuning voor HD Ready-schermen</td><td>Het venster is nu 580×760 pixels (was ~540×700). Past zonder schuifbalk op 1280×720 HD Ready-schermen.</td></tr>
       </tbody>
@@ -1743,7 +1751,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.4 · Dokumentation</div>
+    <div class="version">v3.3.5 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -1571,7 +1571,7 @@
     <table class="field-table">
       <thead><tr><th>Aktion</th><th>Beschreibung</th></tr></thead>
       <tbody>
-        <tr><td>Protokollordner öffnen</td><td>Öffnet das Verzeichnis mit <code>debug.log</code> im Windows Explorer (oder Finder unter macOS). Enthält außerdem bis zu zehn archivierte Sitzungsprotokolle, <code>debug.0.log</code> bis <code>debug.9.log</code>. Nützlich, wenn Sie die Protokolldatei für den Support suchen müssen.</td></tr>
+        <tr><td>Log-Ordner öffnen</td><td>Öffnet das Verzeichnis mit <code>debug.log</code> im Windows Explorer (oder Finder unter macOS). Enthält außerdem bis zu zehn archivierte Sitzungsprotokolle, <code>debug.0.log</code> bis <code>debug.9.log</code>. Nützlich, wenn Sie die Protokolldatei für den Support suchen müssen.</td></tr>
         <tr><td>Diagnoseinformationen kopieren</td><td>Kopiert ein Diagnosepaket in die Zwischenablage: Systeminformationen (Betriebssystem, App-Version, Plattform) sowie das aktuelle Debug-Protokoll und die archivierten Sitzungsprotokolle, neuestes zuerst, jeweils auf 100 KB begrenzt und das gesamte Paket auf rund 1 MB begrenzt. Alles ist bereits redigiert.</td></tr>
       </tbody>
     </table>
@@ -1599,7 +1599,7 @@
         <tr><td>Azure-Profil <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\azureProfile.json</code></td><td>Vor v3.0: Abonnementliste und angemeldete Benutzerinformationen. Mit Azure CLI geteilt.</td></tr>
         <tr><td>Cloud-Konfiguration <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Vor v3.0: Azure-Cloud-Endpunktkonfiguration. Mit Azure CLI geteilt.</td></tr>
         <tr><td>HTTP-Cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Vor v3.0: HTTP-Antwort-Cache. Mit Azure CLI geteilt.</td></tr>
-        <tr><td>Debug-Protokoll</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnoseprotokoll zur Fehlerbehebung. Wird bei jedem Anwendungsstart geleert.</td></tr>
+        <tr><td>Debug-Protokoll</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnoseprotokoll zur Fehlerbehebung. Wird bei jedem Anwendungsstart rotiert: die vorherige Sitzung wird zu <code>debug.0.log</code>, die älteren Archive rücken bis <code>debug.9.log</code> nach, das verworfen wird.</td></tr>
         <tr><td>Temporäre RDP-Dateien</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporäre RDP-Dateien, die von RD Gateway-Verbindungen erstellt werden. Beim Schließen der Anwendung gelöscht.</td></tr>
       </tbody>
     </table>
@@ -1627,6 +1627,14 @@
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Neuigkeiten</h2>
 
+    <h3>v3.3.5</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td><em>Log</em> bleibt in Deutsch, Französisch und Spanisch unübersetzt</td><td>Die Schaltfläche <em>Log-Ordner öffnen</em> und die Meldung bei fehlgeschlagener Verbindung gaben <em>log</em> als <em>Protokoll</em>, <em>journal</em> bzw. <em>registro</em> wieder — das klingt nach einem gewöhnlichen Logbuch statt nach dem Fachbegriff. Beide behalten jetzt das Lehnwort und beugen nur die Umgebung: <em>Log-Ordner öffnen</em>, <em>Ouvrir le dossier de log</em>, <em>Abrir carpeta de log</em>. Englisch, Niederländisch und Portugiesisch bleiben unverändert.</td></tr>
+      </tbody>
+    </table>
+
     <h3>v3.3.4</h3>
     <table class="field-table">
       <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
@@ -1649,7 +1657,7 @@
         <tr><td>Zweispaltiges Layout Registerkarte Azure VM</td><td>Verbindungseinstellungen (Methode, Monitor, Entra ID-Auth) befinden sich in der linken Spalte; VM-Auswahl in der rechten Spalte. Das Layout ist übersichtlicher und zeigt mehr Informationen ohne Scrollen.</td></tr>
         <tr><td>Preflight-Prüfungen</td><td>Vor dem Verbinden prüft die App automatisch Bastion-SKU, Bastion-Feature-Flags (nativer Client / IP-basierte Verbindung) und VM-Energiestatus. Prüfungen sind fail-open.</td></tr>
         <tr><td>Automatische Tunnel-Wiederverbindung</td><td>Wenn die WebSocket-Verbindung abbricht, verbindet sich der Tunnel automatisch neu — bis zu 5 Mal mit exponentiellem Backoff. RDP-Sitzungen bleiben während des Wiederverbindungsfensters verbunden.</td></tr>
-        <tr><td>Info-Dialog &amp; Diagnosepaket</td><td>Neue ℹ-Schaltfläche in der oberen Leiste. Öffnet den Info-Dialog mit <em>Protokollordner öffnen</em> und <em>Diagnoseinformationen kopieren</em> (Systeminfo + letzte 100 KB des redigierten Protokolls).</td></tr>
+        <tr><td>Info-Dialog &amp; Diagnosepaket</td><td>Neue ℹ-Schaltfläche in der oberen Leiste. Öffnet den Info-Dialog mit <em>Log-Ordner öffnen</em> und <em>Diagnoseinformationen kopieren</em> (Systeminfo + letzte 100 KB des redigierten Protokolls).</td></tr>
         <tr><td>Standard-Verbindungsmethode nach Plattform</td><td>Windows verwendet standardmäßig <strong>RD Gateway</strong>; macOS verwendet standardmäßig <strong>Tunnel</strong> (die Windows App unter macOS unterstützt Azure Bastion als RD Gateway nicht). Standard gilt nur, wenn noch keine Einstellung gespeichert wurde.</td></tr>
         <tr><td>Unterstützung für HD-Ready-Bildschirme</td><td>Das Fenster ist jetzt 580×760 Pixel (zuvor ~540×700). Passt ohne Scrollleiste auf 1280×720 HD-Ready-Bildschirme.</td></tr>
       </tbody>
@@ -1749,7 +1757,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.4 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.5 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 
