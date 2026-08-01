@@ -1,7 +1,7 @@
 ---
 title: Vereisten
 description: Wat moet kloppen op uw machine en in Azure voordat Azure Bastion RDP Connector een sessie kan openen.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

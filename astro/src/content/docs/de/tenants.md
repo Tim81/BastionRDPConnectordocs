@@ -1,7 +1,7 @@
 ---
 title: Mehrere Mandanten
 description: Wie die Anwendung für jeden Entra ID-Mandanten, den Ihr Konto sehen kann, einen eigenen Satz an Präferenzen führt, und was global bleibt.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

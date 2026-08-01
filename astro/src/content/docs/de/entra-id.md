@@ -1,7 +1,7 @@
 ---
 title: Entra ID-Authentifizierung
 description: Single Sign-On für RD Gateway-Sitzungen, wann Sie es aktivieren sollten, und was passiert, wenn Bastion es ablehnt.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

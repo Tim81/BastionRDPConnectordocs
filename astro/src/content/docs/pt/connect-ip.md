@@ -1,7 +1,7 @@
 ---
 title: Ligar a um endereço IP
 description: O separador Endereço IP alcança tudo o que a rede virtual do Bastion consiga alcançar, não apenas VMs do Azure, através de uma ligação Túnel.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

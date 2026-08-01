@@ -1,7 +1,7 @@
 ---
 title: Installation
 description: Azure Bastion RDP Connector est distribué via le Microsoft Store. Il n'y a pas de téléchargement direct ni d'installateur séparé.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

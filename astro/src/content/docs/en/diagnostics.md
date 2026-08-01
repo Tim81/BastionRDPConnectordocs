@@ -1,7 +1,7 @@
 ---
 title: Diagnostics
 description: What the About dialog shows, what Copy Diagnostic Info collects, and what stays out of it.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -19,7 +19,7 @@ An **i** button in the top bar opens the About dialog. It shows the application 
       <text class="ui-title" x="10" y="15">About</text>
       <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
       <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
-      <text class="ui-p" x="10" y="60">Version 3.3.4</text>
+      <text class="ui-p" x="10" y="60">Version 3.3.5</text>
       <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
       <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
       <text class="ui-l" x="10" y="104">Diagnostics</text>

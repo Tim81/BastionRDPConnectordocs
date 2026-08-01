@@ -1,9 +1,15 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
+
+## 3.3.5
+
+| Änderung | Details |
+| --- | --- |
+| *Log* bleibt in Deutsch, Französisch und Spanisch unübersetzt | Die Schaltfläche Log-Ordner öffnen und die Meldung bei fehlgeschlagener Verbindung gaben *log* als *Protokoll*, *journal* bzw. *registro* wieder — das klingt nach einem gewöhnlichen Logbuch statt nach dem Fachbegriff. Beide behalten jetzt das Lehnwort und beugen nur die Umgebung: *Log-Ordner öffnen*, *Ouvrir le dossier de log*, *Abrir carpeta de log*. Englisch, Niederländisch und Portugiesisch bleiben unverändert. |
 
 ## 3.3.4
 
@@ -25,6 +31,6 @@ lastReviewed: '2026-07-25'
 | Zweispaltige Registerkarte Azure VM | Verbindungsmethode, Monitor-Modus und Entra ID-Auth sitzen in der linken Spalte; die VM-Auswahl sitzt in der rechten Spalte. |
 | Preflight-Prüfungen | Vor dem Verbinden prüft die Anwendung die Bastion-SKU, ihre Feature-Flags und den Energiestatus der VM. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, blockiert die Verbindung nicht. |
 | Automatische Tunnel-Wiederverbindung | Bricht die WebSocket-Verbindung ab, verbindet sich der Tunnel selbstständig neu, bis zu fünf Mal mit wachsendem Abstand zwischen den Versuchen. Die meisten RDP-Sitzungen bleiben bei einer so kurzen Wiederverbindung verbunden. |
-| Info-Dialog und Diagnosepaket | Die Schaltfläche i in der oberen Leiste, Protokollordner öffnen und Diagnoseinformationen kopieren erschienen alle in dieser Version. |
+| Info-Dialog und Diagnosepaket | Die Schaltfläche i in der oberen Leiste, Log-Ordner öffnen und Diagnoseinformationen kopieren erschienen alle in dieser Version. |
 | Plattformabhängige Standard-Verbindungsmethode | RD Gateway wurde unter Windows zum Standard, Tunnel unter macOS, weil die Windows App unter macOS Bastion nicht als Gateway verwenden kann. Der Standard gilt nur, bis Sie selbst eine Methode wählen. |
 | Unterstützung für HD-Ready-Bildschirme | Das Fenster wuchs auf 580×760, von zuvor rund 540×700, und passt jetzt ohne Bildlaufleiste auf 1280×720-Displays. |

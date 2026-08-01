@@ -1,7 +1,7 @@
 ---
 title: Aktive Tunnel
 description: Jede Tunnel-Verbindung, die die Anwendung offen hat, mit ihrem lokalen Port, der verstrichenen Zeit und Steuerelementen zum Neuverbinden Ihres RDP-Clients oder zum Stoppen.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

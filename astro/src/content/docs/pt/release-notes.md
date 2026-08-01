@@ -1,9 +1,15 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
+
+## 3.3.5
+
+| Alteração | Detalhes |
+| --- | --- |
+| *Log* deixa de ser traduzido em alemão, francês e espanhol | O botão Abrir pasta de log e a mensagem de falha de ligação traduziam *log* como *Protokoll*, *journal* e *registro*, que se leem como um diário de bordo comum em vez do termo técnico. Ambos passam a manter o estrangeirismo: *Log-Ordner öffnen*, *Ouvrir le dossier de log*, *Abrir carpeta de log*. O português já usava *log*; o inglês e o neerlandês não mudam. |
 
 ## 3.3.4
 
@@ -25,6 +31,6 @@ lastReviewed: '2026-07-25'
 | Separador Azure VM em duas colunas | Método de ligação, modo de monitor e auth Entra ID ficam na coluna esquerda; a seleção de VM fica na coluna direita. |
 | Verificações preliminares | Antes de ligar, a aplicação verifica o SKU do Bastion, os seus indicadores de funcionalidades, e o estado de energia da VM. Estas verificações são fail-open: uma verificação que não consiga concluir não bloqueia a ligação. |
 | Reconexão automática do túnel | Se a ligação WebSocket cair, o túnel reconecta-se sozinho, até cinco vezes com um intervalo crescente entre tentativas. A maioria das sessões RDP mantém-se ligada ao longo de uma reconexão tão curta. |
-| Caixa de diálogo Sobre e pacote de diagnóstico | O botão i na barra superior, Abrir pasta de registos, e Copiar informações de diagnóstico foram todos lançados nesta versão. |
+| Caixa de diálogo Sobre e pacote de diagnóstico | O botão i na barra superior, Abrir pasta de log, e Copiar informações de diagnóstico foram todos lançados nesta versão. |
 | Método de ligação predefinido por plataforma | O RD Gateway tornou-se a predefinição no Windows, e o Túnel a predefinição no macOS, porque a Windows App no macOS não consegue utilizar o Bastion como gateway. A predefinição só se aplica até escolher um método por si mesmo. |
 | Suporte a ecrãs HD Ready | A janela cresceu para 580×760, a partir de aproximadamente 540×700, e agora cabe sem barra de deslocamento em ecrãs de 1280×720. |

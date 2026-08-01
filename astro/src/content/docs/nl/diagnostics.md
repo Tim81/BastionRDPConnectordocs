@@ -1,7 +1,7 @@
 ---
 title: Diagnostiek
 description: Wat het dialoogvenster Over toont, wat Diagnostische info kopiëren verzamelt, en wat erbuiten blijft.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -19,7 +19,7 @@ Een **i**-knop in de bovenste balk opent het dialoogvenster Over. Deze toont de 
       <text class="ui-title" x="10" y="15">Over</text>
       <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
       <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
-      <text class="ui-p" x="10" y="60">Versie 3.3.4</text>
+      <text class="ui-p" x="10" y="60">Versie 3.3.5</text>
       <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
       <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
       <text class="ui-l" x="10" y="104">Diagnostiek</text>

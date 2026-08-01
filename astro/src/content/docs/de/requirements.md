@@ -1,7 +1,7 @@
 ---
 title: Voraussetzungen
 description: Was auf Ihrem Computer und in Azure erfüllt sein muss, bevor Azure Bastion RDP Connector eine Sitzung öffnen kann.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

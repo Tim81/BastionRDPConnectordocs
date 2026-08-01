@@ -1,9 +1,15 @@
 ---
 title: Notas de la versión
 description: Qué cambió en cada versión reciente de Azure Bastion RDP Connector.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
+
+## 3.3.5
+
+| Cambio | Detalles |
+| --- | --- |
+| *Log* deja de traducirse en alemán, francés y español | El botón Abrir carpeta de log y el mensaje de conexión fallida traducían *log* como *Protokoll*, *journal* y *registro*, que se leen como un cuaderno de bitácora corriente en lugar del término técnico. Ambos mantienen ahora el préstamo: *Log-Ordner öffnen*, *Ouvrir le dossier de log*, *Abrir carpeta de log*. El inglés, el neerlandés y el portugués no cambian. |
 
 ## 3.3.4
 
@@ -25,6 +31,6 @@ lastReviewed: '2026-07-25'
 | Pestaña Azure VM de dos columnas | El método de conexión, el modo de monitor y la autenticación Entra ID se ubican en la columna izquierda; la selección de VM se ubica en la columna derecha. |
 | Comprobaciones preliminares | Antes de conectar, la aplicación comprueba la SKU de Bastion, sus marcadores de características y el estado de energía de la VM. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión. |
 | Reconexión automática de Túnel | Si la conexión WebSocket se cae, el túnel se reconecta por sí solo, hasta cinco veces con un intervalo cada vez mayor entre intentos. La mayoría de las sesiones RDP permanecen conectadas durante una reconexión tan breve. |
-| Cuadro de diálogo Acerca de y paquete de diagnóstico | El botón i en la barra superior, Abrir carpeta de registros y Copiar información de diagnóstico se incorporaron todos en esta versión. |
+| Cuadro de diálogo Acerca de y paquete de diagnóstico | El botón i en la barra superior, Abrir carpeta de log y Copiar información de diagnóstico se incorporaron todos en esta versión. |
 | Método de conexión predeterminado según la plataforma | RD Gateway pasó a ser el predeterminado en Windows, y Túnel el predeterminado en macOS, porque Windows App en macOS no puede usar Bastion como puerta de enlace. El predeterminado solo se aplica hasta que usted mismo elija un método. |
 | Compatibilidad con pantallas HD Ready | La ventana creció a 580×760, desde aproximadamente 540×700, y ahora cabe sin barra de desplazamiento en pantallas 1280×720. |

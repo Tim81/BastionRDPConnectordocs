@@ -1,7 +1,7 @@
 ---
 title: Diagnostics
 description: Ce que montre la boîte de dialogue À propos, ce que collecte Copier les informations de diagnostic, et ce qui en est exclu.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -13,18 +13,18 @@ Un bouton **i** dans la barre supérieure ouvre la boîte de dialogue À propos.
 <figure class="appshot">
   <div class="frame">
     <svg viewBox="0 0 300 372" role="img" aria-labelledby="s-about-win">
-      <title id="s-about-win">La boîte de dialogue À propos sous Windows. Elle affiche le nom de l'application, la version et la plateforme, puis deux boutons : Ouvrir le dossier de journal et Copier les informations de diagnostic.</title>
+      <title id="s-about-win">La boîte de dialogue À propos sous Windows. Elle affiche le nom de l'application, la version et la plateforme, puis deux boutons : Ouvrir le dossier de log et Copier les informations de diagnostic.</title>
       <rect class="ui-win" x="1" y="1" width="298" height="370" rx="6"/>
       <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
       <text class="ui-title" x="10" y="15">À propos</text>
       <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
       <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
-      <text class="ui-p" x="10" y="60">Version 3.3.4</text>
+      <text class="ui-p" x="10" y="60">Version 3.3.5</text>
       <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
       <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
       <text class="ui-l" x="10" y="104">Diagnostics</text>
       <rect class="ui-btn-2" x="10" y="110" width="280" height="24" rx="4"/>
-      <text class="ui-tb" x="150" y="126" text-anchor="middle">Ouvrir le dossier de journal</text>
+      <text class="ui-tb" x="150" y="126" text-anchor="middle">Ouvrir le dossier de log</text>
       <text class="ui-p" x="10" y="148">Ouvre le dossier contenant debug.log</text>
       <text class="ui-p" x="10" y="159">et ses dix sessions archivées.</text>
       <rect class="ui-btn-2" x="10" y="170" width="280" height="24" rx="4"/>
@@ -36,12 +36,12 @@ Un bouton **i** dans la barre supérieure ouvre la boîte de dialogue À propos.
       <text class="ui-bt" x="240" y="337" text-anchor="middle">Fermer</text>
     </svg>
   </div>
-  <figcaption><b>Windows</b> La boîte de dialogue À propos sous Windows. Elle affiche la version de l'application et la plateforme, et propose Ouvrir le dossier de journal et Copier les informations de diagnostic.</figcaption>
+  <figcaption><b>Windows</b> La boîte de dialogue À propos sous Windows. Elle affiche la version de l'application et la plateforme, et propose Ouvrir le dossier de log et Copier les informations de diagnostic.</figcaption>
 </figure>
 
 | Action | Ce qu'elle fait |
 | --- | --- |
-| Ouvrir le dossier de journal | Ouvre le dossier contenant `debug.log` et ses dix sessions archivées, dans l'Explorateur sous Windows ou le Finder sous macOS. |
+| Ouvrir le dossier de log | Ouvre le dossier contenant `debug.log` et ses dix sessions archivées, dans l'Explorateur sous Windows ou le Finder sous macOS. |
 | Copier les informations de diagnostic | Copie un bundle de diagnostic dans le presse-papiers. |
 
 ## Ce que contient le bundle de diagnostic
@@ -67,4 +67,4 @@ Les ID d'abonnement, les ID de ressource, les GUID et les adresses IP sont conse
 
 ## Envoyer un journal au support
 
-Collez directement le résultat de Copier les informations de diagnostic dans un ticket de support ou un message de discussion. Si le bundle est tronqué et que vous avez besoin du journal complet d'une session, utilisez Ouvrir le dossier de journal pour retrouver le fichier exact et le joindre à la place.
+Collez directement le résultat de Copier les informations de diagnostic dans un ticket de support ou un message de discussion. Si le bundle est tronqué et que vous avez besoin du journal complet d'une session, utilisez Ouvrir le dossier de log pour retrouver le fichier exact et le joindre à la place.

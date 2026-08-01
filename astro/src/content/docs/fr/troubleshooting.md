@@ -1,7 +1,7 @@
 ---
 title: Dépannage
 description: Les problèmes courants, dans les mots que vous utiliseriez pour les décrire, et ce qu'il faut vérifier pour chacun.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -107,4 +107,4 @@ Sélectionnez **Se déconnecter** dans la barre supérieure pour effacer votre �
 
 ### Je dois envoyer un journal au support
 
-Ouvrez **À propos** et sélectionnez **Copier les informations de diagnostic**, ou **Ouvrir le dossier de journal** pour retrouver les fichiers directement. [Diagnostics](../diagnostics/) explique ce que contient le bundle et comment il est épuré.
+Ouvrez **À propos** et sélectionnez **Copier les informations de diagnostic**, ou **Ouvrir le dossier de log** pour retrouver les fichiers directement. [Diagnostics](../diagnostics/) explique ce que contient le bundle et comment il est épuré.

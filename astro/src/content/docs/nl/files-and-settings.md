@@ -1,7 +1,7 @@
 ---
 title: Bestanden en instellingen
 description: Waar de applicatie uw voorkeuren, uw aanmeldstatus en de logboeken bewaart, en wat er in elk bestand staat.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

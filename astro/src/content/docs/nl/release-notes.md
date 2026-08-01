@@ -1,9 +1,15 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
+
+## 3.3.5
+
+| Wijziging | Details |
+| --- | --- |
+| *Log* blijft onvertaald in het Duits, Frans en Spaans | De knop Open logmap en de melding bij een mislukte verbinding gaven *log* weer als *Protokoll*, *journal* en *registro*, wat eerder als een gewoon logboek leest dan als de technische term. Beide houden nu het leenwoord aan: *Log-Ordner öffnen*, *Ouvrir le dossier de log*, *Abrir carpeta de log*. Nederlands, Engels en Portugees zijn ongewijzigd — die gebruikten het woord al. |
 
 ## 3.3.4
 

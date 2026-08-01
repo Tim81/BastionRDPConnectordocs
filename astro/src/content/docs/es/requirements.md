@@ -1,7 +1,7 @@
 ---
 title: Requisitos previos
 description: Qué debe cumplirse en su equipo y en Azure antes de que Azure Bastion RDP Connector pueda abrir una sesión.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

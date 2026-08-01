@@ -1,7 +1,7 @@
 ---
 title: Authentification Entra ID
 description: Authentification unique (SSO) pour les sessions RD Gateway, quand l'activer et ce qui se passe lorsque Bastion la refuse.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

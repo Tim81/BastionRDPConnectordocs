@@ -1,7 +1,7 @@
 ---
 title: Requirements
 description: What has to be true on your machine and in Azure before Azure Bastion RDP Connector can open a session.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

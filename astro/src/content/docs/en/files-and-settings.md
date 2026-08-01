@@ -1,7 +1,7 @@
 ---
 title: Files and settings
 description: Where the application keeps your preferences, your sign-in state, and its logs, and what's in each file.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

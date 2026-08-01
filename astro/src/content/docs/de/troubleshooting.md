@@ -1,7 +1,7 @@
 ---
 title: Fehlerbehebung
 description: Häufige Probleme, in den Worten, mit denen Sie sie beschreiben würden, und was Sie für jedes einzelne prüfen sollten.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -107,4 +107,4 @@ Wählen Sie **Abmelden** in der oberen Leiste, um Ihren Anmeldestatus zu lösche
 
 ### Ich muss ein Protokoll an den Support senden
 
-Öffnen Sie **Über** und wählen Sie **Diagnoseinformationen kopieren**, oder **Protokollordner öffnen**, um die Dateien direkt zu finden. [Diagnose](../diagnostics/) behandelt, was im Paket enthalten ist und wie es redigiert wird.
+Öffnen Sie **Über** und wählen Sie **Diagnoseinformationen kopieren**, oder **Log-Ordner öffnen**, um die Dateien direkt zu finden. [Diagnose](../diagnostics/) behandelt, was im Paket enthalten ist und wie es redigiert wird.

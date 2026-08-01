@@ -1,7 +1,7 @@
 ---
 title: Autenticação Entra ID
 description: Início de sessão único para sessões RD Gateway, quando ativá-lo, e o que acontece quando o Bastion o recusa.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

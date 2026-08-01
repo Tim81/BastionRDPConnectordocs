@@ -1,7 +1,7 @@
 ---
 title: Se connecter à une adresse IP
 description: "L'onglet Adresse IP atteint tout ce que le réseau virtuel de Bastion peut router, pas seulement les VM Azure, via une connexion Tunnel."
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Solución de problemas
 description: Problemas frecuentes, descritos con las palabras que usaría para describirlos, y qué comprobar en cada caso.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -107,4 +107,4 @@ Seleccione **Cerrar sesión** en la barra superior para borrar su estado de inic
 
 ### Necesito enviar un registro a soporte
 
-Abra **Acerca de** y seleccione **Copiar información de diagnóstico**, o **Abrir carpeta de registros** para encontrar los archivos directamente. [Diagnósticos](../diagnostics/) cubre qué contiene el paquete y cómo se redacta.
+Abra **Acerca de** y seleccione **Copiar información de diagnóstico**, o **Abrir carpeta de log** para encontrar los archivos directamente. [Diagnósticos](../diagnostics/) cubre qué contiene el paquete y cómo se redacta.

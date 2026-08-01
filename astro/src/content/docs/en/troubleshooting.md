@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 description: Common problems, in the words you'd use to describe them, and what to check for each one.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

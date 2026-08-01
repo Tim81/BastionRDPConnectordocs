@@ -1,7 +1,7 @@
 ---
 title: Connect to an IP address
 description: The IP address tab reaches anything Bastion's virtual network can route to, not only Azure VMs, over a Tunnel connection.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 

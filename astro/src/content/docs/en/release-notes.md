@@ -1,9 +1,15 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
+
+## 3.3.5
+
+| Change | Details |
+| --- | --- |
+| "Log" kept untranslated in German, French and Spanish | The Open Log Folder button and the failed-connection message rendered "log" as *Protokoll*, *journal* and *registro*, which reads as an ordinary logbook rather than the technical term. Both keep the loanword now and inflect only the surrounding grammar: *Log-Ordner öffnen*, *Ouvrir le dossier de log*, *Abrir carpeta de log*. English, Dutch and Portuguese are unchanged. |
 
 ## 3.3.4
 

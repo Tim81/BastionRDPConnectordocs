@@ -1,7 +1,7 @@
 ---
 title: Resolução de problemas
 description: Problemas comuns, nas palavras que utilizaria para os descrever, e o que verificar para cada um.
-appliesTo: '3.3.4'
+appliesTo: '3.3.5'
 lastReviewed: '2026-07-25'
 ---
 
@@ -107,4 +107,4 @@ Selecione **Terminar sessão** na barra superior para limpar o seu estado de in�
 
 ### Preciso de enviar um registo para o suporte
 
-Abra **Sobre** e selecione **Copiar informações de diagnóstico**, ou **Abrir pasta de registos** para encontrar os ficheiros diretamente. [Diagnósticos](../diagnostics/) explica o que está no pacote e como é redigido.
+Abra **Sobre** e selecione **Copiar informações de diagnóstico**, ou **Abrir pasta de log** para encontrar os ficheiros diretamente. [Diagnósticos](../diagnostics/) explica o que está no pacote e como é redigido.
