@@ -1,7 +1,7 @@
 ---
 title: Meerdere tenants
 description: Hoe de applicatie een aparte set voorkeuren bijhoudt voor elke Entra ID-tenant die uw account kan zien, en wat globaal blijft.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
 description: Open a remote desktop session through Azure Bastion to an Azure virtual machine, or to any Windows system the Bastion network can route to.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

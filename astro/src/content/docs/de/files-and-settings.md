@@ -1,7 +1,7 @@
 ---
 title: Dateien und Einstellungen
 description: Wo die Anwendung Ihre Präferenzen, Ihren Anmeldestatus und ihre Protokolle speichert, und was in jeder Datei steht.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Aperçu
 description: Ouvrez une session Bureau à distance via Azure Bastion vers une machine virtuelle Azure, ou vers tout système Windows que le réseau Bastion peut atteindre.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Tunnels actifs
 description: Chaque connexion Tunnel ouverte par l'application, avec son port local, sa durée écoulée et des contrôles pour reconnecter votre client RDP ou l'arrêter.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

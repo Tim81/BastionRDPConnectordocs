@@ -1,7 +1,7 @@
 ---
 title: Visão geral
 description: Abra uma sessão de ambiente de trabalho remoto através do Azure Bastion para uma máquina virtual do Azure, ou para qualquer sistema Windows que a rede do Bastion consiga alcançar.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

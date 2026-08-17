@@ -1,7 +1,7 @@
 ---
 title: Pré-requisitos
 description: O que tem de estar assegurado na sua máquina e no Azure antes de o Azure Bastion RDP Connector conseguir abrir uma sessão.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

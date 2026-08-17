@@ -1,7 +1,7 @@
 ---
 title: Overzicht
 description: Open een externe bureaubladsessie via Azure Bastion naar een Azure-VM, of naar elk Windows-systeem dat het Bastion-netwerk kan bereiken.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

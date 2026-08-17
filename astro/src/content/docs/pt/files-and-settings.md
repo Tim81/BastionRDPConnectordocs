@@ -1,7 +1,7 @@
 ---
 title: Ficheiros e definições
 description: Onde a aplicação guarda as suas preferências, o seu estado de início de sessão, e os seus registos, e o que está em cada ficheiro.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

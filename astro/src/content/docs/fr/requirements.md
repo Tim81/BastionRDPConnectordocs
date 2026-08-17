@@ -1,7 +1,7 @@
 ---
 title: Prérequis
 description: Ce qui doit être vrai sur votre machine et dans Azure avant qu'Azure Bastion RDP Connector puisse ouvrir une session.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

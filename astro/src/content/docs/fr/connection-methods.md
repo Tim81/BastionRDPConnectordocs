@@ -1,7 +1,7 @@
 ---
 title: Méthodes de connexion
 description: 'Tunnel et RD Gateway comparés : comment chacun achemine la session, quelles cibles ils atteignent, et lequel est la méthode par défaut sous Windows et sur macOS.'
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

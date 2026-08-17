@@ -1,7 +1,7 @@
 ---
 title: Archivos y configuración
 description: Dónde guarda la aplicación sus preferencias, su estado de inicio de sesión y sus registros, y qué contiene cada archivo.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

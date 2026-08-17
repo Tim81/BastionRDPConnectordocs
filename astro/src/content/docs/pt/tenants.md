@@ -1,7 +1,7 @@
 ---
 title: Múltiplos inquilinos
 description: Como a aplicação mantém um conjunto separado de preferências para cada inquilino Entra ID que a sua conta consegue ver, e o que se mantém global.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

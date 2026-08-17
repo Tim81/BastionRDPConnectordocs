@@ -1,7 +1,7 @@
 ---
 title: Verbindung zu einer IP-Adresse herstellen
 description: Die Registerkarte IP-Adresse erreicht alles, wozu das virtuelle Netzwerk von Bastion eine Route hat, nicht nur Azure-VMs, über eine Tunnel-Verbindung.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Diagnostics
 description: Ce que montre la boîte de dialogue À propos, ce que collecte Copier les informations de diagnostic, et ce qui en est exclu.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 
@@ -19,7 +19,7 @@ Un bouton **i** dans la barre supérieure ouvre la boîte de dialogue À propos.
       <text class="ui-title" x="10" y="15">À propos</text>
       <path d="M280 9 l7 7 M287 9 l-7 7" stroke="#7B8794" stroke-width="1.1" fill="none"/>
       <text class="ui-tb" x="10" y="46">Azure Bastion RDP Connector</text>
-      <text class="ui-p" x="10" y="60">Version 3.3.5</text>
+      <text class="ui-p" x="10" y="60">Version 3.3.6</text>
       <text class="ui-p" x="10" y="72">Windows 11 · x64</text>
       <line x1="10" y1="86" x2="290" y2="86" stroke="#DCE2EA" stroke-width="1"/>
       <text class="ui-l" x="10" y="104">Diagnostics</text>

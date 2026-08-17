@@ -1,7 +1,7 @@
 ---
 title: Verbindungsmethoden
 description: 'Tunnel und RD Gateway im Vergleich: wie jede die Sitzung überträgt, welche Ziele sie erreichen, und welche unter Windows und macOS der Standard ist.'
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

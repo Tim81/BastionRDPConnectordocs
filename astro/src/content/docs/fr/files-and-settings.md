@@ -1,7 +1,7 @@
 ---
 title: Fichiers et paramètres
 description: Où l'application conserve vos préférences, votre état de connexion et ses journaux, et ce que contient chaque fichier.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

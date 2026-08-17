@@ -1,7 +1,7 @@
 ---
 title: Première connexion
 description: Ce qui se passe la première fois que vous ouvrez l'application, comment fonctionne le cache de jetons, et comment s'articulent la sélection du locataire et de l'abonnement.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

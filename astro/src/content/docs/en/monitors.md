@@ -1,7 +1,7 @@
 ---
 title: Monitors
 description: Choose whether an RD Gateway session opens on your primary display or spans every connected monitor.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

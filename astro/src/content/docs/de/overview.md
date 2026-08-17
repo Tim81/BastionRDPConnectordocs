@@ -1,7 +1,7 @@
 ---
 title: Übersicht
 description: Öffnen Sie eine Remotedesktopsitzung über Azure Bastion zu einer Azure-VM oder zu jedem Windows-System, zu dem das Bastion-Netzwerk eine Route hat.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

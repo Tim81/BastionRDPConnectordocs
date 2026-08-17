@@ -1,7 +1,7 @@
 ---
 title: Primeiro início de sessão
 description: O que acontece da primeira vez que abre a aplicação, como funciona a cache de tokens, e como se articulam a seleção de inquilino e de subscrição.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

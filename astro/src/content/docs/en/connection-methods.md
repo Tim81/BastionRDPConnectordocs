@@ -1,7 +1,7 @@
 ---
 title: Connection methods
 description: 'Tunnel and RD Gateway compared: how each carries the session, which targets they reach, and which one is the default on Windows and macOS.'
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

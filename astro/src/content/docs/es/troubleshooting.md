@@ -1,7 +1,7 @@
 ---
 title: Solución de problemas
 description: Problemas frecuentes, descritos con las palabras que usaría para describirlos, y qué comprobar en cada caso.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

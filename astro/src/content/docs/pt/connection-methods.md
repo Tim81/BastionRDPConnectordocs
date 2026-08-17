@@ -1,7 +1,7 @@
 ---
 title: Métodos de ligação
 description: 'Túnel e RD Gateway comparados: como cada um transporta a sessão, que destinos alcançam, e qual é a predefinição no Windows e no macOS.'
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

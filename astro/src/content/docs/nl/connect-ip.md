@@ -1,7 +1,7 @@
 ---
 title: Verbinden met een IP-adres
 description: Het tabblad IP-adres bereikt alles waar het virtuele netwerk van Bastion een route naartoe heeft, niet alleen Azure-VM's, via een Tunnel-verbinding.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

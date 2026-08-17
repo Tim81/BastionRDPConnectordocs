@@ -1,7 +1,7 @@
 ---
 title: Plusieurs locataires
 description: Comment l'application conserve un ensemble distinct de préférences pour chaque locataire Entra ID auquel votre compte a accès, et ce qui reste global.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

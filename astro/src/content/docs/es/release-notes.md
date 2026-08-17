@@ -1,9 +1,16 @@
 ---
 title: Notas de la versión
 description: Qué cambió en cada versión reciente de Azure Bastion RDP Connector.
-appliesTo: '3.3.5'
-lastReviewed: '2026-07-25'
+appliesTo: '3.3.6'
+lastReviewed: '2026-08-17'
 ---
+
+## 3.3.6
+
+| Cambio | Detalles |
+| --- | --- |
+| Actualización de seguridad del runtime .NET incluido | La aplicación incorpora su propia copia de .NET y no usa ninguna instalada en su equipo. Por eso las correcciones de seguridad del runtime le llegan mediante una actualización de la aplicación y no a través de las actualizaciones de Windows o macOS. Esta versión se compila sobre .NET 10.0.11, una versión de seguridad del runtime. |
+| Componentes actualizados | Avalonia.Controls.WebView 12.1.0 y Azure.Core 1.61.0. |
 
 ## 3.3.5
 

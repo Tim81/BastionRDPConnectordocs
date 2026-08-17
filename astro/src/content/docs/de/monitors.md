@@ -1,7 +1,7 @@
 ---
 title: Monitore
 description: Wählen Sie, ob eine RD Gateway-Sitzung auf Ihrem primären Bildschirm geöffnet wird oder sich über alle verbundenen Monitore erstreckt.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

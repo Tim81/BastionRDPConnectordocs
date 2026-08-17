@@ -1,7 +1,7 @@
 ---
 title: Entra ID-authenticatie
 description: Single sign-on voor RD Gateway-sessies, wanneer u het inschakelt, en wat er gebeurt als Bastion het weigert.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

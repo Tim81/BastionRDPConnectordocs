@@ -1,7 +1,7 @@
 ---
 title: Eerste aanmelding
 description: Wat er gebeurt de eerste keer dat u de applicatie opent, hoe de tokencache werkt, en hoe tenant- en subscriptionselectie samenhangen.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

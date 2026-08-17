@@ -1,7 +1,7 @@
 ---
 title: Métodos de conexión
 description: 'Comparativa entre Túnel y RD Gateway: cómo transporta cada uno la sesión, a qué destinos llegan y cuál es el predeterminado en Windows y en macOS.'
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

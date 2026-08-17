@@ -1,7 +1,7 @@
 ---
 title: Descripción general
 description: Abra una sesión de escritorio remoto a través de Azure Bastion hacia una máquina virtual de Azure, o hacia cualquier sistema Windows al que la red de Bastion pueda enrutar.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

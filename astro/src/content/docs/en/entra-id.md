@@ -1,7 +1,7 @@
 ---
 title: Entra ID authentication
 description: Single sign-on for RD Gateway sessions, when to turn it on, and what happens when Bastion refuses it.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

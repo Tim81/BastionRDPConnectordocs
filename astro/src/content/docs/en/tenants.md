@@ -1,7 +1,7 @@
 ---
 title: Multiple tenants
 description: How the application keeps a separate set of preferences for every Entra ID tenant your account can see, and what stays global.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 

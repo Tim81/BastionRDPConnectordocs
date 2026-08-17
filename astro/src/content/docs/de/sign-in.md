@@ -1,7 +1,7 @@
 ---
 title: Erste Anmeldung
 description: Was beim ersten Öffnen der Anwendung passiert, wie der Token-Cache funktioniert und wie Mandanten- und Subscription-Auswahl zusammenspielen.
-appliesTo: '3.3.5'
+appliesTo: '3.3.6'
 lastReviewed: '2026-07-25'
 ---
 
