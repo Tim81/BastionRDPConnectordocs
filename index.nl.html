@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.6 · Documentatie</div>
+    <div class="version">v3.3.9 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -751,7 +751,7 @@
         <tr><td>Windows 10/11 (x64)</td><td>Beschikbaar via de Microsoft Store als native x64-uitvoerbaar bestand</td></tr>
         <tr><td>macOS 12 Monterey of nieuwer <span class="badge orange">v3.1.2+ · nog niet publiek</span></td><td>Ondersteund vanaf v3.1.2 voor Apple Silicon (arm64) en Intel (x64). Publieke release gepland voor een toekomstige update.</td></tr>
         <tr><td>Remote Desktop-client (Windows)</td><td>Ingebouwd in Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Remote Desktop-client (macOS)</td><td><a href="https://apps.apple.com/nl/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> via de Mac App Store. <strong>Alleen Tunnel-modus</strong> — RD Gateway wordt niet ondersteund door de Windows App op macOS. Meer precies: Azure Bastion gedraagt zich als een RD Gateway, maar de Windows App kan hier geen verbinding mee maken — dit is een beperking van de Windows App zelf, los van RD Gateway-ondersteuning in andere scenario's.</td></tr>
+        <tr><td>Remote Desktop-client (macOS)</td><td><a href="https://apps.apple.com/nl/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> via de Mac App Store. <strong>Tunnel-modus aanbevolen</strong> — de Windows App op macOS kan momenteel geen RD Gateway-sessie via Azure Bastion vasthouden: de verbinding valt binnen enkele seconden weg (fouten 0x300006c, 0x3000064 of 0x10b). De VM is niet het probleem. De app waarschuwt u en biedt <em>Gebruik in plaats daarvan Tunnel</em> of <em>Toch RD Gateway proberen</em> aan.</td></tr>
         <tr><td>Azure CLI <span class="badge orange">v2.x only</span></td><td>Niet langer vereist vanaf v3.0. Alleen nodig als u versie 2.x gebruikt. Download via <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
@@ -1194,7 +1194,7 @@
     </table>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Preflight-controles zijn <strong>fail-open</strong> — als de controle zelf mislukt (bijv. een netwerkprobleem voorkomt het ophalen van Bastion-metagegevens), verloopt de verbindingspoging normaal in plaats van te worden geblokkeerd.</p>
+      <p>Preflight-controles zijn <strong>fail-open</strong> — als de controle zelf mislukt (bijv. een netwerkprobleem voorkomt het ophalen van Bastion-metagegevens), verloopt de verbindingspoging normaal in plaats van te worden geblokkeerd. De uitzondering is een verlopen Azure-sessie, die nu vraagt om opnieuw aan te melden.</p>
     </div>
 
     <div class="callout tip">
@@ -1331,7 +1331,7 @@
         <div class="step-num">3</div>
         <div class="step-content">
           <strong>Tijdelijk bestand wordt opgeruimd bij afsluiten</strong>
-          <p>Het RDP-bestand wordt alleen bewaard voor de duur van de applicatiesessie en wordt veilig verwijderd wanneer de applicatie sluit.</p>
+          <p>Het RDP-bestand wordt alleen bewaard voor de duur van de applicatiesessie en wordt verwijderd met een overschrijving naar beste vermogen wanneer de applicatie sluit. Bestanden die na een crash of geforceerd afsluiten zijn achtergebleven, worden bij de volgende start opgeruimd.</p>
         </div>
       </div>
     </div>
@@ -1594,7 +1594,7 @@
         <tr><td>Cloudconfiguratie <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Vóór v3.0: Azure-cloud-eindpuntconfiguratie. Gedeeld met Azure CLI.</td></tr>
         <tr><td>HTTP-cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Vóór v3.0: HTTP-antwoordcache. Gedeeld met Azure CLI.</td></tr>
         <tr><td>Debug logboek</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostisch logboek. Rouleert bij elke start van de applicatie: de vorige sessie wordt <code>debug.0.log</code> en de oudere archieven schuiven door tot <code>debug.9.log</code>, dat vervalt.</td></tr>
-        <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Verwijderd bij afsluiten.</td></tr>
+        <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Opgeslagen in een map per gebruiker die alleen voor de eigenaar toegankelijk is. Verwijderd bij afsluiten (overschrijving naar beste vermogen, geen gegarandeerde veilige verwijdering); resten na een crash worden bij het opstarten opgeruimd.</td></tr>
       </tbody>
     </table>
 
@@ -1620,6 +1620,36 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.3.9</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Verlopen sessies vragen om opnieuw aan te melden</td><td>De preflight-controles (Bastion SKU, functievlaggen, VM-energiestatus) waren voorheen bij elke fout fail-open, ook bij een verlopen Azure-sessie. Een verlopen sessie leidt nu naar het aanmeldproces in plaats van te worden genegeerd.</td></tr>
+        <tr><td>Betrouwbaardere aanmelding</td><td>Het hoofdvenster wordt hersteld voordat het aanmeldvenster opent. Bekende onschadelijke dialoogfouten over een verborgen of gesloten eigenaarvenster worden in het log vastgelegd en genegeerd, in plaats van de app te laten crashen en actieve tunnels te verbreken.</td></tr>
+        <tr><td>Verouderde tijdelijke RDP-bestanden worden bij het opstarten verwijderd</td><td>Achtergebleven <code>.rdp</code>-bestanden na een crash of geforceerd afsluiten worden opgeruimd wanneer de applicatie start. Gegenereerde <code>.rdp</code>-bestanden staan in een tijdelijke map per gebruiker die alleen voor de eigenaar toegankelijk is en worden bij afsluiten verwijderd met een overschrijving naar beste vermogen (geen gegarandeerde veilige verwijdering).</td></tr>
+        <tr><td>macOS: RD Gateway-waarschuwing herzien</td><td>De Windows App voor Mac kan momenteel geen RD Gateway-sessie via Azure Bastion vasthouden: de verbinding valt binnen enkele seconden weg (fouten 0x300006c, 0x3000064 of 0x10b). De VM is niet het probleem. Het dialoogvenster, nu getiteld &quot;Bekend probleem op macOS&quot;, biedt <strong>Gebruik in plaats daarvan Tunnel</strong> of <strong>Toch RD Gateway proberen</strong>.</td></tr>
+        <tr><td>macOS: beveiliging en lokalisatie</td><td><code>.rdp</code>-bestanden en de log-map worden geopend via het absolute pad <code>/usr/bin/open</code>. Het menu-item Over is gelokaliseerd en volgt taalwijzigingen direct.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.8</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Beveiligingsgepatchte .NET-runtime</td><td>De build vereist nu SDK 10.0.401, waardoor de meegeleverde runtime het beveiligingsgepatchte .NET 10.0.12 is. Beveiligingsfixes voor de runtime bereiken u via applicatie-updates.</td></tr>
+        <tr><td>Bijgewerkte componenten</td><td>MSAL 4.90.0.</td></tr>
+        <tr><td>macOS: nieuw app-pictogram</td><td>Het pictogram is nu een squircle, zodat macOS Tahoe het niet meer in een wit kader plaatst.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.7</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Bijgewerkte componenten</td><td>Alleen afhankelijkheidsupdates: Azure.Core 1.62.0, Avalonia-pakketten 12.1.2 en de identiteitsbibliotheken (MSAL en verwante).</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.6</h3>
     <table class="field-table">
@@ -1658,7 +1688,7 @@
         <tr><td>Azure Resource Graph VM-laden</td><td>VM's over 200 subscriptions laden in <strong>2–4 seconden</strong> in plaats van 30–60 seconden. Gebruikt de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions.</td></tr>
         <tr><td>VM-zoekopdracht over meerdere subscriptions</td><td>Nieuwe radio-knop <em>Alle subscriptions</em> doorzoekt tegelijk al uw Azure-subscriptions. Vereist minimaal 3 tekens. Het subscription-dropdown toont nu alleen subscriptions die daadwerkelijk VM's bevatten.</td></tr>
         <tr><td>Twee-kolommenindeling Azure VM tabblad</td><td>Verbindingsinstellingen (methode, monitor, Entra ID-auth) staan in de linkerkolom; VM-selectie staat in de rechterkolom. De indeling is overzichtelijker en past meer informatie zonder te scrollen.</td></tr>
-        <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open.</td></tr>
+        <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open, behalve dat een verlopen sessie vraagt om opnieuw aan te melden.</td></tr>
         <tr><td>Automatisch herverbinden tunnel</td><td>Als de WebSocket-verbinding wegvalt, maakt de tunnel automatisch opnieuw verbinding — tot 5 keer met exponentieel uitstel. RDP-sessies blijven verbonden gedurende het herverbindingsvenster.</td></tr>
         <tr><td>Dialoogvenster Info &amp; diagnostisch pakket</td><td>Nieuwe ℹ-knop in de bovenste balk. Opent het Dialoogvenster Info met <em>Open logmap</em> en <em>Diagnostische info kopiëren</em> (systeeminfo + laatste 100 KB van geredigeerd logboek).</td></tr>
         <tr><td>Standaard verbindingsmethode per platform</td><td>Windows gebruikt standaard <strong>RD Gateway</strong>; macOS gebruikt standaard <strong>Tunnel</strong> (de Windows App op macOS ondersteunt Azure Bastion als RD Gateway niet). De standaard geldt alleen als er nog geen voorkeur is opgeslagen.</td></tr>
@@ -1760,7 +1790,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

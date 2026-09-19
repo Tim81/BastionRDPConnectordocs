@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.6 · Documentação</div>
+    <div class="version">v3.3.9 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -753,7 +753,7 @@
         <tr><td>Windows 10/11 (x64)</td><td>Disponível via Microsoft Store como executável nativo x64</td></tr>
         <tr><td>macOS 12 Monterey ou posterior <span class="badge orange">v3.1.2+ · ainda não público</span></td><td>Suportado desde v3.1.2 para Apple Silicon (arm64) e Intel (x64). Lançamento público previsto para uma atualização futura.</td></tr>
         <tr><td>Cliente de Ambiente de Trabalho Remoto (Windows)</td><td>Integrado no Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Cliente de Ambiente de Trabalho Remoto (macOS)</td><td><a href="https://apps.apple.com/pt/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> da Mac App Store. <strong>Apenas modo Tunnel</strong> — RD Gateway não é suportado pela aplicação Windows no macOS. Mais precisamente: o Azure Bastion comporta-se como um servidor RD Gateway, mas a aplicação Windows não consegue estabelecer ligação através dele — trata-se de uma limitação da própria aplicação Windows, independente do suporte a RD Gateway noutros cenários.</td></tr>
+        <tr><td>Cliente de Ambiente de Trabalho Remoto (macOS)</td><td><a href="https://apps.apple.com/pt/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> da Mac App Store. <strong>Modo Tunnel recomendado</strong> — a aplicação Windows no macOS não consegue atualmente manter uma sessão RD Gateway através do Azure Bastion: desliga-se em poucos segundos (erros 0x300006c, 0x3000064 ou 0x10b). A VM não é o problema. A aplicação avisa-o e oferece <em>Usar Tunnel em vez disso</em> ou <em>Tentar RD Gateway mesmo assim</em>.</td></tr>
         <tr><td>Azure CLI <span class="badge orange">apenas v2.x</span></td><td>Já não é necessário a partir da v3.0. Só é necessário se estiver a utilizar a versão 2.x. Descarregar de <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
@@ -1206,7 +1206,7 @@
     </table>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>As verificações preliminares são <strong>fail-open</strong> — se a própria verificação falhar (p. ex., um problema de rede impede a obtenção de metadados do Bastion), a tentativa de ligação prossegue normalmente em vez de ser bloqueada.</p>
+      <p>As verificações preliminares são <strong>fail-open</strong> — se a própria verificação falhar (p. ex., um problema de rede impede a obtenção de metadados do Bastion), a tentativa de ligação prossegue normalmente em vez de ser bloqueada. A exceção é uma sessão Azure expirada, que agora pede novo início de sessão.</p>
     </div>
 
     <div class="callout tip">
@@ -1343,7 +1343,7 @@
         <div class="step-num">3</div>
         <div class="step-content">
           <strong>O ficheiro temporário é limpo ao fechar</strong>
-          <p>O ficheiro RDP é mantido apenas durante a sessão da aplicação e é eliminado em segurança quando a aplicação fecha.</p>
+          <p>O ficheiro RDP é mantido apenas durante a sessão da aplicação e é eliminado com uma substituição de melhor esforço quando a aplicação fecha. Os ficheiros deixados por um bloqueio ou encerramento forçado são limpos no arranque seguinte.</p>
         </div>
       </div>
     </div>
@@ -1605,7 +1605,7 @@
         <tr><td>Configuração de cloud <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Antes da v3.0: configuração de endpoints de cloud Azure. Partilhado com o Azure CLI.</td></tr>
         <tr><td>Cache HTTP <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Antes da v3.0: cache de resposta HTTP. Partilhado com o Azure CLI.</td></tr>
         <tr><td>Registo de depuração</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Registo de diagnóstico para resolução de problemas. Rodado em cada arranque da aplicação: a sessão anterior passa a <code>debug.0.log</code> e os arquivos mais antigos deslizam até <code>debug.9.log</code>, que é descartado.</td></tr>
-        <tr><td>Ficheiros RDP temporários</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Ficheiros RDP temporários criados por ligações RD Gateway. Eliminados quando a aplicação fecha.</td></tr>
+        <tr><td>Ficheiros RDP temporários</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Ficheiros RDP temporários criados por ligações RD Gateway. Guardados numa pasta por utilizador, acessível apenas ao proprietário. Eliminados (substituição de melhor esforço, não uma eliminação segura garantida) quando a aplicação fecha; os restos de um bloqueio são limpos ao iniciar.</td></tr>
       </tbody>
     </table>
 
@@ -1631,6 +1631,36 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.3.9</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>As sessões expiradas pedem novo início de sessão</td><td>As verificações preliminares (SKU do Bastion, sinalizadores de funcionalidades, estado de energia da VM) falhavam anteriormente em modo fail-open perante qualquer erro, incluindo uma sessão Azure expirada. Agora uma sessão expirada chega ao fluxo de início de sessão em vez de ser ignorada.</td></tr>
+        <tr><td>Início de sessão mais fiável</td><td>A janela principal é restaurada antes de abrir a janela de início de sessão. Os erros inofensivos conhecidos das caixas de diálogo devido a uma janela proprietária oculta ou fechada são registados no log e ignorados, em vez de bloquear a aplicação e perder os túneis ativos.</td></tr>
+        <tr><td>Os ficheiros RDP temporários obsoletos são removidos ao iniciar</td><td>Os ficheiros <code>.rdp</code> deixados por um bloqueio ou encerramento forçado são limpos quando a aplicação inicia. Os ficheiros <code>.rdp</code> gerados ficam numa pasta temporária por utilizador, acessível apenas ao proprietário, e são eliminados ao sair com uma substituição de melhor esforço (não é uma eliminação segura garantida).</td></tr>
+        <tr><td>macOS: aviso do RD Gateway revisto</td><td>A aplicação Windows para Mac não consegue atualmente manter uma sessão RD Gateway através do Azure Bastion: desliga-se em poucos segundos (erros 0x300006c, 0x3000064 ou 0x10b). A VM não é o problema. A caixa de diálogo, agora intitulada &quot;Problema conhecido no macOS&quot;, oferece <strong>Usar Tunnel em vez disso</strong> ou <strong>Tentar RD Gateway mesmo assim</strong>.</td></tr>
+        <tr><td>macOS: reforço e localização</td><td>Os ficheiros <code>.rdp</code> e a pasta de log são abertos através do caminho absoluto <code>/usr/bin/open</code>. O item de menu Acerca de está localizado e acompanha de imediato as mudanças de idioma.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.8</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Runtime .NET com correções de segurança</td><td>A compilação passa a exigir o SDK 10.0.401, pelo que o runtime incluído é o .NET 10.0.12 com correções de segurança. As correções de segurança do runtime chegam-lhe através das atualizações da aplicação.</td></tr>
+        <tr><td>Componentes atualizados</td><td>MSAL 4.90.0.</td></tr>
+        <tr><td>macOS: novo ícone da aplicação</td><td>O ícone é agora um squircle, pelo que o macOS Tahoe já não o coloca numa caixa branca.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.7</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Componentes atualizados</td><td>Apenas atualizações de dependências: Azure.Core 1.62.0, pacotes Avalonia 12.1.2 e as bibliotecas de identidade (MSAL e relacionadas).</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.6</h3>
     <table class="field-table">
@@ -1669,7 +1699,7 @@
         <tr><td>Carregamento de VM com Azure Resource Graph</td><td>As VMs de 200 subscrições carregam em <strong>2–4 segundos</strong> em vez de 30–60 segundos. Utiliza a API Azure Resource Graph para consultas entre subscrições.</td></tr>
         <tr><td>Pesquisa de VM entre subscrições</td><td>Novo botão de opção <em>Todas as subscrições</em> que pesquisa em todas as suas subscrições do Azure ao mesmo tempo. Requer pelo menos 3 carateres. A lista pendente de subscrições agora mostra apenas as que contêm VMs.</td></tr>
         <tr><td>Disposição de duas colunas do separador Azure VM</td><td>As definições de ligação (método, monitor, auth Entra ID) estão na coluna esquerda; a seleção de VM está na coluna direita. A disposição é mais clara e mostra mais informação sem deslocamento.</td></tr>
-        <tr><td>Verificações preliminares</td><td>Antes de ligar, a aplicação verifica automaticamente o SKU do Bastion, os sinalizadores de funcionalidades do Bastion (cliente nativo / ligação baseada em IP) e o estado de energia da VM. As verificações são fail-open.</td></tr>
+        <tr><td>Verificações preliminares</td><td>Antes de ligar, a aplicação verifica automaticamente o SKU do Bastion, os sinalizadores de funcionalidades do Bastion (cliente nativo / ligação baseada em IP) e o estado de energia da VM. As verificações são fail-open, exceto que uma sessão expirada pede novo início de sessão.</td></tr>
         <tr><td>Reconexão automática do túnel</td><td>Se a ligação WebSocket for interrompida, o túnel reconecta-se automaticamente — até 5 vezes com recuo exponencial. As sessões RDP permanecem ligadas durante a janela de reconexão.</td></tr>
         <tr><td>Caixa de diálogo Sobre &amp; pacote de diagnóstico</td><td>Novo botão ℹ na barra superior. Abre a caixa de diálogo Sobre com <em>Abrir pasta de registos</em> e <em>Copiar informações de diagnóstico</em> (info do sistema + últimos 100 KB do registo redigido).</td></tr>
         <tr><td>Método de ligação predefinido por plataforma</td><td>O Windows utiliza <strong>RD Gateway</strong> por predefinição; o macOS utiliza <strong>Túnel</strong> por predefinição (a aplicação Windows no macOS não suporta o Azure Bastion como RD Gateway). A predefinição aplica-se apenas se não tiver sido guardada nenhuma preferência.</td></tr>
@@ -1763,7 +1793,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 
