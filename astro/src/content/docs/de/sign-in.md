@@ -15,7 +15,7 @@ Was Sie sehen, hängt davon ab, ob bereits ein Token auf Ihrem Computer zwischen
 | --- | --- |
 | Kein zwischengespeicherter Token | Die Microsoft-Anmeldeseite öffnet sich sofort. |
 | Ein gültiger zwischengespeicherter Token | Die App meldet sich still an. Es erscheint kein Anmeldefenster, und Sie gelangen direkt zur Mandantenauswahl, falls Ihr Konto mehr als einen hat. |
-| Ein abgelaufener Token, oder eine Conditional-Access-Richtlinie, die eine erneute Authentifizierung erfordert | Das Anmeldefenster öffnet sich erneut, damit Sie erfüllen können, was Ihre Organisation verlangt, zum Beispiel tägliche MFA. |
+| Ein abgelaufener Token, oder eine Conditional-Access-Richtlinie, die eine erneute Authentifizierung erfordert | Das Anmeldefenster öffnet sich erneut, damit Sie erfüllen können, was Ihre Organisation verlangt, zum Beispiel tägliche MFA. Die Anwendung wiederholt den Vorgang danach einmal. Es ist immer nur ein Anmeldefenster offen; ein zweiter Auslöser wartet auf das bereits geöffnete. |
 
 Wählen Sie **Geschäfts-, Schul- oder Unikonto**, geben Sie Ihr Konto ein und schließen Sie MFA ab, falls Ihre Organisation dies verlangt.
 

@@ -32,7 +32,7 @@ Einstellungen werden atomar geschrieben: Die Anwendung schreibt zuerst eine temp
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>
-<p>Temporäre <code>.rdp</code>-Dateien, die für RD Gateway-Verbindungen erzeugt werden, liegen unter Windows in einem Ordner, der pro Benutzer angelegt und nur für den Besitzer zugänglich ist, unter <code>%TEMP%\BastionRDPConnector\</code>. Sie werden beim Schließen der Anwendung nach bestem Bemühen überschrieben und gelöscht, was kein garantiertes sicheres Löschen ist. Reste eines Absturzes oder erzwungenen Beendens werden beim nächsten Start der Anwendung entfernt.</p>
+<p>Temporäre <code>.rdp</code>-Dateien, die für RD Gateway-Verbindungen erzeugt werden, liegen unter Windows in einem Ordner, der pro Benutzer angelegt und nur für den Besitzer zugänglich ist, unter <code>%TEMP%\BastionRDPConnector\</code>. Sie werden beim Schließen der Anwendung nach bestem Bemühen überschrieben und gelöscht, was kein garantiertes sicheres Löschen ist. Reste eines Absturzes oder erzwungenen Beendens werden beim nächsten Start der Anwendung entfernt. Der temporäre Ordner wird abgelehnt, wenn er ein Symlink oder eine Junction ist. Unter macOS wird der Ordner mit <code>0700</code> und seine Dateien mit <code>0600</code> angelegt. Die <code>.rdp</code>-Datei des macOS-Tunnels durchläuft dieselbe Behandlung und wird beim Beenden gelöscht.</p>
 </div>
 
 ## Zurücksetzen

@@ -15,7 +15,7 @@ Ce que vous voyez dépend de la présence ou non d'un jeton déjà en cache sur 
 | --- | --- |
 | Aucun jeton en cache | La page de connexion Microsoft s'ouvre immédiatement. |
 | Un jeton en cache valide | L'application se connecte silencieusement. Aucune fenêtre de connexion n'apparaît, et vous passez directement à la sélection du locataire si votre compte en a plusieurs. |
-| Un jeton expiré, ou une politique d'accès conditionnel qui exige une réauthentification | La fenêtre de connexion s'ouvre à nouveau, afin que vous puissiez satisfaire aux exigences de votre organisation, par exemple une MFA quotidienne. |
+| Un jeton expiré, ou une politique d'accès conditionnel qui exige une réauthentification | La fenêtre de connexion s'ouvre à nouveau, afin que vous puissiez satisfaire aux exigences de votre organisation, par exemple une MFA quotidienne. L'application réessaie ensuite l'opération une fois. Une seule fenêtre de connexion est ouverte à la fois ; un second déclenchement attend celle qui est déjà ouverte. |
 
 Sélectionnez **Compte professionnel ou scolaire**, saisissez votre compte, et effectuez la MFA si votre organisation l'exige.
 

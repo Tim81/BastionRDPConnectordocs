@@ -53,7 +53,7 @@ The selected VM's power state shows next to its name.
 | Stopped or deallocated (red) | The VM is off. A **Start** button appears. |
 | Starting, stopping, or other (amber) | The VM is between states. A progress indicator shows while the app waits for it to settle. |
 
-To start a stopped VM, select **Start**. The button is replaced by a progress indicator while the application polls Azure for the updated state, once every 5 seconds for up to 5 minutes. When the state turns green, a toast notification confirms the VM is ready and **Connect** becomes available.
+To start a stopped VM, select **Start**. The button is replaced by a progress indicator while the application polls Azure for the updated state, once every 5 seconds for up to 5 minutes. When the state turns green, a toast notification confirms the VM is ready and **Connect** becomes available. While a VM is starting, **Start** is hidden and **Connect** is disabled, and the starting state is tracked per VM, so switching VMs never shows it on the wrong one. If the VM keeps reading stopped or deallocated for about 30 seconds, the application reports an error naming the VM instead of waiting out the full 5 minutes.
 
 <div class="callout warn">
 <span class="eyebrow">Starting needs more than Reader</span>

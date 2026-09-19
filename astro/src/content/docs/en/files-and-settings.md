@@ -32,7 +32,7 @@ Settings writes are atomic: the application writes a temporary file first, then 
 
 <div class="callout note">
 <span class="eyebrow">Note</span>
-<p>Temporary <code>.rdp</code> files, generated for RD Gateway connections, live in a per-user, owner-only folder at <code>%TEMP%\BastionRDPConnector\</code> on Windows. They are deleted with a best-effort overwrite when the application closes, which is not a guaranteed secure erase. Leftovers from a crash or force-quit are swept the next time the application starts.</p>
+<p>Temporary <code>.rdp</code> files, generated for RD Gateway connections, live in a per-user, owner-only folder at <code>%TEMP%\BastionRDPConnector\</code> on Windows. They are deleted with a best-effort overwrite when the application closes, which is not a guaranteed secure erase. Leftovers from a crash or force-quit are swept the next time the application starts. The temp folder is refused if it is a symlink or junction. On macOS the folder is created with <code>0700</code> and its files with <code>0600</code>. The macOS tunnel <code>.rdp</code> file uses the same handling and is deleted on exit.</p>
 </div>
 
 ## Resetting

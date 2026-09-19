@@ -43,7 +43,7 @@ L'application ouvre un WebSocket vers l'hôte Bastion et écoute sur un port loc
 
 Comme la cible n'est jamais qu'une adresse à l'autre bout du tunnel, cette méthode atteint toute adresse IP que le réseau virtuel Bastion peut router. Cela inclut des machines qui ne sont pas des VM Azure.
 
-Si le WebSocket se coupe, le tunnel se reconnecte automatiquement, jusqu'à cinq tentatives avec un intervalle croissant entre chaque tentative. Une session de bureau à distance ouverte survit à une reconnexion brève.
+Si le WebSocket se termine en pleine session, la connexion locale se ferme et la reconnexion automatique du client RDP en ouvre une nouvelle via le tunnel, avec un jeton Bastion neuf. Chaque connexion acceptée reçoit son propre jeton et son propre WebSocket.
 
 ### Quand l'utiliser
 
@@ -64,11 +64,13 @@ C'est le chemin le plus court, et c'est la méthode par défaut sous Windows. El
 
 ### RD Gateway sur macOS
 
-RD Gateway est sélectionnable sur macOS et la connexion s'établit bien. Windows App for Mac ne parvient toutefois actuellement pas à maintenir une session RD Gateway via Azure Bastion : la session se déconnecte en quelques secondes, avec l'erreur `0x300006c`, `0x3000064` ou `0x10b`. La machine virtuelle n'est pas en cause, et aucun paramètre de votre côté ne permet de contourner le problème.
+RD Gateway est sélectionnable sur macOS et la connexion s'établit bien, mais elle ne tient pas. Windows App for Mac découpe un paquet RD Gateway en deux messages WebSocket, après quoi Azure Bastion ferme le WebSocket. Les paquets de passerelle plus grands que le tampon de réception de 20 480 octets de Bastion bloquent aussi la session. Le résultat est une déconnexion en quelques secondes, avec l'erreur `0x300006c`, `0x3000064` ou `0x10b`. Cela a été vérifié sur Windows App 11.4.1.
+
+Ce n'est pas un problème de TLS ni de suites de chiffrement, et la machine virtuelle n'est pas en cause non plus. FreeRDP via le même Bastion et le mode Tunnel avec Windows App restent tous deux connectés, et aucune propriété du fichier `.rdp` ne permet de contourner le problème.
 
 Microsoft prend en charge le chemin RD Gateway de Bastion avec le client Windows. Ce n'est pas une combinaison prise en charge avec Windows App sur macOS.
 
-Comme la connexion semble d'abord réussir avant d'échouer, l'application demande confirmation avant de tenter la connexion. Choisir RD Gateway sur macOS affiche la boîte de dialogue « Problème connu sur macOS », qui décrit le problème et propose **Utiliser le mode Tunnel à la place** ou **Essayer quand même RD Gateway**. Essayer quand même lance la tentative, afin que le comportement puisse être vérifié plutôt que pris pour acquis.
+Comme la connexion semble d'abord réussir avant d'échouer, l'application demande confirmation avant de tenter la connexion. Choisir RD Gateway sur macOS affiche la boîte de dialogue « Problème connu sur macOS », qui décrit le problème et propose **Utiliser le mode Tunnel à la place**, **Essayer quand même RD Gateway** ou Annuler. Essayer quand même lance la tentative, afin que le comportement puisse être vérifié plutôt que pris pour acquis.
 
 Utilisez Tunnel sur macOS. Il atteint les mêmes machines et c'est la méthode par défaut sur cette plateforme pour cette raison.
 
@@ -79,7 +81,7 @@ Utilisez Tunnel sur macOS. Il atteint les mêmes machines et c'est la méthode p
 | Se connecter à une VM Azure | Oui | Oui |
 | Se connecter à une adresse IP | Oui | Non |
 | Ouvre un port local | Oui, un par session | Non |
-| Se reconnecte automatiquement | Oui, jusqu'à 5 tentatives | Non |
+| Se reconnecte automatiquement | Oui, via la reconnexion automatique du client RDP | Non |
 | Authentification Entra ID | Non applicable | Désactivée par défaut, facultative |
 | Par défaut sous Windows | Non | Oui |
 | Par défaut sur macOS | Oui | Non |

@@ -32,7 +32,7 @@ Les écritures de paramètres sont atomiques : l'application écrit d'abord un f
 
 <div class="callout note">
 <span class="eyebrow">Remarque</span>
-<p>Les fichiers <code>.rdp</code> temporaires, générés pour les connexions RD Gateway, se trouvent sous Windows dans un dossier propre à chaque utilisateur et accessible à lui seul, sous <code>%TEMP%\BastionRDPConnector\</code>. Ils sont supprimés avec un écrasement au mieux à la fermeture de l'application, ce qui n'est pas un effacement sécurisé garanti. Les restes d'un plantage ou d'une fermeture forcée sont supprimés au prochain démarrage de l'application.</p>
+<p>Les fichiers <code>.rdp</code> temporaires, générés pour les connexions RD Gateway, se trouvent sous Windows dans un dossier propre à chaque utilisateur et accessible à lui seul, sous <code>%TEMP%\BastionRDPConnector\</code>. Ils sont supprimés avec un écrasement au mieux à la fermeture de l'application, ce qui n'est pas un effacement sécurisé garanti. Les restes d'un plantage ou d'une fermeture forcée sont supprimés au prochain démarrage de l'application. Le dossier temporaire est refusé s'il s'agit d'un lien symbolique ou d'une jonction. Sur macOS, le dossier est créé en <code>0700</code> et ses fichiers en <code>0600</code>. Le fichier <code>.rdp</code> du tunnel macOS suit le même traitement et est supprimé à la sortie.</p>
 </div>
 
 ## Réinitialisation

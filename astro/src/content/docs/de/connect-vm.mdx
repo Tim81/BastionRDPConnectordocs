@@ -53,7 +53,7 @@ Der Energiestatus der ausgewählten VM wird neben ihrem Namen angezeigt.
 | Beendet oder freigegeben (rot) | Die VM ist ausgeschaltet. Eine Schaltfläche **Start** erscheint. |
 | Wird gestartet, wird beendet oder ein anderer Zwischenzustand (orange) | Die VM befindet sich zwischen zwei Zuständen. Ein Fortschrittsindikator wird angezeigt, während die App auf den endgültigen Zustand wartet. |
 
-Um eine gestoppte VM zu starten, wählen Sie **Start**. Die Schaltfläche wird durch einen Fortschrittsindikator ersetzt, während die Anwendung Azure alle 5 Sekunden für bis zu 5 Minuten nach dem aktualisierten Zustand abfragt. Wird der Status grün, bestätigt eine Toast-Benachrichtigung, dass die VM bereit ist, und **Verbinden** wird verfügbar.
+Um eine gestoppte VM zu starten, wählen Sie **Start**. Die Schaltfläche wird durch einen Fortschrittsindikator ersetzt, während die Anwendung Azure alle 5 Sekunden für bis zu 5 Minuten nach dem aktualisierten Zustand abfragt. Wird der Status grün, bestätigt eine Toast-Benachrichtigung, dass die VM bereit ist, und **Verbinden** wird verfügbar. Während eine VM startet, ist **Start** ausgeblendet und **Verbinden** deaktiviert, und der Startzustand wird pro VM verfolgt, sodass er beim Wechsel der VM nie bei der falschen erscheint. Bleibt die VM etwa 30 Sekunden lang gestoppt oder freigegeben, meldet die Anwendung einen Fehler mit dem Namen der VM, statt die vollen 5 Minuten abzuwarten.
 
 <div class="callout warn">
 <span class="eyebrow">Starten erfordert mehr als Reader</span>

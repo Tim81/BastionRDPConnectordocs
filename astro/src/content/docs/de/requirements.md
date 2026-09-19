@@ -14,7 +14,7 @@ Die Anwendung ist eigenständig. Sie benötigt kein separat installiertes .NET, 
 | Windows 10 oder neuer, x64 | Installiert über den Microsoft Store |
 | macOS 12 Monterey oder neuer | Unterstützt seit 3.1.2 für Apple Silicon und Intel, aber noch nicht öffentlich verfügbar |
 | Remotedesktop-Client, Windows | `mstsc.exe`, bereits Teil von Windows |
-| Remotedesktop-Client, macOS | Die Windows App aus dem Mac App Store. Verwenden Sie damit Tunnel. Eine RD Gateway-Sitzung öffnet sich und wird innerhalb weniger Sekunden mit dem Fehler `0x300006c`, `0x3000064` oder `0x10b` getrennt, was Microsoft auf diesem Client nicht unterstützt |
+| Remotedesktop-Client, macOS | Die Windows App aus dem Mac App Store. Verwenden Sie damit Tunnel. Eine RD Gateway-Sitzung öffnet sich und wird innerhalb weniger Sekunden mit dem Fehler `0x300006c`, `0x3000064` oder `0x10b` getrennt, weil Windows App for Mac ein RD Gateway-Paket auf zwei WebSocket-Nachrichten aufteilt und Bastion den WebSocket schließt |
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>

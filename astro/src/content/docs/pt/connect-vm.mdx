@@ -53,7 +53,7 @@ O estado de energia da VM selecionada aparece junto ao seu nome.
 | Parada ou desalocada (vermelho) | A VM está desligada. Aparece um botão **Iniciar**. |
 | A iniciar, a parar, ou outro (âmbar) | A VM está entre estados. É mostrado um indicador de progresso enquanto a aplicação espera que estabilize. |
 
-Para iniciar uma VM parada, selecione **Iniciar**. O botão é substituído por um indicador de progresso enquanto a aplicação consulta o Azure para obter o estado atualizado, uma vez a cada 5 segundos durante até 5 minutos. Quando o estado fica verde, uma notificação confirma que a VM está pronta e o botão **Ligar** fica disponível.
+Para iniciar uma VM parada, selecione **Iniciar**. O botão é substituído por um indicador de progresso enquanto a aplicação consulta o Azure para obter o estado atualizado, uma vez a cada 5 segundos durante até 5 minutos. Quando o estado fica verde, uma notificação confirma que a VM está pronta e o botão **Ligar** fica disponível. Enquanto uma VM arranca, **Iniciar** fica oculto e **Ligar** fica desativado, e o estado de arranque é acompanhado por VM, pelo que nunca aparece na errada ao mudar de VM. Se a VM continuar parada ou desalocada durante cerca de 30 segundos, a aplicação comunica um erro com o nome da VM em vez de esperar os 5 minutos completos.
 
 <div class="callout warn">
 <span class="eyebrow">Iniciar precisa de mais do que Leitor</span>

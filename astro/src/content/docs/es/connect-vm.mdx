@@ -53,7 +53,7 @@ El estado de energía de la VM seleccionada se muestra junto a su nombre.
 | Detenida o desasignada (rojo) | La VM está apagada. Aparece un botón **Iniciar**. |
 | Iniciando, deteniendo u otro (ámbar) | La VM está en un estado intermedio. Se muestra un indicador de progreso mientras la aplicación espera a que se estabilice. |
 
-Para iniciar una VM detenida, seleccione **Iniciar**. El botón se reemplaza por un indicador de progreso mientras la aplicación consulta a Azure el estado actualizado, una vez cada 5 segundos durante un máximo de 5 minutos. Cuando el estado se pone en verde, una notificación confirma que la VM está lista y **Conectar** queda disponible.
+Para iniciar una VM detenida, seleccione **Iniciar**. El botón se reemplaza por un indicador de progreso mientras la aplicación consulta a Azure el estado actualizado, una vez cada 5 segundos durante un máximo de 5 minutos. Cuando el estado se pone en verde, una notificación confirma que la VM está lista y **Conectar** queda disponible. Mientras una VM se inicia, **Iniciar** está oculto y **Conectar** está desactivado, y el estado de inicio se sigue por VM, de modo que nunca aparece en la equivocada al cambiar de VM. Si la VM sigue detenida o desasignada durante unos 30 segundos, la aplicación notifica un error con el nombre de la VM en lugar de esperar los 5 minutos completos.
 
 <div class="callout warn">
 <span class="eyebrow">Iniciar requiere más que Lector</span>

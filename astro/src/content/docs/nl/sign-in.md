@@ -15,7 +15,7 @@ Wat u ziet, hangt af van of er al een token gecached staat op uw machine.
 | --- | --- |
 | Geen gecachede token | De Microsoft-aanmeldpagina opent direct. |
 | Een geldige gecachede token | De app meldt zich stil aan. Er verschijnt geen aanmeldvenster, en u gaat direct naar de tenantselectie als uw account er meer dan één heeft. |
-| Een verlopen token, of een Conditional Access-beleid dat herverificatie vereist | Het aanmeldvenster opent opnieuw, zodat u kunt voldoen aan wat uw organisatie vereist, bijvoorbeeld dagelijkse MFA. |
+| Een verlopen token, of een Conditional Access-beleid dat herverificatie vereist | Het aanmeldvenster opent opnieuw, zodat u kunt voldoen aan wat uw organisatie vereist, bijvoorbeeld dagelijkse MFA. De applicatie probeert de bewerking daarna één keer opnieuw. Er is steeds maar één inlogvenster open; een tweede trigger wacht op het venster dat al open is. |
 
 Kies **Werk- of schoolaccount**, voer uw account in en voltooi MFA als uw organisatie daarom vraagt.
 
