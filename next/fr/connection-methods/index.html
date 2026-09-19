@@ -31,7 +31,7 @@
 <h2 id="tunnel">Tunnel</h2>
 <p>L’application ouvre un WebSocket vers l’hôte Bastion et écoute sur un port local de votre ordinateur. Votre client de bureau à distance se connecte à <code>localhost</code> sur ce port, et le trafic est transmis via le WebSocket.</p>
 <p>Comme la cible n’est jamais qu’une adresse à l’autre bout du tunnel, cette méthode atteint toute adresse IP que le réseau virtuel Bastion peut router. Cela inclut des machines qui ne sont pas des VM Azure.</p>
-<p>Si le WebSocket se coupe, le tunnel se reconnecte automatiquement, jusqu’à cinq tentatives avec un intervalle croissant entre chaque tentative. Une session de bureau à distance ouverte survit à une reconnexion brève.</p>
+<p>Si le WebSocket se termine en pleine session, la connexion locale se ferme et la reconnexion automatique du client RDP en ouvre une nouvelle via le tunnel, avec un jeton Bastion neuf. Chaque connexion acceptée reçoit son propre jeton et son propre WebSocket.</p>
 <h3 id="quand-lutiliser">Quand l’utiliser</h3>
 <ul>
 <li>Vous vous connectez à une adresse IP plutôt que de choisir une VM.</li>
@@ -46,9 +46,10 @@
 <p>L'authentification Entra ID est désactivée par défaut et doit le rester lorsque la machine virtuelle appartient à un locataire différent de celui du compte avec lequel vous vous êtes connecté, ce qui est le cas habituel avec Azure Lighthouse. Azure AD renvoie <code>AADSTS293004</code> pour cette combinaison. Si vous l'activez quand même et que Bastion refuse, l'application réessaie automatiquement avec le paramètre désactivé, afin que la session puisse quand même s'ouvrir. Voir <a href="../entra-id/">Authentification Entra ID</a>.</p>
 </div>
 <h3 id="rd-gateway-sur-macos">RD Gateway sur macOS</h3>
-<p>RD Gateway est sélectionnable sur macOS et la connexion s’établit bien. Windows App for Mac ne parvient toutefois actuellement pas à maintenir une session RD Gateway via Azure Bastion : la session se déconnecte en quelques secondes, avec l’erreur <code>0x300006c</code>, <code>0x3000064</code> ou <code>0x10b</code>. La machine virtuelle n’est pas en cause, et aucun paramètre de votre côté ne permet de contourner le problème.</p>
+<p>RD Gateway est sélectionnable sur macOS et la connexion s’établit bien, mais elle ne tient pas. Windows App for Mac découpe un paquet RD Gateway en deux messages WebSocket, après quoi Azure Bastion ferme le WebSocket. Les paquets de passerelle plus grands que le tampon de réception de 20 480 octets de Bastion bloquent aussi la session. Le résultat est une déconnexion en quelques secondes, avec l’erreur <code>0x300006c</code>, <code>0x3000064</code> ou <code>0x10b</code>. Cela a été vérifié sur Windows App 11.4.1.</p>
+<p>Ce n’est pas un problème de TLS ni de suites de chiffrement, et la machine virtuelle n’est pas en cause non plus. FreeRDP via le même Bastion et le mode Tunnel avec Windows App restent tous deux connectés, et aucune propriété du fichier <code>.rdp</code> ne permet de contourner le problème.</p>
 <p>Microsoft prend en charge le chemin RD Gateway de Bastion avec le client Windows. Ce n’est pas une combinaison prise en charge avec Windows App sur macOS.</p>
-<p>Comme la connexion semble d’abord réussir avant d’échouer, l’application demande confirmation avant de tenter la connexion. Choisir RD Gateway sur macOS affiche la boîte de dialogue « Problème connu sur macOS », qui décrit le problème et propose <strong>Utiliser le mode Tunnel à la place</strong> ou <strong>Essayer quand même RD Gateway</strong>. Essayer quand même lance la tentative, afin que le comportement puisse être vérifié plutôt que pris pour acquis.</p>
+<p>Comme la connexion semble d’abord réussir avant d’échouer, l’application demande confirmation avant de tenter la connexion. Choisir RD Gateway sur macOS affiche la boîte de dialogue « Problème connu sur macOS », qui décrit le problème et propose <strong>Utiliser le mode Tunnel à la place</strong>, <strong>Essayer quand même RD Gateway</strong> ou Annuler. Essayer quand même lance la tentative, afin que le comportement puisse être vérifié plutôt que pris pour acquis.</p>
 <p>Utilisez Tunnel sur macOS. Il atteint les mêmes machines et c’est la méthode par défaut sur cette plateforme pour cette raison.</p>
 <h2 id="comparaison">Comparaison</h2>
 <table>
@@ -77,7 +78,7 @@
 </tr>
 <tr>
 <td>Se reconnecte automatiquement</td>
-<td>Oui, jusqu’à 5 tentatives</td>
+<td>Oui, via la reconnexion automatique du client RDP</td>
 <td>Non</td>
 </tr>
 <tr>

@@ -42,8 +42,8 @@
       <text class="ui-p" x="32" y="242">localhost:55001 · offen 41s</text>
       <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="232">Stoppen</text>
-      <text class="ui-p" x="10" y="284">Tunnel verbinden sich selbstständig neu, wenn der</text>
-      <text class="ui-p" x="10" y="295">WebSocket abbricht, bis zu fünf Versuche.</text>
+      <text class="ui-p" x="10" y="284">Die automatische Wiederverbindung des RDP-Clients</text>
+      <text class="ui-p" x="10" y="295">öffnet eine neue Tunnelverbindung, wenn der WebSocket abbricht.</text>
       <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
@@ -77,6 +77,6 @@
 <p>Das Stoppen eines Tunnels trennt sofort jede RDP-Sitzung, die ihn verwendet. Speichern Sie zuerst Ihre Arbeit in der Remote-Sitzung.</p>
 </div>
 <h2 id="wiederverbinden">Wiederverbinden</h2>
-<p>Wenn die WebSocket-Verbindung zu Bastion abbricht, etwa durch eine kurze Netzwerkunterbrechung oder Bastion-Wartung, verbindet sich der Tunnel selbstständig neu. Er versucht es bis zu fünf Mal, mit wachsendem Abstand zwischen den Versuchen. Ihre RDP-Sitzung bleibt bei einer so kurzen Wiederverbindung meist verbunden, sodass Sie es womöglich gar nicht bemerken.</p>
-<p>Schlagen alle fünf Versuche fehl, stoppt der Tunnel, und im Systembenachrichtigungsbereich erscheint eine Fehlermeldung. Öffnen Sie von dort aus erneut die Registerkarte Azure VM oder IP-Adresse und verbinden Sie sich manuell neu.</p>
+<p>Endet die WebSocket-Verbindung zu Bastion mitten in einer Sitzung, etwa durch eine kurze Netzwerkunterbrechung oder Bastion-Wartung, versucht der Tunnel es nicht selbst erneut. Jede angenommene Verbindung hat für ihre gesamte Lebensdauer ein Bastion-Token und einen WebSocket, daher wird die lokale Verbindung geschlossen, und die eigene automatische Wiederverbindung des RDP-Clients öffnet eine neue, die ein frisches Token erhält. Eine offene RDP-Sitzung erholt sich meist innerhalb weniger Sekunden.</p>
+<p>Erneutes Verbinden mit derselben Bastion, demselben Ziel und demselben Port verwendet den laufenden Tunnel wieder und startet den RDP-Client neu, statt einen zweiten Tunnel anzulegen. Der gewählte Zielport wird beachtet, und die Tunnelbezeichnung zeigt <code>vm:port</code>. Der Verbindungsaufbau des WebSockets läuft nach 30 Sekunden in ein Zeitlimit. Erholt sich die Verbindung über die Wiederverbindung des RDP-Clients nicht, öffnen Sie den Tab Azure VM oder den Tab IP-Adresse erneut und verbinden Sie manuell.</p>
 <p class="meta">Gilt für 3.3.9 · Zuletzt geprüft 2026-07-25</p><div class="pager"><a href="/BastionRDPConnectordocs/next/de/connect-vm/"><span class="dir">Zurück</span><span class="ttl">Verbindung zu einer Azure-VM herstellen</span></a><a class="next" href="/BastionRDPConnectordocs/next/de/monitors/"><span class="dir">Weiter</span><span class="ttl">Monitore</span></a></div></article><aside class="toc" aria-label="Auf dieser Seite"><span class="eyebrow">Auf dieser Seite</span><ul><li><a href="#die-registerkarte-aktive-tunnel">Die Registerkarte Aktive Tunnel</a></li><li><a href="#wiederverbinden">Wiederverbinden</a></li></ul></aside></div></main></body></html>

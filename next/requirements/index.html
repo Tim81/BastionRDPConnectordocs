@@ -22,7 +22,7 @@
 </tr>
 <tr>
 <td>Remote desktop client, macOS</td>
-<td>The Windows App, from the Mac App Store. Use Tunnel with it. An RD Gateway session opens and then disconnects within seconds with error <code>0x300006c</code>, <code>0x3000064</code> or <code>0x10b</code>, which Microsoft does not support on this client</td>
+<td>The Windows App, from the Mac App Store. Use Tunnel with it. An RD Gateway session opens and then disconnects within seconds with error <code>0x300006c</code>, <code>0x3000064</code> or <code>0x10b</code>, because Windows App for Mac splits one RD Gateway packet across two WebSocket messages and Bastion closes the WebSocket</td>
 </tr>
 </tbody>
 </table>

@@ -31,7 +31,7 @@
 <h2 id="túnel">Túnel</h2>
 <p>La aplicación abre un WebSocket hacia el host de Bastion y escucha en un puerto local de su equipo. Su cliente de escritorio remoto se conecta a <code>localhost</code> en ese puerto, y el tráfico se reenvía a través del WebSocket.</p>
 <p>Dado que el destino no es más que una dirección al otro lado del túnel, este método llega a cualquier dirección IP a la que la red virtual de Bastion pueda enrutar. Eso incluye máquinas que no son VM de Azure.</p>
-<p>Si el WebSocket se cae, el túnel se reconecta por sí solo, hasta cinco veces con un intervalo cada vez mayor entre intentos. Una sesión de escritorio remoto abierta sobrevive a una reconexión breve.</p>
+<p>Si el WebSocket termina a mitad de sesión, la conexión local se cierra y la reconexión automática del propio cliente RDP abre una nueva a través del túnel con un token de Bastion nuevo. Cada conexión aceptada recibe su propio token y su propio WebSocket.</p>
 <h3 id="cuándo-usarlo">Cuándo usarlo</h3>
 <ul>
 <li>Se está conectando a una dirección IP en lugar de elegir una VM.</li>
@@ -46,9 +46,10 @@
 <p>La autenticación Entra ID está desactivada de forma predeterminada y debe permanecer así cuando la máquina virtual pertenece a un inquilino distinto al de la cuenta con la que inició sesión, que es el caso habitual con Azure Lighthouse. Azure AD devuelve <code>AADSTS293004</code> para esa combinación. Si la activa de todos modos y Bastion la rechaza, la aplicación vuelve a intentarlo con la opción desactivada, de modo que la sesión igualmente se abre. Consulte <a href="../entra-id/">Autenticación Entra ID</a>.</p>
 </div>
 <h3 id="rd-gateway-en-macos">RD Gateway en macOS</h3>
-<p>RD Gateway se puede seleccionar en macOS y la conexión sí se abre. Sin embargo, Windows App for Mac actualmente no puede mantener una sesión de RD Gateway a través de Azure Bastion: la sesión se desconecta en segundos, con el error <code>0x300006c</code>, <code>0x3000064</code> o <code>0x10b</code>. La máquina virtual no es el problema, y no existe ninguna configuración por su parte que lo solucione.</p>
+<p>RD Gateway se puede seleccionar en macOS y la conexión sí se abre, pero no se mantiene. Windows App for Mac divide un paquete de RD Gateway en dos mensajes WebSocket, y Azure Bastion cierra entonces el WebSocket. Los paquetes de puerta de enlace mayores que el búfer de recepción de 20 480 bytes de Bastion también bloquean la sesión. El resultado es una desconexión en segundos, con el error <code>0x300006c</code>, <code>0x3000064</code> o <code>0x10b</code>. Se verificó en Windows App 11.4.1.</p>
+<p>No es un problema de TLS ni de cifrado, y la máquina virtual tampoco es el problema. FreeRDP sobre el mismo Bastion y el modo Túnel con Windows App se mantienen conectados, y ninguna propiedad del archivo <code>.rdp</code> lo soluciona.</p>
 <p>Microsoft admite la ruta RD Gateway de Bastion con el cliente de Windows. No es una combinación admitida con la aplicación Windows App en macOS.</p>
-<p>Como la conexión parece tener éxito antes de fallar, la aplicación pregunta antes de intentarlo. Elegir RD Gateway en macOS muestra el cuadro de diálogo “Problema conocido en macOS”, que describe el problema y ofrece <strong>Usar Túnel en su lugar</strong> o <strong>Probar RD Gateway de todos modos</strong>. Probar de todos modos igualmente realiza el intento, de modo que el comportamiento se puede comprobar en lugar de darlo por sentado.</p>
+<p>Como la conexión parece tener éxito antes de fallar, la aplicación pregunta antes de intentarlo. Elegir RD Gateway en macOS muestra el cuadro de diálogo “Problema conocido en macOS”, que describe el problema y ofrece <strong>Usar Túnel en su lugar</strong>, <strong>Probar RD Gateway de todos modos</strong> o Cancelar. Probar de todos modos igualmente realiza el intento, de modo que el comportamiento se puede comprobar en lugar de darlo por sentado.</p>
 <p>Use Túnel en macOS. Llega a las mismas máquinas y es el predeterminado allí por esta razón.</p>
 <h2 id="comparación">Comparación</h2>
 <table>
@@ -77,7 +78,7 @@
 </tr>
 <tr>
 <td>Se reconecta automáticamente</td>
-<td>Sí, hasta 5 intentos</td>
+<td>Sí, mediante la reconexión automática del cliente RDP</td>
 <td>No</td>
 </tr>
 <tr>

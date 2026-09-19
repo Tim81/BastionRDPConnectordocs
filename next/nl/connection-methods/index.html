@@ -31,7 +31,7 @@
 <h2 id="tunnel">Tunnel</h2>
 <p>De applicatie opent een WebSocket naar de Bastion-host en luistert op een lokale poort op uw computer. Uw remote desktop-client maakt verbinding met <code>localhost</code> op die poort, en verkeer wordt doorgestuurd via de WebSocket.</p>
 <p>Omdat het doel altijd slechts een adres aan de andere kant van de tunnel is, bereikt deze methode elk IP-adres dat het virtuele netwerk van Bastion kan routeren. Dat omvat machines die geen Azure-VM’s zijn.</p>
-<p>Als de WebSocket wegvalt, verbindt de tunnel zelf opnieuw, tot vijf keer met een groeiende tussenpoos tussen pogingen. Een open remote desktop-sessie overleeft een korte herverbinding.</p>
+<p>Als de WebSocket midden in een sessie eindigt, sluit de lokale verbinding en opent de automatische herverbinding van de RDP-client zelf een nieuwe via de tunnel, met een vers Bastion-token. Elke geaccepteerde verbinding krijgt een eigen token en WebSocket.</p>
 <h3 id="wanneer-u-het-gebruikt">Wanneer u het gebruikt</h3>
 <ul>
 <li>U maakt verbinding met een IP-adres in plaats van een VM te kiezen.</li>
@@ -46,9 +46,10 @@
 <p>Entra ID-authenticatie staat standaard uit en moet uit blijven wanneer de virtuele machine bij een andere tenant hoort dan het account waarmee u bent aangemeld, wat het gebruikelijke geval is bij Azure Lighthouse. Azure AD geeft dan <code>AADSTS293004</code> terug. Als u het toch inschakelt en Bastion het weigert, vraagt de applicatie opnieuw met de instelling uit, zodat de sessie alsnog opent. Zie <a href="../entra-id/">Entra ID-authenticatie</a>.</p>
 </div>
 <h3 id="rd-gateway-op-macos">RD Gateway op macOS</h3>
-<p>RD Gateway is selecteerbaar op macOS en de verbinding opent ook echt. Windows App for Mac kan momenteel echter geen RD Gateway-sessie via Azure Bastion in stand houden: de sessie verbreekt binnen enkele seconden, met foutcode <code>0x300006c</code>, <code>0x3000064</code> of <code>0x10b</code>. De virtuele machine is niet het probleem en er is geen instelling aan uw kant die dit omzeilt.</p>
+<p>RD Gateway is selecteerbaar op macOS en de verbinding opent ook echt, maar blijft niet in stand. Windows App for Mac splitst één RD Gateway-pakket over twee WebSocket-berichten, waarna Azure Bastion de WebSocket sluit. Gatewaypakketten die groter zijn dan de ontvangstbuffer van Bastion van 20.480 bytes laten de sessie ook vastlopen. Het resultaat is een verbreking binnen enkele seconden, met foutcode <code>0x300006c</code>, <code>0x3000064</code> of <code>0x10b</code>. Dit is geverifieerd op Windows App 11.4.1.</p>
+<p>Dit is geen TLS- of cipherprobleem, en de virtuele machine is ook niet het probleem. FreeRDP via dezelfde Bastion en Tunnel-modus met de Windows App blijven beide verbonden, en geen enkele eigenschap in het <code>.rdp</code>-bestand omzeilt het.</p>
 <p>Microsoft ondersteunt het RD Gateway-pad van Bastion met de Windows-client. Het is geen ondersteunde combinatie met de Windows App op macOS.</p>
-<p>Omdat de verbinding lijkt te slagen voordat deze mislukt, vraagt de applicatie het eerst na. Als u RD Gateway kiest op macOS, verschijnt een dialoogvenster “Bekend probleem op macOS” dat het probleem beschrijft en <strong>Tunnel gebruiken</strong> of <strong>Toch RD Gateway proberen</strong> aanbiedt. Als u toch doorgaat, wordt de poging alsnog gedaan, zodat het gedrag te controleren is in plaats van op vertrouwen aangenomen te worden.</p>
+<p>Omdat de verbinding lijkt te slagen voordat deze mislukt, vraagt de applicatie het eerst na. Als u RD Gateway kiest op macOS, verschijnt een dialoogvenster “Bekend probleem op macOS” dat het probleem beschrijft en <strong>Tunnel gebruiken</strong>, <strong>Toch RD Gateway proberen</strong> of Annuleren aanbiedt. Als u toch doorgaat, wordt de poging alsnog gedaan, zodat het gedrag te controleren is in plaats van op vertrouwen aangenomen te worden.</p>
 <p>Gebruik Tunnel op macOS. Het bereikt dezelfde machines en is daar om deze reden de standaard.</p>
 <h2 id="vergelijking">Vergelijking</h2>
 <table>
@@ -77,7 +78,7 @@
 </tr>
 <tr>
 <td>Verbindt automatisch opnieuw</td>
-<td>Ja, tot 5 pogingen</td>
+<td>Ja, via de automatische herverbinding van de RDP-client</td>
 <td>Nee</td>
 </tr>
 <tr>

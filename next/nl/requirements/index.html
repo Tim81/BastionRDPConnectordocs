@@ -22,7 +22,7 @@
 </tr>
 <tr>
 <td>Remote desktop-client, macOS</td>
-<td>De Windows App, uit de Mac App Store. Gebruik hiermee Tunnel. Een RD Gateway-sessie opent en verbreekt daarna binnen enkele seconden met fout <code>0x300006c</code>, <code>0x3000064</code> of <code>0x10b</code>, wat Microsoft op deze client niet ondersteunt</td>
+<td>De Windows App, uit de Mac App Store. Gebruik hiermee Tunnel. Een RD Gateway-sessie opent en verbreekt daarna binnen enkele seconden met fout <code>0x300006c</code>, <code>0x3000064</code> of <code>0x10b</code>, omdat Windows App for Mac één RD Gateway-pakket over twee WebSocket-berichten splitst en Bastion de WebSocket sluit</td>
 </tr>
 </tbody>
 </table>

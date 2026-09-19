@@ -35,7 +35,7 @@
 <p><a href="../diagnostics/">Diagnósticos</a> cubre qué contiene el registro de depuración y cómo hacerlo llegar a soporte sin que lleve secretos.</p>
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>Los archivos <code>.rdp</code> temporales, generados para las conexiones RD Gateway, se guardan en Windows en una carpeta propia de cada usuario y accesible solo por él, en <code>%TEMP%\BastionRDPConnector\</code>. Se eliminan con una sobrescritura en la medida de lo posible cuando la aplicación se cierra, lo que no es un borrado seguro garantizado. Los restos de un bloqueo o un cierre forzado se eliminan la próxima vez que se inicia la aplicación.</p>
+<p>Los archivos <code>.rdp</code> temporales, generados para las conexiones RD Gateway, se guardan en Windows en una carpeta propia de cada usuario y accesible solo por él, en <code>%TEMP%\BastionRDPConnector\</code>. Se eliminan con una sobrescritura en la medida de lo posible cuando la aplicación se cierra, lo que no es un borrado seguro garantizado. Los restos de un bloqueo o un cierre forzado se eliminan la próxima vez que se inicia la aplicación. La carpeta temporal se rechaza si es un enlace simbólico o una unión. En macOS la carpeta se crea con <code>0700</code> y sus archivos con <code>0600</code>. El archivo <code>.rdp</code> del túnel de macOS pasa por el mismo tratamiento y se elimina al salir.</p>
 </div>
 <h2 id="restablecer">Restablecer</h2>
 <p>Eliminar <code>settings.json</code> devuelve cada preferencia a su valor predeterminado. Su sesión permanece iniciada; nada cambia en su caché de tokens.</p>

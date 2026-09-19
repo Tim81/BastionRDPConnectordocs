@@ -8,28 +8,44 @@
 </thead>
 <tbody>
 <tr>
-<td>Les sessions expirées demandent de se reconnecter</td>
-<td>Les vérifications préalables (SKU Bastion, indicateurs de fonctionnalités, état d’alimentation de la VM) étaient fail-open pour toutes les erreurs, y compris une session Azure expirée. Une session expirée mène désormais au flux de connexion au lieu d’être laissée passer. Les autres erreurs restent fail-open.</td>
-</tr>
-<tr>
-<td>Fenêtre principale restaurée avant la fenêtre de connexion</td>
-<td>La fenêtre principale est restaurée avant l’ouverture de la fenêtre de connexion. Les exceptions de boîte de dialogue connues et sans gravité liées à un propriétaire non visible ou fermé sont consignées dans le log et ignorées, au lieu de faire planter l’application et de couper les tunnels actifs.</td>
-</tr>
-<tr>
-<td>Fichiers <code>.rdp</code> temporaires obsolètes supprimés au démarrage</td>
-<td>Les fichiers laissés par un plantage ou une fermeture forcée sont supprimés au démarrage suivant, uniquement par la première instance en cours d’exécution. Les fichiers <code>.rdp</code> générés se trouvent dans un dossier temporaire de l’application propre à chaque utilisateur et accessible à lui seul, et sont supprimés à la fermeture avec un écrasement au mieux. Ce n’est pas un effacement sécurisé garanti.</td>
-</tr>
-<tr>
-<td>macOS : les fichiers <code>.rdp</code> et le dossier de log s’ouvrent via <code>/usr/bin/open</code></td>
-<td>Les deux s’ouvrent désormais via le chemin absolu <code>/usr/bin/open</code>.</td>
+<td>macOS : les coupures RD Gateway sont un bogue de Windows App for Mac</td>
+<td>Windows App for Mac découpe un paquet RD Gateway en deux messages WebSocket, après quoi Azure Bastion ferme le WebSocket. Les paquets de passerelle plus grands que le tampon de réception de 20 480 octets de Bastion bloquent aussi la session. Les deux se manifestent par une déconnexion en quelques secondes, avec l’erreur <code>0x300006c</code>, <code>0x3000064</code> ou <code>0x10b</code>. Ce n’est pas un problème de TLS ni de suites de chiffrement, contrairement à ce que disaient les versions précédentes. Cela a été vérifié sur Windows App 11.4.1. FreeRDP via le même Bastion et le mode Tunnel avec Windows App restent tous deux connectés, et aucune propriété du fichier <code>.rdp</code> ne permet de contourner le problème.</td>
 </tr>
 <tr>
 <td>macOS : avertissement RD Gateway remanié</td>
-<td>Windows App for Mac ne parvient actuellement pas à maintenir une session RD Gateway via Azure Bastion : la session se déconnecte en quelques secondes, avec l’erreur <code>0x300006c</code>, <code>0x3000064</code> ou <code>0x10b</code>. La VM n’est pas en cause. La boîte de dialogue s’intitule désormais « Problème connu sur macOS » au lieu de « Non pris en charge sur macOS » et propose <strong>Utiliser le mode Tunnel à la place</strong> ou <strong>Essayer quand même RD Gateway</strong>.</td>
+<td>RD Gateway reste sélectionnable sur macOS, au cas où Microsoft corrigerait le client. L’avertissement dit maintenant ce qui se passe réellement et que votre VM n’est pas en cause. Il propose <strong>Utiliser le mode Tunnel à la place</strong>, <strong>Essayer quand même RD Gateway</strong> ou Annuler, dans les six langues. La boîte de dialogue s’intitule « Problème connu sur macOS » au lieu de « Non pris en charge sur macOS ». L’élément de menu À propos sur macOS est désormais localisé et suit immédiatement un changement de langue.</td>
 </tr>
 <tr>
-<td>macOS : élément de menu À propos localisé</td>
-<td>L’élément de menu À propos est traduit et suit immédiatement les changements de langue.</td>
+<td>Tunnels : fin des boucles de reconnexion inutiles</td>
+<td>Lorsque le client RDP fermait sa propre connexion, le tunnel y voyait une erreur réseau et réessayait jusqu’à cinq fois, en demandant à chaque fois un nouveau jeton Bastion sans client connecté. Désormais, chaque connexion acceptée reçoit un jeton Bastion et un WebSocket pour toute sa durée de vie. Si le WebSocket se termine alors que le client est encore connecté, la connexion locale est fermée et la reconnexion automatique du client RDP en ouvre une nouvelle avec un jeton neuf. L’état « Reconnexion… (tentative n/5) » a disparu.</td>
+</tr>
+<tr>
+<td>Tunnels : délais, arrêt propre, réutilisation et port cible</td>
+<td>La connexion WebSocket expire après 30 secondes, et une demande de jeton Bastion arrivée à expiration est signalée comme une erreur plutôt que comme une annulation silencieuse. La session Bastion est toujours nettoyée à la sortie, la fermeture du WebSocket est limitée dans le temps et un tunnel en cours d’arrêt ne reçoit jamais de nouveau client. Se reconnecter au même Bastion, à la même cible et au même port réutilise le tunnel en cours et relance le client RDP. Le port cible choisi est respecté : les tunnels de VM étaient figés sur 3389. La dernière cible et le dernier port local sont mémorisés, et les libellés affichent <code>vm:port</code>.</td>
+</tr>
+<tr>
+<td>Une session Azure expirée vous ramène à la connexion</td>
+<td>Les vérifications préalables s’ignoraient elles-mêmes à la moindre erreur, y compris une exigence de réauthentification de l’accès conditionnel, et laissaient la connexion échouer plus tard. Désormais l’application demande de se connecter et réessaie l’opération une fois, au démarrage, au chargement des abonnements, des Bastions et des VM, au changement d’abonnement, à la connexion et au démarrage d’une VM. Une seule fenêtre de connexion est ouverte à la fois ; un second déclenchement attend celle qui est déjà ouverte.</td>
+</tr>
+<tr>
+<td>Corrections de la connexion</td>
+<td>La fenêtre principale est restaurée avant l’ouverture de toute fenêtre de connexion, si bien que la connexion ne se bloque plus lorsque la fenêtre est masquée dans la zone de notification. Seules les exceptions de boîte de dialogue connues et sans gravité liées à un propriétaire non visible ou fermé sont ignorées ; tout le reste est toujours consigné dans le log et affiché. L’acquisition des jetons est liée au compte connecté, ce qui corrige l’utilisation du jeton d’un mauvais compte quand plusieurs comptes sont en cache. Se connecter avec un autre compte vide le cache des abonnements. Le listage des locataires, des abonnements et des Bastions signale désormais les échecs au lieu de renvoyer une liste vide. Si les abonnements ne se chargent toujours pas après la réauthentification, l’application se ferme plutôt que de vous laisser déconnecté sans rien à choisir.</td>
+</tr>
+<tr>
+<td>État d’alimentation des VM</td>
+<td>Le démarrage d’une VM est suivi par VM, si bien que changer de VM n’affiche plus « Démarrage » sur la mauvaise. Pendant le démarrage d’une VM, le bouton Démarrer est masqué et Se connecter est désactivé. Un démarrage échoué est détecté : si la VM reste arrêtée ou désallouée pendant environ 30 secondes, vous obtenez une erreur nommant la VM au lieu d’attendre toute la durée d’interrogation. Le démarrage d’une VM et l’actualisation de l’état d’alimentation se réauthentifient en cas de session expirée.</td>
+</tr>
+<tr>
+<td>Autres améliorations de fiabilité</td>
+<td>Fermer la fenêtre annule discrètement le travail en cours, sans boîte de dialogue d’erreur pendant l’arrêt. Une actualisation obsolète des Bastions ou des abonnements est ignorée si vous avez changé d’abonnement entre-temps, et la boîte de dialogue Changer d’abonnement récupère les Bastions avant de valider, si bien qu’un échec laisse l’abonnement précédent intact. Si le client RDP ne se lance pas, vous recevez une notification, ou une fenêtre restaurée avec une boîte de dialogue d’erreur s’il n’y a pas d’icône de notification. La restauration depuis la zone de notification ramène le bouton de la barre des tâches et l’état précédent de la fenêtre. Réduire la fenêtre pendant qu’une boîte de dialogue ou une fenêtre de connexion est ouverte ne la masque plus dans la zone de notification et ne la détruit plus. La boîte de dialogue À propos n’existe qu’en une seule instance. Ouvrir le dossier de log fonctionne désormais avec des chemins contenant des espaces.</td>
+</tr>
+<tr>
+<td>Sécurité : nom d’hôte Bastion et pagination</td>
+<td>L’application envoie votre jeton ARM à l’hôte indiqué dans la réponse d’Azure. Elle n’accepte désormais qu’un nom DNS se terminant par <code>.bastion.azure.com</code>, si bien qu’une adresse IP ou un hôte étranger ne le reçoit jamais, et les redirections sont désactivées pour la demande de jeton. Les <code>nextLink</code> ARM doivent être en https sur l’hôte ARM, le nombre de pages est plafonné à 500 et une réponse Resource Graph en échec déclenche une erreur au lieu d’une liste tronquée.</td>
+</tr>
+<tr>
+<td>Sécurité : fichiers temporaires</td>
+<td>Les fichiers <code>.rdp</code> générés, qui peuvent contenir un jeton de passerelle actif, sont supprimés à la fermeture avec un écrasement au mieux. Ce n’est pas un effacement sécurisé garanti. Le dossier temporaire est refusé s’il s’agit d’un lien symbolique ou d’une jonction. Sur macOS, le dossier est créé en 0700 et les fichiers en 0600, et le fichier <code>.rdp</code> du tunnel macOS suit désormais le même traitement ; il s’agissait auparavant d’un fichier lisible par tous dans <code>$TMPDIR</code>, jamais supprimé. Les restes d’un plantage ou d’une fermeture forcée sont supprimés au démarrage, uniquement par la première instance confirmée. Sur macOS, les fichiers <code>.rdp</code> et le dossier de log s’ouvrent via le chemin absolu <code>/usr/bin/open</code>.</td>
 </tr>
 </tbody>
 </table>
