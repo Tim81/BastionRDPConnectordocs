@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.6 · Documentation</div>
+    <div class="version">v3.3.9 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Language</div>
@@ -751,7 +751,7 @@
         <tr><td>Windows 10/11 (x64)</td><td>Available via the Microsoft Store as a native x64 executable</td></tr>
         <tr><td>macOS 12 Monterey or later <span class="badge orange">v3.1.2+ · not yet public</span></td><td>Supported as of v3.1.2 for Apple Silicon (arm64) and Intel (x64). Public release planned for a future update.</td></tr>
         <tr><td>Remote Desktop client (Windows)</td><td>Built into Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Remote Desktop client (macOS)</td><td><a href="https://apps.apple.com/us/app/windows-app/id1295203466" target="_blank" style="color:var(--azure);">Windows App</a> from the Mac App Store. <strong>Tunnel mode only</strong> — RD Gateway is not supported by the Windows App on macOS. More precisely: Azure Bastion exposes an RD Gateway endpoint that the Windows App cannot connect through — this is a limitation of the Windows App itself, unrelated to RD Gateway support in other scenarios.</td></tr>
+        <tr><td>Remote Desktop client (macOS)</td><td><a href="https://apps.apple.com/us/app/windows-app/id1295203466" target="_blank" style="color:var(--azure);">Windows App</a> from the Mac App Store. <strong>Tunnel mode recommended</strong> — known issue: the Windows App for Mac splits one RD Gateway packet across two WebSocket messages, so Azure Bastion closes the WebSocket and the session disconnects within seconds (errors 0x300006c, 0x3000064 or 0x10b). Packets larger than Bastion's 20,480-byte receive buffer also stall it. Verified with Windows App 11.4.1; FreeRDP and Tunnel mode work, it is not a TLS or cipher problem, and no <code>.rdp</code> property helps. The VM is not the problem. RD Gateway stays selectable, and the app warns you and offers <em>Use Tunnel instead</em>, <em>Try RD Gateway anyway</em> or Cancel.</td></tr>
         <tr><td>Azure CLI <span class="badge orange">v2.x only</span></td><td>No longer required as of v3.0. Only needed if you are running version 2.x. Download from <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
@@ -1170,7 +1170,7 @@
     <table class="field-table">
       <thead><tr><th>Field</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td>Connection Method</td><td>Choose <strong>Tunnel</strong> or <strong>RD Gateway</strong>. See the <a href="#method-comparison">comparison section</a> for guidance. Default: <strong>RD Gateway</strong> on Windows, <strong>Tunnel</strong> on macOS.</td></tr>
+        <tr><td>Connection Method</td><td>Choose <strong>Tunnel</strong> or <strong>RD Gateway</strong>. See the <a href="#method-comparison">comparison section</a> for guidance. Default: <strong>RD Gateway</strong> on Windows, <strong>Tunnel</strong> on macOS (RD Gateway is a known issue with the Windows App there; see <a href="#prerequisites">Requirements</a>).</td></tr>
         <tr><td>Monitor Configuration</td><td>Select <strong>Single Monitor</strong> (primary screen only) or <strong>All Monitors</strong> (span across all displays). Only applies to RD Gateway mode.</td></tr>
         <tr><td>Entra ID Authentication</td><td>Optional checkbox (visible in RD Gateway mode only). Enables Entra ID SSO. See <a href="#entraid">Entra ID Auth</a>.</td></tr>
         <tr><td>VM Search Mode</td><td><strong>VM Subscription</strong> — list VMs from one subscription. <strong>All subscriptions</strong> — cross-subscription search via Azure Resource Graph (≥3 characters required). <span class="badge blue">v3.3</span></td></tr>
@@ -1194,7 +1194,7 @@
     </table>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Pre-flight checks are <strong>fail-open</strong> — if the check itself fails (e.g. a network issue prevents retrieving Bastion metadata), the connection attempt proceeds normally rather than blocking you.</p>
+      <p>Pre-flight checks are <strong>fail-open</strong> — if the check itself fails (e.g. a network issue prevents retrieving Bastion metadata), the connection attempt proceeds normally rather than blocking you. The exception is an expired Azure session, which now prompts you to sign in again and retries the operation once (one sign-in popup at a time).</p>
     </div>
 
     <div class="callout tip">
@@ -1298,11 +1298,11 @@
       <p>Tunnel mode is the only method available on the <strong>IP Address</strong> tab. It supports multiple simultaneous tunnels to different targets.</p>
     </div>
 
-    <h3>Auto-reconnect <span class="badge blue">v3.3</span></h3>
-    <p>If the WebSocket connection to Azure Bastion drops unexpectedly — for example due to a network blip or Bastion maintenance — the tunnel automatically reconnects. The app retries up to <strong>5 times</strong> using exponential backoff. Your RDP session remains connected during the reconnect window; you will typically not notice the interruption.</p>
+    <h3>Connection loss and reconnecting <span class="badge blue">v3.3.9</span></h3>
+    <p>There is no in-app auto-reconnect any more. Each accepted connection gets its own Bastion token and WebSocket. If the WebSocket to Azure Bastion drops while your RDP client is still connected, the local connection is closed and the RDP client's own auto-reconnect opens a new one, which fetches a fresh token. Connecting again to the same Bastion, target and port reuses the running tunnel instead of creating a second one.</p>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>If all 5 reconnect attempts fail, the tunnel is stopped and an error notification is shown in the system tray. You can then reconnect manually from the <strong>Azure VM</strong> or <strong>Active Tunnels</strong> tab.</p>
+      <p>The WebSocket connect times out after 30 seconds. If the RDP client cannot reconnect on its own, reconnect from the <strong>Azure VM</strong> or <strong>Active Tunnels</strong> tab.</p>
     </div>
   </section>
 
@@ -1331,7 +1331,7 @@
         <div class="step-num">3</div>
         <div class="step-content">
           <strong>Temporary file is cleaned up on exit</strong>
-          <p>The RDP file is kept only for the duration of the application session and is securely deleted when the application closes.</p>
+          <p>The RDP file is kept only for the duration of the application session and is deleted with a best-effort overwrite when the application closes. Files left behind by a crash or force-quit are swept at the next startup.</p>
         </div>
       </div>
     </div>
@@ -1470,7 +1470,7 @@
       <p>Starting a VM requires at least <strong>Virtual Machine Contributor</strong> role on that VM. If the Start VM button does not appear, your account may lack the required permission.</p>
     </div>
 
-    <p>Once a VM start is initiated, the application polls Azure every 5 seconds for up to 5 minutes waiting for the Running state. If the VM does not reach Running within that time, click the 🔄 <strong>Refresh</strong> button to check the current state manually.</p>
+    <p>Once a VM start is initiated, the application polls Azure every 5 seconds for up to 5 minutes waiting for the Running state. If the VM does not reach Running within that time, click the 🔄 <strong>Refresh</strong> button to check the current state manually. The start is tracked per VM: while it runs, <strong>Start VM</strong> is hidden and <strong>Connect</strong> is disabled, and if the VM keeps reading stopped or deallocated for about 30 seconds an error naming the VM is shown.</p>
 
     <div class="callout info">
       <span class="ci">ℹ️</span>
@@ -1593,7 +1593,7 @@
         <tr><td>Cloud config <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Pre-v3.0: Azure cloud endpoint configuration. Shared with Azure CLI.</td></tr>
         <tr><td>HTTP cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Pre-v3.0: HTTP response cache. Shared with Azure CLI.</td></tr>
                                 <tr><td>Debug log</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostic log for troubleshooting. Rotated on every application start: the previous session becomes <code>debug.0.log</code> and the older archives shift down to <code>debug.9.log</code>, which is discarded.</td></tr>
-        <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Deleted when the application closes.</td></tr>
+        <tr><td>RDP temp files</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Temporary RDP files created by RD Gateway connections. Stored in a per-user, owner-only folder. Deleted (best-effort overwrite, not a guaranteed secure erase) when the application closes; leftovers from a crash are swept at startup. The folder is refused if it is a symlink or junction; on macOS it is created 0700 and the files 0600. The macOS tunnel <code>.rdp</code> file uses the same handling and is deleted on exit.</td></tr>
       </tbody>
     </table>
 
@@ -1619,6 +1619,38 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> What's New</h2>
+
+    <h3>v3.3.9</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>macOS: RD Gateway drops are a Windows App for Mac bug</td><td>Investigation with Windows App 11.4.1 on a Mac showed that the drops are not a TLS or cipher problem, as earlier versions said. The Windows App for Mac splits one RD Gateway packet across two WebSocket messages, and Azure Bastion then closes the WebSocket. Gateway packets larger than Bastion's 20,480-byte receive buffer also stall the session. The result is a disconnect within seconds (errors 0x300006c, 0x3000064 or 0x10b). FreeRDP through the same Bastion and Tunnel mode with the Windows App both stay connected, and no <code>.rdp</code> property works around it. RD Gateway stays selectable in case Microsoft fixes the client. The warning, titled &quot;Known issue on macOS&quot;, says your VM is not the problem and offers <strong>Use Tunnel instead</strong>, <strong>Try RD Gateway anyway</strong> or Cancel.</td></tr>
+        <tr><td>Tunnels: no more futile reconnect loops</td><td>The in-app auto-reconnect (up to 5 retries with a &quot;Reconnecting… (attempt n/5)&quot; status) is removed. When the RDP client closed its own connection, the tunnel used to treat it as a network error and fetch a new Bastion token each time. Now each accepted connection gets one Bastion token and one WebSocket. If the WebSocket ends while the client is still connected, the local connection closes and the RDP client's own auto-reconnect opens a new one with a fresh token. The WebSocket connect times out after 30 seconds, and a stopping tunnel is shut down cleanly and never handed a new client.</td></tr>
+        <tr><td>Tunnels: reuse and target port</td><td>Connecting again to the same Bastion, target and port reuses the running tunnel and relaunches the RDP client instead of creating a second tunnel. The target port you choose is honored (VM tunnels were hardcoded to 3389); the last target and local port are remembered and labels show <code>vm:port</code>.</td></tr>
+        <tr><td>Sign-in and expired sessions</td><td>An expired Azure session now prompts you to sign in and retries the operation once: at startup, when loading subscriptions, Bastions and VMs, when changing subscription, when connecting and when starting a VM. The pre-flight checks used to skip themselves on any error, including a Conditional Access re-authentication requirement. Only one sign-in popup opens at a time, and the main window is restored before it opens, so sign-in no longer hangs when the window is hidden to the tray. Known-harmless &quot;non-visible/closed owner&quot; dialog exceptions are logged and swallowed; everything else is still logged and shown. Tokens are tied to the signed-in account, and signing in as a different account clears the subscription cache. Listing tenants, subscriptions and Bastions now reports failures instead of showing an empty list.</td></tr>
+        <tr><td>VM power</td><td>Starting a VM is tracked per VM, so switching VMs no longer shows &quot;Starting&quot; on the wrong one. While a VM is starting, the Start VM button is hidden and Connect is disabled. If the VM keeps reading stopped or deallocated for about 30 seconds, you get an error naming the VM instead of waiting out the full poll. Start VM and the power-state refresh re-authenticate on an expired session.</td></tr>
+        <tr><td>Other reliability</td><td>Closing the window cancels in-flight work quietly. A stale Bastion or subscription refresh is discarded if you switched subscription meanwhile, and Change Subscription fetches Bastions before committing, so a failure leaves the previous subscription untouched. If the RDP client fails to launch you get a notification, or a restored window with an error dialog when there is no tray icon. Restoring from the tray brings back the taskbar button and the previous window state, and minimizing while a dialog or sign-in popup is open no longer hides to the tray. Open Log Folder works with paths that contain spaces. On macOS the About menu item is localized and follows a live language change.</td></tr>
+        <tr><td>Security</td><td>The app only sends your Azure token to a Bastion host name ending in <code>.bastion.azure.com</code>, and redirects are disabled on the token request. Paginated Azure results can no longer be returned partially without an error. Generated <code>.rdp</code> files (which can hold a live gateway token) are deleted with a best-effort overwrite on exit, not a guaranteed secure erase. The temp folder is refused if it is a symlink or junction. On macOS the folder is created 0700 and the files 0600, and the tunnel <code>.rdp</code> file now uses the same handling and is deleted on exit (it used to stay in <code>$TMPDIR</code>). Leftovers from a crash or force-quit are swept at startup by the first instance only. On macOS, <code>.rdp</code> files and the log folder open through the absolute <code>/usr/bin/open</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.8</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Security-patched .NET runtime</td><td>The build now requires SDK 10.0.401, so the bundled runtime is the security-patched .NET 10.0.12. Runtime security fixes reach you through application updates.</td></tr>
+        <tr><td>Updated components</td><td>MSAL 4.90.0.</td></tr>
+        <tr><td>macOS: new app icon</td><td>The icon is now a squircle, so macOS Tahoe no longer places it in a white box.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.7</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Updated components</td><td>Dependency updates only: Azure.Core 1.62.0, Avalonia packages 12.1.2 and the identity libraries (MSAL and related).</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.6</h3>
     <table class="field-table">
@@ -1657,10 +1689,10 @@
         <tr><td>Azure Resource Graph VM loading</td><td>VMs across 200 subscriptions load in <strong>2–4 seconds</strong> instead of 30–60 seconds. Uses the Azure Resource Graph API for cross-subscription queries.</td></tr>
         <tr><td>Cross-subscription VM search</td><td>New <em>All subscriptions</em> radio button mode searches across all your Azure subscriptions at once. Requires at least 3 characters. The subscription dropdown now shows only subscriptions that actually contain VMs.</td></tr>
         <tr><td>Two-column Azure VM tab</td><td>Connection settings (method, monitor, Entra ID auth) are in the left column; VM selection is in the right column. The layout is cleaner and fits more information without scrolling.</td></tr>
-        <tr><td>Pre-flight checks</td><td>Before connecting, the app automatically checks Bastion SKU, Bastion feature flags (native client / IP-based connection), and VM power state. Checks are fail-open.</td></tr>
-        <tr><td>Auto-reconnect tunnel</td><td>If the WebSocket connection drops, the tunnel reconnects automatically — up to 5 times with exponential backoff. RDP sessions stay connected during the reconnect window.</td></tr>
+        <tr><td>Pre-flight checks</td><td>Before connecting, the app automatically checks Bastion SKU, Bastion feature flags (native client / IP-based connection), and VM power state. Checks are fail-open, except that an expired session prompts you to sign in again.</td></tr>
+        <tr><td>Tunnel connection loss</td><td>The app no longer retries the WebSocket itself. If it drops, the local connection closes and the RDP client's own auto-reconnect opens a new one with a fresh Bastion token.</td></tr>
         <tr><td>About dialog &amp; diagnostic bundle</td><td>New ℹ button in the top bar. Opens the About dialog with <em>Open Log Folder</em> and <em>Copy Diagnostic Info</em> (system info + last 100 KB of redacted log).</td></tr>
-        <tr><td>Platform default connection method</td><td>Windows defaults to <strong>RD Gateway</strong>; macOS defaults to <strong>Tunnel</strong> (the Windows App on macOS does not support Azure Bastion acting as RD Gateway). Default applies only when no preference has been saved.</td></tr>
+        <tr><td>Platform default connection method</td><td>Windows defaults to <strong>RD Gateway</strong>; macOS defaults to <strong>Tunnel</strong> (RD Gateway is a known issue with the Windows App on macOS: the session disconnects within seconds). Default applies only when no preference has been saved.</td></tr>
         <tr><td>HD Ready screen support</td><td>Window is now 580×760 pixels (was ~540×700). Fits without a scrollbar on 1280×720 HD Ready displays.</td></tr>
       </tbody>
     </table>
@@ -1759,7 +1791,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
 </footer>
 </div>
 

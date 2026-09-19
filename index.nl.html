@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.6 · Documentatie</div>
+    <div class="version">v3.3.9 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -751,7 +751,7 @@
         <tr><td>Windows 10/11 (x64)</td><td>Beschikbaar via de Microsoft Store als native x64-uitvoerbaar bestand</td></tr>
         <tr><td>macOS 12 Monterey of nieuwer <span class="badge orange">v3.1.2+ · nog niet publiek</span></td><td>Ondersteund vanaf v3.1.2 voor Apple Silicon (arm64) en Intel (x64). Publieke release gepland voor een toekomstige update.</td></tr>
         <tr><td>Remote Desktop-client (Windows)</td><td>Ingebouwd in Windows — <code>mstsc.exe</code></td></tr>
-        <tr><td>Remote Desktop-client (macOS)</td><td><a href="https://apps.apple.com/nl/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> via de Mac App Store. <strong>Alleen Tunnel-modus</strong> — RD Gateway wordt niet ondersteund door de Windows App op macOS. Meer precies: Azure Bastion gedraagt zich als een RD Gateway, maar de Windows App kan hier geen verbinding mee maken — dit is een beperking van de Windows App zelf, los van RD Gateway-ondersteuning in andere scenario's.</td></tr>
+        <tr><td>Remote Desktop-client (macOS)</td><td><a href="https://apps.apple.com/nl/app/windows-app/id1295203466?mt=12" target="_blank" style="color:var(--azure);">Windows App</a> via de Mac App Store. <strong>Tunnel-modus aanbevolen</strong> — bekend probleem: de Windows App voor Mac splitst één RD Gateway-pakket over twee WebSocket-berichten, waarna Azure Bastion de WebSocket sluit en de sessie binnen enkele seconden wegvalt (fouten 0x300006c, 0x3000064 of 0x10b). Pakketten die groter zijn dan de ontvangstbuffer van 20.480 bytes van Bastion laten de sessie ook vastlopen. Geverifieerd met Windows App 11.4.1; FreeRDP en Tunnel-modus werken, het is geen TLS- of cipherprobleem, en geen enkele <code>.rdp</code>-eigenschap helpt. De VM is niet het probleem. RD Gateway blijft selecteerbaar, en de app waarschuwt u en biedt <em>Tunnel gebruiken</em>, <em>Toch RD Gateway proberen</em> of Annuleren aan.</td></tr>
         <tr><td>Azure CLI <span class="badge orange">v2.x only</span></td><td>Niet langer vereist vanaf v3.0. Alleen nodig als u versie 2.x gebruikt. Download via <a href="https://aka.ms/installazurecliwindowsx64" target="_blank" style="color:var(--azure);">aka.ms/installazurecliwindowsx64</a></td></tr>
       </tbody>
     </table>
@@ -1170,7 +1170,7 @@
     <table class="field-table">
       <thead><tr><th>Veld</th><th>Beschrijving</th></tr></thead>
       <tbody>
-        <tr><td>Verbindingsmethode</td><td>Kies <strong>Tunnel</strong> of <strong>RD Gateway</strong>. Zie de <a href="#method-comparison">vergelijkingssectie</a> voor advies. Standaard: <strong>RD Gateway</strong> op Windows, <strong>Tunnel</strong> op macOS.</td></tr>
+        <tr><td>Verbindingsmethode</td><td>Kies <strong>Tunnel</strong> of <strong>RD Gateway</strong>. Zie de <a href="#method-comparison">vergelijkingssectie</a> voor advies. Standaard: <strong>RD Gateway</strong> op Windows, <strong>Tunnel</strong> op macOS (RD Gateway is daar een bekend probleem van de Windows App; zie <a href="#prerequisites">Vereisten</a>).</td></tr>
         <tr><td>Monitor Configuratie</td><td>Selecteer <strong>Enkel beeldscherm</strong> (alleen primair scherm) of <strong>Alle beeldschermen</strong> (over alle schermen). Alleen voor RD Gateway-modus.</td></tr>
         <tr><td>Entra ID Authenticatie</td><td>Optioneel selectievakje (alleen in RD Gateway-modus). Schakelt Entra ID SSO in. Zie <a href="#entraid">Entra ID Authenticatie</a>.</td></tr>
         <tr><td>VM-zoekmodus</td><td><strong>VM Subscription</strong> — VM's van één subscription weergeven. <strong>Alle subscriptions</strong> — zoekopdracht over meerdere subscriptions via Azure Resource Graph (minimaal 3 tekens vereist). <span class="badge blue">v3.3</span></td></tr>
@@ -1194,7 +1194,7 @@
     </table>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Preflight-controles zijn <strong>fail-open</strong> — als de controle zelf mislukt (bijv. een netwerkprobleem voorkomt het ophalen van Bastion-metagegevens), verloopt de verbindingspoging normaal in plaats van te worden geblokkeerd.</p>
+      <p>Preflight-controles zijn <strong>fail-open</strong> — als de controle zelf mislukt (bijv. een netwerkprobleem voorkomt het ophalen van Bastion-metagegevens), verloopt de verbindingspoging normaal in plaats van te worden geblokkeerd. De uitzondering is een verlopen Azure-sessie, die nu vraagt om opnieuw aan te melden en de bewerking eenmaal herhaalt (steeds maar één aanmeldvenster).</p>
     </div>
 
     <div class="callout tip">
@@ -1298,11 +1298,11 @@
       <p>De Tunnelmodus is de enige methode beschikbaar op het tabblad <strong>IP-adres</strong>. Deze ondersteunt meerdere gelijktijdige tunnels naar verschillende doelen.</p>
     </div>
 
-    <h3>Automatisch herverbinden <span class="badge blue">v3.3</span></h3>
-    <p>Als de WebSocket-verbinding met Azure Bastion onverwacht wordt verbroken — bijvoorbeeld door een netwerkstoring of Bastion-onderhoud — maakt de tunnel automatisch opnieuw verbinding. De app probeert dit tot <strong>5 keer</strong> met exponentieel uitstel. Uw RDP-sessie blijft verbonden gedurende het herverbindingsvenster; u zult de onderbreking doorgaans niet merken.</p>
+    <h3>Verbindingsverlies en herverbinden <span class="badge blue">v3.3.9</span></h3>
+    <p>Er is geen ingebouwde automatische herverbinding meer. Elke geaccepteerde verbinding krijgt een eigen Bastion-token en een eigen WebSocket. Valt de WebSocket naar Azure Bastion weg terwijl uw RDP-client nog verbonden is, dan wordt de lokale verbinding gesloten en opent de eigen automatische herverbinding van de RDP-client een nieuwe, die een vers token ophaalt. Opnieuw verbinden met dezelfde Bastion, hetzelfde doel en dezelfde poort hergebruikt de draaiende tunnel in plaats van een tweede te maken.</p>
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p>Als alle 5 herverbindingspogingen mislukken, wordt de tunnel gestopt en verschijnt een foutmelding in het systeemvak. U kunt vervolgens handmatig opnieuw verbinding maken via het tabblad <strong>Azure VM</strong> of <strong>Actieve Tunnels</strong>.</p>
+      <p>Het opzetten van de WebSocket time-out na 30 seconden. Kan de RDP-client zelf niet opnieuw verbinden, verbind dan opnieuw via het tabblad <strong>Azure VM</strong> of <strong>Actieve tunnels</strong>.</p>
     </div>
   </section>
 
@@ -1331,7 +1331,7 @@
         <div class="step-num">3</div>
         <div class="step-content">
           <strong>Tijdelijk bestand wordt opgeruimd bij afsluiten</strong>
-          <p>Het RDP-bestand wordt alleen bewaard voor de duur van de applicatiesessie en wordt veilig verwijderd wanneer de applicatie sluit.</p>
+          <p>Het RDP-bestand wordt alleen bewaard voor de duur van de applicatiesessie en wordt verwijderd met een overschrijving naar beste vermogen wanneer de applicatie sluit. Bestanden die na een crash of geforceerd afsluiten zijn achtergebleven, worden bij de volgende start opgeruimd.</p>
         </div>
       </div>
     </div>
@@ -1470,7 +1470,7 @@
       <p>Het starten van een VM vereist minimaal de rol <strong>Virtual Machine Contributor</strong> op die VM. Als de knop Start VM niet verschijnt, heeft uw account mogelijk niet de vereiste machtiging.</p>
     </div>
 
-    <p>Zodra een VM-start is geïnitieerd, pollt de applicatie Azure elke 5 seconden gedurende maximaal 5 minuten in afwachting van de status Actief. Als de VM die status niet bereikt binnen die tijd, klik dan op de knop 🔄 <strong>Ververs</strong> om de huidige status handmatig te controleren.</p>
+    <p>Zodra een VM-start is geïnitieerd, pollt de applicatie Azure elke 5 seconden gedurende maximaal 5 minuten in afwachting van de status Actief. Als de VM die status niet bereikt binnen die tijd, klik dan op de knop 🔄 <strong>Ververs</strong> om de huidige status handmatig te controleren. De start wordt per VM bijgehouden: zolang die loopt, is <strong>Start VM</strong> verborgen en <strong>Verbinden</strong> uitgeschakeld, en blijft de VM ongeveer 30 seconden lang als gestopt of vrijgegeven te boek staan, dan verschijnt een foutmelding met de naam van de VM.</p>
 
         <p>Wanneer de VM de status <strong>Actief</strong> bereikt, toont de applicatie een Windows-melding vanuit het systeemvakpictogram om te bevestigen dat de VM klaar is.</p>
 <div class="callout info">
@@ -1594,7 +1594,7 @@
         <tr><td>Cloudconfiguratie <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\clouds.config</code></td><td>Vóór v3.0: Azure-cloud-eindpuntconfiguratie. Gedeeld met Azure CLI.</td></tr>
         <tr><td>HTTP-cache <span class="badge orange">v2.x</span></td><td><code>%USERPROFILE%\.azure\msal_http_cache.bin</code></td><td>Vóór v3.0: HTTP-antwoordcache. Gedeeld met Azure CLI.</td></tr>
         <tr><td>Debug logboek</td><td><code>%LOCALAPPDATA%\BastionRDPConnector\debug.log</code></td><td>Diagnostisch logboek. Rouleert bij elke start van de applicatie: de vorige sessie wordt <code>debug.0.log</code> en de oudere archieven schuiven door tot <code>debug.9.log</code>, dat vervalt.</td></tr>
-        <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Verwijderd bij afsluiten.</td></tr>
+        <tr><td>Tijdelijke RDP-bestanden</td><td><code>%TEMP%\BastionRDPConnector\</code></td><td>Tijdelijke RDP-bestanden aangemaakt door RD Gateway-verbindingen. Opgeslagen in een map per gebruiker die alleen voor de eigenaar toegankelijk is. Verwijderd bij afsluiten (overschrijving naar beste vermogen, geen gegarandeerde veilige verwijdering); resten na een crash worden bij het opstarten opgeruimd. De map wordt geweigerd als het een symbolische koppeling of junction is; op macOS wordt hij aangemaakt met 0700 en de bestanden met 0600. Het <code>.rdp</code>-bestand van de macOS-tunnel krijgt dezelfde behandeling en wordt bij afsluiten verwijderd.</td></tr>
       </tbody>
     </table>
 
@@ -1620,6 +1620,38 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.3.9</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>macOS: RD Gateway-verbrekingen zijn een bug in de Windows App voor Mac</td><td>Onderzoek met Windows App 11.4.1 op een Mac toonde aan dat de verbrekingen geen TLS- of cipherprobleem zijn, zoals eerdere versies aangaven. De Windows App voor Mac splitst één RD Gateway-pakket over twee WebSocket-berichten, waarna Azure Bastion de WebSocket sluit. Gateway-pakketten die groter zijn dan de ontvangstbuffer van 20.480 bytes van Bastion laten de sessie ook vastlopen. Het gevolg is een verbroken verbinding binnen enkele seconden (fouten 0x300006c, 0x3000064 of 0x10b). FreeRDP via dezelfde Bastion en Tunnel-modus met de Windows App blijven verbonden, en geen enkele <code>.rdp</code>-eigenschap omzeilt het probleem. RD Gateway blijft selecteerbaar voor het geval Microsoft de client herstelt. De waarschuwing, getiteld &quot;Bekend probleem op macOS&quot;, zegt dat je VM niet het probleem is en biedt <strong>Tunnel gebruiken</strong>, <strong>Toch RD Gateway proberen</strong> of Annuleren aan.</td></tr>
+        <tr><td>Tunnels: geen zinloze herverbindlussen meer</td><td>De ingebouwde automatische herverbinding (tot 5 pogingen met de status &quot;Opnieuw verbinden… (poging n/5)&quot;) is verwijderd. Wanneer de RDP-client zijn eigen verbinding sloot, zag de tunnel dat als netwerkfout en haalde elke keer een nieuw Bastion-token op. Nu krijgt elke geaccepteerde verbinding één Bastion-token en één WebSocket. Eindigt de WebSocket terwijl de client nog verbonden is, dan wordt de lokale verbinding gesloten en opent de eigen automatische herverbinding van de RDP-client een nieuwe met een vers token. Het opzetten van de WebSocket time-out na 30 seconden, en een tunnel die wordt gestopt krijgt nooit een nieuwe client.</td></tr>
+        <tr><td>Tunnels: hergebruik en doelpoort</td><td>Opnieuw verbinden met dezelfde Bastion, hetzelfde doel en dezelfde poort hergebruikt de draaiende tunnel en start de RDP-client opnieuw, in plaats van een tweede tunnel te maken. De gekozen doelpoort wordt gerespecteerd (VM-tunnels stonden vast op 3389); de laatste doelpoort en lokale poort worden onthouden en labels tonen <code>vm:poort</code>.</td></tr>
+        <tr><td>Aanmelden en verlopen sessies</td><td>Een verlopen Azure-sessie vraagt nu om aan te melden en herhaalt de bewerking eenmaal: bij het opstarten, bij het laden van subscriptions, Bastions en VM's, bij het wisselen van subscription, bij het verbinden en bij het starten van een VM. De preflight-controles sloegen zichzelf bij elke fout over, ook bij een vereiste heraanmelding via Conditional Access. Er opent steeds maar één aanmeldvenster, en het hoofdvenster wordt eerst hersteld, zodat aanmelden niet meer blijft hangen als het venster naar het systeemvak is verborgen. Bekende onschadelijke dialoogfouten over een verborgen of gesloten eigenaarvenster worden in het log vastgelegd en genegeerd; al het andere wordt nog steeds gelogd en getoond. Tokens zijn gekoppeld aan het aangemelde account, en aanmelden met een ander account wist de subscription-cache. Het ophalen van tenants, subscriptions en Bastions meldt nu fouten in plaats van een lege lijst te tonen.</td></tr>
+        <tr><td>VM-energiestatus</td><td>Het starten van een VM wordt per VM bijgehouden, zodat wisselen van VM niet meer &quot;Wordt gestart&quot; bij de verkeerde toont. Terwijl een VM start, is de knop Start VM verborgen en Verbinden uitgeschakeld. Blijft de VM ongeveer 30 seconden lang als gestopt of vrijgegeven te boek staan, dan krijgt u een foutmelding met de naam van de VM in plaats van de volledige pollperiode af te wachten. Start VM en het vernieuwen van de energiestatus verifiëren opnieuw bij een verlopen sessie.</td></tr>
+        <tr><td>Overige betrouwbaarheid</td><td>Het sluiten van het venster annuleert lopend werk zonder meldingen. Een verouderde verversing van Bastions of subscriptions wordt genegeerd als u ondertussen van subscription bent gewisseld, en Subscription wijzigen haalt de Bastions op vóór het vastleggen, zodat bij een fout de vorige subscription ongewijzigd blijft. Start de RDP-client niet, dan krijgt u een melding, of een hersteld venster met een foutdialoog als er geen systeemvakpictogram is. Herstellen vanuit het systeemvak brengt de taakbalkknop en de vorige vensterstatus terug, en minimaliseren terwijl een dialoog of aanmeldvenster open is verbergt het niet meer in het systeemvak. Logmap openen werkt met paden die spaties bevatten. Op macOS is het menu-item Over gelokaliseerd en volgt het direct een taalwijziging.</td></tr>
+        <tr><td>Beveiliging</td><td>De app stuurt uw Azure-token alleen naar een Bastion-hostnaam die eindigt op <code>.bastion.azure.com</code>, en omleidingen zijn uitgeschakeld voor de tokenaanvraag. Gepagineerde Azure-resultaten kunnen niet meer zonder fout gedeeltelijk worden teruggegeven. Gegenereerde <code>.rdp</code>-bestanden (die een actief gateway-token kunnen bevatten) worden bij afsluiten verwijderd met een overschrijving naar beste vermogen, geen gegarandeerde veilige verwijdering. De tijdelijke map wordt geweigerd als het een symbolische koppeling of junction is. Op macOS wordt de map aangemaakt met 0700 en de bestanden met 0600, en het <code>.rdp</code>-bestand van de tunnel krijgt nu dezelfde behandeling en wordt bij afsluiten verwijderd (het bleef eerder achter in <code>$TMPDIR</code>). Resten na een crash of geforceerd afsluiten worden bij het opstarten opgeruimd, alleen door de eerste instantie. Op macOS worden <code>.rdp</code>-bestanden en de log-map geopend via het absolute pad <code>/usr/bin/open</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.8</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Beveiligingsgepatchte .NET-runtime</td><td>De build vereist nu SDK 10.0.401, waardoor de meegeleverde runtime het beveiligingsgepatchte .NET 10.0.12 is. Beveiligingsfixes voor de runtime bereiken u via applicatie-updates.</td></tr>
+        <tr><td>Bijgewerkte componenten</td><td>MSAL 4.90.0.</td></tr>
+        <tr><td>macOS: nieuw app-pictogram</td><td>Het pictogram is nu een squircle, zodat macOS Tahoe het niet meer in een wit kader plaatst.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.7</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Bijgewerkte componenten</td><td>Alleen afhankelijkheidsupdates: Azure.Core 1.62.0, Avalonia-pakketten 12.1.2 en de identiteitsbibliotheken (MSAL en verwante).</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.6</h3>
     <table class="field-table">
@@ -1658,10 +1690,10 @@
         <tr><td>Azure Resource Graph VM-laden</td><td>VM's over 200 subscriptions laden in <strong>2–4 seconden</strong> in plaats van 30–60 seconden. Gebruikt de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions.</td></tr>
         <tr><td>VM-zoekopdracht over meerdere subscriptions</td><td>Nieuwe radio-knop <em>Alle subscriptions</em> doorzoekt tegelijk al uw Azure-subscriptions. Vereist minimaal 3 tekens. Het subscription-dropdown toont nu alleen subscriptions die daadwerkelijk VM's bevatten.</td></tr>
         <tr><td>Twee-kolommenindeling Azure VM tabblad</td><td>Verbindingsinstellingen (methode, monitor, Entra ID-auth) staan in de linkerkolom; VM-selectie staat in de rechterkolom. De indeling is overzichtelijker en past meer informatie zonder te scrollen.</td></tr>
-        <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open.</td></tr>
-        <tr><td>Automatisch herverbinden tunnel</td><td>Als de WebSocket-verbinding wegvalt, maakt de tunnel automatisch opnieuw verbinding — tot 5 keer met exponentieel uitstel. RDP-sessies blijven verbonden gedurende het herverbindingsvenster.</td></tr>
+        <tr><td>Preflight-controles</td><td>Vóór verbinden controleert de app automatisch de Bastion SKU, Bastion-functievlaggen (native client / op IP gebaseerde verbinding) en de VM-energiestatus. Controles zijn fail-open, behalve dat een verlopen sessie vraagt om opnieuw aan te melden.</td></tr>
+        <tr><td>Verbindingsverlies tunnel</td><td>De app probeert de WebSocket niet meer zelf opnieuw. Valt die weg, dan wordt de lokale verbinding gesloten en opent de eigen automatische herverbinding van de RDP-client een nieuwe met een vers Bastion-token.</td></tr>
         <tr><td>Dialoogvenster Info &amp; diagnostisch pakket</td><td>Nieuwe ℹ-knop in de bovenste balk. Opent het Dialoogvenster Info met <em>Open logmap</em> en <em>Diagnostische info kopiëren</em> (systeeminfo + laatste 100 KB van geredigeerd logboek).</td></tr>
-        <tr><td>Standaard verbindingsmethode per platform</td><td>Windows gebruikt standaard <strong>RD Gateway</strong>; macOS gebruikt standaard <strong>Tunnel</strong> (de Windows App op macOS ondersteunt Azure Bastion als RD Gateway niet). De standaard geldt alleen als er nog geen voorkeur is opgeslagen.</td></tr>
+        <tr><td>Standaard verbindingsmethode per platform</td><td>Windows gebruikt standaard <strong>RD Gateway</strong>; macOS gebruikt standaard <strong>Tunnel</strong> (RD Gateway is een bekend probleem van de Windows App op macOS: de sessie valt binnen enkele seconden weg). De standaard geldt alleen als er nog geen voorkeur is opgeslagen.</td></tr>
         <tr><td>Ondersteuning voor HD Ready-schermen</td><td>Het venster is nu 580×760 pixels (was ~540×700). Past zonder schuifbalk op 1280×720 HD Ready-schermen.</td></tr>
       </tbody>
     </table>
@@ -1760,7 +1792,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.6 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 
