@@ -1,7 +1,7 @@
 ---
 title: Ligar a uma VM do Azure
 description: Escolha uma máquina virtual pelo nome, numa subscrição ou em todas, verifique o seu estado de energia, inicie-a se necessário, e ligue.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Um par de botões de opção por cima da lista de VMs controla o funcionamento d
 | Máquina virtual | A VM à qual ligar, escolhida na lista à direita. |
 | Porta de destino, porta local | Utilizadas apenas no modo Túnel, e partilhadas com o separador Endereço IP. |
 
-Antes de ligar, a aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades, e o estado de energia da VM, e indica o que está em falta se uma verificação falhar. Estas verificações são fail-open: uma verificação que não consiga concluir não bloqueia a ligação.
+Antes de ligar, a aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades, e o estado de energia da VM, e indica o que está em falta se uma verificação falhar. Estas verificações são fail-open: uma verificação que não consiga concluir não bloqueia a ligação. Uma sessão do Azure expirada é a exceção: leva-o de novo ao início de sessão.
 
 ## Estado de energia e iniciar uma VM
 

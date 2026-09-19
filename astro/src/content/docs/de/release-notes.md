@@ -1,9 +1,34 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Änderung | Details |
+| --- | --- |
+| Abgelaufene Sitzungen fordern zur erneuten Anmeldung auf | Die Vorabprüfungen (Bastion-SKU, Feature-Flags, Energiestatus der VM) waren bei jedem Fehler fail-open, auch bei einer abgelaufenen Azure-Sitzung. Eine abgelaufene Sitzung führt jetzt in den Anmeldevorgang, statt durchgewunken zu werden. Andere Fehler bleiben fail-open. |
+| Hauptfenster wird vor dem Anmelde-Popup wiederhergestellt | Das Hauptfenster wird wiederhergestellt, bevor das Anmelde-Popup geöffnet wird. Bekannte, harmlose Dialogausnahmen wegen eines nicht sichtbaren oder geschlossenen Besitzerfensters werden protokolliert und verworfen, statt die Anwendung abstürzen zu lassen und aktive Tunnel zu trennen. |
+| Veraltete temporäre `.rdp`-Dateien werden beim Start entfernt | Nach einem Absturz oder erzwungenen Beenden zurückgebliebene Dateien werden beim nächsten Start gelöscht, und zwar nur von der ersten laufenden Instanz. Erzeugte `.rdp`-Dateien liegen in einem temporären Anwendungsordner, der pro Benutzer angelegt und nur für den Besitzer zugänglich ist, und werden beim Beenden nach bestem Bemühen überschrieben und gelöscht. Das ist kein garantiertes sicheres Löschen. |
+| macOS: `.rdp`-Dateien und der Log-Ordner werden über `/usr/bin/open` geöffnet | Beides wird jetzt über den absoluten Pfad `/usr/bin/open` geöffnet. |
+| macOS: überarbeitete RD Gateway-Warnung | Windows App for Mac kann derzeit keine RD Gateway-Sitzung über Azure Bastion aufrechterhalten: Die Sitzung wird innerhalb weniger Sekunden getrennt, mit dem Fehler `0x300006c`, `0x3000064` oder `0x10b`. Die VM ist nicht das Problem. Der Dialog heißt jetzt „Bekanntes Problem unter macOS“ statt „Unter macOS nicht unterstützt“ und bietet **Stattdessen Tunnel verwenden** oder **Trotzdem RD Gateway versuchen** an. |
+| macOS: Menüeintrag „Über“ lokalisiert | Der Menüeintrag „Über“ ist übersetzt und folgt Sprachwechseln sofort. |
+
+## 3.3.8
+
+| Änderung | Details |
+| --- | --- |
+| MSAL 4.90.0 | Die Microsoft Authentication Library, die die Anmeldung übernimmt, wurde aktualisiert. |
+| Sicherheitsgepatchte .NET-Runtime | Die Untergrenze des Build-SDK wurde auf 10.0.401 angehoben, sodass die mitgelieferte Runtime das sicherheitsgepatchte .NET 10.0.12 ist. Sicherheitskorrekturen der Runtime erreichen Sie über Updates der Anwendung. |
+| macOS: App-Symbol als Squircle | Das App-Symbol ist jetzt ein Squircle, sodass macOS Tahoe es nicht mehr in ein weißes Feld setzt. |
+
+## 3.3.7
+
+| Änderung | Details |
+| --- | --- |
+| Aktualisierte Komponenten | Azure.Core 1.62.0, Avalonia-Pakete 12.1.2 und Updates der Identitätsgruppe (MSAL und verwandte Pakete). Ausschließlich Abhängigkeitsupdates. |
 
 ## 3.3.6
 

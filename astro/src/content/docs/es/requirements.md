@@ -1,7 +1,7 @@
 ---
 title: Requisitos previos
 description: Qué debe cumplirse en su equipo y en Azure antes de que Azure Bastion RDP Connector pueda abrir una sesión.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ La aplicación es autónoma. No necesita .NET instalado por separado y, desde la
 | Windows 10 o posterior, x64 | Instalado desde la Microsoft Store |
 | macOS 12 Monterey o posterior | Compatible desde la 3.1.2 para Apple Silicon e Intel, pero aún no disponible públicamente |
 | Cliente de escritorio remoto, Windows | `mstsc.exe`, ya incluido en Windows |
-| Cliente de escritorio remoto, macOS | Windows App, desde la Mac App Store. Úselo con Túnel. Una sesión RD Gateway se abre y luego se interrumpe a los pocos segundos con el error `0x3000064`, una incompatibilidad de cifrado que Microsoft no admite en este cliente |
+| Cliente de escritorio remoto, macOS | Windows App, desde la Mac App Store. Úselo con Túnel. Una sesión RD Gateway se abre y luego se desconecta en segundos con el error `0x300006c`, `0x3000064` o `0x10b`, algo que Microsoft no admite en este cliente |
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
@@ -34,7 +34,7 @@ La aplicación es autónoma. No necesita .NET instalado por separado y, desde la
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>La aplicación comprueba la SKU de Bastion y sus marcadores de características antes de conectar, y nombra el que falta si una comprobación no se cumple. Estas comprobaciones son fail-open: si la comprobación en sí no puede completarse, por ejemplo por un problema de red transitorio, el intento de conexión continúa de todas formas.</p>
+<p>La aplicación comprueba la SKU de Bastion y sus marcadores de características antes de conectar, y nombra el que falta si una comprobación no se cumple. Estas comprobaciones son fail-open: si la comprobación en sí no puede completarse, por ejemplo por un problema de red transitorio, el intento de conexión continúa de todas formas. Una sesión de Azure caducada es la excepción: le lleva de nuevo al inicio de sesión.</p>
 </div>
 
 ## Accesibilidad de red

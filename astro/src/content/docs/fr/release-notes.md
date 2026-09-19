@@ -1,9 +1,34 @@
 ---
 title: Nouveautés
 description: Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Changement | Détails |
+| --- | --- |
+| Les sessions expirées demandent de se reconnecter | Les vérifications préalables (SKU Bastion, indicateurs de fonctionnalités, état d'alimentation de la VM) étaient fail-open pour toutes les erreurs, y compris une session Azure expirée. Une session expirée mène désormais au flux de connexion au lieu d'être laissée passer. Les autres erreurs restent fail-open. |
+| Fenêtre principale restaurée avant la fenêtre de connexion | La fenêtre principale est restaurée avant l'ouverture de la fenêtre de connexion. Les exceptions de boîte de dialogue connues et sans gravité liées à un propriétaire non visible ou fermé sont consignées dans le log et ignorées, au lieu de faire planter l'application et de couper les tunnels actifs. |
+| Fichiers `.rdp` temporaires obsolètes supprimés au démarrage | Les fichiers laissés par un plantage ou une fermeture forcée sont supprimés au démarrage suivant, uniquement par la première instance en cours d'exécution. Les fichiers `.rdp` générés se trouvent dans un dossier temporaire de l'application propre à chaque utilisateur et accessible à lui seul, et sont supprimés à la fermeture avec un écrasement au mieux. Ce n'est pas un effacement sécurisé garanti. |
+| macOS : les fichiers `.rdp` et le dossier de log s'ouvrent via `/usr/bin/open` | Les deux s'ouvrent désormais via le chemin absolu `/usr/bin/open`. |
+| macOS : avertissement RD Gateway remanié | Windows App for Mac ne parvient actuellement pas à maintenir une session RD Gateway via Azure Bastion : la session se déconnecte en quelques secondes, avec l'erreur `0x300006c`, `0x3000064` ou `0x10b`. La VM n'est pas en cause. La boîte de dialogue s'intitule désormais « Problème connu sur macOS » au lieu de « Non pris en charge sur macOS » et propose **Utiliser le mode Tunnel à la place** ou **Essayer quand même RD Gateway**. |
+| macOS : élément de menu À propos localisé | L'élément de menu À propos est traduit et suit immédiatement les changements de langue. |
+
+## 3.3.8
+
+| Changement | Détails |
+| --- | --- |
+| MSAL 4.90.0 | Mise à jour de la Microsoft Authentication Library, qui gère la connexion. |
+| Runtime .NET avec correctifs de sécurité | Le SDK minimal de génération passe à 10.0.401, si bien que le runtime intégré est .NET 10.0.12, avec les correctifs de sécurité. Les correctifs de sécurité du runtime vous parviennent par les mises à jour de l'application. |
+| macOS : icône d'application en squircle | L'icône de l'application est désormais un squircle, si bien que macOS Tahoe ne la place plus dans un cadre blanc. |
+
+## 3.3.7
+
+| Changement | Détails |
+| --- | --- |
+| Composants mis à jour | Azure.Core 1.62.0, packages Avalonia 12.1.2 et mises à jour du groupe d'identité (MSAL et packages associés). Mises à jour de dépendances uniquement. |
 
 ## 3.3.6
 

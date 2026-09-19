@@ -1,9 +1,34 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Change | Details |
+| --- | --- |
+| Expired sessions prompt you to sign in again | The pre-flight checks (Bastion SKU, feature flags, VM power state) used to fail open on every error, including an expired Azure session. An expired session now reaches the sign-in flow instead of being waved through. Other errors still fail open. |
+| Main window restored before the sign-in popup | The main window is restored before the sign-in popup opens. Known-harmless "non-visible or closed owner" dialog exceptions are logged and swallowed instead of crashing the application and dropping active tunnels. |
+| Stale temporary `.rdp` files swept at startup | Files left behind by a crash or force-quit are deleted at the next start, by the first running instance only. Generated `.rdp` files live in a per-user, owner-only application temp folder and are deleted with a best-effort overwrite on exit. That is not a guaranteed secure erase. |
+| macOS: `.rdp` files and the log folder open through `/usr/bin/open` | Both now open through the absolute path `/usr/bin/open`. |
+| macOS: reworked RD Gateway warning | Windows App for Mac currently can't keep an RD Gateway session through Azure Bastion: it disconnects within seconds, with error `0x300006c`, `0x3000064` or `0x10b`. The VM is not the problem. The dialog, now titled "Known issue on macOS" instead of "Not supported on macOS", offers **Use Tunnel instead** or **Try RD Gateway anyway**. |
+| macOS: About menu item localized | The About menu item is translated and follows language changes live. |
+
+## 3.3.8
+
+| Change | Details |
+| --- | --- |
+| MSAL 4.90.0 | Updated the Microsoft Authentication Library, which handles sign-in. |
+| Security-patched .NET runtime | The build SDK floor is raised to 10.0.401, so the bundled runtime is the security-patched .NET 10.0.12. Runtime security fixes reach you through application updates. |
+| macOS: squircle app icon | The app icon is now a squircle, so macOS Tahoe no longer places it in a white box. |
+
+## 3.3.7
+
+| Change | Details |
+| --- | --- |
+| Updated components | Azure.Core 1.62.0, Avalonia packages 12.1.2, and updates to the identity group (MSAL and related packages). Dependency updates only. |
 
 ## 3.3.6
 

@@ -1,7 +1,7 @@
 ---
 title: Descripción general
 description: Abra una sesión de escritorio remoto a través de Azure Bastion hacia una máquina virtual de Azure, o hacia cualquier sistema Windows al que la red de Bastion pueda enrutar.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ La aplicación ofrece dos métodos de conexión. Llegan a la misma máquina y se
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>La aplicación comprueba la SKU de Bastion y sus marcadores de características antes de conectar, e indica cuál falta si una comprobación no se cumple. Estas comprobaciones son fail-open, por lo que una comprobación que no puede completarse no le impide conectarse.</p>
+<p>La aplicación comprueba la SKU de Bastion y sus marcadores de características antes de conectar, e indica cuál falta si una comprobación no se cumple. Estas comprobaciones son fail-open, por lo que una comprobación que no puede completarse no le impide conectarse. Una sesión de Azure caducada es la excepción: le lleva de nuevo al inicio de sesión.</p>
 </div>
 
 ## Dónde se almacenan las cosas

@@ -1,7 +1,7 @@
 ---
 title: Connection methods
 description: 'Tunnel and RD Gateway compared: how each carries the session, which targets they reach, and which one is the default on Windows and macOS.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -64,13 +64,11 @@ This is the shorter path, and on Windows it is the default. It only works when B
 
 ### RD Gateway on macOS
 
-RD Gateway is selectable on macOS and the connection does open. It then drops after roughly ten to fifteen seconds with error `0x3000064`.
-
-The cause is a cipher mismatch, not a configuration mistake. The macOS client's TLS stack offers only RSA cipher suites, and Azure Bastion's gateway presents ECDSA. Neither side can meet the other, so the session is torn down shortly after it starts. This is a client limitation on Microsoft's side with no setting that works around it.
+RD Gateway is selectable on macOS and the connection does open. Windows App for Mac currently can't keep an RD Gateway session through Azure Bastion, though: it disconnects within seconds, with error `0x300006c`, `0x3000064` or `0x10b`. The virtual machine is not the problem, and no setting on your side works around it.
 
 Microsoft supports Bastion's RD Gateway path with the Windows client. It is not a supported combination with the Windows App on macOS.
 
-Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a prompt naming the error code and offering Tunnel instead. Answering yes still makes the attempt, so the behaviour can be checked rather than taken on trust.
+Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a "Known issue on macOS" dialog that describes the problem and offers **Use Tunnel instead** or **Try RD Gateway anyway**. Trying anyway still makes the attempt, so the behaviour can be checked rather than taken on trust.
 
 Use Tunnel on macOS. It reaches the same machines and is the default there for this reason.
 

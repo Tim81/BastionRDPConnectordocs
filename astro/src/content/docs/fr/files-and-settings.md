@@ -1,7 +1,7 @@
 ---
 title: Fichiers et paramètres
 description: Où l'application conserve vos préférences, votre état de connexion et ses journaux, et ce que contient chaque fichier.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -32,7 +32,7 @@ Les écritures de paramètres sont atomiques : l'application écrit d'abord un f
 
 <div class="callout note">
 <span class="eyebrow">Remarque</span>
-<p>Les fichiers <code>.rdp</code> temporaires, générés pour les connexions RD Gateway, se trouvent sous <code>%TEMP%\BastionRDPConnector\</code> et sont supprimés à la fermeture de l'application.</p>
+<p>Les fichiers <code>.rdp</code> temporaires, générés pour les connexions RD Gateway, se trouvent sous Windows dans un dossier propre à chaque utilisateur et accessible à lui seul, sous <code>%TEMP%\BastionRDPConnector\</code>. Ils sont supprimés avec un écrasement au mieux à la fermeture de l'application, ce qui n'est pas un effacement sécurisé garanti. Les restes d'un plantage ou d'une fermeture forcée sont supprimés au prochain démarrage de l'application.</p>
 </div>
 
 ## Réinitialisation

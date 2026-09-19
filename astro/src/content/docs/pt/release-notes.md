@@ -1,9 +1,34 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Alteração | Detalhes |
+| --- | --- |
+| As sessões expiradas pedem novo início de sessão | As verificações prévias (SKU do Bastion, indicadores de funcionalidades, estado de energia da VM) eram fail-open perante qualquer erro, incluindo uma sessão do Azure expirada. Agora, uma sessão expirada chega ao fluxo de início de sessão em vez de ser deixada passar. Os restantes erros continuam fail-open. |
+| Janela principal restaurada antes da janela de início de sessão | A janela principal é restaurada antes de a janela de início de sessão abrir. As exceções de caixa de diálogo conhecidas e inofensivas por um proprietário não visível ou fechado são registadas no log e descartadas, em vez de bloquearem a aplicação e perderem os túneis ativos. |
+| Ficheiros `.rdp` temporários antigos eliminados no arranque | Os ficheiros deixados por um bloqueio ou encerramento forçado são eliminados no arranque seguinte, apenas pela primeira instância em execução. Os ficheiros `.rdp` gerados ficam numa pasta temporária da aplicação própria de cada utilizador e acessível apenas a este, e são eliminados ao sair com uma substituição de conteúdo na medida do possível. Não é um apagamento seguro garantido. |
+| macOS: os ficheiros `.rdp` e a pasta de log abrem através de `/usr/bin/open` | Ambos abrem agora através do caminho absoluto `/usr/bin/open`. |
+| macOS: aviso do RD Gateway reformulado | O Windows App for Mac atualmente não consegue manter uma sessão de RD Gateway através do Azure Bastion: a sessão desliga em segundos, com o erro `0x300006c`, `0x3000064` ou `0x10b`. A VM não é o problema. A caixa de diálogo passa a chamar-se "Problema conhecido no macOS" em vez de "Não suportado no macOS" e oferece **Usar Túnel em vez disso** ou **Tentar mesmo assim via RD Gateway**. |
+| macOS: item de menu Acerca de localizado | O item de menu Acerca de está traduzido e acompanha de imediato as alterações de idioma. |
+
+## 3.3.8
+
+| Alteração | Detalhes |
+| --- | --- |
+| MSAL 4.90.0 | A Microsoft Authentication Library, que trata do início de sessão, foi atualizada. |
+| Runtime .NET com correções de segurança | O SDK mínimo de compilação sobe para 10.0.401, pelo que o runtime incluído é o .NET 10.0.12, com as correções de segurança. As correções de segurança do runtime chegam-lhe através das atualizações da aplicação. |
+| macOS: ícone da aplicação em squircle | O ícone da aplicação é agora um squircle, pelo que o macOS Tahoe já não o coloca numa caixa branca. |
+
+## 3.3.7
+
+| Alteração | Detalhes |
+| --- | --- |
+| Componentes atualizados | Azure.Core 1.62.0, pacotes do Avalonia 12.1.2 e atualizações do grupo de identidade (MSAL e pacotes relacionados). Apenas atualizações de dependências. |
 
 ## 3.3.6
 

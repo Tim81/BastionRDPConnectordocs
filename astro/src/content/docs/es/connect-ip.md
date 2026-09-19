@@ -1,7 +1,7 @@
 ---
 title: Conectarse a una dirección IP
 description: La pestaña Dirección IP llega a todo lo que la red virtual de Bastion pueda enrutar, no solo a VM de Azure, mediante una conexión Túnel.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

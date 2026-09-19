@@ -1,7 +1,7 @@
 ---
 title: Connect to an Azure VM
 description: Pick a virtual machine by name, across one subscription or all of them, check its power state, start it if needed, and connect.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ A pair of radio buttons above the VM list controls how the search works.
 | Virtual machine | The VM to connect to, picked from the list on the right. |
 | Target port, local port | Used only in Tunnel mode, and shared with the IP address tab. |
 
-Before connecting, the application checks the Bastion SKU and its feature flags, and the VM's power state, and tells you what is missing if a check fails. These checks fail open: a check that cannot complete does not block the connection.
+Before connecting, the application checks the Bastion SKU and its feature flags, and the VM's power state, and tells you what is missing if a check fails. These checks fail open: a check that cannot complete does not block the connection. An expired Azure session is the exception: it takes you to sign-in again.
 
 ## Power state and starting a VM
 

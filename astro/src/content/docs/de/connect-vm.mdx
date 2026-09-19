@@ -1,7 +1,7 @@
 ---
 title: Verbindung zu einer Azure-VM herstellen
 description: Wählen Sie eine virtuelle Maschine nach Namen aus, über eine Subscription oder alle hinweg, prüfen Sie ihren Energiestatus, starten Sie sie bei Bedarf, und verbinden Sie sich.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Ein Paar Optionsfelder über der VM-Liste steuert, wie die Suche funktioniert.
 | Virtuelle Maschine | Die VM, mit der eine Verbindung hergestellt wird, ausgewählt aus der Liste rechts. |
 | Zielport, lokaler Port | Nur im Tunnel-Modus verwendet, und mit der Registerkarte IP-Adresse geteilt. |
 
-Vor dem Verbinden prüft die Anwendung die Bastion-SKU und ihre Feature-Flags sowie den Energiestatus der VM und nennt Ihnen, was fehlt, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, blockiert die Verbindung nicht.
+Vor dem Verbinden prüft die Anwendung die Bastion-SKU und ihre Feature-Flags sowie den Energiestatus der VM und nennt Ihnen, was fehlt, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, blockiert die Verbindung nicht. Eine abgelaufene Azure-Sitzung ist die Ausnahme: Sie führt Sie erneut zur Anmeldung.
 
 ## Energiestatus und eine VM starten
 

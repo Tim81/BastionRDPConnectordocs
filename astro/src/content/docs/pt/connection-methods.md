@@ -1,7 +1,7 @@
 ---
 title: Métodos de ligação
 description: 'Túnel e RD Gateway comparados: como cada um transporta a sessão, que destinos alcançam, e qual é a predefinição no Windows e no macOS.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -64,13 +64,11 @@ Este é o caminho mais curto, e no Windows é a predefinição. Só funciona qua
 
 ### RD Gateway no macOS
 
-O RD Gateway pode ser selecionado no macOS e a ligação chega a abrir. Depois cai ao fim de cerca de dez a quinze segundos com o erro `0x3000064`.
-
-A causa é uma incompatibilidade de cifras, não um erro de configuração. A pilha TLS do cliente macOS só oferece conjuntos de cifras RSA, e o gateway do Azure Bastion apresenta ECDSA. Nenhum dos lados consegue satisfazer o outro, pelo que a sessão é encerrada pouco depois de começar. Trata-se de uma limitação do cliente, do lado da Microsoft, sem nenhuma definição que a contorne.
+O RD Gateway pode ser selecionado no macOS e a ligação chega a abrir. No entanto, o Windows App for Mac atualmente não consegue manter uma sessão de RD Gateway através do Azure Bastion: a sessão desliga em segundos, com o erro `0x300006c`, `0x3000064` ou `0x10b`. A máquina virtual não é o problema, e não existe nenhuma definição do seu lado que o contorne.
 
 A Microsoft suporta a via RD Gateway do Bastion com o cliente Windows. Não é uma combinação suportada com a Windows App no macOS.
 
-Como a ligação parece ter sucesso antes de falhar, a aplicação pergunta antes de tentar. Escolher RD Gateway no macOS mostra um aviso que indica o código de erro e oferece o Túnel em alternativa. Responder que sim faz a tentativa na mesma, para que o comportamento possa ser verificado em vez de ser dado como garantido.
+Como a ligação parece ter sucesso antes de falhar, a aplicação pergunta antes de tentar. Escolher RD Gateway no macOS mostra a caixa de diálogo "Problema conhecido no macOS", que descreve o problema e oferece **Usar Túnel em vez disso** ou **Tentar mesmo assim via RD Gateway**. Tentar mesmo assim faz a tentativa na mesma, para que o comportamento possa ser verificado em vez de ser dado como garantido.
 
 Utilize o Túnel no macOS. Alcança as mesmas máquinas e é a predefinição aí por esse motivo.
 

@@ -1,7 +1,7 @@
 ---
 title: Dateien und Einstellungen
 description: Wo die Anwendung Ihre Präferenzen, Ihren Anmeldestatus und ihre Protokolle speichert, und was in jeder Datei steht.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -32,7 +32,7 @@ Einstellungen werden atomar geschrieben: Die Anwendung schreibt zuerst eine temp
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>
-<p>Temporäre <code>.rdp</code>-Dateien, die für RD Gateway-Verbindungen erzeugt werden, liegen unter <code>%TEMP%\BastionRDPConnector\</code> und werden beim Schließen der Anwendung gelöscht.</p>
+<p>Temporäre <code>.rdp</code>-Dateien, die für RD Gateway-Verbindungen erzeugt werden, liegen unter Windows in einem Ordner, der pro Benutzer angelegt und nur für den Besitzer zugänglich ist, unter <code>%TEMP%\BastionRDPConnector\</code>. Sie werden beim Schließen der Anwendung nach bestem Bemühen überschrieben und gelöscht, was kein garantiertes sicheres Löschen ist. Reste eines Absturzes oder erzwungenen Beendens werden beim nächsten Start der Anwendung entfernt.</p>
 </div>
 
 ## Zurücksetzen

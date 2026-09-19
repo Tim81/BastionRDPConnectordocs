@@ -1,7 +1,7 @@
 ---
 title: Sign in
 description: What happens the first time you open the application, how the token cache works, and how tenant and subscription selection fit together.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

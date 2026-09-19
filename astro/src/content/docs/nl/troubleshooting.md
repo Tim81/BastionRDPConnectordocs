@@ -1,7 +1,7 @@
 ---
 title: Problemen oplossen
 description: Veelvoorkomende problemen, in de woorden waarmee u ze zou omschrijven, en wat u voor elk moet controleren.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

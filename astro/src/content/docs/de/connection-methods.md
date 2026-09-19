@@ -1,7 +1,7 @@
 ---
 title: Verbindungsmethoden
 description: 'Tunnel und RD Gateway im Vergleich: wie jede die Sitzung überträgt, welche Ziele sie erreichen, und welche unter Windows und macOS der Standard ist.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -64,13 +64,11 @@ Das ist der kürzere Weg, und unter Windows ist er der Standard. Er funktioniert
 
 ### RD Gateway unter macOS
 
-RD Gateway ist unter macOS auswählbar, und die Verbindung öffnet sich tatsächlich. Sie bricht dann nach etwa zehn bis fünfzehn Sekunden mit dem Fehler `0x3000064` ab.
-
-Die Ursache ist ein Cipher-Mismatch, kein Konfigurationsfehler. Der TLS-Stack des macOS-Clients bietet nur RSA-Cipher-Suites an, und das Gateway von Azure Bastion präsentiert ECDSA. Keine Seite kann sich mit der anderen einigen, sodass die Sitzung kurz nach dem Start abgebrochen wird. Das ist eine Client-Einschränkung auf Microsoft-Seite, für die es keine Einstellung als Umgehung gibt.
+RD Gateway ist unter macOS auswählbar, und die Verbindung öffnet sich tatsächlich. Windows App for Mac kann derzeit jedoch keine RD Gateway-Sitzung über Azure Bastion aufrechterhalten: Die Sitzung wird innerhalb weniger Sekunden getrennt, mit dem Fehler `0x300006c`, `0x3000064` oder `0x10b`. Die virtuelle Maschine ist nicht das Problem, und es gibt auf Ihrer Seite keine Einstellung, die das umgeht.
 
 Microsoft unterstützt den RD Gateway-Pfad von Bastion mit dem Windows-Client. Mit der Windows App unter macOS ist das keine unterstützte Kombination.
 
-Da die Verbindung scheinbar zunächst gelingt, bevor sie fehlschlägt, fragt die Anwendung nach, bevor sie es versucht. Die Wahl von RD Gateway unter macOS zeigt eine Meldung, die den Fehlercode nennt und stattdessen Tunnel anbietet. Wird trotzdem mit Ja geantwortet, wird der Versuch dennoch unternommen, sodass sich das Verhalten überprüfen statt nur glauben lässt.
+Da die Verbindung scheinbar zunächst gelingt, bevor sie fehlschlägt, fragt die Anwendung nach, bevor sie es versucht. Die Wahl von RD Gateway unter macOS zeigt den Dialog „Bekanntes Problem unter macOS“, der das Problem beschreibt und **Stattdessen Tunnel verwenden** oder **Trotzdem RD Gateway versuchen** anbietet. Wird trotzdem fortgefahren, wird der Versuch dennoch unternommen, sodass sich das Verhalten überprüfen statt nur glauben lässt.
 
 Verwenden Sie unter macOS Tunnel. Er erreicht dieselben Computer und ist dort aus diesem Grund der Standard.
 

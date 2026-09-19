@@ -1,7 +1,7 @@
 ---
 title: Verbindingsmethoden
 description: 'Tunnel en RD Gateway vergeleken: hoe elk de sessie overbrengt, welke doelen ze bereiken, en welke standaard is op Windows en macOS.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -64,13 +64,11 @@ Dit is het kortere pad, en op Windows is het de standaard. Het werkt alleen wann
 
 ### RD Gateway op macOS
 
-RD Gateway is selecteerbaar op macOS en de verbinding opent ook echt. Deze valt vervolgens na ongeveer tien tot vijftien seconden weg met fout `0x3000064`.
-
-De oorzaak is een cipher-mismatch, geen configuratiefout. De TLS-stack van de macOS-client biedt alleen RSA-ciphersuites aan, en de gateway van Azure Bastion presenteert ECDSA. Geen van beide kan de ander tegemoetkomen, dus de sessie wordt kort na de start afgebroken. Dit is een clientbeperking aan de kant van Microsoft waar geen instelling omheen werkt.
+RD Gateway is selecteerbaar op macOS en de verbinding opent ook echt. Windows App for Mac kan momenteel echter geen RD Gateway-sessie via Azure Bastion in stand houden: de sessie verbreekt binnen enkele seconden, met foutcode `0x300006c`, `0x3000064` of `0x10b`. De virtuele machine is niet het probleem en er is geen instelling aan uw kant die dit omzeilt.
 
 Microsoft ondersteunt het RD Gateway-pad van Bastion met de Windows-client. Het is geen ondersteunde combinatie met de Windows App op macOS.
 
-Omdat de verbinding lijkt te slagen voordat deze mislukt, vraagt de applicatie het eerst na. Als u RD Gateway kiest op macOS, verschijnt een prompt die de foutcode noemt en Tunnel als alternatief aanbiedt. Als u toch ja antwoordt, wordt de poging alsnog gedaan, zodat het gedrag te controleren is in plaats van op vertrouwen aangenomen te worden.
+Omdat de verbinding lijkt te slagen voordat deze mislukt, vraagt de applicatie het eerst na. Als u RD Gateway kiest op macOS, verschijnt een dialoogvenster "Bekend probleem op macOS" dat het probleem beschrijft en **Tunnel gebruiken** of **Toch RD Gateway proberen** aanbiedt. Als u toch doorgaat, wordt de poging alsnog gedaan, zodat het gedrag te controleren is in plaats van op vertrouwen aangenomen te worden.
 
 Gebruik Tunnel op macOS. Het bereikt dezelfde machines en is daar om deze reden de standaard.
 

@@ -1,7 +1,7 @@
 ---
 title: Aperçu
 description: Ouvrez une session Bureau à distance via Azure Bastion vers une machine virtuelle Azure, ou vers tout système Windows que le réseau Bastion peut atteindre.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ L'application propose deux méthodes de connexion. Elles atteignent la même mac
 
 <div class="callout note">
 <span class="eyebrow">Remarque</span>
-<p>L'application vérifie le SKU Bastion et ses indicateurs de fonctionnalités avant de se connecter, et vous indique lequel manque si une vérification échoue. Ces vérifications sont fail-open, si bien qu'une vérification qui ne peut pas aboutir ne vous empêche pas de vous connecter.</p>
+<p>L'application vérifie le SKU Bastion et ses indicateurs de fonctionnalités avant de se connecter, et vous indique lequel manque si une vérification échoue. Ces vérifications sont fail-open, si bien qu'une vérification qui ne peut pas aboutir ne vous empêche pas de vous connecter. Une session Azure expirée fait exception : elle vous ramène à la connexion.</p>
 </div>
 
 ## Où les données sont stockées

@@ -1,7 +1,7 @@
 ---
 title: Túneles activos
 description: Cada conexión Túnel que la aplicación tiene abierta, con su puerto local, tiempo transcurrido y controles para reconectar el cliente RDP o detenerla.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

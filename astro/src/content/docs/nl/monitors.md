@@ -1,7 +1,7 @@
 ---
 title: Monitors
 description: Kies of een RD Gateway-sessie opent op uw primaire beeldscherm of zich uitstrekt over alle aangesloten monitors.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

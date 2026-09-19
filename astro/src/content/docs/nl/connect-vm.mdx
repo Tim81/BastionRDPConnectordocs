@@ -1,7 +1,7 @@
 ---
 title: Verbinden met een Azure VM
 description: Kies een virtuele machine op naam, binnen één subscription of over alle, controleer de energiestatus, start deze indien nodig, en maak verbinding.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Een paar keuzerondjes boven de VM-lijst bepaalt hoe het zoeken werkt.
 | Virtuele machine | De VM waarmee verbinding wordt gemaakt, gekozen uit de lijst rechts. |
 | Doelpoort, lokale poort | Alleen gebruikt in Tunnelmodus, en gedeeld met het tabblad IP-adres. |
 
-Voordat er verbinding wordt gemaakt, controleert de applicatie de Bastion-SKU en de bijbehorende functievlaggen, en de energiestatus van de VM, en laat weten wat ontbreekt als een controle mislukt. Deze controles zijn fail-open: een controle die niet kan worden voltooid, blokkeert de verbinding niet.
+Voordat er verbinding wordt gemaakt, controleert de applicatie de Bastion-SKU en de bijbehorende functievlaggen, en de energiestatus van de VM, en laat weten wat ontbreekt als een controle mislukt. Deze controles zijn fail-open: een controle die niet kan worden voltooid, blokkeert de verbinding niet. Een verlopen Azure-sessie is de uitzondering: die brengt u opnieuw naar het inloggen.
 
 ## Energiestatus en een VM starten
 

@@ -1,7 +1,7 @@
 ---
 title: Moniteurs
 description: Choisissez si une session RD Gateway s'ouvre sur votre écran principal ou s'étend sur tous les moniteurs connectés.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

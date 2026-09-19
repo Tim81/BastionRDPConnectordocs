@@ -1,7 +1,7 @@
 ---
 title: Conectarse a una VM de Azure
 description: Elija una máquina virtual por nombre, en una suscripción o en todas ellas, compruebe su estado de energía, inícela si es necesario y conéctese.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Un par de botones de opción encima de la lista de VM controla cómo funciona la
 | Máquina virtual | La VM a la que conectarse, elegida de la lista de la derecha. |
 | Puerto de destino, puerto local | Se usan solo en modo Túnel, y se comparten con la pestaña Dirección IP. |
 
-Antes de conectar, la aplicación comprueba la SKU de Bastion y sus marcadores de características, y el estado de energía de la VM, e indica qué falta si una comprobación no se cumple. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión.
+Antes de conectar, la aplicación comprueba la SKU de Bastion y sus marcadores de características, y el estado de energía de la VM, e indica qué falta si una comprobación no se cumple. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión. Una sesión de Azure caducada es la excepción: le lleva de nuevo al inicio de sesión.
 
 ## Estado de energía e inicio de una VM
 

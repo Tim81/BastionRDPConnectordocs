@@ -1,7 +1,7 @@
 ---
 title: Vereisten
 description: Wat moet kloppen op uw machine en in Azure voordat Azure Bastion RDP Connector een sessie kan openen.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ De applicatie is zelfstandig. Er hoeft geen .NET apart geïnstalleerd te worden,
 | Windows 10 of hoger, x64 | Geïnstalleerd vanuit de Microsoft Store |
 | macOS 12 Monterey of hoger | Ondersteund sinds 3.1.2 voor Apple Silicon en Intel, maar nog niet publiek beschikbaar |
 | Remote desktop-client, Windows | `mstsc.exe`, al onderdeel van Windows |
-| Remote desktop-client, macOS | De Windows App, uit de Mac App Store. Gebruik hiermee Tunnel. Een RD Gateway-sessie opent en valt daarna na een paar seconden weg met fout `0x3000064`, een cipher-mismatch die Microsoft op deze client niet ondersteunt |
+| Remote desktop-client, macOS | De Windows App, uit de Mac App Store. Gebruik hiermee Tunnel. Een RD Gateway-sessie opent en verbreekt daarna binnen enkele seconden met fout `0x300006c`, `0x3000064` of `0x10b`, wat Microsoft op deze client niet ondersteunt |
 
 <div class="callout note">
 <span class="eyebrow">Opmerking</span>
@@ -34,7 +34,7 @@ De applicatie is zelfstandig. Er hoeft geen .NET apart geïnstalleerd te worden,
 
 <div class="callout note">
 <span class="eyebrow">Opmerking</span>
-<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en noemt de ontbrekende als een controle mislukt. Deze controles zijn fail-open: als de controle zelf niet kan worden voltooid, bijvoorbeeld door een tijdelijk netwerkprobleem, gaat de verbindingspoging toch door.</p>
+<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en noemt de ontbrekende als een controle mislukt. Deze controles zijn fail-open: als de controle zelf niet kan worden voltooid, bijvoorbeeld door een tijdelijk netwerkprobleem, gaat de verbindingspoging toch door. Een verlopen Azure-sessie is de uitzondering: die brengt u opnieuw naar het inloggen.</p>
 </div>
 
 ## Netwerkbereikbaarheid

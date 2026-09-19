@@ -1,7 +1,7 @@
 ---
 title: Actieve tunnels
 description: Elke Tunnel-verbinding die de applicatie open heeft staan, met de lokale poort, verstreken tijd, en bedieningselementen om uw RDP-client opnieuw te verbinden of te stoppen.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

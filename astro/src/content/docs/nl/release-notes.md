@@ -1,9 +1,34 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Wijziging | Details |
+| --- | --- |
+| Verlopen sessies vragen om opnieuw in te loggen | De pre-flightcontroles (Bastion-SKU, functievlaggen, energiestatus van de VM) faalden eerder open bij elke fout, ook bij een verlopen Azure-sessie. Een verlopen sessie komt nu bij het inlogproces uit in plaats van doorgelaten te worden. Andere fouten falen nog steeds open. |
+| Hoofdvenster hersteld vóór de inlogpopup | Het hoofdvenster wordt hersteld voordat de inlogpopup opent. Bekende, onschadelijke dialoogfouten over een niet-zichtbare of gesloten eigenaar worden gelogd en genegeerd in plaats van de applicatie te laten crashen en actieve tunnels te verbreken. |
+| Verouderde tijdelijke `.rdp`-bestanden worden bij het opstarten opgeruimd | Bestanden die na een crash of geforceerd afsluiten zijn achtergebleven, worden bij de volgende start verwijderd, alleen door de eerste draaiende instantie. Gegenereerde `.rdp`-bestanden staan in een tijdelijke map van de applicatie die per gebruiker is en alleen voor de eigenaar toegankelijk, en worden bij het afsluiten verwijderd met een overschrijving naar beste vermogen. Dat is geen gegarandeerde veilige wisbewerking. |
+| macOS: `.rdp`-bestanden en de logmap openen via `/usr/bin/open` | Beide worden nu geopend via het absolute pad `/usr/bin/open`. |
+| macOS: herziene RD Gateway-waarschuwing | Windows App for Mac kan momenteel geen RD Gateway-sessie via Azure Bastion in stand houden: de sessie verbreekt binnen enkele seconden, met foutcode `0x300006c`, `0x3000064` of `0x10b`. De VM is niet het probleem. Het dialoogvenster heet nu "Bekend probleem op macOS" in plaats van "Niet ondersteund op macOS" en biedt **Tunnel gebruiken** of **Toch RD Gateway proberen**. |
+| macOS: menu-item Info gelokaliseerd | Het menu-item Info is vertaald en volgt taalwijzigingen direct. |
+
+## 3.3.8
+
+| Wijziging | Details |
+| --- | --- |
+| MSAL 4.90.0 | De Microsoft Authentication Library, die het inloggen afhandelt, is bijgewerkt. |
+| Runtime .NET met beveiligingsfixes | De ondergrens van de build-SDK is verhoogd naar 10.0.401, zodat de meegeleverde runtime .NET 10.0.12 is, met de beveiligingsfixes. Beveiligingsfixes voor de runtime bereiken u via updates van de applicatie. |
+| macOS: squircle-appicoon | Het appicoon is nu een squircle, zodat macOS Tahoe het niet meer in een wit vlak plaatst. |
+
+## 3.3.7
+
+| Wijziging | Details |
+| --- | --- |
+| Bijgewerkte componenten | Azure.Core 1.62.0, Avalonia-pakketten 12.1.2 en updates van de identiteitsgroep (MSAL en gerelateerde pakketten). Uitsluitend afhankelijkheidsupdates. |
 
 ## 3.3.6
 

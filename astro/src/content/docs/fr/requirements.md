@@ -1,7 +1,7 @@
 ---
 title: Prérequis
 description: Ce qui doit être vrai sur votre machine et dans Azure avant qu'Azure Bastion RDP Connector puisse ouvrir une session.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ L'application est autonome. Elle n'a pas besoin que .NET soit installé séparé
 | Windows 10 ou version ultérieure, x64 | Installé depuis le Microsoft Store |
 | macOS 12 Monterey ou version ultérieure | Pris en charge depuis la version 3.1.2 pour Apple Silicon et Intel, mais pas encore disponible publiquement |
 | Client Bureau à distance, Windows | `mstsc.exe`, déjà inclus dans Windows |
-| Client Bureau à distance, macOS | The Windows App, depuis le Mac App Store. Utilisez le mode Tunnel avec ce client. Une session RD Gateway s'ouvre puis se coupe après quelques secondes avec l'erreur `0x3000064`, un conflit de chiffrement que Microsoft ne prend pas en charge sur ce client |
+| Client Bureau à distance, macOS | The Windows App, depuis le Mac App Store. Utilisez le mode Tunnel avec ce client. Une session RD Gateway s'ouvre puis se déconnecte en quelques secondes avec l'erreur `0x300006c`, `0x3000064` ou `0x10b`, ce que Microsoft ne prend pas en charge sur ce client |
 
 <div class="callout note">
 <span class="eyebrow">Remarque</span>
@@ -34,7 +34,7 @@ L'application est autonome. Elle n'a pas besoin que .NET soit installé séparé
 
 <div class="callout note">
 <span class="eyebrow">Remarque</span>
-<p>L'application vérifie le SKU Bastion et ses indicateurs de fonctionnalités avant de se connecter, et nomme celui qui manque si une vérification échoue. Ces vérifications sont fail-open : si la vérification elle-même ne peut pas aboutir, par exemple en raison d'un problème réseau transitoire, la tentative de connexion se poursuit malgré tout.</p>
+<p>L'application vérifie le SKU Bastion et ses indicateurs de fonctionnalités avant de se connecter, et nomme celui qui manque si une vérification échoue. Ces vérifications sont fail-open : si la vérification elle-même ne peut pas aboutir, par exemple en raison d'un problème réseau transitoire, la tentative de connexion se poursuit malgré tout. Une session Azure expirée fait exception : elle vous ramène à la connexion.</p>
 </div>
 
 ## Accessibilité réseau

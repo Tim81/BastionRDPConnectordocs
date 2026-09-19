@@ -1,7 +1,7 @@
 ---
 title: Se connecter à une VM Azure
 description: Choisissez une machine virtuelle par nom, dans un abonnement ou dans tous, vérifiez son état d'alimentation, démarrez-la si nécessaire, et connectez-vous.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Une paire de boutons radio au-dessus de la liste des VM détermine le fonctionne
 | Machine virtuelle | La VM à laquelle se connecter, choisie dans la liste à droite. |
 | Port cible, port local | Utilisés uniquement en mode Tunnel, et partagés avec l'onglet Adresse IP. |
 
-Avant la connexion, l'application vérifie la SKU Bastion et ses indicateurs de fonctionnalités, ainsi que l'état d'alimentation de la VM, et indique ce qui manque si une vérification échoue. Ces vérifications sont fail-open : une vérification qui ne peut pas aboutir ne bloque pas la connexion.
+Avant la connexion, l'application vérifie la SKU Bastion et ses indicateurs de fonctionnalités, ainsi que l'état d'alimentation de la VM, et indique ce qui manque si une vérification échoue. Ces vérifications sont fail-open : une vérification qui ne peut pas aboutir ne bloque pas la connexion. Une session Azure expirée fait exception : elle vous ramène à la connexion.
 
 ## État d'alimentation et démarrage d'une VM
 

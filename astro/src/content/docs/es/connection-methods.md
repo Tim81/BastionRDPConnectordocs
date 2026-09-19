@@ -1,7 +1,7 @@
 ---
 title: Métodos de conexión
 description: 'Comparativa entre Túnel y RD Gateway: cómo transporta cada uno la sesión, a qué destinos llegan y cuál es el predeterminado en Windows y en macOS.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -64,13 +64,11 @@ Es el camino más corto, y en Windows es el predeterminado. Solo funciona cuando
 
 ### RD Gateway en macOS
 
-RD Gateway se puede seleccionar en macOS y la conexión sí se abre. Después se interrumpe al cabo de aproximadamente diez a quince segundos con el error `0x3000064`.
-
-La causa es una incompatibilidad de cifrado, no un error de configuración. La pila TLS del cliente de macOS solo ofrece conjuntos de cifrado RSA, y la puerta de enlace de Azure Bastion presenta ECDSA. Ninguno de los dos lados puede satisfacer al otro, así que la sesión se cierra poco después de iniciarse. Es una limitación del cliente por parte de Microsoft para la que no existe ninguna configuración que la solucione.
+RD Gateway se puede seleccionar en macOS y la conexión sí se abre. Sin embargo, Windows App for Mac actualmente no puede mantener una sesión de RD Gateway a través de Azure Bastion: la sesión se desconecta en segundos, con el error `0x300006c`, `0x3000064` o `0x10b`. La máquina virtual no es el problema, y no existe ninguna configuración por su parte que lo solucione.
 
 Microsoft admite la ruta RD Gateway de Bastion con el cliente de Windows. No es una combinación admitida con la aplicación Windows App en macOS.
 
-Como la conexión parece tener éxito antes de fallar, la aplicación pregunta antes de intentarlo. Elegir RD Gateway en macOS muestra un aviso que nombra el código de error y ofrece Túnel en su lugar. Responder que sí igualmente realiza el intento, de modo que el comportamiento se puede comprobar en lugar de darlo por sentado.
+Como la conexión parece tener éxito antes de fallar, la aplicación pregunta antes de intentarlo. Elegir RD Gateway en macOS muestra el cuadro de diálogo "Problema conocido en macOS", que describe el problema y ofrece **Usar Túnel en su lugar** o **Probar RD Gateway de todos modos**. Probar de todos modos igualmente realiza el intento, de modo que el comportamiento se puede comprobar en lugar de darlo por sentado.
 
 Use Túnel en macOS. Llega a las mismas máquinas y es el predeterminado allí por esta razón.
 
