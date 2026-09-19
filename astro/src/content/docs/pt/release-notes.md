@@ -1,9 +1,38 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.3.6'
-lastReviewed: '2026-08-17'
+appliesTo: '3.3.9'
+lastReviewed: '2026-09-19'
 ---
+
+## 3.3.9
+
+| Alteração | Detalhes |
+| --- | --- |
+| macOS: as quedas do RD Gateway são um erro do Windows App for Mac | O Windows App for Mac divide um pacote do RD Gateway em duas mensagens WebSocket, e o Azure Bastion fecha então o WebSocket. Os pacotes do gateway maiores do que o buffer de receção de 20 480 bytes do Bastion também bloqueiam a sessão. Ambos surgem como uma desligação em segundos, com o erro `0x300006c`, `0x3000064` ou `0x10b`. Não é um problema de TLS nem de cifras, como diziam versões anteriores. Foi verificado no Windows App 11.4.1. O FreeRDP através do mesmo Bastion e o modo Túnel com o Windows App mantêm-se ambos ligados, e nenhuma propriedade do ficheiro `.rdp` o contorna. |
+| macOS: aviso do RD Gateway reformulado | O RD Gateway continua selecionável no macOS, caso a Microsoft corrija o cliente. O aviso diz agora o que realmente se passa e que a sua VM não é o problema. Oferece **Usar Túnel em vez disso**, **Tentar mesmo assim via RD Gateway** ou Cancelar, nos seis idiomas. A caixa de diálogo passa a chamar-se "Problema conhecido no macOS" em vez de "Não suportado no macOS". O item de menu Acerca de no macOS está agora localizado e acompanha de imediato uma alteração de idioma. |
+| Túneis: fim dos ciclos de reconexão inúteis | Quando o cliente RDP fechava a sua própria ligação, o túnel tratava isso como um erro de rede e tentava novamente até cinco vezes, obtendo de cada vez um novo token do Bastion sem nenhum cliente ligado. Agora cada ligação aceite recebe um token do Bastion e um WebSocket durante toda a sua vida. Se o WebSocket terminar enquanto o cliente ainda está ligado, a ligação local é fechada e a reconexão automática do próprio cliente RDP abre uma nova com um token novo. O estado "A reconectar… (tentativa n/5)" desapareceu. |
+| Túneis: tempos limite, encerramento limpo, reutilização e porta de destino | A ligação do WebSocket expira ao fim de 30 segundos, e um pedido de token ao Bastion que expire é comunicado como erro em vez de um cancelamento silencioso. A sessão do Bastion é sempre limpa à saída, o fecho do WebSocket tem um limite de tempo e um túnel que está a parar nunca recebe um novo cliente. Voltar a ligar ao mesmo Bastion, destino e porta reutiliza o túnel em execução e volta a lançar o cliente RDP. A porta de destino escolhida é respeitada: os túneis de VM estavam fixos em 3389. O último destino e a última porta local são memorizados, e as etiquetas mostram `vm:porta`. |
+| Uma sessão do Azure expirada leva-o de volta ao início de sessão | As verificações prévias ignoravam-se a si próprias perante qualquer erro, incluindo uma exigência de reautenticação do Acesso Condicional, e deixavam a ligação falhar mais tarde. Agora a aplicação pede o início de sessão e repete a operação uma vez, no arranque, ao carregar subscrições, Bastions e VMs, ao mudar de subscrição, ao ligar e ao iniciar uma VM. Só existe uma janela de início de sessão aberta de cada vez; um segundo acionamento espera pela que já está aberta. |
+| Correções do início de sessão | A janela principal é restaurada antes de abrir qualquer janela de início de sessão, pelo que o início de sessão já não fica bloqueado quando a janela está oculta na área de notificação. Só as exceções de caixa de diálogo conhecidas e inofensivas por um proprietário não visível ou fechado são descartadas; tudo o resto continua a ser registado no log e apresentado. A obtenção de tokens está associada à conta com sessão iniciada, o que corrige o uso de tokens da conta errada quando há várias contas em cache. Iniciar sessão com outra conta limpa a cache de subscrições. A listagem de inquilinos, subscrições e Bastions comunica agora as falhas em vez de devolver uma lista vazia. Se as subscrições continuarem sem carregar após a reautenticação, a aplicação fecha em vez de o deixar sem sessão e sem nada para escolher. |
+| Estado de energia da VM | O arranque de uma VM é acompanhado por VM, pelo que ao mudar de VM já não aparece "A iniciar" na errada. Enquanto uma VM arranca, o botão Iniciar fica oculto e Ligar fica desativado. Um arranque falhado é detetado: se a VM continuar a ser lida como parada ou desalocada durante cerca de 30 segundos, recebe um erro com o nome da VM em vez de esperar por todo o sondeio. Iniciar uma VM e atualizar o estado de energia reautenticam perante uma sessão expirada. |
+| Outras melhorias de fiabilidade | Fechar a janela cancela o trabalho em curso sem ruído, sem caixas de erro durante o encerramento. Uma atualização obsoleta de Bastions ou subscrições é descartada se entretanto mudou de subscrição, e a caixa Alterar subscrição obtém os Bastions antes de confirmar, pelo que uma falha deixa a subscrição anterior intacta. Se o cliente RDP não arrancar, recebe uma notificação, ou uma janela restaurada com uma caixa de erro se não houver ícone na área de notificação. Restaurar a partir da área de notificação devolve o botão da barra de tarefas e o estado anterior da janela. Minimizar com uma caixa de diálogo ou uma janela de início de sessão abertas já não a oculta na área de notificação nem a encerra. A caixa Acerca de tem uma única instância. Abrir pasta de log funciona agora com caminhos que contêm espaços. |
+| Segurança: nome de anfitrião do Bastion e paginação | A aplicação envia o seu token do ARM para o anfitrião indicado na resposta do Azure. Agora só aceita um nome DNS terminado em `.bastion.azure.com`, pelo que um endereço IP ou um anfitrião estranho nunca o recebe, e os redirecionamentos estão desativados no pedido do token. Os `nextLink` do ARM têm de ser https no anfitrião do ARM, o número de páginas está limitado a 500 e uma resposta falhada do Resource Graph gera um erro em vez de uma lista truncada. |
+| Segurança: ficheiros temporários | Os ficheiros `.rdp` gerados, que podem conter um token de gateway ativo, são eliminados à saída com uma substituição de conteúdo na medida do possível. Não é um apagamento seguro garantido. A pasta temporária é recusada se for uma ligação simbólica ou uma junção. No macOS a pasta é criada com 0700 e os ficheiros com 0600, e o ficheiro `.rdp` do túnel do macOS passa agora pelo mesmo tratamento; antes era um ficheiro legível por todos em `$TMPDIR` que nunca era removido. Os restos de um bloqueio ou encerramento forçado são eliminados no arranque, apenas pela primeira instância confirmada. No macOS, os ficheiros `.rdp` e a pasta de log abrem através do caminho absoluto `/usr/bin/open`. |
+
+## 3.3.8
+
+| Alteração | Detalhes |
+| --- | --- |
+| MSAL 4.90.0 | A Microsoft Authentication Library, que trata do início de sessão, foi atualizada. |
+| Runtime .NET com correções de segurança | O SDK mínimo de compilação sobe para 10.0.401, pelo que o runtime incluído é o .NET 10.0.12, com as correções de segurança. As correções de segurança do runtime chegam-lhe através das atualizações da aplicação. |
+| macOS: ícone da aplicação em squircle | O ícone da aplicação é agora um squircle, pelo que o macOS Tahoe já não o coloca numa caixa branca. |
+
+## 3.3.7
+
+| Alteração | Detalhes |
+| --- | --- |
+| Componentes atualizados | Azure.Core 1.62.0, pacotes do Avalonia 12.1.2 e atualizações do grupo de identidade (MSAL e pacotes relacionados). Apenas atualizações de dependências. |
 
 ## 3.3.6
 

@@ -1,7 +1,7 @@
 ---
 title: Fehlerbehebung
 description: Häufige Probleme, in den Worten, mit denen Sie sie beschreiben würden, und was Sie für jedes einzelne prüfen sollten.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

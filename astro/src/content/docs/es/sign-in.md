@@ -1,7 +1,7 @@
 ---
 title: Primer inicio de sesión
 description: Qué ocurre la primera vez que abre la aplicación, cómo funciona la caché de tokens y cómo encajan la selección de inquilino y de suscripción.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -15,7 +15,7 @@ Lo que ve depende de si ya hay un token en caché en su equipo.
 | --- | --- |
 | Sin token en caché | La página de inicio de sesión de Microsoft se abre de inmediato. |
 | Token válido en caché | La aplicación inicia sesión de forma silenciosa. No aparece ninguna ventana de inicio de sesión, y pasa directamente a la selección de inquilino si su cuenta tiene más de uno. |
-| Token caducado, o una política de Acceso Condicional que exige reautenticación | La ventana de inicio de sesión se abre de nuevo, para que pueda cumplir lo que su organización requiera, por ejemplo MFA diaria. |
+| Token caducado, o una política de Acceso Condicional que exige reautenticación | La ventana de inicio de sesión se abre de nuevo, para que pueda cumplir lo que su organización requiera, por ejemplo MFA diaria. Después, la aplicación reintenta la operación una vez. Solo hay una ventana de inicio de sesión abierta a la vez; un segundo disparador espera a la que ya está abierta. |
 
 Elija **Cuenta profesional o educativa**, ingrese su cuenta y complete la MFA si su organización lo exige.
 

@@ -1,7 +1,7 @@
 ---
 title: Sign in
 description: What happens the first time you open the application, how the token cache works, and how tenant and subscription selection fit together.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -15,7 +15,7 @@ What you see depends on whether a token is already cached on your machine.
 | --- | --- |
 | No cached token | The Microsoft sign-in page opens right away. |
 | A valid cached token | The app signs in silently. No login window appears, and you go straight to tenant selection if your account has more than one. |
-| An expired token, or a Conditional Access policy that requires re-authentication | The login window opens again, so you can satisfy whatever your organisation requires, for example daily MFA. |
+| An expired token, or a Conditional Access policy that requires re-authentication | The login window opens again, so you can satisfy whatever your organisation requires, for example daily MFA. The application then retries the operation once. Only one sign-in window is open at a time; a second trigger waits for the one already open. |
 
 Pick **Work or school account**, enter your account, and complete MFA if your organisation asks for it.
 

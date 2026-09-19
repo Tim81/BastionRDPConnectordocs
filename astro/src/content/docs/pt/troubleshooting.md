@@ -1,7 +1,7 @@
 ---
 title: Resolução de problemas
 description: Problemas comuns, nas palavras que utilizaria para os descrever, e o que verificar para cada um.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

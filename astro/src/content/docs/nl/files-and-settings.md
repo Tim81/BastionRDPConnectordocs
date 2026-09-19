@@ -1,7 +1,7 @@
 ---
 title: Bestanden en instellingen
 description: Waar de applicatie uw voorkeuren, uw aanmeldstatus en de logboeken bewaart, en wat er in elk bestand staat.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -32,7 +32,7 @@ Instellingen worden atomair weggeschreven: de applicatie schrijft eerst een tijd
 
 <div class="callout note">
 <span class="eyebrow">Opmerking</span>
-<p>Tijdelijke <code>.rdp</code>-bestanden, gegenereerd voor RD Gateway-verbindingen, staan onder <code>%TEMP%\BastionRDPConnector\</code> en worden verwijderd wanneer de applicatie sluit.</p>
+<p>Tijdelijke <code>.rdp</code>-bestanden, gegenereerd voor RD Gateway-verbindingen, staan in een map die per gebruiker is en alleen voor de eigenaar toegankelijk, onder <code>%TEMP%\BastionRDPConnector\</code> op Windows. Ze worden bij het sluiten van de applicatie verwijderd met een overschrijving naar beste vermogen, wat geen gegarandeerde veilige wisbewerking is. Restanten van een crash of geforceerd afsluiten worden opgeruimd bij de volgende start van de applicatie. De tijdelijke map wordt geweigerd als het een symlink of junction is. Op macOS wordt de map aangemaakt met <code>0700</code> en de bestanden met <code>0600</code>. Het <code>.rdp</code>-bestand van de macOS-tunnel volgt dezelfde afhandeling en wordt bij het afsluiten verwijderd.</p>
 </div>
 
 ## Opnieuw instellen

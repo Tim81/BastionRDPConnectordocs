@@ -1,7 +1,7 @@
 ---
 title: Se connecter à une VM Azure
 description: Choisissez une machine virtuelle par nom, dans un abonnement ou dans tous, vérifiez son état d'alimentation, démarrez-la si nécessaire, et connectez-vous.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Une paire de boutons radio au-dessus de la liste des VM détermine le fonctionne
 | Machine virtuelle | La VM à laquelle se connecter, choisie dans la liste à droite. |
 | Port cible, port local | Utilisés uniquement en mode Tunnel, et partagés avec l'onglet Adresse IP. |
 
-Avant la connexion, l'application vérifie la SKU Bastion et ses indicateurs de fonctionnalités, ainsi que l'état d'alimentation de la VM, et indique ce qui manque si une vérification échoue. Ces vérifications sont fail-open : une vérification qui ne peut pas aboutir ne bloque pas la connexion.
+Avant la connexion, l'application vérifie la SKU Bastion et ses indicateurs de fonctionnalités, ainsi que l'état d'alimentation de la VM, et indique ce qui manque si une vérification échoue. Ces vérifications sont fail-open : une vérification qui ne peut pas aboutir ne bloque pas la connexion. Une session Azure expirée fait exception : elle vous ramène à la connexion.
 
 ## État d'alimentation et démarrage d'une VM
 
@@ -53,7 +53,7 @@ L'état d'alimentation de la VM sélectionnée s'affiche à côté de son nom.
 | Arrêtée ou désallouée (rouge) | La VM est éteinte. Un bouton **Démarrer** apparaît. |
 | Démarrage, arrêt ou autre (ambre) | La VM est entre deux états. Un indicateur de progression s'affiche pendant que l'application attend qu'elle se stabilise. |
 
-Pour démarrer une VM arrêtée, sélectionnez **Démarrer**. Le bouton est remplacé par un indicateur de progression pendant que l'application interroge Azure pour obtenir l'état actualisé, une fois toutes les 5 secondes pendant jusqu'à 5 minutes. Lorsque l'état passe au vert, une notification confirme que la VM est prête et **Connecter** devient disponible.
+Pour démarrer une VM arrêtée, sélectionnez **Démarrer**. Le bouton est remplacé par un indicateur de progression pendant que l'application interroge Azure pour obtenir l'état actualisé, une fois toutes les 5 secondes pendant jusqu'à 5 minutes. Lorsque l'état passe au vert, une notification confirme que la VM est prête et **Connecter** devient disponible. Pendant le démarrage d'une VM, **Démarrer** est masqué et **Se connecter** est désactivé, et l'état de démarrage est suivi par VM, si bien qu'il n'apparaît jamais sur la mauvaise après un changement de VM. Si la VM reste arrêtée ou désallouée pendant environ 30 secondes, l'application signale une erreur nommant la VM au lieu d'attendre les 5 minutes complètes.
 
 <div class="callout warn">
 <span class="eyebrow">Le démarrage nécessite plus que le rôle Lecteur</span>

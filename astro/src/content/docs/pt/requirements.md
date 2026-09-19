@@ -1,7 +1,7 @@
 ---
 title: Pré-requisitos
 description: O que tem de estar assegurado na sua máquina e no Azure antes de o Azure Bastion RDP Connector conseguir abrir uma sessão.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ A aplicação é autónoma. Não precisa do .NET instalado separadamente e, desd
 | Windows 10 ou posterior, x64 | Instalado a partir da Microsoft Store |
 | macOS 12 Monterey ou posterior | Suportado desde a 3.1.2 para Apple Silicon e Intel, mas ainda não disponível publicamente |
 | Cliente de ambiente de trabalho remoto, Windows | `mstsc.exe`, já incluído no Windows |
-| Cliente de ambiente de trabalho remoto, macOS | A Windows App, da Mac App Store. Utilize o modo Túnel com este cliente. Uma sessão RD Gateway abre e depois cai ao fim de alguns segundos com o erro `0x3000064`, uma incompatibilidade de cifras que a Microsoft não suporta neste cliente |
+| Cliente de ambiente de trabalho remoto, macOS | A Windows App, da Mac App Store. Utilize o modo Túnel com este cliente. Uma sessão RD Gateway abre e depois desliga em segundos com o erro `0x300006c`, `0x3000064` ou `0x10b`, porque o Windows App for Mac divide um pacote do RD Gateway em duas mensagens WebSocket e o Bastion fecha o WebSocket |
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
@@ -34,7 +34,7 @@ A aplicação é autónoma. Não precisa do .NET instalado separadamente e, desd
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>A aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades antes de ligar, e nomeia o que está em falta se uma verificação falhar. Estas verificações são fail-open: se a própria verificação não conseguir concluir, por exemplo devido a um problema de rede transitório, a tentativa de ligação prossegue na mesma.</p>
+<p>A aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades antes de ligar, e nomeia o que está em falta se uma verificação falhar. Estas verificações são fail-open: se a própria verificação não conseguir concluir, por exemplo devido a um problema de rede transitório, a tentativa de ligação prossegue na mesma. Uma sessão do Azure expirada é a exceção: leva-o de novo ao início de sessão.</p>
 </div>
 
 ## Acessibilidade de rede

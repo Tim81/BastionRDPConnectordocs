@@ -1,7 +1,7 @@
 ---
 title: Conectarse a una VM de Azure
 description: Elija una máquina virtual por nombre, en una suscripción o en todas ellas, compruebe su estado de energía, inícela si es necesario y conéctese.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Un par de botones de opción encima de la lista de VM controla cómo funciona la
 | Máquina virtual | La VM a la que conectarse, elegida de la lista de la derecha. |
 | Puerto de destino, puerto local | Se usan solo en modo Túnel, y se comparten con la pestaña Dirección IP. |
 
-Antes de conectar, la aplicación comprueba la SKU de Bastion y sus marcadores de características, y el estado de energía de la VM, e indica qué falta si una comprobación no se cumple. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión.
+Antes de conectar, la aplicación comprueba la SKU de Bastion y sus marcadores de características, y el estado de energía de la VM, e indica qué falta si una comprobación no se cumple. Estas comprobaciones son fail-open: una comprobación que no puede completarse no bloquea la conexión. Una sesión de Azure caducada es la excepción: le lleva de nuevo al inicio de sesión.
 
 ## Estado de energía e inicio de una VM
 
@@ -53,7 +53,7 @@ El estado de energía de la VM seleccionada se muestra junto a su nombre.
 | Detenida o desasignada (rojo) | La VM está apagada. Aparece un botón **Iniciar**. |
 | Iniciando, deteniendo u otro (ámbar) | La VM está en un estado intermedio. Se muestra un indicador de progreso mientras la aplicación espera a que se estabilice. |
 
-Para iniciar una VM detenida, seleccione **Iniciar**. El botón se reemplaza por un indicador de progreso mientras la aplicación consulta a Azure el estado actualizado, una vez cada 5 segundos durante un máximo de 5 minutos. Cuando el estado se pone en verde, una notificación confirma que la VM está lista y **Conectar** queda disponible.
+Para iniciar una VM detenida, seleccione **Iniciar**. El botón se reemplaza por un indicador de progreso mientras la aplicación consulta a Azure el estado actualizado, una vez cada 5 segundos durante un máximo de 5 minutos. Cuando el estado se pone en verde, una notificación confirma que la VM está lista y **Conectar** queda disponible. Mientras una VM se inicia, **Iniciar** está oculto y **Conectar** está desactivado, y el estado de inicio se sigue por VM, de modo que nunca aparece en la equivocada al cambiar de VM. Si la VM sigue detenida o desasignada durante unos 30 segundos, la aplicación notifica un error con el nombre de la VM en lugar de esperar los 5 minutos completos.
 
 <div class="callout warn">
 <span class="eyebrow">Iniciar requiere más que Lector</span>

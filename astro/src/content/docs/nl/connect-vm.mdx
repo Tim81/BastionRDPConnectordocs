@@ -1,7 +1,7 @@
 ---
 title: Verbinden met een Azure VM
 description: Kies een virtuele machine op naam, binnen één subscription of over alle, controleer de energiestatus, start deze indien nodig, en maak verbinding.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ Een paar keuzerondjes boven de VM-lijst bepaalt hoe het zoeken werkt.
 | Virtuele machine | De VM waarmee verbinding wordt gemaakt, gekozen uit de lijst rechts. |
 | Doelpoort, lokale poort | Alleen gebruikt in Tunnelmodus, en gedeeld met het tabblad IP-adres. |
 
-Voordat er verbinding wordt gemaakt, controleert de applicatie de Bastion-SKU en de bijbehorende functievlaggen, en de energiestatus van de VM, en laat weten wat ontbreekt als een controle mislukt. Deze controles zijn fail-open: een controle die niet kan worden voltooid, blokkeert de verbinding niet.
+Voordat er verbinding wordt gemaakt, controleert de applicatie de Bastion-SKU en de bijbehorende functievlaggen, en de energiestatus van de VM, en laat weten wat ontbreekt als een controle mislukt. Deze controles zijn fail-open: een controle die niet kan worden voltooid, blokkeert de verbinding niet. Een verlopen Azure-sessie is de uitzondering: die brengt u opnieuw naar het inloggen.
 
 ## Energiestatus en een VM starten
 
@@ -53,7 +53,7 @@ De energiestatus van de geselecteerde VM staat naast de naam.
 | Gestopt of vrijgegeven (rood) | De VM staat uit. Er verschijnt een knop **Start VM**. |
 | Starten, stoppen of anders (oranje) | De VM bevindt zich tussen statussen in. Er verschijnt een voortgangsindicator terwijl de app wacht tot deze tot rust komt. |
 
-Om een gestopte VM te starten, selecteert u **Start VM**. De knop wordt vervangen door een voortgangsindicator terwijl de applicatie Azure bevraagt op de bijgewerkte status, elke 5 seconden gedurende maximaal 5 minuten. Wanneer de status groen wordt, bevestigt een toastmelding dat de VM klaar is en wordt **Verbinden** beschikbaar.
+Om een gestopte VM te starten, selecteert u **Start VM**. De knop wordt vervangen door een voortgangsindicator terwijl de applicatie Azure bevraagt op de bijgewerkte status, elke 5 seconden gedurende maximaal 5 minuten. Wanneer de status groen wordt, bevestigt een toastmelding dat de VM klaar is en wordt **Verbinden** beschikbaar. Terwijl een VM start, is **Start VM** verborgen en is **Verbinden** uitgeschakeld, en de opstartstatus wordt per VM bijgehouden, dus bij het wisselen van VM staat die nooit bij de verkeerde. Als de VM ongeveer 30 seconden lang gestopt of ongealloceerd blijft, meldt de applicatie een fout met de naam van de VM in plaats van de volledige 5 minuten af te wachten.
 
 <div class="callout warn">
 <span class="eyebrow">Starten vereist meer dan Reader</span>

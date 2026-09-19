@@ -1,7 +1,7 @@
 ---
 title: Primeiro início de sessão
 description: O que acontece da primeira vez que abre a aplicação, como funciona a cache de tokens, e como se articulam a seleção de inquilino e de subscrição.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -15,7 +15,7 @@ O que vê depende de já existir ou não um token em cache na sua máquina.
 | --- | --- |
 | Sem token em cache | A página de início de sessão da Microsoft abre de imediato. |
 | Um token em cache válido | A aplicação inicia sessão em silêncio. Não aparece nenhuma janela de início de sessão, e passa diretamente para a seleção de inquilino se a sua conta tiver mais do que um. |
-| Um token expirado, ou uma política de Acesso Condicional que exige reautenticação | A janela de início de sessão abre novamente, para que possa satisfazer o que a sua organização exigir, por exemplo MFA diária. |
+| Um token expirado, ou uma política de Acesso Condicional que exige reautenticação | A janela de início de sessão abre novamente, para que possa satisfazer o que a sua organização exigir, por exemplo MFA diária. Depois, a aplicação repete a operação uma vez. Só existe uma janela de início de sessão aberta de cada vez; um segundo acionamento espera pela que já está aberta. |
 
 Escolha **Conta profissional ou de estudante**, introduza a sua conta e conclua o MFA se a sua organização o exigir.
 

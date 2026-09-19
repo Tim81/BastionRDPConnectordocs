@@ -1,7 +1,7 @@
 ---
 title: Connection methods
 description: 'Tunnel and RD Gateway compared: how each carries the session, which targets they reach, and which one is the default on Windows and macOS.'
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -43,7 +43,7 @@ The application opens a WebSocket to the Bastion host and listens on a local por
 
 Because the target is only ever an address on the far side of the tunnel, this method reaches any IP address the Bastion virtual network can route to. That includes machines that are not Azure VMs.
 
-If the WebSocket drops, the tunnel reconnects on its own, up to five times with a widening gap between attempts. An open remote desktop session survives a short reconnect.
+If the WebSocket ends mid-session, the local connection closes and the RDP client's own auto-reconnect opens a new one through the tunnel with a fresh Bastion token. Each accepted connection gets its own token and WebSocket.
 
 ### When to use it
 
@@ -64,13 +64,13 @@ This is the shorter path, and on Windows it is the default. It only works when B
 
 ### RD Gateway on macOS
 
-RD Gateway is selectable on macOS and the connection does open. It then drops after roughly ten to fifteen seconds with error `0x3000064`.
+RD Gateway is selectable on macOS and the connection does open, but it does not stay up. Windows App for Mac splits one RD Gateway packet across two WebSocket messages, and Azure Bastion then closes the WebSocket. Gateway packets larger than Bastion's 20,480-byte receive buffer also stall the session. The result is a disconnect within seconds, with error `0x300006c`, `0x3000064` or `0x10b`. It was verified on Windows App 11.4.1.
 
-The cause is a cipher mismatch, not a configuration mistake. The macOS client's TLS stack offers only RSA cipher suites, and Azure Bastion's gateway presents ECDSA. Neither side can meet the other, so the session is torn down shortly after it starts. This is a client limitation on Microsoft's side with no setting that works around it.
+This is not a TLS or cipher problem, and the virtual machine is not the problem either. FreeRDP over the same Bastion and Tunnel mode with the Windows App both stay connected, and no property in the `.rdp` file works around it.
 
 Microsoft supports Bastion's RD Gateway path with the Windows client. It is not a supported combination with the Windows App on macOS.
 
-Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a prompt naming the error code and offering Tunnel instead. Answering yes still makes the attempt, so the behaviour can be checked rather than taken on trust.
+Because the connection appears to succeed before failing, the application asks before it tries. Choosing RD Gateway on macOS shows a "Known issue on macOS" dialog that describes the problem and offers **Use Tunnel instead**, **Try RD Gateway anyway** or Cancel. Trying anyway still makes the attempt, so the behaviour can be checked rather than taken on trust.
 
 Use Tunnel on macOS. It reaches the same machines and is the default there for this reason.
 
@@ -81,7 +81,7 @@ Use Tunnel on macOS. It reaches the same machines and is the default there for t
 | Connect to an Azure VM | Yes | Yes |
 | Connect to an IP address | Yes | No |
 | Opens a local port | Yes, one per session | No |
-| Reconnects automatically | Yes, up to 5 attempts | No |
+| Reconnects automatically | Yes, through the RDP client's own auto-reconnect | No |
 | Entra ID authentication | Not applicable | Off by default, optional |
 | Default on Windows | No | Yes |
 | Default on macOS | Yes | No |

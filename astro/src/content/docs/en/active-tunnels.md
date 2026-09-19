@@ -1,7 +1,7 @@
 ---
 title: Active tunnels
 description: Every Tunnel connection the application has open, with its local port, elapsed time, and controls to reconnect your RDP client or stop it.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -51,8 +51,8 @@ Every Tunnel connection you open, from either the IP address tab or the Azure VM
       <text class="ui-p" x="32" y="242">localhost:55001 · open 41s</text>
       <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="232">Stop</text>
-      <text class="ui-p" x="10" y="284">Tunnels reconnect on their own if the</text>
-      <text class="ui-p" x="10" y="295">WebSocket drops, up to five attempts.</text>
+      <text class="ui-p" x="10" y="284">The RDP client's auto-reconnect opens</text>
+      <text class="ui-p" x="10" y="295">a new tunnel connection if the WebSocket drops.</text>
       <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
@@ -74,6 +74,6 @@ Each row names the target, the local port it is listening on, and how long it ha
 
 ## Reconnecting
 
-If the WebSocket connection to Bastion drops, for example from a brief network interruption or Bastion maintenance, the tunnel reconnects on its own. It retries up to five times, with a widening gap between attempts. Your RDP session usually stays connected through a reconnect this short, so you may not notice it happened.
+If the WebSocket connection to Bastion ends mid-session, for example from a brief network interruption or Bastion maintenance, the tunnel does not retry by itself. Each accepted connection has one Bastion token and one WebSocket for its whole life, so the local connection closes and the RDP client's own auto-reconnect opens a new one, which gets a fresh token. An open RDP session usually recovers within a few seconds.
 
-If all five attempts fail, the tunnel stops and the system tray shows an error notification. From there, open the Azure VM tab or the IP address tab again and reconnect manually.
+Connecting again to the same Bastion, target and port reuses the running tunnel and relaunches the RDP client instead of creating a second one. The chosen target port is honored, and the tunnel label shows `vm:port`. The WebSocket connect times out after 30 seconds. If the RDP client's own reconnect does not recover, open the Azure VM tab or the IP address tab again and connect manually.

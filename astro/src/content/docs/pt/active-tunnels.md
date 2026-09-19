@@ -1,7 +1,7 @@
 ---
 title: Túneis ativos
 description: Todas as ligações Túnel que a aplicação tem abertas, com a respetiva porta local, tempo decorrido, e controlos para reconectar o seu cliente RDP ou pará-lo.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -51,8 +51,8 @@ Cada ligação Túnel que abre, quer no separador Endereço IP quer no separador
       <text class="ui-p" x="32" y="242">localhost:55001 · aberto há 41s</text>
       <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="232">Parar</text>
-      <text class="ui-p" x="10" y="284">Os túneis reconectam-se sozinhos se o</text>
-      <text class="ui-p" x="10" y="295">WebSocket cair, até cinco tentativas.</text>
+      <text class="ui-p" x="10" y="284">A reconexão automática do cliente RDP abre</text>
+      <text class="ui-p" x="10" y="295">uma nova ligação de túnel se o WebSocket cair.</text>
       <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
@@ -74,6 +74,6 @@ Cada linha indica o destino, a porta local em que está à escuta, e há quanto 
 
 ## Reconectar
 
-Se a ligação WebSocket ao Bastion cair, por exemplo devido a uma breve interrupção de rede ou a manutenção do Bastion, o túnel reconecta-se sozinho. Tenta até cinco vezes, com um intervalo crescente entre tentativas. A sua sessão RDP normalmente mantém-se ligada ao longo de uma reconexão tão curta, pelo que pode nem notar que aconteceu.
+Se a ligação WebSocket ao Bastion terminar a meio de uma sessão, por exemplo devido a uma breve interrupção de rede ou a manutenção do Bastion, o túnel não tenta novamente por si só. Cada ligação aceite tem um token do Bastion e um WebSocket durante toda a sua vida, pelo que a ligação local fecha e a reconexão automática do próprio cliente RDP abre uma nova, que recebe um token novo. Uma sessão RDP aberta costuma recuperar em poucos segundos.
 
-Se as cinco tentativas falharem todas, o túnel para e a área de notificação mostra uma notificação de erro. A partir daí, abra novamente o separador Azure VM ou o separador Endereço IP e reconecte manualmente.
+Voltar a ligar ao mesmo Bastion, destino e porta reutiliza o túnel em execução e volta a lançar o cliente RDP em vez de criar um segundo túnel. A porta de destino escolhida é respeitada e a etiqueta do túnel mostra `vm:porta`. A ligação do WebSocket expira ao fim de 30 segundos. Se a reconexão do cliente RDP não recuperar, abra novamente o separador Azure VM ou o separador Endereço IP e ligue manualmente.

@@ -1,7 +1,7 @@
 ---
 title: Übersicht
 description: Öffnen Sie eine Remotedesktopsitzung über Azure Bastion zu einer Azure-VM oder zu jedem Windows-System, zu dem das Bastion-Netzwerk eine Route hat.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ Die Anwendung bietet zwei Verbindungsmethoden. Beide erreichen denselben Compute
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>
-<p>Die Anwendung prüft die Bastion-SKU und ihre Feature-Flags, bevor sie eine Verbindung herstellt, und nennt Ihnen die fehlende Voraussetzung, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, hindert Sie nicht am Verbinden.</p>
+<p>Die Anwendung prüft die Bastion-SKU und ihre Feature-Flags, bevor sie eine Verbindung herstellt, und nennt Ihnen die fehlende Voraussetzung, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Eine Prüfung, die nicht abgeschlossen werden kann, hindert Sie nicht am Verbinden. Eine abgelaufene Azure-Sitzung ist die Ausnahme: Sie führt Sie erneut zur Anmeldung.</p>
 </div>
 
 ## Wo die Daten gespeichert werden

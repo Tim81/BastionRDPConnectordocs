@@ -1,7 +1,7 @@
 ---
 title: Overzicht
 description: Open een externe bureaubladsessie via Azure Bastion naar een Azure-VM, of naar elk Windows-systeem dat het Bastion-netwerk kan bereiken.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ De applicatie biedt twee verbindingsmethoden. Ze bereiken dezelfde machine en ve
 
 <div class="callout note">
 <span class="eyebrow">Opmerking</span>
-<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en laat weten welke ontbreekt als een controle mislukt. Deze controles zijn fail-open, dus een controle die niet kan worden voltooid, weerhoudt u er niet van om verbinding te maken.</p>
+<p>De applicatie controleert de Bastion-SKU en de bijbehorende functievlaggen voordat er verbinding wordt gemaakt, en laat weten welke ontbreekt als een controle mislukt. Deze controles zijn fail-open, dus een controle die niet kan worden voltooid, weerhoudt u er niet van om verbinding te maken. Een verlopen Azure-sessie is de uitzondering: die brengt u opnieuw naar het inloggen.</p>
 </div>
 
 ## Waar dingen worden opgeslagen

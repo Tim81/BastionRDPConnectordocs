@@ -1,7 +1,7 @@
 ---
 title: Overview
 description: Open a remote desktop session through Azure Bastion to an Azure virtual machine, or to any Windows system the Bastion network can route to.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ The application offers two connection methods. They reach the same machine and d
 
 <div class="callout note">
 <span class="eyebrow">Note</span>
-<p>The application checks the Bastion SKU and its feature flags before it connects, and tells you which one is missing if a check fails. These checks fail open, so a check that cannot complete does not stop you connecting.</p>
+<p>The application checks the Bastion SKU and its feature flags before it connects, and tells you which one is missing if a check fails. These checks fail open, so a check that cannot complete does not stop you connecting. An expired Azure session is the exception: it takes you to sign-in again.</p>
 </div>
 
 ## Where things are stored

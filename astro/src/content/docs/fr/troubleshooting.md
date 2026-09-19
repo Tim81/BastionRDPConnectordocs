@@ -1,7 +1,7 @@
 ---
 title: Dépannage
 description: Les problèmes courants, dans les mots que vous utiliseriez pour les décrire, et ce qu'il faut vérifier pour chacun.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

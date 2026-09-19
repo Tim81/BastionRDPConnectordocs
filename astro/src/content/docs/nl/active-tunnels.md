@@ -1,7 +1,7 @@
 ---
 title: Actieve tunnels
 description: Elke Tunnel-verbinding die de applicatie open heeft staan, met de lokale poort, verstreken tijd, en bedieningselementen om uw RDP-client opnieuw te verbinden of te stoppen.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -51,8 +51,8 @@ Elke Tunnel-verbinding die u opent, vanuit het tabblad IP-adres of het tabblad A
       <text class="ui-p" x="32" y="242">localhost:55001 · open 41s</text>
       <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="232">Stop</text>
-      <text class="ui-p" x="10" y="284">Tunnels verbinden zelf opnieuw als de</text>
-      <text class="ui-p" x="10" y="295">WebSocket wegvalt, tot vijf pogingen.</text>
+      <text class="ui-p" x="10" y="284">De automatische herverbinding van de RDP-client</text>
+      <text class="ui-p" x="10" y="295">opent een nieuwe tunnelverbinding als de WebSocket wegvalt.</text>
       <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
@@ -74,6 +74,6 @@ Elke rij noemt het doel, de lokale poort waarop deze luistert, en hoe lang deze 
 
 ## Opnieuw verbinden
 
-Als de WebSocket-verbinding met Bastion wegvalt, bijvoorbeeld door een korte netwerkonderbreking of Bastion-onderhoud, verbindt de tunnel zelf opnieuw. Deze probeert het tot vijf keer, met een groeiende tussenpoos tussen pogingen. Uw RDP-sessie blijft doorgaans verbonden tijdens zo'n korte herverbinding, dus mogelijk merkt u er niets van.
+Als de WebSocket-verbinding met Bastion midden in een sessie eindigt, bijvoorbeeld door een korte netwerkonderbreking of Bastion-onderhoud, probeert de tunnel het niet zelf opnieuw. Elke geaccepteerde verbinding heeft één Bastion-token en één WebSocket voor zijn hele levensduur, dus de lokale verbinding sluit en de automatische herverbinding van de RDP-client zelf opent een nieuwe, die een vers token krijgt. Een open RDP-sessie herstelt meestal binnen enkele seconden.
 
-Als alle vijf pogingen mislukken, stopt de tunnel en toont het systeemvak een foutmelding. Open vanaf daar opnieuw het tabblad Azure VM of het tabblad IP-adres en maak handmatig opnieuw verbinding.
+Opnieuw verbinden met dezelfde Bastion, hetzelfde doel en dezelfde poort hergebruikt de draaiende tunnel en start de RDP-client opnieuw in plaats van een tweede tunnel te maken. De gekozen doelpoort wordt gerespecteerd en het tunnellabel toont `vm:poort`. De WebSocket-verbinding krijgt na 30 seconden een time-out. Herstelt de herverbinding van de RDP-client zich niet, open dan opnieuw het tabblad Azure VM of het tabblad IP-adres en verbind handmatig.

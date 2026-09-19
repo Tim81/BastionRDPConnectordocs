@@ -1,7 +1,7 @@
 ---
 title: Archivos y configuración
 description: Dónde guarda la aplicación sus preferencias, su estado de inicio de sesión y sus registros, y qué contiene cada archivo.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -32,7 +32,7 @@ Las escrituras de configuración son atómicas: la aplicación escribe primero u
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>Los archivos <code>.rdp</code> temporales, generados para las conexiones RD Gateway, se guardan en <code>%TEMP%\BastionRDPConnector\</code> y se eliminan cuando la aplicación se cierra.</p>
+<p>Los archivos <code>.rdp</code> temporales, generados para las conexiones RD Gateway, se guardan en Windows en una carpeta propia de cada usuario y accesible solo por él, en <code>%TEMP%\BastionRDPConnector\</code>. Se eliminan con una sobrescritura en la medida de lo posible cuando la aplicación se cierra, lo que no es un borrado seguro garantizado. Los restos de un bloqueo o un cierre forzado se eliminan la próxima vez que se inicia la aplicación. La carpeta temporal se rechaza si es un enlace simbólico o una unión. En macOS la carpeta se crea con <code>0700</code> y sus archivos con <code>0600</code>. El archivo <code>.rdp</code> del túnel de macOS pasa por el mismo tratamiento y se elimina al salir.</p>
 </div>
 
 ## Restablecer

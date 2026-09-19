@@ -1,7 +1,7 @@
 ---
 title: Ficheiros e definições
 description: Onde a aplicação guarda as suas preferências, o seu estado de início de sessão, e os seus registos, e o que está em cada ficheiro.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -32,7 +32,7 @@ As escritas de definições são atómicas: a aplicação escreve primeiro um fi
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>Os ficheiros <code>.rdp</code> temporários, gerados para ligações RD Gateway, ficam em <code>%TEMP%\BastionRDPConnector\</code> e são eliminados quando a aplicação fecha.</p>
+<p>Os ficheiros <code>.rdp</code> temporários, gerados para ligações RD Gateway, ficam no Windows numa pasta própria de cada utilizador e acessível apenas a este, em <code>%TEMP%\BastionRDPConnector\</code>. São eliminados com uma substituição de conteúdo na medida do possível quando a aplicação fecha, o que não é um apagamento seguro garantido. Os restos de um bloqueio ou encerramento forçado são eliminados no próximo arranque da aplicação. A pasta temporária é recusada se for uma ligação simbólica ou uma junção. No macOS a pasta é criada com <code>0700</code> e os respetivos ficheiros com <code>0600</code>. O ficheiro <code>.rdp</code> do túnel do macOS passa pelo mesmo tratamento e é eliminado à saída.</p>
 </div>
 
 ## Repor

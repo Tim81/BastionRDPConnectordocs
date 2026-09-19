@@ -1,7 +1,7 @@
 ---
 title: Tunnels actifs
 description: Chaque connexion Tunnel ouverte par l'application, avec son port local, sa durée écoulée et des contrôles pour reconnecter votre client RDP ou l'arrêter.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -51,8 +51,8 @@ Chaque connexion Tunnel que vous ouvrez, depuis l'onglet Adresse IP ou l'onglet 
       <text class="ui-p" x="32" y="242">localhost:55001 · ouvert depuis 41 s</text>
       <rect class="ui-btn-2" x="244" y="221" width="34" height="15" rx="3"/>
       <text class="ui-tb" x="252" y="232">Arrêter</text>
-      <text class="ui-p" x="10" y="284">Les tunnels se reconnectent automatiquement si la</text>
-      <text class="ui-p" x="10" y="295">connexion WebSocket est interrompue, jusqu'à cinq tentatives.</text>
+      <text class="ui-p" x="10" y="284">La reconnexion automatique du client RDP ouvre</text>
+      <text class="ui-p" x="10" y="295">une nouvelle connexion de tunnel si le WebSocket se coupe.</text>
       <text class="ui-p" x="10" y="352">EN · NL · DE · FR · ES · PT</text>
     </svg>
   </div>
@@ -74,6 +74,6 @@ Chaque ligne indique la cible, le port local sur lequel elle écoute et depuis c
 
 ## Reconnexion
 
-Si la connexion WebSocket à Bastion est interrompue, par exemple à cause d'une brève coupure réseau ou d'une maintenance Bastion, le tunnel se reconnecte automatiquement. Il retente jusqu'à cinq fois, avec un délai croissant entre les tentatives. Votre session RDP reste généralement connectée pendant une reconnexion aussi courte, donc vous ne remarquerez peut-être rien.
+Si la connexion WebSocket à Bastion se termine en pleine session, par exemple à cause d'une brève coupure réseau ou d'une maintenance Bastion, le tunnel ne réessaie pas de lui-même. Chaque connexion acceptée a un jeton Bastion et un WebSocket pour toute sa durée de vie ; la connexion locale se ferme donc et la reconnexion automatique du client RDP en ouvre une nouvelle, qui reçoit un jeton neuf. Une session RDP ouverte se rétablit généralement en quelques secondes.
 
-Si les cinq tentatives échouent, le tunnel s'arrête et la zone de notification affiche une notification d'erreur. Ouvrez alors à nouveau l'onglet Azure VM ou l'onglet Adresse IP et reconnectez-vous manuellement.
+Se reconnecter au même Bastion, à la même cible et au même port réutilise le tunnel en cours et relance le client RDP au lieu d'en créer un second. Le port cible choisi est respecté et le libellé du tunnel affiche `vm:port`. La connexion WebSocket expire après 30 secondes. Si la reconnexion du client RDP n'aboutit pas, rouvrez l'onglet Azure VM ou l'onglet Adresse IP et connectez-vous manuellement.

@@ -1,7 +1,7 @@
 ---
 title: Varios inquilinos
 description: Cómo mantiene la aplicación un conjunto de preferencias distinto para cada inquilino de Entra ID que su cuenta puede ver, y qué permanece global.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 

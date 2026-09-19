@@ -1,7 +1,7 @@
 ---
 title: Voraussetzungen
 description: Was auf Ihrem Computer und in Azure erfüllt sein muss, bevor Azure Bastion RDP Connector eine Sitzung öffnen kann.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ Die Anwendung ist eigenständig. Sie benötigt kein separat installiertes .NET, 
 | Windows 10 oder neuer, x64 | Installiert über den Microsoft Store |
 | macOS 12 Monterey oder neuer | Unterstützt seit 3.1.2 für Apple Silicon und Intel, aber noch nicht öffentlich verfügbar |
 | Remotedesktop-Client, Windows | `mstsc.exe`, bereits Teil von Windows |
-| Remotedesktop-Client, macOS | Die Windows App aus dem Mac App Store. Verwenden Sie damit Tunnel. Eine RD Gateway-Sitzung öffnet sich und wird nach wenigen Sekunden mit dem Fehler `0x3000064` getrennt – ein Cipher-Mismatch, den Microsoft auf diesem Client nicht unterstützt |
+| Remotedesktop-Client, macOS | Die Windows App aus dem Mac App Store. Verwenden Sie damit Tunnel. Eine RD Gateway-Sitzung öffnet sich und wird innerhalb weniger Sekunden mit dem Fehler `0x300006c`, `0x3000064` oder `0x10b` getrennt, weil Windows App for Mac ein RD Gateway-Paket auf zwei WebSocket-Nachrichten aufteilt und Bastion den WebSocket schließt |
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>
@@ -34,7 +34,7 @@ Die Anwendung ist eigenständig. Sie benötigt kein separat installiertes .NET, 
 
 <div class="callout note">
 <span class="eyebrow">Hinweis</span>
-<p>Die Anwendung prüft die Bastion-SKU und ihre Feature-Flags vor dem Verbinden und nennt die fehlende Voraussetzung, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Wenn die Prüfung selbst nicht abgeschlossen werden kann, etwa wegen eines vorübergehenden Netzwerkproblems, wird der Verbindungsversuch trotzdem fortgesetzt.</p>
+<p>Die Anwendung prüft die Bastion-SKU und ihre Feature-Flags vor dem Verbinden und nennt die fehlende Voraussetzung, wenn eine Prüfung fehlschlägt. Diese Prüfungen sind fail-open: Wenn die Prüfung selbst nicht abgeschlossen werden kann, etwa wegen eines vorübergehenden Netzwerkproblems, wird der Verbindungsversuch trotzdem fortgesetzt. Eine abgelaufene Azure-Sitzung ist die Ausnahme: Sie führt Sie erneut zur Anmeldung.</p>
 </div>
 
 ## Netzwerkerreichbarkeit

@@ -1,7 +1,7 @@
 ---
 title: Visão geral
 description: Abra uma sessão de ambiente de trabalho remoto através do Azure Bastion para uma máquina virtual do Azure, ou para qualquer sistema Windows que a rede do Bastion consiga alcançar.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -53,7 +53,7 @@ A aplicação oferece dois métodos de ligação. Alcançam a mesma máquina e d
 
 <div class="callout note">
 <span class="eyebrow">Nota</span>
-<p>A aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades antes de ligar, e indica qual está em falta se uma verificação falhar. Estas verificações são fail-open, pelo que uma verificação que não consiga concluir não o impede de ligar.</p>
+<p>A aplicação verifica o SKU do Bastion e os respetivos indicadores de funcionalidades antes de ligar, e indica qual está em falta se uma verificação falhar. Estas verificações são fail-open, pelo que uma verificação que não consiga concluir não o impede de ligar. Uma sessão do Azure expirada é a exceção: leva-o de novo ao início de sessão.</p>
 </div>
 
 ## Onde as coisas são guardadas

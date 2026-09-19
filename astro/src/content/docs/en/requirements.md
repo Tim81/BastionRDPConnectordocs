@@ -1,7 +1,7 @@
 ---
 title: Requirements
 description: What has to be true on your machine and in Azure before Azure Bastion RDP Connector can open a session.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-07-25'
 ---
 
@@ -14,7 +14,7 @@ The application is self-contained. It does not need .NET installed separately, a
 | Windows 10 or later, x64 | Installed from the Microsoft Store |
 | macOS 12 Monterey or later | Supported since 3.1.2 for Apple Silicon and Intel, but not yet publicly available |
 | Remote desktop client, Windows | `mstsc.exe`, already part of Windows |
-| Remote desktop client, macOS | The Windows App, from the Mac App Store. Use Tunnel with it. An RD Gateway session opens and then drops after a few seconds with error `0x3000064`, a cipher mismatch Microsoft does not support on this client |
+| Remote desktop client, macOS | The Windows App, from the Mac App Store. Use Tunnel with it. An RD Gateway session opens and then disconnects within seconds with error `0x300006c`, `0x3000064` or `0x10b`, because Windows App for Mac splits one RD Gateway packet across two WebSocket messages and Bastion closes the WebSocket |
 
 <div class="callout note">
 <span class="eyebrow">Note</span>
@@ -34,7 +34,7 @@ The application is self-contained. It does not need .NET installed separately, a
 
 <div class="callout note">
 <span class="eyebrow">Note</span>
-<p>The application checks the Bastion SKU and its feature flags before connecting, and names the missing one if a check fails. These checks fail open: if the check itself cannot complete, for example because of a transient network problem, the connection attempt still proceeds.</p>
+<p>The application checks the Bastion SKU and its feature flags before connecting, and names the missing one if a check fails. These checks fail open: if the check itself cannot complete, for example because of a transient network problem, the connection attempt still proceeds. An expired Azure session is the exception: it takes you to sign-in again.</p>
 </div>
 
 ## Network reachability

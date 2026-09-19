@@ -1,7 +1,7 @@
 ---
 title: Connect to an Azure VM
 description: Pick a virtual machine by name, across one subscription or all of them, check its power state, start it if needed, and connect.
-appliesTo: '3.3.6'
+appliesTo: '3.3.9'
 lastReviewed: '2026-08-01'
 ---
 import ScreenAzureVm from '../../../components/ScreenAzureVm.astro';
@@ -41,7 +41,7 @@ A pair of radio buttons above the VM list controls how the search works.
 | Virtual machine | The VM to connect to, picked from the list on the right. |
 | Target port, local port | Used only in Tunnel mode, and shared with the IP address tab. |
 
-Before connecting, the application checks the Bastion SKU and its feature flags, and the VM's power state, and tells you what is missing if a check fails. These checks fail open: a check that cannot complete does not block the connection.
+Before connecting, the application checks the Bastion SKU and its feature flags, and the VM's power state, and tells you what is missing if a check fails. These checks fail open: a check that cannot complete does not block the connection. An expired Azure session is the exception: it takes you to sign-in again.
 
 ## Power state and starting a VM
 
@@ -53,7 +53,7 @@ The selected VM's power state shows next to its name.
 | Stopped or deallocated (red) | The VM is off. A **Start** button appears. |
 | Starting, stopping, or other (amber) | The VM is between states. A progress indicator shows while the app waits for it to settle. |
 
-To start a stopped VM, select **Start**. The button is replaced by a progress indicator while the application polls Azure for the updated state, once every 5 seconds for up to 5 minutes. When the state turns green, a toast notification confirms the VM is ready and **Connect** becomes available.
+To start a stopped VM, select **Start**. The button is replaced by a progress indicator while the application polls Azure for the updated state, once every 5 seconds for up to 5 minutes. When the state turns green, a toast notification confirms the VM is ready and **Connect** becomes available. While a VM is starting, **Start** is hidden and **Connect** is disabled, and the starting state is tracked per VM, so switching VMs never shows it on the wrong one. If the VM keeps reading stopped or deallocated for about 30 seconds, the application reports an error naming the VM instead of waiting out the full 5 minutes.
 
 <div class="callout warn">
 <span class="eyebrow">Starting needs more than Reader</span>
