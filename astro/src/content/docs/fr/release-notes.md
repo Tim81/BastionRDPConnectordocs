@@ -1,9 +1,21 @@
 ---
 title: Nouveautés
 description: Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector.
-appliesTo: '3.4.0'
+appliesTo: '3.4.2'
 lastReviewed: '2026-10-19'
 ---
+
+## 3.4.2
+
+| Changement | Détails |
+| --- | --- |
+| Mode sombre | Les onglets en dossiers et la page suivent le thème d'application Windows. En mode sombre, la page est sombre, l'onglet sélectionné reprend ce même fond et les libellés restent lisibles. |
+
+## 3.4.1
+
+| Changement | Détails |
+| --- | --- |
+| Composants mis à jour | Avalonia.Controls.WebView 12.1.1 et les paquets d'identité (MSAL 4.91.0). Mises à jour de dépendances uniquement. |
 
 ## 3.4.0
 

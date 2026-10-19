@@ -1,9 +1,21 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.4.0'
+appliesTo: '3.4.2'
 lastReviewed: '2026-10-19'
 ---
+
+## 3.4.2
+
+| Wijziging | Details |
+| --- | --- |
+| Donkere modus | De maptabbladen en de pagina volgen het Windows-app-thema. In de donkere modus is de pagina donker, het gekozen tabblad gebruikt diezelfde achtergrond en de labels blijven leesbaar. |
+
+## 3.4.1
+
+| Wijziging | Details |
+| --- | --- |
+| Bijgewerkte onderdelen | Avalonia.Controls.WebView 12.1.1 en de identiteitspakketten (MSAL 4.91.0). Alleen afhankelijkheidsupdates. |
 
 ## 3.4.0
 

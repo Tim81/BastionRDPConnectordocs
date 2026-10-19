@@ -1,9 +1,21 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.4.0'
+appliesTo: '3.4.2'
 lastReviewed: '2026-10-19'
 ---
+
+## 3.4.2
+
+| Alteração | Detalhes |
+| --- | --- |
+| Modo escuro | Os separadores em forma de pasta e a página seguem o tema de aplicação do Windows. No modo escuro a página é escura, o separador selecionado usa esse mesmo fundo e as etiquetas continuam legíveis. |
+
+## 3.4.1
+
+| Alteração | Detalhes |
+| --- | --- |
+| Componentes atualizados | Avalonia.Controls.WebView 12.1.1 e os pacotes de identidade (MSAL 4.91.0). Apenas atualizações de dependências. |
 
 ## 3.4.0
 
