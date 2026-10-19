@@ -1,9 +1,21 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.4.0'
+appliesTo: '3.4.2'
 lastReviewed: '2026-10-19'
 ---
+
+## 3.4.2
+
+| Change | Details |
+| --- | --- |
+| Dark mode | The folder tabs and the page follow the Windows app theme. In dark mode the page is dark, the selected tab uses that same background, and the labels stay readable. |
+
+## 3.4.1
+
+| Change | Details |
+| --- | --- |
+| Updated components | Avalonia.Controls.WebView 12.1.1 and the identity packages (MSAL 4.91.0). Dependency updates only. |
 
 ## 3.4.0
 

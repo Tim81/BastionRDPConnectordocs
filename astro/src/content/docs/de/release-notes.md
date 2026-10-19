@@ -1,9 +1,21 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.4.0'
+appliesTo: '3.4.2'
 lastReviewed: '2026-10-19'
 ---
+
+## 3.4.2
+
+| Änderung | Details |
+| --- | --- |
+| Dunkler Modus | Die Ordner-Registerkarten und die Seite folgen dem Windows-App-Design. Im dunklen Modus ist die Seite dunkel, die gewählte Registerkarte hat denselben Hintergrund und die Beschriftungen bleiben lesbar. |
+
+## 3.4.1
+
+| Änderung | Details |
+| --- | --- |
+| Aktualisierte Komponenten | Avalonia.Controls.WebView 12.1.1 und die Identitätspakete (MSAL 4.91.0). Nur Aktualisierungen von Abhängigkeiten. |
 
 ## 3.4.0
 
