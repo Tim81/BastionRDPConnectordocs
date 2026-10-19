@@ -1,9 +1,24 @@
 ---
 title: Nouveautés
 description: Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Changement | Détails |
+| --- | --- |
+| Favoris | L'onglet Favoris contient jusqu'à dix adresses IP et VM Azure pour le locataire auquel vous êtes connecté. Une étoile à côté de Connecter enregistre la cible actuelle ou la retire, et le retrait demande une confirmation. Connecter utilise l'hôte Bastion sélectionné à ce moment-là. Un favori IP ouvre un tunnel. Un favori VM utilise la méthode de connexion, les ports, l'option Entra ID et le choix de moniteur de l'onglet Azure VM. La carte suit les mêmes règles d'état d'alimentation que cet onglet : Connecter n'est disponible que pendant que la VM est en cours d'exécution, et Démarrer la VM apparaît lorsque la VM est arrêtée et que votre compte peut la démarrer. |
+| Le changement de langue atteint chaque onglet | Un changement de langue réécrit toute la fenêtre tout de suite, y compris les onglets que vous ne regardez pas. Un onglet que vous n'aviez pas encore ouvert gardait auparavant l'ancienne langue jusqu'au démarrage suivant. |
+| Onglets en dossiers | La barre d'onglets est une rangée d'onglets en forme de dossiers, de gauche à droite. |
+
+## 3.3.10
+
+| Changement | Détails |
+| --- | --- |
+| Composants mis à jour | Azure.Core 1.63.0, Avalonia 12.1.4 et les packages d'identité (MSAL 4.90.1). Mises à jour de dépendances uniquement. |
+| Runtime .NET avec correctifs de sécurité | Le SDK minimal de génération est 10.0.402, si bien que le runtime intégré est .NET 10.0.13, avec les correctifs de sécurité. |
 
 ## 3.3.9
 

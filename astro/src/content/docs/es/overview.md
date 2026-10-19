@@ -1,8 +1,8 @@
 ---
 title: Descripción general
 description: Abra una sesión de escritorio remoto a través de Azure Bastion hacia una máquina virtual de Azure, o hacia cualquier sistema Windows al que la red de Bastion pueda enrutar.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Azure Bastion RDP Connector abre una sesión de escritorio remoto a través de Azure Bastion, usando el cliente de escritorio remoto ya instalado en su equipo. Las máquinas virtuales de Azure se eligen por nombre. Cualquier otro destino se alcanza por dirección, lo que incluye máquinas locales y máquinas en otras nubes.
@@ -62,5 +62,5 @@ La configuración se sincroniza con su perfil de Windows. Los datos de inicio de
 
 | Ruta | Contiene |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json`: última suscripción, Bastion, VM e idioma utilizados |
+| `%APPDATA%\BastionRDPConnector` | `settings.json`: última suscripción, Bastion, VM, favoritos e idioma utilizados |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Caché de tokens de inicio de sesión, el perfil del navegador de inicio de sesión y `debug.log` con las últimas diez sesiones |

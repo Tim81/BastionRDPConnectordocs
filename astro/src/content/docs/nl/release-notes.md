@@ -1,9 +1,24 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Wijziging | Details |
+| --- | --- |
+| Favorieten | Het tabblad Favorieten bevat maximaal tien IP-adressen en Azure-VM's voor de tenant waarbij u bent aangemeld. Een ster naast Verbinden slaat het huidige doel op of verwijdert het, en verwijderen vraagt om bevestiging. Verbinden gebruikt de Bastion-host die op dat moment is gekozen. Een IP-favoriet opent een tunnel. Een VM-favoriet gebruikt de verbindingsmethode, de poorten, de Entra ID-optie en de monitorkeuze van het tabblad Azure VM. De kaart volgt dezelfde energiestatusregels als dat tabblad: Verbinden is alleen beschikbaar terwijl de VM actief is, en Start VM verschijnt wanneer de VM is gestopt en uw account die mag starten. |
+| Taalwijzigingen bereiken elk tabblad | Een taalwijziging herschrijft het hele venster meteen, ook tabbladen die u niet bekijkt. Een tabblad dat u nog niet had geopend, hield voorheen de vorige taal tot de volgende start. |
+| Maptabbladen | De tabstrook is een rij maptabbladen, van links naar rechts. |
+
+## 3.3.10
+
+| Wijziging | Details |
+| --- | --- |
+| Bijgewerkte componenten | Azure.Core 1.63.0, Avalonia 12.1.4 en de identiteitspakketten (MSAL 4.90.1). Uitsluitend afhankelijkheidsupdates. |
+| Runtime .NET met beveiligingsfixes | De ondergrens van de build-SDK is 10.0.402, zodat de meegeleverde runtime .NET 10.0.13 is, met de beveiligingsfixes. |
 
 ## 3.3.9
 

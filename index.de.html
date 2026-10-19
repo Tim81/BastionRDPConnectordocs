@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Dokumentation</div>
+    <div class="version">v3.4.0 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">Registerkarte IP-Adresse</a>
       <a href="#tab-vm">Registerkarte Azure VM</a>
       <a href="#tab-tunnels">Aktive Tunnel</a>
+      <a href="#tab-favorites">Favoriten</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Verbindungsmethoden</div>
@@ -725,6 +726,7 @@
       <tbody>
         <tr><td>Per IP verbinden</td><td>Tunnel zu jeder über Bastion erreichbaren IP-Adresse</td></tr>
         <tr><td>Per VM verbinden</td><td>Virtuelle Azure-Computer in Ihren Subscriptions durchsuchen und auswählen</td></tr>
+        <tr><td>Favoriten</td><td>Bis zu zehn IP-Adressen und Azure-VMs pro Mandant speichern und über die Registerkarte Favoriten erneut verbinden</td></tr>
         <tr><td>Tunnelmodus</td><td>Native .NET WebSocket-Tunnel — kein Azure CLI erforderlich</td></tr>
         <tr><td>RD Gateway-Modus</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>VM-Energieverwaltung</td><td>Energiestatus anzeigen und gestoppte VMs aus der App starten</td></tr>
@@ -945,7 +947,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Fensterlayout</h2>
-    <p>Das Hauptfenster ist in drei feste Bereiche und drei Registerkarten unterteilt.</p>
+    <p>Das Hauptfenster ist in drei feste Bereiche und vier Registerkarten unterteilt.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -977,6 +979,7 @@
           <div class="ui-tab active">IP-Adresse</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Aktive Tunnel</div>
+          <div class="ui-tab">Favoriten</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Registerkarteninhalt in den folgenden Abschnitten)</div>
       </div>
@@ -990,6 +993,7 @@
         <tr><td>Registerkarte IP-Adresse</td><td>Verbindung zu einer beliebigen IP-Adresse über Bastion mit einem lokalen Tunnel.</td></tr>
         <tr><td>Registerkarte Azure VM</td><td>VMs in Subscriptions durchsuchen, Energiestatus prüfen, VMs starten und verbinden.</td></tr>
         <tr><td>Registerkarte Aktive Tunnel</td><td>Alle aktuell von dieser Anwendung geöffneten Tunnel anzeigen und verwalten.</td></tr>
+        <tr><td>Registerkarte Favoriten</td><td>Bis zu zehn IP-Adressen und Azure-VMs für diesen Mandanten speichern und erneut verbinden, mit dem zu diesem Zeitpunkt gewählten Bastion-Host.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1262,6 +1266,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Favoriten <span class="badge blue">v3.4.0</span></h2>
+    <p>Favoriten sind ein kürzerer Weg zurück zu einer Verbindung, die Sie bereits herstellen. Die Liste enthält bis zu zehn IP-Adressen und Azure-VMs für den Entra ID-Mandanten, bei dem Sie angemeldet sind. Ports, Verbindungsmethode und Bastion-Host bleiben dort, wo Sie sie festlegen.</p>
+    <p>Auf der Registerkarte IP-Adresse und der Registerkarte Azure VM steht ein Stern neben <strong>Verbinden</strong>. Ein leerer Stern speichert das aktuelle Ziel. Ein gefüllter Stern entfernt es, nachdem Sie bestätigen. <strong>Entfernen</strong> in einer Favoritenzeile stellt dieselbe Frage. Ein elfter Eintrag wird abgelehnt, bis Sie einen entfernen.</p>
+    <p><strong>Verbinden</strong> bei einem Favoriten verwendet den Bastion-Host, der in diesem Moment oben im Fenster ausgewählt ist. Ein IP-Favorit öffnet einen Tunnel, mit Zielport und lokalem Port der Registerkarte IP-Adresse. Ein VM-Favorit verwendet die Verbindungsmethode der Registerkarte Azure VM: Tunnel verwendet die Ports dieser Registerkarte, und RD Gateway verwendet Port 3389, das Kontrollkästchen für die Entra ID-Authentifizierung und die Monitorauswahl.</p>
+    <p>Die virtuelle Maschine muss noch in der für diese Anmeldung geladenen Liste stehen. Würde der aktuelle Subscription-, Namens- oder Tagfilter die VM ausblenden, wechselt Verbinden zur Subscription dieser VM, löscht diese Filter und lässt die Registerkarte Azure VM auf dieser Maschine stehen.</p>
+    <p>Ein VM-Favorit folgt denselben Energiestatusregeln wie die Registerkarte Azure VM. <strong>Verbinden</strong> ist nur verfügbar, solange die VM aktiv ist. Eine gestoppte oder freigegebene VM bietet <strong>VM starten</strong>, wenn Ihr Konto sie starten darf. Während die VM startet, ist <strong>VM starten</strong> ausgeblendet und <strong>Verbinden</strong> bleibt aus. Ein IP-Favorit hat keinen Energiestatus.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Tunnelmodus</h2>
@@ -1505,6 +1519,7 @@
       <span class="badge blue">Verbindungsmethode</span>
       <span class="badge blue">Monitor-Modus</span>
       <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Favoriten</span>
     </div>
 
     <div class="callout tip">
@@ -1548,7 +1563,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten.</p>
+    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert, auch auf Registerkarten, die Sie nicht ansehen. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten.</p>
 
     <h3>Automatische Erkennungsreihenfolge</h3>
     <p>Wenn noch keine Sprache gespeichert wurde, versucht die Anwendung, Ihre Präferenz in dieser Reihenfolge zu erkennen:</p>
@@ -1619,6 +1634,7 @@
         <tr><td>Verbindungsmethode</td><td><span class="badge orange">Pro Mandant</span></td><td>Tunnel oder RD Gateway</td></tr>
         <tr><td>Monitormodus</td><td><span class="badge orange">Pro Mandant</span></td><td>Einzelner oder alle Monitore</td></tr>
         <tr><td>Entra ID-Authentifizierung</td><td><span class="badge orange">Pro Mandant</span></td><td>Ein/Aus für RD Gateway SSO</td></tr>
+        <tr><td>Favoriten</td><td><span class="badge orange">Pro Mandant</span></td><td>Bis zu zehn IP-Adressen und Azure-VMs</td></tr>
       </tbody>
     </table>
   </section>
@@ -1626,6 +1642,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Neuigkeiten</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Favoriten</td><td>Die Registerkarte Favoriten hält bis zu zehn IP-Adressen und Azure-VMs für den angemeldeten Mandanten. Ein Stern neben Verbinden speichert das aktuelle Ziel oder entfernt es, und das Entfernen fragt nach einer Bestätigung. Verbinden verwendet den in diesem Moment gewählten Bastion-Host. Ein IP-Favorit öffnet einen Tunnel. Ein VM-Favorit verwendet Verbindungsmethode, Ports, Entra-ID-Option und Monitorauswahl der Registerkarte Azure VM und folgt denselben Energiestatusregeln: Verbinden bleibt aus, solange die VM nicht aktiv ist, und VM starten erscheint, wenn die VM gestoppt ist und Ihr Konto sie starten darf.</td></tr>
+        <tr><td>Sprachwechsel erreichen jede Registerkarte</td><td>Ein Sprachwechsel schreibt das ganze Fenster sofort um, auch Registerkarten, die Sie nicht ansehen. Eine noch nicht geöffnete Registerkarte behielt zuvor die alte Sprache bis zum nächsten Start.</td></tr>
+        <tr><td>Ordner-Registerkarten</td><td>Die Registerleiste ist eine Reihe von Ordner-Reitern, von links nach rechts.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Aktualisierte Komponenten</td><td>Azure.Core 1.63.0, Avalonia 12.1.4 und die Identitätspakete (MSAL 4.90.1). Ausschließlich Abhängigkeitsupdates.</td></tr>
+        <tr><td>Sicherheitsgepatchte .NET-Runtime</td><td>Die mitgelieferte Runtime ist das sicherheitsgepatchte .NET 10.0.13. Die Untergrenze des Build-SDK ist 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1798,7 +1833,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 

@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Documentación</div>
+    <div class="version">v3.4.0 · Documentación</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">Pestaña Dirección IP</a>
       <a href="#tab-vm">Pestaña Azure VM</a>
       <a href="#tab-tunnels">Túneles activos</a>
+      <a href="#tab-favorites">Favoritos</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Métodos de conexión</div>
@@ -725,6 +726,7 @@
       <tbody>
         <tr><td>Conectar por IP</td><td>Túnel a cualquier dirección IP alcanzable a través de Bastion</td></tr>
         <tr><td>Conectar por VM</td><td>Explorar y seleccionar cualquier VM de Azure en sus suscripciones</td></tr>
+        <tr><td>Favoritos</td><td>Guardar hasta diez direcciones IP y VM de Azure por inquilino, y volver a conectarse desde la pestaña Favoritos</td></tr>
         <tr><td>Modo túnel</td><td>Túnel WebSocket .NET nativo — sin Azure CLI requerido</td></tr>
         <tr><td>Modo RD Gateway</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>Gestión de energía VM</td><td>Ver el estado de energía e iniciar VM detenidas desde la aplicación</td></tr>
@@ -952,7 +954,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Diseño de ventana</h2>
-    <p>La ventana principal está dividida en tres áreas persistentes y tres pestañas.</p>
+    <p>La ventana principal está dividida en tres áreas persistentes y cuatro pestañas.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -984,6 +986,7 @@
           <div class="ui-tab active">Dirección IP</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Túneles activos</div>
+          <div class="ui-tab">Favoritos</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(El contenido de las pestañas se muestra en las secciones siguientes)</div>
       </div>
@@ -997,6 +1000,7 @@
         <tr><td>Pestaña Dirección IP</td><td>Conexión a cualquier dirección IP a través de Bastion con un túnel local.</td></tr>
         <tr><td>Pestaña Azure VM</td><td>Explorar VMs en suscripciones, verificar estado de energía, iniciar VMs y conectar.</td></tr>
         <tr><td>Pestaña Túneles activos</td><td>Ver y administrar todos los túneles actualmente abiertos por esta aplicación.</td></tr>
+        <tr><td>Pestaña Favoritos</td><td>Guardar hasta diez direcciones IP y VM de Azure para este inquilino, y volver a conectarse con el host de Bastion seleccionado en ese momento.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1269,6 +1273,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Pestaña Favoritos <span class="badge blue">v3.4.0</span></h2>
+    <p>Los favoritos son un camino más corto de vuelta a una conexión que usted ya hace. La lista guarda hasta diez direcciones IP y VM de Azure para el inquilino de Entra ID en el que ha iniciado sesión. Los puertos, el método de conexión y el host de Bastion se quedan donde usted los configura.</p>
+    <p>En la pestaña Dirección IP y en la pestaña Azure VM, una estrella está junto a <strong>Conectar</strong>. Una estrella vacía guarda el destino actual. Una estrella rellena lo quita, después de confirmar. <strong>Quitar</strong> en una fila de Favoritos hace la misma pregunta. Una undécima entrada se rechaza hasta que quite una.</p>
+    <p><strong>Conectar</strong> en un favorito usa el host de Bastion seleccionado en la parte superior de la ventana en ese momento. Un favorito de IP abre un túnel, con el puerto de destino y el puerto local de la pestaña Dirección IP. Un favorito de VM usa el método de conexión de la pestaña Azure VM: Túnel usa los puertos de esa pestaña, y RD Gateway usa el puerto 3389, la casilla de autenticación Entra ID y la elección de monitor.</p>
+    <p>La máquina virtual debe seguir en la lista cargada para este inicio de sesión. Si el filtro actual de suscripción, nombre o etiqueta la ocultaría, Conectar cambia a la suscripción de esa VM, borra esos filtros y deja la pestaña Azure VM en esa máquina.</p>
+    <p>Un favorito de VM sigue las mismas reglas de estado de energía que la pestaña Azure VM. <strong>Conectar</strong> solo está disponible mientras la VM está en ejecución. Una VM detenida o desasignada ofrece <strong>Iniciar VM</strong> cuando su cuenta puede iniciarla. Mientras la VM se inicia, <strong>Iniciar VM</strong> está oculto y <strong>Conectar</strong> permanece desactivado. Un favorito de IP no tiene estado de energía.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Modo túnel</h2>
@@ -1512,6 +1526,7 @@
       <span class="badge blue">Método de conexión</span>
       <span class="badge blue">Modo de monitor</span>
       <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Favoritos</span>
     </div>
 
     <div class="callout tip">
@@ -1555,7 +1570,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Los cambios de idioma tienen efecto <strong>inmediatamente</strong> sin reiniciar la aplicación. Todo el texto de la interfaz — etiquetas, botones, mensajes y tooltips — se actualiza en vivo. El idioma seleccionado se guarda globalmente y persiste entre inicios.</p>
+    <p>Los cambios de idioma tienen efecto <strong>inmediatamente</strong> sin reiniciar la aplicación. Todo el texto de la interfaz — etiquetas, botones, mensajes y tooltips — se actualiza en vivo, incluidas las pestañas que no está mirando. El idioma seleccionado se guarda globalmente y persiste entre inicios.</p>
 
     <h3>Orden de detección automática</h3>
     <p>Si aún no se ha guardado ningún idioma, la aplicación intenta detectar su preferencia en este orden:</p>
@@ -1626,6 +1641,7 @@
         <tr><td>Método de conexión</td><td><span class="badge orange">Por inquilino</span></td><td>Túnel o RD Gateway</td></tr>
         <tr><td>Modo monitor</td><td><span class="badge orange">Por inquilino</span></td><td>Monitor único o todos los monitores</td></tr>
         <tr><td>Autenticación Entra ID</td><td><span class="badge orange">Por inquilino</span></td><td>Activar/desactivar SSO de RD Gateway</td></tr>
+        <tr><td>Favoritos</td><td><span class="badge orange">Por inquilino</span></td><td>Hasta diez direcciones IP y VM de Azure</td></tr>
       </tbody>
     </table>
   </section>
@@ -1633,6 +1649,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novedades</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td>Favoritos</td><td>La pestaña Favoritos guarda hasta diez direcciones IP y VM de Azure para el inquilino con la sesión iniciada. Una estrella junto a Conectar guarda el destino actual o lo quita, y quitarlo pide confirmación. Conectar usa el host de Bastion seleccionado en ese momento. Un favorito de IP abre un túnel. Un favorito de VM usa el método de conexión, los puertos, la opción Entra ID y la elección de monitor de la pestaña Azure VM, y sigue las mismas reglas de estado de energía: Conectar permanece desactivado hasta que la VM está en ejecución, e Iniciar VM aparece cuando la VM está detenida y su cuenta puede iniciarla.</td></tr>
+        <tr><td>El cambio de idioma llega a cada pestaña</td><td>Un cambio de idioma reescribe toda la ventana al momento, incluidas las pestañas que no está mirando. Antes, una pestaña que aún no había abierto conservaba el idioma anterior hasta el siguiente inicio.</td></tr>
+        <tr><td>Pestañas en forma de carpeta</td><td>La barra de pestañas es una fila de pestañas en forma de carpeta, de izquierda a derecha.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td>Componentes actualizados</td><td>Azure.Core 1.63.0, Avalonia 12.1.4 y los paquetes de identidad (MSAL 4.90.1). Solo actualizaciones de dependencias.</td></tr>
+        <tr><td>Runtime .NET con correcciones de seguridad</td><td>El runtime incluido es .NET 10.0.13, con las correcciones de seguridad. El SDK mínimo de compilación es 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1797,7 +1832,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
 </footer>
 </div>
 

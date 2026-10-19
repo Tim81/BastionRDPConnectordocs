@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Documentação</div>
+    <div class="version">v3.4.0 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">Separador Endereço IP</a>
       <a href="#tab-vm">Separador Azure VM</a>
       <a href="#tab-tunnels">Túneis ativos</a>
+      <a href="#tab-favorites">Favoritos</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Métodos de ligação</div>
@@ -725,6 +726,7 @@
       <tbody>
         <tr><td>Ligar por IP</td><td>Túnel para qualquer endereço IP acessível via Bastion</td></tr>
         <tr><td>Ligar por VM</td><td>Navegar e escolher qualquer VM do Azure nas suas subscrições</td></tr>
+        <tr><td>Favoritos</td><td>Guardar até dez endereços IP e VMs do Azure por inquilino, e voltar a ligar a partir do separador Favoritos</td></tr>
         <tr><td>Modo de túnel</td><td>Túnel WebSocket .NET nativo — sem Azure CLI necessário</td></tr>
         <tr><td>Modo RD Gateway</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>Gestão de energia da VM</td><td>Ver estado de energia e iniciar VMs paradas a partir da aplicação</td></tr>
@@ -951,7 +953,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Esquema da janela</h2>
-    <p>A janela principal está dividida em três áreas persistentes e três separadores.</p>
+    <p>A janela principal está dividida em três áreas persistentes e quatro separadores.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -983,6 +985,7 @@
           <div class="ui-tab active">Endereço IP</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Túneis ativos</div>
+          <div class="ui-tab">Favoritos</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(O conteúdo dos separadores é apresentado nas secções seguintes)</div>
       </div>
@@ -996,6 +999,7 @@
         <tr><td>Separador Endereço IP</td><td>Ligação a qualquer endereço IP através do Bastion com um túnel local.</td></tr>
         <tr><td>Separador Azure VM</td><td>Navegar pelas VMs nas subscrições, verificar estado de energia, iniciar VMs e ligar.</td></tr>
         <tr><td>Separador Túneis ativos</td><td>Ver e gerir todos os túneis atualmente abertos por esta aplicação.</td></tr>
+        <tr><td>Separador Favoritos</td><td>Guardar até dez endereços IP e VMs do Azure para este inquilino, e voltar a ligar com o anfitrião Bastion selecionado nesse momento.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1268,6 +1272,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Separador Favoritos <span class="badge blue">v3.4.0</span></h2>
+    <p>Os favoritos são um caminho mais curto de volta a uma ligação que já faz. A lista guarda até dez endereços IP e VMs do Azure para o inquilino do Entra ID em que iniciou sessão. As portas, o método de ligação e o anfitrião Bastion ficam onde os define.</p>
+    <p>No separador Endereço IP e no separador Azure VM, uma estrela fica junto a <strong>Ligar</strong>. Uma estrela vazia guarda o destino atual. Uma estrela preenchida remove-o, depois de confirmar. <strong>Remover</strong> numa linha de Favoritos faz a mesma pergunta. Uma décima primeira entrada é recusada até remover uma.</p>
+    <p><strong>Ligar</strong> num favorito usa o anfitrião Bastion selecionado no topo da janela nesse momento. Um favorito de IP abre um túnel, com a porta de destino e a porta local do separador Endereço IP. Um favorito de VM usa o método de ligação do separador Azure VM: Túnel usa as portas desse separador, e RD Gateway usa a porta 3389, a caixa de autenticação Entra ID e a escolha de monitor.</p>
+    <p>A máquina virtual tem de continuar na lista carregada para este início de sessão. Se o filtro atual de subscrição, nome ou etiqueta a ocultasse, Ligar muda para a subscrição dessa VM, limpa esses filtros e deixa o separador Azure VM nessa máquina.</p>
+    <p>Um favorito de VM segue as mesmas regras de estado de energia que o separador Azure VM. <strong>Ligar</strong> só está disponível enquanto a VM está em execução. Uma VM parada ou desalocada oferece <strong>Iniciar VM</strong> quando a sua conta a pode iniciar. Enquanto a VM arranca, <strong>Iniciar VM</strong> fica oculto e <strong>Ligar</strong> permanece desativado. Um favorito de IP não tem estado de energia.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Modo de túnel</h2>
@@ -1511,6 +1525,7 @@
       <span class="badge blue">Método de ligação</span>
       <span class="badge blue">Modo de monitor</span>
       <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Favoritos</span>
     </div>
 
     <div class="callout tip">
@@ -1554,7 +1569,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real. O idioma selecionado é guardado globalmente e persiste entre arranques.</p>
+    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real, incluindo nos separadores que não está a ver. O idioma selecionado é guardado globalmente e persiste entre arranques.</p>
 
     <h3>Ordem de deteção automática</h3>
     <p>Se ainda não foi guardado nenhum idioma, a aplicação tenta detetar a sua preferência por esta ordem:</p>
@@ -1624,6 +1639,7 @@
         <tr><td>Método de ligação</td><td><span class="badge orange">Por inquilino</span></td><td>Túnel ou RD Gateway</td></tr>
         <tr><td>Modo de monitor</td><td><span class="badge orange">Por inquilino</span></td><td>Monitor único ou todos os monitores</td></tr>
         <tr><td>Autenticação Entra ID</td><td><span class="badge orange">Por inquilino</span></td><td>Ativar/desativar SSO de RD Gateway</td></tr>
+        <tr><td>Favoritos</td><td><span class="badge orange">Por inquilino</span></td><td>Até dez endereços IP e VMs do Azure</td></tr>
       </tbody>
     </table>
   </section>
@@ -1631,6 +1647,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Favoritos</td><td>O separador Favoritos guarda até dez endereços IP e VMs do Azure para o inquilino com sessão iniciada. Uma estrela junto a Ligar guarda o destino atual ou remove-o, e a remoção pede confirmação. Ligar usa o anfitrião Bastion selecionado nesse momento. Um favorito de IP abre um túnel. Um favorito de VM usa o método de ligação, as portas, a opção Entra ID e a escolha de monitor do separador Azure VM, e segue as mesmas regras de estado de energia: Ligar permanece desativado até a VM estar em execução, e Iniciar VM aparece quando a VM está parada e a sua conta a pode iniciar.</td></tr>
+        <tr><td>A alteração de idioma chega a cada separador</td><td>Uma alteração de idioma reescreve toda a janela de imediato, incluindo os separadores que não está a ver. Antes, um separador que ainda não tinha aberto mantinha o idioma anterior até ao arranque seguinte.</td></tr>
+        <tr><td>Separadores em forma de pasta</td><td>A barra de separadores é uma fila de separadores em forma de pasta, da esquerda para a direita.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Componentes atualizados</td><td>Azure.Core 1.63.0, Avalonia 12.1.4 e os pacotes de identidade (MSAL 4.90.1). Apenas atualizações de dependências.</td></tr>
+        <tr><td>Runtime .NET com correções de segurança</td><td>O runtime incluído é o .NET 10.0.13, com as correções de segurança. O SDK mínimo de compilação é 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1795,7 +1830,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

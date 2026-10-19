@@ -1,9 +1,24 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Änderung | Details |
+| --- | --- |
+| Favoriten | Die Registerkarte Favoriten hält bis zu zehn IP-Adressen und Azure-VMs für den Mandanten, bei dem Sie angemeldet sind. Ein Stern neben Verbinden speichert das aktuelle Ziel oder entfernt es, und das Entfernen fragt nach einer Bestätigung. Verbinden verwendet den in diesem Moment gewählten Bastion-Host. Ein IP-Favorit öffnet einen Tunnel. Ein VM-Favorit verwendet die Verbindungsmethode, die Ports, die Entra-ID-Option und die Monitorauswahl der Registerkarte Azure VM. Die Karte folgt denselben Energiestatusregeln wie diese Registerkarte: Verbinden ist nur verfügbar, solange die VM aktiv ist, und VM starten erscheint, wenn die VM gestoppt ist und Ihr Konto sie starten darf. |
+| Sprachwechsel erreichen jede Registerkarte | Ein Sprachwechsel schreibt das ganze Fenster sofort um, auch Registerkarten, die Sie nicht ansehen. Eine noch nicht geöffnete Registerkarte behielt zuvor die alte Sprache bis zum nächsten Start. |
+| Ordner-Registerkarten | Die Registerleiste ist eine Reihe von Ordner-Reitern, von links nach rechts. |
+
+## 3.3.10
+
+| Änderung | Details |
+| --- | --- |
+| Aktualisierte Komponenten | Azure.Core 1.63.0, Avalonia 12.1.4 und die Identitätspakete (MSAL 4.90.1). Ausschließlich Abhängigkeitsupdates. |
+| Sicherheitsgepatchte .NET-Runtime | Die Untergrenze des Build-SDK ist 10.0.402, sodass die mitgelieferte Runtime das sicherheitsgepatchte .NET 10.0.13 ist. |
 
 ## 3.3.9
 

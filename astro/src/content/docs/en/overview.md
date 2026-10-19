@@ -1,8 +1,8 @@
 ---
 title: Overview
 description: Open a remote desktop session through Azure Bastion to an Azure virtual machine, or to any Windows system the Bastion network can route to.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Azure Bastion RDP Connector opens a remote desktop session through Azure Bastion, using the remote desktop client already installed on your computer. Azure virtual machines are picked by name. Anything else is reached by address, which includes on-premises machines and machines in other clouds.
@@ -62,5 +62,5 @@ Settings roam with your Windows profile. Sign-in data and logs stay on the machi
 
 | Path | Holds |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json`: last used subscription, Bastion, VM, and language |
+| `%APPDATA%\BastionRDPConnector` | `settings.json`: last used subscription, Bastion, VM, favorites, and language |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Sign-in token cache, the sign-in browser profile, and `debug.log` with the last ten sessions |

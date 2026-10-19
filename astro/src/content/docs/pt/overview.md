@@ -1,8 +1,8 @@
 ---
 title: Visão geral
 description: Abra uma sessão de ambiente de trabalho remoto através do Azure Bastion para uma máquina virtual do Azure, ou para qualquer sistema Windows que a rede do Bastion consiga alcançar.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 O Azure Bastion RDP Connector abre uma sessão de ambiente de trabalho remoto através do Azure Bastion, utilizando o cliente de ambiente de trabalho remoto já instalado no seu computador. As máquinas virtuais do Azure são escolhidas pelo nome. Tudo o resto é alcançado por endereço, o que inclui máquinas no local e máquinas noutras clouds.
@@ -62,5 +62,5 @@ As definições acompanham o seu perfil do Windows. Os dados de início de sess�
 
 | Caminho | Contém |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json`: última subscrição, Bastion, VM e idioma utilizados |
+| `%APPDATA%\BastionRDPConnector` | `settings.json`: última subscrição, Bastion, VM, favoritos e idioma utilizados |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Cache de tokens de início de sessão, o perfil do navegador de início de sessão, e `debug.log` com as últimas dez sessões |

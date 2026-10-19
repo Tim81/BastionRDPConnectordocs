@@ -1,8 +1,8 @@
 ---
 title: Plusieurs locataires
 description: Comment l'application conserve un ensemble distinct de préférences pour chaque locataire Entra ID auquel votre compte a accès, et ce qui reste global.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Si votre compte a accès à plus d'un locataire Entra ID, par exemple via Azure Lighthouse, l'application conserve un ensemble distinct de préférences pour chacun au lieu d'écraser un seul ensemble partagé à chaque changement.
@@ -24,6 +24,7 @@ Chaque locataire dispose de son propre emplacement pour :
 - La méthode de connexion, Tunnel ou RD Gateway
 - Le mode moniteur
 - L'authentification Entra ID
+- Jusqu'à 10 connexions favorites (adresses IP et VM Azure)
 
 Passez du locataire A au locataire B puis revenez, et le Bastion, la VM et les ports du locataire A reviennent exactement comme vous les aviez laissés. Rien du locataire B n'est conservé.
 

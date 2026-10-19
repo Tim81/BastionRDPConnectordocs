@@ -1,8 +1,8 @@
 ---
 title: Mehrere Mandanten
 description: Wie die Anwendung für jeden Entra ID-Mandanten, den Ihr Konto sehen kann, einen eigenen Satz an Präferenzen führt, und was global bleibt.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Wenn Ihr Konto Zugriff auf mehr als einen Entra ID-Mandanten hat, zum Beispiel über Azure Lighthouse, führt die Anwendung für jeden einen eigenen Satz an Präferenzen, statt bei jedem Wechsel einen einzigen gemeinsamen Satz zu überschreiben.
@@ -24,6 +24,7 @@ Jeder Mandant erhält einen eigenen Speicherplatz für:
 - Verbindungsmethode, Tunnel oder RD Gateway
 - Monitor-Modus
 - Entra ID-Authentifizierung
+- Bis zu 10 Favoriten (IP-Adressen und Azure-VMs)
 
 Wechseln Sie von Mandant A zu Mandant B und wieder zurück, kommen Bastion, VM und Ports von Mandant A genau so zurück, wie Sie sie verlassen haben. Nichts von Mandant B wird übernommen.
 

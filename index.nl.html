@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Documentatie</div>
+    <div class="version">v3.4.0 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">IP-adres tabblad</a>
       <a href="#tab-vm">Azure VM tabblad</a>
       <a href="#tab-tunnels">Actieve Tunnels tabblad</a>
+      <a href="#tab-favorites">Favorieten tabblad</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Verbindingsmethoden</div>
@@ -724,6 +725,7 @@
       <tbody>
         <tr><td>Verbinden via IP</td><td>Tunnel naar elk IP-adres bereikbaar via Bastion</td></tr>
         <tr><td>Verbinden via VM</td><td>Blader door en kies een Azure-VM in uw subscriptions</td></tr>
+        <tr><td>Favorieten</td><td>Sla tot tien IP-adressen en Azure-VM's per tenant op, en verbind opnieuw vanaf het tabblad Favorieten</td></tr>
         <tr><td>Tunnelmodus</td><td>Native .NET WebSocket-tunnel — geen Azure CLI vereist</td></tr>
         <tr><td>RD Gateway-modus</td><td>Moderne directe RD Gateway-verbinding via de Bastion API</td></tr>
         <tr><td>VM energiebeheer</td><td>Bekijk de status en start gestopte VM's vanuit de app</td></tr>
@@ -939,7 +941,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Vensterindeling</h2>
-    <p>Het hoofdvenster is verdeeld in drie vaste gebieden en drie tabbladen.</p>
+    <p>Het hoofdvenster is verdeeld in drie vaste gebieden en vier tabbladen.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -971,6 +973,7 @@
           <div class="ui-tab active">IP-adres</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Actieve Tunnels</div>
+          <div class="ui-tab">Favorieten</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Tabbladinhoud wordt hieronder weergegeven)</div>
       </div>
@@ -984,6 +987,7 @@
         <tr><td>IP-adres tabblad</td><td>Verbinden met elk IP-adres via Bastion met een lokale tunnel.</td></tr>
         <tr><td>Azure VM tabblad</td><td>Blader door VM's, controleer de status, start VM's en maak verbinding.</td></tr>
         <tr><td>Actieve Tunnels tabblad</td><td>Bekijk en beheer alle tunnels die momenteel open zijn.</td></tr>
+        <tr><td>Favorieten tabblad</td><td>Sla tot tien IP-adressen en Azure-VM's voor deze tenant op, en verbind opnieuw met de Bastion-host die op dat moment is gekozen.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1256,6 +1260,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Favorieten tabblad <span class="badge blue">v3.4.0</span></h2>
+    <p>Favorieten zijn een kortere weg terug naar een verbinding die u al maakt. De lijst bevat maximaal tien IP-adressen en Azure-VM's voor de Entra ID-tenant waarbij u bent aangemeld. De poorten, de verbindingsmethode en de Bastion-host blijven staan waar u ze instelt.</p>
+    <p>Op het tabblad IP-adres en het tabblad Azure VM staat een ster naast <strong>Verbinden</strong>. Een lege ster slaat het huidige doel op. Een gevulde ster verwijdert het, nadat u bevestigt. <strong>Verwijderen</strong> bij een rij op Favorieten stelt dezelfde vraag. Een elfde item wordt geweigerd totdat u er een verwijdert.</p>
+    <p><strong>Verbinden</strong> bij een favoriet gebruikt de Bastion-host die op dat moment bovenaan het venster is gekozen. Een IP-favoriet opent een tunnel, met de doelpoort en de lokale poort van het tabblad IP-adres. Een VM-favoriet gebruikt de verbindingsmethode van het tabblad Azure VM: Tunnel gebruikt de poorten van dat tabblad, en RD Gateway gebruikt poort 3389, het selectievakje voor Entra ID en de monitorkeuze.</p>
+    <p>De virtuele machine moet nog in de lijst staan die voor deze aanmelding is geladen. Als het huidige subscription-, naam- of tagfilter de VM zou verbergen, schakelt Verbinden naar de subscription van die VM, wist die filters en laat het tabblad Azure VM op die machine staan.</p>
+    <p>Een VM-favoriet volgt dezelfde energiestatusregels als het tabblad Azure VM. <strong>Verbinden</strong> is alleen beschikbaar terwijl de VM actief is. Een gestopte of vrijgegeven VM biedt <strong>Start VM</strong> wanneer uw account die mag starten. Terwijl de VM start, is <strong>Start VM</strong> verborgen en blijft <strong>Verbinden</strong> uit. Een IP-favoriet heeft geen energiestatus.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Tunnelmodus</h2>
@@ -1499,6 +1513,7 @@
       <span class="badge blue">Verbindingsmethode</span>
       <span class="badge blue">Monitormodus</span>
       <span class="badge blue">Entra ID-verificatie</span>
+      <span class="badge blue">Favorieten</span>
     </div>
 
     <div class="callout tip">
@@ -1542,7 +1557,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt. De geselecteerde taal wordt globaal opgeslagen.</p>
+    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt, ook op tabbladen die u niet bekijkt. De geselecteerde taal wordt globaal opgeslagen.</p>
 
     <h3>Automatische detectievolgorde</h3>
     <p>Als er nog geen taal is opgeslagen, probeert de applicatie uw voorkeur in deze volgorde te detecteren:</p>
@@ -1613,6 +1628,7 @@
         <tr><td>Verbindingsmethode</td><td><span class="badge orange">Per tenant</span></td><td>Tunnel of RD Gateway</td></tr>
         <tr><td>Monitormodus</td><td><span class="badge orange">Per tenant</span></td><td>Enkel beeldscherm of alle beeldschermen</td></tr>
         <tr><td>Entra ID Authenticatie</td><td><span class="badge orange">Per tenant</span></td><td>Aan/uit voor RD Gateway SSO</td></tr>
+        <tr><td>Favorieten</td><td><span class="badge orange">Per tenant</span></td><td>Maximaal tien IP-adressen en Azure-VM's</td></tr>
       </tbody>
     </table>
   </section>
@@ -1620,6 +1636,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Favorieten</td><td>Het tabblad Favorieten bevat maximaal tien IP-adressen en Azure-VM's voor de aangemelde tenant. Een ster naast Verbinden slaat het huidige doel op of verwijdert het, en verwijderen vraagt om bevestiging. Verbinden gebruikt de Bastion-host die op dat moment is gekozen. Een IP-favoriet opent een tunnel. Een VM-favoriet gebruikt de verbindingsmethode, de poorten, de Entra ID-optie en de monitorkeuze van het tabblad Azure VM, en volgt dezelfde energiestatusregels: Verbinden blijft uit tot de VM actief is, en Start VM verschijnt wanneer de VM is gestopt en uw account die mag starten.</td></tr>
+        <tr><td>Taalwijzigingen bereiken elk tabblad</td><td>Een taalwijziging herschrijft het hele venster meteen, ook tabbladen die u niet bekijkt. Een tabblad dat u nog niet had geopend, hield voorheen de vorige taal tot de volgende start.</td></tr>
+        <tr><td>Maptabbladen</td><td>De tabstrook is een rij maptabbladen, van links naar rechts.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Bijgewerkte componenten</td><td>Azure.Core 1.63.0, Avalonia 12.1.4 en de identiteitspakketten (MSAL 4.90.1). Uitsluitend afhankelijkheidsupdates.</td></tr>
+        <tr><td>Runtime .NET met beveiligingsfixes</td><td>De meegeleverde runtime is .NET 10.0.13, met de beveiligingsfixes. De ondergrens van de build-SDK is 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1792,7 +1827,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

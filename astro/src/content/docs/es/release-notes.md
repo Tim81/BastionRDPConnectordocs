@@ -1,9 +1,24 @@
 ---
 title: Notas de la versión
 description: Qué cambió en cada versión reciente de Azure Bastion RDP Connector.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Cambio | Detalles |
+| --- | --- |
+| Favoritos | La pestaña Favoritos guarda hasta diez direcciones IP y VM de Azure para el inquilino en el que ha iniciado sesión. Una estrella junto a Conectar guarda el destino actual o lo quita, y quitarlo pide confirmación. Conectar usa el host de Bastion seleccionado en ese momento. Un favorito de IP abre un túnel. Un favorito de VM usa el método de conexión, los puertos, la opción Entra ID y la elección de monitor de la pestaña Azure VM. La tarjeta sigue las mismas reglas de estado de energía que esa pestaña: Conectar solo está disponible mientras la VM está en ejecución, e Iniciar VM aparece cuando la VM está detenida y su cuenta puede iniciarla. |
+| El cambio de idioma llega a cada pestaña | Un cambio de idioma reescribe toda la ventana al momento, incluidas las pestañas que no está mirando. Antes, una pestaña que aún no había abierto conservaba el idioma anterior hasta el siguiente inicio. |
+| Pestañas en forma de carpeta | La barra de pestañas es una fila de pestañas en forma de carpeta, de izquierda a derecha. |
+
+## 3.3.10
+
+| Cambio | Detalles |
+| --- | --- |
+| Componentes actualizados | Azure.Core 1.63.0, Avalonia 12.1.4 y los paquetes de identidad (MSAL 4.90.1). Solo actualizaciones de dependencias. |
+| Runtime .NET con correcciones de seguridad | El SDK mínimo de compilación es 10.0.402, de modo que el runtime incluido es .NET 10.0.13, con las correcciones de seguridad. |
 
 ## 3.3.9
 

@@ -1,8 +1,8 @@
 ---
 title: Overzicht
 description: Open een externe bureaubladsessie via Azure Bastion naar een Azure-VM, of naar elk Windows-systeem dat het Bastion-netwerk kan bereiken.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Azure Bastion RDP Connector opent een externe bureaubladsessie via Azure Bastion, met de remote desktop-client die al op uw computer is geïnstalleerd. Azure-VM's worden op naam gekozen. Al het andere wordt bereikt via een adres, waaronder on-premises machines en machines in andere clouds vallen.
@@ -62,5 +62,5 @@ Instellingen roamen mee met uw Windows-profiel. Aanmeldgegevens en logboeken bli
 
 | Pad | Bevat |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json`: laatst gebruikte subscription, Bastion, VM en taal |
+| `%APPDATA%\BastionRDPConnector` | `settings.json`: laatst gebruikte subscription, Bastion, VM, favorieten en taal |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Aanmeldtokencache, het aanmeldbrowserprofiel en `debug.log` met de laatste tien sessies |

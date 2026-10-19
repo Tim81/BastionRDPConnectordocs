@@ -1,15 +1,15 @@
 ---
 title: Dateien und Einstellungen
 description: Wo die Anwendung Ihre Präferenzen, Ihren Anmeldestatus und ihre Protokolle speichert, und was in jeder Datei steht.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Die Anwendung schreibt in zwei getrennte Ordner unter Ihrem Benutzerprofil. Sie bearbeiten diese Dateien nie direkt; die Anwendung liest und schreibt sie selbstständig.
 
 ## Einstellungen: roaming, pro Mandant
 
-`%APPDATA%\BastionRDPConnector\settings.json` enthält Ihre Präferenzen: die zuletzt verwendete Subscription, den Bastion-Host, die VM und die IP-Adresse, Verbindungsmethode, Monitor-Modus, Entra ID-Authentifizierung und Ihre Sprachwahl.
+`%APPDATA%\BastionRDPConnector\settings.json` enthält Ihre Präferenzen: die zuletzt verwendete Subscription, den Bastion-Host, die VM und die IP-Adresse, Verbindungsmethode, Monitor-Modus, Entra ID-Authentifizierung, Favoriten und Ihre Sprachwahl.
 
 Dieser Ordner wandert mit Ihrem Windows-Profil, sodass dieselben Präferenzen Sie zwischen Computern in einer Domäne oder einem Entra ID-verbundenen Netzwerk begleiten, das `%APPDATA%` synchronisiert.
 

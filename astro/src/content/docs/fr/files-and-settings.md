@@ -1,15 +1,15 @@
 ---
 title: Fichiers et paramètres
 description: Où l'application conserve vos préférences, votre état de connexion et ses journaux, et ce que contient chaque fichier.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 L'application écrit dans deux dossiers distincts sous votre profil utilisateur. Vous ne modifiez jamais ces fichiers directement ; l'application les lit et les écrit elle-même.
 
 ## Paramètres : itinérants, par locataire
 
-`%APPDATA%\BastionRDPConnector\settings.json` contient vos préférences : le dernier abonnement, hôte Bastion, VM et adresse IP utilisés, la méthode de connexion, le mode moniteur, l'authentification Entra ID, et votre choix de langue.
+`%APPDATA%\BastionRDPConnector\settings.json` contient vos préférences : le dernier abonnement, hôte Bastion, VM et adresse IP utilisés, la méthode de connexion, le mode moniteur, l'authentification Entra ID, les connexions favorites, et votre choix de langue.
 
 Ce dossier suit votre profil Windows en itinérance, si bien que les mêmes préférences vous suivent d'une machine à l'autre sur un domaine ou un réseau joint à Entra ID qui synchronise `%APPDATA%`.
 
