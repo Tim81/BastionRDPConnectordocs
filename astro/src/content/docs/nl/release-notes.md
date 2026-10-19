@@ -11,7 +11,7 @@ lastReviewed: '2026-10-19'
 | --- | --- |
 | Favorieten | Het tabblad Favorieten bevat maximaal tien IP-adressen en Azure-VM's voor de tenant waarbij u bent aangemeld. Een ster naast Verbinden slaat het huidige doel op of verwijdert het, en verwijderen vraagt om bevestiging. Verbinden gebruikt de Bastion-host die op dat moment is gekozen. Een IP-favoriet opent een tunnel. Een VM-favoriet gebruikt de verbindingsmethode, de poorten, de Entra ID-optie en de monitorkeuze van het tabblad Azure VM. De kaart volgt dezelfde energiestatusregels als dat tabblad: Verbinden is alleen beschikbaar terwijl de VM actief is, en Start VM verschijnt wanneer de VM is gestopt en uw account die mag starten. |
 | Taalwijzigingen bereiken elk tabblad | Een taalwijziging herschrijft het hele venster meteen, ook tabbladen die u niet bekijkt. Een tabblad dat u nog niet had geopend, hield voorheen de vorige taal tot de volgende start. |
-| Maptabbladen | De tabstrook is een rij maptabbladen, van links naar rechts. |
+| Maptabbladen | De tabbladen zijn getekend als mappen die op de pagina aansluiten. Het gekozen tabblad is hoger en gebruikt de pagina-achtergrond. De andere zijn korter en grijs. Er is geen onderstreping. Ze staan in één rij, van links naar rechts. |
 
 ## 3.3.10
 

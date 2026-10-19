@@ -32,11 +32,14 @@ Gebruik dit tabblad wanneer de machine die u wilt bereiken geen VM-record heeft 
       <text class="ui-v" x="15" y="91">bastion-hub-weu</text>
       <rect class="ui-btn-2" x="266" y="80" width="24" height="15" rx="3"/>
       <text class="ui-tb" x="273" y="91">↻</text>
-      <line x1="10" y1="120" x2="290" y2="120" stroke="#DCE2EA" stroke-width="1"/>
-      <text class="ui-tb" x="14" y="115">IP-adres</text>
-      <line class="ui-tabup" x1="10" y1="120" x2="70" y2="120"/>
-      <text class="ui-tb off" x="76" y="115">Azure VM</text>
-      <text class="ui-tb off" x="142" y="115">Actieve tunnels</text>
+      <line x1="10" y1="121" x2="290" y2="121" stroke="#C8C8C8" stroke-width="1"/>
+      <path class="ui-taboff" d="M90 121 V111 Q90 106 95 106 H148 Q153 106 153 111 V121 Z"/>
+      <path class="ui-taboff" d="M158 121 V111 Q158 106 163 106 H248 Q253 106 253 111 V121 Z"/>
+      <path class="ui-tabon" d="M10 121 V106 Q10 100 16 100 H80 Q86 100 86 106 V121 Z"/>
+      <rect x="11" y="120" width="74" height="3" fill="#fff"/>
+      <text class="ui-tb" x="16" y="116">IP-adres</text>
+      <text class="ui-tb off" x="96" y="118">Azure VM</text>
+      <text class="ui-tb off" x="164" y="118">Actieve tunnels</text>
       <rect class="ui-panel" x="10" y="132" width="280" height="112" rx="4"/>
       <text class="ui-l" x="20" y="150">IP-adres</text>
       <rect class="ui-field" x="20" y="154" width="260" height="16" rx="3"/>

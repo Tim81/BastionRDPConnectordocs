@@ -251,8 +251,9 @@ figcaption b { font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spac
 .ui-panel { fill: #F8FAFC; stroke: var(--rule-soft); stroke-width: 1; }
 .ui-btn   { fill: var(--azure); }
 .ui-btn-2 { fill: #fff; stroke: #CBD3DC; stroke-width: 1; }
-.ui-tabon { fill: #fff; }
-.ui-tabup { stroke: var(--azure); stroke-width: 2; }
+.ui-tabon { fill: #fff; stroke: #C8C8C8; stroke-width: 1; }
+.ui-taboff { fill: #F3F3F3; stroke: #C8C8C8; stroke-width: 1; }
+.ui-tabjoin { stroke: #fff; stroke-width: 2; }
 
 /* Text inside the mock */
 .ui-l  { font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 8px; fill: var(--text-2); }

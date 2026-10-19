@@ -319,20 +319,35 @@
   .ui-btn.danger { background: var(--red); color: #fff; }
   .ui-tab-bar {
     display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 16px;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 0;
   }
   .ui-tab {
-    padding: 6px 16px;
+    padding: 6px 14px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--ink-faint);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     cursor: default;
   }
-  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-tab.active {
+    color: var(--ink);
+    background: #fff;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ui-tab-bar + div {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+  }
   .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
   .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
   .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -1648,7 +1663,7 @@
       <tbody>
         <tr><td>Favoris</td><td>L'onglet Favoris contient jusqu'à dix adresses IP et VM Azure pour le locataire connecté. Une étoile à côté de Connecter enregistre la cible actuelle ou la retire, et le retrait demande une confirmation. Connecter utilise l'hôte Bastion sélectionné à ce moment-là. Un favori IP ouvre un tunnel. Un favori VM utilise la méthode de connexion, les ports, l'option Entra ID et le choix de moniteur de l'onglet Azure VM, et suit les mêmes règles d'état d'alimentation : Connecter reste désactivé tant que la VM n'est pas en cours d'exécution, et Démarrer la VM apparaît lorsque la VM est arrêtée et que votre compte peut la démarrer.</td></tr>
         <tr><td>Le changement de langue atteint chaque onglet</td><td>Un changement de langue réécrit toute la fenêtre tout de suite, y compris les onglets que vous ne regardez pas. Un onglet que vous n'aviez pas encore ouvert gardait auparavant l'ancienne langue jusqu'au démarrage suivant.</td></tr>
-        <tr><td>Onglets en dossiers</td><td>La barre d'onglets est une rangée d'onglets en forme de dossiers, de gauche à droite.</td></tr>
+        <tr><td>Onglets en dossiers</td><td>Les onglets sont dessinés comme des dossiers joints à la page. L'onglet sélectionné est plus haut et reprend le fond de la page. Les autres sont plus courts et gris. Il n'y a pas de soulignement. Ils forment une seule rangée, de gauche à droite.</td></tr>
       </tbody>
     </table>
 
