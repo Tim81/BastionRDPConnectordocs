@@ -1,8 +1,8 @@
 ---
 title: Aperçu
 description: Ouvrez une session Bureau à distance via Azure Bastion vers une machine virtuelle Azure, ou vers tout système Windows que le réseau Bastion peut atteindre.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Azure Bastion RDP Connector ouvre une session Bureau à distance via Azure Bastion, en utilisant le client Bureau à distance déjà installé sur votre ordinateur. Les machines virtuelles Azure sont choisies par nom. Tout le reste est atteint par adresse, ce qui inclut les machines sur site et les machines dans d'autres clouds.
@@ -62,5 +62,5 @@ Les paramètres suivent votre profil Windows en itinérance. Les données de con
 
 | Chemin | Contient |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json` : dernier abonnement, Bastion, VM et langue utilisés |
+| `%APPDATA%\BastionRDPConnector` | `settings.json` : dernier abonnement, Bastion, VM, favoris et langue utilisés |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Le cache de jetons de connexion, le profil du navigateur de connexion, et `debug.log` avec les dix dernières sessions |

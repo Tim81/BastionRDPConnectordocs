@@ -1,15 +1,15 @@
 ---
 title: Files and settings
 description: Where the application keeps your preferences, your sign-in state, and its logs, and what's in each file.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 The application writes to two separate folders under your user profile. You never edit these files directly; the application reads and writes them on its own.
 
 ## Settings: roaming, per tenant
 
-`%APPDATA%\BastionRDPConnector\settings.json` holds your preferences: the last subscription, Bastion host, VM, and IP address you used, connection method, monitor mode, Entra ID authentication, and your language choice.
+`%APPDATA%\BastionRDPConnector\settings.json` holds your preferences: the last subscription, Bastion host, VM, and IP address you used, connection method, monitor mode, Entra ID authentication, favorite connections, and your language choice.
 
 This folder roams with your Windows profile, so the same preferences follow you between machines on a domain or Entra ID-joined network that syncs `%APPDATA%`.
 

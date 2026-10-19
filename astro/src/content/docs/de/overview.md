@@ -1,8 +1,8 @@
 ---
 title: Übersicht
 description: Öffnen Sie eine Remotedesktopsitzung über Azure Bastion zu einer Azure-VM oder zu jedem Windows-System, zu dem das Bastion-Netzwerk eine Route hat.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Azure Bastion RDP Connector öffnet eine Remotedesktopsitzung über Azure Bastion und verwendet dabei den Remotedesktop-Client, der bereits auf Ihrem Computer installiert ist. Azure-VMs werden nach Namen ausgewählt. Alles andere wird über eine Adresse erreicht, einschließlich lokaler Computer und Computer in anderen Clouds.
@@ -62,5 +62,5 @@ Einstellungen wandern mit Ihrem Windows-Profil. Anmeldedaten und Protokolle verb
 
 | Pfad | Enthält |
 | --- | --- |
-| `%APPDATA%\BastionRDPConnector` | `settings.json`: zuletzt verwendete Subscription, Bastion, VM und Sprache |
+| `%APPDATA%\BastionRDPConnector` | `settings.json`: zuletzt verwendete Subscription, Bastion, VM, Favoriten und Sprache |
 | `%LOCALAPPDATA%\BastionRDPConnector` | Anmelde-Token-Cache, das Profil des Anmeldebrowsers und `debug.log` mit den letzten zehn Sitzungen |

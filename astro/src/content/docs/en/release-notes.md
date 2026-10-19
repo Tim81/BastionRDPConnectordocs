@@ -1,9 +1,24 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Change | Details |
+| --- | --- |
+| Favorites | A Favorites tab holds up to ten IP addresses and Azure VMs for the tenant you are signed in to. A star next to Connect saves or removes the current target, and removing one asks you to confirm. Connect uses the Bastion host selected at that moment. An IP favorite opens a tunnel. A VM favorite uses the connection method, ports, Entra ID option, and monitor choice on the Azure VM tab. The card follows the same power rules as that tab: Connect is available only while the VM is running, and Start VM appears when the VM is stopped and your account can start it. |
+| Language changes reach every tab | Changing the language rewrites the whole window at once, including tabs you are not looking at. A tab you had not opened yet used to keep the previous language until the next start. |
+| Folder tabs | The tab strip is a row of folder tabs, running left to right. |
+
+## 3.3.10
+
+| Change | Details |
+| --- | --- |
+| Updated components | Azure.Core 1.63.0, Avalonia 12.1.4, and the identity packages (MSAL 4.90.1). Dependency updates only. |
+| Security-patched .NET runtime | The build SDK floor is 10.0.402, so the bundled runtime is the security-patched .NET 10.0.13. |
 
 ## 3.3.9
 

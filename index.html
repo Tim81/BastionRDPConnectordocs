@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Documentation</div>
+    <div class="version">v3.4.0 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Language</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">IP Address Tab</a>
       <a href="#tab-vm">Azure VM Tab</a>
       <a href="#tab-tunnels">Active Tunnels Tab</a>
+      <a href="#tab-favorites">Favorites Tab</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Connection Methods</div>
@@ -724,6 +725,7 @@
       <tbody>
         <tr><td>Connect by IP</td><td>Tunnel to any IP address reachable through Bastion</td></tr>
         <tr><td>Connect by VM</td><td>Browse and pick any Azure VM in your subscriptions</td></tr>
+        <tr><td>Favorites</td><td>Save up to ten IP addresses and Azure VMs per tenant, and connect again from the Favorites tab</td></tr>
         <tr><td>Tunnel mode</td><td>Native .NET WebSocket tunnel — no Azure CLI required</td></tr>
         <tr><td>RD Gateway mode</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>VM power management</td><td>View power state and start stopped VMs from the app</td></tr>
@@ -939,7 +941,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Window Layout</h2>
-    <p>The main window is divided into three persistent areas and three tabs.</p>
+    <p>The main window is divided into three persistent areas and four tabs.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -971,6 +973,7 @@
           <div class="ui-tab active">IP Address</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Active Tunnels</div>
+          <div class="ui-tab">Favorites</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Tab content shown in sections below)</div>
       </div>
@@ -984,6 +987,7 @@
         <tr><td>IP Address tab</td><td>Connect to any IP address through Bastion using a local tunnel.</td></tr>
         <tr><td>Azure VM tab</td><td>Browse VMs across subscriptions, check power state, start VMs, and connect.</td></tr>
         <tr><td>Active Tunnels tab</td><td>View and manage all tunnels currently open by this application.</td></tr>
+        <tr><td>Favorites tab</td><td>Save up to ten IP addresses and Azure VMs for this tenant, and connect again with the Bastion host selected at that moment.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1256,6 +1260,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Favorites Tab <span class="badge blue">v3.4.0</span></h2>
+    <p>Favorites are a shorter way back to a connection you already make. The list holds up to ten IP addresses and Azure VMs for the Entra ID tenant you are signed in to. Ports, the connection method, and the Bastion host stay where you set them.</p>
+    <p>On the IP Address tab and the Azure VM tab, a star sits next to <strong>Connect</strong>. An empty star saves the current target. A filled star removes it, after you confirm. <strong>Remove</strong> on a Favorites row asks the same question. An eleventh entry is refused until you remove one.</p>
+    <p><strong>Connect</strong> on a Favorites row uses the Bastion host selected at the top of the window at that moment. An IP favorite opens a tunnel, using the target port and local port from the IP Address tab. A VM favorite uses the connection method on the Azure VM tab: Tunnel uses that tab's ports, and RD Gateway uses port 3389, the Entra ID checkbox, and the monitor choice.</p>
+    <p>The virtual machine must still be in the list loaded for this sign-in. If the current subscription, name, or tag filter would hide it, Connect switches to that VM's subscription, clears those filters, and leaves the Azure VM tab on that machine.</p>
+    <p>A VM favorite follows the same power rules as the Azure VM tab. <strong>Connect</strong> is available only while the VM is running. A stopped or deallocated VM offers <strong>Start VM</strong> when your account can start it. While the VM is starting, <strong>Start VM</strong> is hidden and <strong>Connect</strong> stays off. An IP favorite has no power state.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Tunnel Mode</h2>
@@ -1499,6 +1513,7 @@
       <span class="badge blue">Connection Method</span>
       <span class="badge blue">Monitor Mode</span>
       <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Favorites</span>
     </div>
 
     <div class="callout tip">
@@ -1542,7 +1557,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Language changes take effect <strong>immediately</strong> without restarting the application. All UI text — labels, buttons, messages, and tooltips — updates live. The selected language is saved globally and persists across launches.</p>
+    <p>Language changes take effect <strong>immediately</strong> without restarting the application. All UI text — labels, buttons, messages, and tooltips — updates live, including on tabs you are not looking at. The selected language is saved globally and persists across launches.</p>
 
     <h3>Automatic detection order</h3>
     <p>If no language has been saved yet, the application tries to detect your preference in this order:</p>
@@ -1612,6 +1627,7 @@
         <tr><td>Connection Method</td><td><span class="badge orange">Per-tenant</span></td><td>Tunnel or RD Gateway</td></tr>
         <tr><td>Monitor Mode</td><td><span class="badge orange">Per-tenant</span></td><td>Single or All Monitors</td></tr>
         <tr><td>Entra ID Auth</td><td><span class="badge orange">Per-tenant</span></td><td>On/off for RD Gateway SSO</td></tr>
+        <tr><td>Favorites</td><td><span class="badge orange">Per-tenant</span></td><td>Up to ten IP addresses and Azure VMs</td></tr>
       </tbody>
     </table>
   </section>
@@ -1619,6 +1635,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> What's New</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Favorites</td><td>A Favorites tab holds up to ten IP addresses and Azure VMs for the signed-in tenant. A star next to Connect saves or removes the current target, and removing one asks you to confirm. Connect uses the Bastion host selected at that moment. An IP favorite opens a tunnel. A VM favorite uses the Azure VM tab's connection method, ports, Entra ID option, and monitor choice, and follows that tab's power rules: Connect stays off until the VM is running, and Start VM appears when the VM is stopped and your account can start it.</td></tr>
+        <tr><td>Language changes reach every tab</td><td>Changing the language rewrites the whole window at once, including tabs you are not looking at. A tab you had not opened yet used to keep the previous language until the next start.</td></tr>
+        <tr><td>Folder tabs</td><td>The tab strip is a row of folder tabs, running left to right.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Updated components</td><td>Azure.Core 1.63.0, Avalonia 12.1.4, and the identity packages (MSAL 4.90.1). Dependency updates only.</td></tr>
+        <tr><td>Security-patched .NET runtime</td><td>The bundled runtime is the security-patched .NET 10.0.13. The build SDK floor is 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1791,7 +1826,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
 </footer>
 </div>
 

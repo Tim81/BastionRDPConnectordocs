@@ -51,6 +51,7 @@ export const nav: NavGroup[] = [
       { title: 'Connect to an IP address', slug: 'connect-ip' },
       { title: 'Connect to an Azure VM', slug: 'connect-vm' },
       { title: 'Active tunnels', slug: 'active-tunnels' },
+      { title: 'Favorites', slug: 'favorites' },
     ],
   },
   {

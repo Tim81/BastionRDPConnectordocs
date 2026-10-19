@@ -1,8 +1,8 @@
 ---
 title: Múltiplos inquilinos
 description: Como a aplicação mantém um conjunto separado de preferências para cada inquilino Entra ID que a sua conta consegue ver, e o que se mantém global.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Se a sua conta tiver acesso a mais do que um inquilino Entra ID, por exemplo através do Azure Lighthouse, a aplicação mantém um conjunto separado de preferências para cada um, em vez de substituir um único conjunto partilhado sempre que muda.
@@ -24,6 +24,7 @@ Cada inquilino tem o seu próprio espaço para:
 - Método de ligação, Túnel ou RD Gateway
 - Modo de monitor
 - Autenticação Entra ID
+- Até 10 ligações favoritas (endereços IP e VMs do Azure)
 
 Mude do inquilino A para o inquilino B e volte, e o Bastion, a VM e as portas do inquilino A regressam exatamente como os deixou. Nada do inquilino B transita.
 

@@ -1,8 +1,8 @@
 ---
 title: Meerdere tenants
 description: Hoe de applicatie een aparte set voorkeuren bijhoudt voor elke Entra ID-tenant die uw account kan zien, en wat globaal blijft.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 Als uw account toegang heeft tot meer dan één Entra ID-tenant, bijvoorbeeld via Azure Lighthouse, houdt de applicatie voor elke tenant een aparte set voorkeuren bij in plaats van telkens een enkele gedeelde set te overschrijven wanneer u wisselt.
@@ -24,6 +24,7 @@ Elke tenant krijgt zijn eigen plek voor:
 - Verbindingsmethode, Tunnel of RD Gateway
 - Monitormodus
 - Entra ID-authenticatie
+- Maximaal 10 favoriete verbindingen (IP-adressen en Azure-VM's)
 
 Schakel van tenant A naar tenant B en weer terug, en de Bastion, VM en poorten van tenant A komen precies terug zoals u ze achterliet. Niets van tenant B blijft hangen.
 

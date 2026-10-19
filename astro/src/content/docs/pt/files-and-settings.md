@@ -1,15 +1,15 @@
 ---
 title: Ficheiros e definições
 description: Onde a aplicação guarda as suas preferências, o seu estado de início de sessão, e os seus registos, e o que está em cada ficheiro.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 A aplicação escreve em duas pastas separadas dentro do seu perfil de utilizador. Nunca precisa de editar estes ficheiros diretamente; a aplicação lê-os e escreve-os sozinha.
 
 ## Definições: itinerantes, por inquilino
 
-`%APPDATA%\BastionRDPConnector\settings.json` contém as suas preferências: a última subscrição, anfitrião Bastion, VM e endereço IP utilizados, método de ligação, modo de monitor, autenticação Entra ID, e a sua escolha de idioma.
+`%APPDATA%\BastionRDPConnector\settings.json` contém as suas preferências: a última subscrição, anfitrião Bastion, VM e endereço IP utilizados, método de ligação, modo de monitor, autenticação Entra ID, ligações favoritas, e a sua escolha de idioma.
 
 Esta pasta acompanha o seu perfil do Windows, pelo que as mesmas preferências o seguem entre máquinas num domínio ou numa rede associada ao Entra ID que sincronize o `%APPDATA%`.
 

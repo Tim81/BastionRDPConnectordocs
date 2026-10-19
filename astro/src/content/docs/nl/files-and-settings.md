@@ -1,15 +1,15 @@
 ---
 title: Bestanden en instellingen
 description: Waar de applicatie uw voorkeuren, uw aanmeldstatus en de logboeken bewaart, en wat er in elk bestand staat.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 De applicatie schrijft naar twee aparte mappen onder uw gebruikersprofiel. U bewerkt deze bestanden nooit rechtstreeks; de applicatie leest en schrijft ze zelf.
 
 ## Instellingen: roaming, per tenant
 
-`%APPDATA%\BastionRDPConnector\settings.json` bevat uw voorkeuren: de laatst gebruikte subscription, Bastion-host, VM en IP-adres, verbindingsmethode, monitormodus, Entra ID-authenticatie, en uw taalkeuze.
+`%APPDATA%\BastionRDPConnector\settings.json` bevat uw voorkeuren: de laatst gebruikte subscription, Bastion-host, VM en IP-adres, verbindingsmethode, monitormodus, Entra ID-authenticatie, favoriete verbindingen, en uw taalkeuze.
 
 Deze map roamt mee met uw Windows-profiel, dus dezelfde voorkeuren volgen u tussen machines op een domein of Entra ID-gekoppeld netwerk dat `%APPDATA%` synchroniseert.
 

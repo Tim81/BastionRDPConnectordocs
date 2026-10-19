@@ -1,15 +1,15 @@
 ---
 title: Archivos y configuración
 description: Dónde guarda la aplicación sus preferencias, su estado de inicio de sesión y sus registros, y qué contiene cada archivo.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 La aplicación escribe en dos carpetas separadas dentro de su perfil de usuario. Usted nunca edita estos archivos directamente; la aplicación los lee y los escribe por su cuenta.
 
 ## Configuración: itinerante, por inquilino
 
-`%APPDATA%\BastionRDPConnector\settings.json` contiene sus preferencias: la última suscripción, host de Bastion, VM y dirección IP utilizados, el método de conexión, el modo de monitor, la autenticación Entra ID y su elección de idioma.
+`%APPDATA%\BastionRDPConnector\settings.json` contiene sus preferencias: la última suscripción, host de Bastion, VM y dirección IP utilizados, el método de conexión, el modo de monitor, la autenticación Entra ID, las conexiones favoritas y su elección de idioma.
 
 Esta carpeta se sincroniza con su perfil de Windows, por lo que las mismas preferencias le siguen entre equipos en un dominio o una red unida a Entra ID que sincronice `%APPDATA%`.
 

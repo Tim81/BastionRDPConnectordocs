@@ -1,8 +1,8 @@
 ---
 title: Multiple tenants
 description: How the application keeps a separate set of preferences for every Entra ID tenant your account can see, and what stays global.
-appliesTo: '3.3.9'
-lastReviewed: '2026-07-25'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
 
 If your account has access to more than one Entra ID tenant, for example through Azure Lighthouse, the application keeps a separate set of preferences for each one instead of overwriting a single shared set every time you switch.
@@ -24,6 +24,7 @@ Each tenant gets its own slot for:
 - Connection method, Tunnel or RD Gateway
 - Monitor mode
 - Entra ID authentication
+- Up to 10 favorite connections (IP addresses and Azure VMs)
 
 Switch from tenant A to tenant B and back, and tenant A's Bastion, VM, and ports come back exactly as you left them. Nothing from tenant B carries over.
 

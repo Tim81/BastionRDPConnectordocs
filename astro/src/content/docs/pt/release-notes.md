@@ -1,9 +1,24 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.3.9'
-lastReviewed: '2026-09-19'
+appliesTo: '3.4.0'
+lastReviewed: '2026-10-19'
 ---
+
+## 3.4.0
+
+| Alteração | Detalhes |
+| --- | --- |
+| Favoritos | O separador Favoritos guarda até dez endereços IP e VMs do Azure para o inquilino em que iniciou sessão. Uma estrela junto a Ligar guarda o destino atual ou remove-o, e a remoção pede confirmação. Ligar usa o anfitrião Bastion selecionado nesse momento. Um favorito de IP abre um túnel. Um favorito de VM usa o método de ligação, as portas, a opção Entra ID e a escolha de monitor do separador Azure VM. O cartão segue as mesmas regras de estado de energia que esse separador: Ligar só está disponível enquanto a VM está em execução, e Iniciar VM aparece quando a VM está parada e a sua conta a pode iniciar. |
+| A alteração de idioma chega a cada separador | Uma alteração de idioma reescreve toda a janela de imediato, incluindo os separadores que não está a ver. Antes, um separador que ainda não tinha aberto mantinha o idioma anterior até ao arranque seguinte. |
+| Separadores em forma de pasta | A barra de separadores é uma fila de separadores em forma de pasta, da esquerda para a direita. |
+
+## 3.3.10
+
+| Alteração | Detalhes |
+| --- | --- |
+| Componentes atualizados | Azure.Core 1.63.0, Avalonia 12.1.4 e os pacotes de identidade (MSAL 4.90.1). Apenas atualizações de dependências. |
+| Runtime .NET com correções de segurança | O SDK mínimo de compilação é 10.0.402, pelo que o runtime incluído é o .NET 10.0.13, com as correções de segurança. |
 
 ## 3.3.9
 

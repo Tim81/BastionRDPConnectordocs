@@ -637,7 +637,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.3.9 · Documentation</div>
+    <div class="version">v3.4.0 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Langue</div>
@@ -664,6 +664,7 @@
       <a href="#tab-ip">Onglet Adresse IP</a>
       <a href="#tab-vm">Onglet Azure VM</a>
       <a href="#tab-tunnels">Tunnels actifs</a>
+      <a href="#tab-favorites">Favoris</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Méthodes de connexion</div>
@@ -725,6 +726,7 @@
       <tbody>
         <tr><td>Connexion par IP</td><td>Tunnel vers toute adresse IP accessible via Bastion</td></tr>
         <tr><td>Connexion par VM</td><td>Parcourir et choisir n'importe quelle VM Azure dans vos abonnements</td></tr>
+        <tr><td>Favoris</td><td>Enregistrer jusqu'à dix adresses IP et VM Azure par locataire, et se reconnecter depuis l'onglet Favoris</td></tr>
         <tr><td>Mode tunnel</td><td>Tunnel WebSocket .NET natif — aucune Azure CLI requise</td></tr>
         <tr><td>Mode RD Gateway</td><td>Modern direct RD Gateway connection via Bastion API</td></tr>
         <tr><td>Gestion de l'alimentation VM</td><td>Afficher l'état d'alimentation et démarrer les VM arrêtées depuis l'application</td></tr>
@@ -944,7 +946,7 @@
   <!-- ── WINDOW LAYOUT ─────────────────────── -->
   <section id="layout">
     <h2><span class="icon">🖼️</span> Disposition de la fenêtre</h2>
-    <p>La fenêtre principale est divisée en trois zones persistantes et trois onglets.</p>
+    <p>La fenêtre principale est divisée en trois zones persistantes et quatre onglets.</p>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -976,6 +978,7 @@
           <div class="ui-tab active">Adresse IP</div>
           <div class="ui-tab">Azure VM</div>
           <div class="ui-tab">Tunnels actifs</div>
+          <div class="ui-tab">Favoris</div>
         </div>
         <div style="font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 0;">(Contenu des onglets présenté dans les sections ci-dessous)</div>
       </div>
@@ -989,6 +992,7 @@
         <tr><td>Onglet Adresse IP</td><td>Connexion à une adresse IP quelconque via Bastion avec un tunnel local.</td></tr>
         <tr><td>Onglet Azure VM</td><td>Parcourir les VM dans les abonnements, vérifier l'état d'alimentation, démarrer des VM et se connecter.</td></tr>
         <tr><td>Onglet Tunnels actifs</td><td>Afficher et gérer tous les tunnels actuellement ouverts par cette application.</td></tr>
+        <tr><td>Onglet Favoris</td><td>Enregistrer jusqu'à dix adresses IP et VM Azure pour ce locataire, et se reconnecter avec l'hôte Bastion sélectionné à ce moment-là.</td></tr>
       </tbody>
     </table>
   </section>
@@ -1261,6 +1265,16 @@
     </div>
   </section>
 
+  <!-- ── TAB 4: FAVORITES ─────────────────── -->
+  <section id="tab-favorites">
+    <h2><span class="icon">⭐</span> Onglet Favoris <span class="badge blue">v3.4.0</span></h2>
+    <p>Les favoris sont un raccourci vers une connexion que vous faites déjà. La liste contient jusqu'à dix adresses IP et VM Azure pour le locataire Entra ID auquel vous êtes connecté. Les ports, la méthode de connexion et l'hôte Bastion restent là où vous les réglez.</p>
+    <p>Sur l'onglet Adresse IP et l'onglet Azure VM, une étoile se trouve à côté de <strong>Connecter</strong>. Une étoile vide enregistre la cible actuelle. Une étoile pleine la retire, après confirmation. <strong>Retirer</strong> sur une ligne de Favoris pose la même question. Une onzième entrée est refusée tant que vous n'en retirez pas une.</p>
+    <p><strong>Connecter</strong> sur un favori utilise l'hôte Bastion sélectionné en haut de la fenêtre à ce moment-là. Un favori IP ouvre un tunnel, avec le port cible et le port local de l'onglet Adresse IP. Un favori VM utilise la méthode de connexion de l'onglet Azure VM : Tunnel utilise les ports de cet onglet, et RD Gateway utilise le port 3389, la case d'authentification Entra ID et le choix de moniteur.</p>
+    <p>La machine virtuelle doit encore figurer dans la liste chargée pour cette connexion. Si le filtre d'abonnement, de nom ou d'étiquette actuel la masquerait, Connecter passe à l'abonnement de cette VM, efface ces filtres et laisse l'onglet Azure VM sur cette machine.</p>
+    <p>Un favori VM suit les mêmes règles d'état d'alimentation que l'onglet Azure VM. <strong>Connecter</strong> n'est disponible que pendant que la VM est en cours d'exécution. Une VM arrêtée ou désallouée propose <strong>Démarrer la VM</strong> lorsque votre compte peut la démarrer. Pendant le démarrage, <strong>Démarrer la VM</strong> est masqué et <strong>Connecter</strong> reste désactivé. Un favori IP n'a pas d'état d'alimentation.</p>
+  </section>
+
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
   <section id="method-tunnel">
     <h2><span class="icon">🚇</span> Mode tunnel</h2>
@@ -1504,6 +1518,7 @@
       <span class="badge blue">Méthode de connexion</span>
       <span class="badge blue">Mode moniteur</span>
       <span class="badge blue">Entra ID Auth setting</span>
+      <span class="badge blue">Favoris</span>
     </div>
 
     <div class="callout tip">
@@ -1547,7 +1562,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages.</p>
+    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct, y compris sur les onglets que vous ne regardez pas. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages.</p>
 
     <h3>Ordre de détection automatique</h3>
     <p>Si aucune langue n'a encore été sauvegardée, l'application essaie de détecter votre préférence dans cet ordre :</p>
@@ -1618,6 +1633,7 @@
         <tr><td>Méthode de connexion</td><td><span class="badge orange">Par locataire</span></td><td>Tunnel ou RD Gateway</td></tr>
         <tr><td>Mode moniteur</td><td><span class="badge orange">Par locataire</span></td><td>Moniteur unique ou tous les moniteurs</td></tr>
         <tr><td>Authentification Entra ID</td><td><span class="badge orange">Par locataire</span></td><td>Activer/désactiver le SSO RD Gateway</td></tr>
+        <tr><td>Favoris</td><td><span class="badge orange">Par locataire</span></td><td>Jusqu'à dix adresses IP et VM Azure</td></tr>
       </tbody>
     </table>
   </section>
@@ -1625,6 +1641,25 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Nouveautés</h2>
+
+    <h3>v3.4.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td>Favoris</td><td>L'onglet Favoris contient jusqu'à dix adresses IP et VM Azure pour le locataire connecté. Une étoile à côté de Connecter enregistre la cible actuelle ou la retire, et le retrait demande une confirmation. Connecter utilise l'hôte Bastion sélectionné à ce moment-là. Un favori IP ouvre un tunnel. Un favori VM utilise la méthode de connexion, les ports, l'option Entra ID et le choix de moniteur de l'onglet Azure VM, et suit les mêmes règles d'état d'alimentation : Connecter reste désactivé tant que la VM n'est pas en cours d'exécution, et Démarrer la VM apparaît lorsque la VM est arrêtée et que votre compte peut la démarrer.</td></tr>
+        <tr><td>Le changement de langue atteint chaque onglet</td><td>Un changement de langue réécrit toute la fenêtre tout de suite, y compris les onglets que vous ne regardez pas. Un onglet que vous n'aviez pas encore ouvert gardait auparavant l'ancienne langue jusqu'au démarrage suivant.</td></tr>
+        <tr><td>Onglets en dossiers</td><td>La barre d'onglets est une rangée d'onglets en forme de dossiers, de gauche à droite.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>v3.3.10</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td>Composants mis à jour</td><td>Azure.Core 1.63.0, Avalonia 12.1.4 et les packages d'identité (MSAL 4.90.1). Mises à jour de dépendances uniquement.</td></tr>
+        <tr><td>Runtime .NET avec correctifs de sécurité</td><td>Le runtime intégré est .NET 10.0.13, avec les correctifs de sécurité. Le SDK minimal de génération est 10.0.402.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.3.9</h3>
     <table class="field-table">
@@ -1797,7 +1832,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.3.9 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.4.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
 </footer>
 </div>
 
