@@ -11,7 +11,7 @@ lastReviewed: '2026-10-19'
 | --- | --- |
 | Favoritos | O separador Favoritos guarda até dez endereços IP e VMs do Azure para o inquilino em que iniciou sessão. Uma estrela junto a Ligar guarda o destino atual ou remove-o, e a remoção pede confirmação. Ligar usa o anfitrião Bastion selecionado nesse momento. Um favorito de IP abre um túnel. Um favorito de VM usa o método de ligação, as portas, a opção Entra ID e a escolha de monitor do separador Azure VM. O cartão segue as mesmas regras de estado de energia que esse separador: Ligar só está disponível enquanto a VM está em execução, e Iniciar VM aparece quando a VM está parada e a sua conta a pode iniciar. |
 | A alteração de idioma chega a cada separador | Uma alteração de idioma reescreve toda a janela de imediato, incluindo os separadores que não está a ver. Antes, um separador que ainda não tinha aberto mantinha o idioma anterior até ao arranque seguinte. |
-| Separadores em forma de pasta | A barra de separadores é uma fila de separadores em forma de pasta, da esquerda para a direita. |
+| Separadores em forma de pasta | Os separadores são desenhados como pastas ligadas à página. O separador selecionado é mais alto e usa o fundo da página. Os outros são mais baixos e cinzentos. Não há sublinhado. Ficam numa só fila, da esquerda para a direita. |
 
 ## 3.3.10
 

@@ -319,20 +319,35 @@
   .ui-btn.danger { background: var(--red); color: #fff; }
   .ui-tab-bar {
     display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 16px;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 0;
   }
   .ui-tab {
-    padding: 6px 16px;
+    padding: 6px 14px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--ink-faint);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     cursor: default;
   }
-  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-tab.active {
+    color: var(--ink);
+    background: #fff;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ui-tab-bar + div {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+  }
   .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
   .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
   .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -1656,7 +1671,7 @@
       <tbody>
         <tr><td>Favoritos</td><td>La pestaña Favoritos guarda hasta diez direcciones IP y VM de Azure para el inquilino con la sesión iniciada. Una estrella junto a Conectar guarda el destino actual o lo quita, y quitarlo pide confirmación. Conectar usa el host de Bastion seleccionado en ese momento. Un favorito de IP abre un túnel. Un favorito de VM usa el método de conexión, los puertos, la opción Entra ID y la elección de monitor de la pestaña Azure VM, y sigue las mismas reglas de estado de energía: Conectar permanece desactivado hasta que la VM está en ejecución, e Iniciar VM aparece cuando la VM está detenida y su cuenta puede iniciarla.</td></tr>
         <tr><td>El cambio de idioma llega a cada pestaña</td><td>Un cambio de idioma reescribe toda la ventana al momento, incluidas las pestañas que no está mirando. Antes, una pestaña que aún no había abierto conservaba el idioma anterior hasta el siguiente inicio.</td></tr>
-        <tr><td>Pestañas en forma de carpeta</td><td>La barra de pestañas es una fila de pestañas en forma de carpeta, de izquierda a derecha.</td></tr>
+        <tr><td>Pestañas en forma de carpeta</td><td>Las pestañas se dibujan como carpetas unidas a la página. La pestaña seleccionada es más alta y usa el fondo de la página. Las demás son más bajas y grises. No hay subrayado. Forman una sola fila, de izquierda a derecha.</td></tr>
       </tbody>
     </table>
 

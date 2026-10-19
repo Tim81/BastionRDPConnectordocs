@@ -319,20 +319,35 @@
   .ui-btn.danger { background: var(--red); color: #fff; }
   .ui-tab-bar {
     display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 16px;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 0;
   }
   .ui-tab {
-    padding: 6px 16px;
+    padding: 6px 14px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--ink-faint);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     cursor: default;
   }
-  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-tab.active {
+    color: var(--ink);
+    background: #fff;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ui-tab-bar + div {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+  }
   .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
   .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
   .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -1649,7 +1664,7 @@
       <tbody>
         <tr><td>Favoriten</td><td>Die Registerkarte Favoriten hält bis zu zehn IP-Adressen und Azure-VMs für den angemeldeten Mandanten. Ein Stern neben Verbinden speichert das aktuelle Ziel oder entfernt es, und das Entfernen fragt nach einer Bestätigung. Verbinden verwendet den in diesem Moment gewählten Bastion-Host. Ein IP-Favorit öffnet einen Tunnel. Ein VM-Favorit verwendet Verbindungsmethode, Ports, Entra-ID-Option und Monitorauswahl der Registerkarte Azure VM und folgt denselben Energiestatusregeln: Verbinden bleibt aus, solange die VM nicht aktiv ist, und VM starten erscheint, wenn die VM gestoppt ist und Ihr Konto sie starten darf.</td></tr>
         <tr><td>Sprachwechsel erreichen jede Registerkarte</td><td>Ein Sprachwechsel schreibt das ganze Fenster sofort um, auch Registerkarten, die Sie nicht ansehen. Eine noch nicht geöffnete Registerkarte behielt zuvor die alte Sprache bis zum nächsten Start.</td></tr>
-        <tr><td>Ordner-Registerkarten</td><td>Die Registerleiste ist eine Reihe von Ordner-Reitern, von links nach rechts.</td></tr>
+        <tr><td>Ordner-Registerkarten</td><td>Die Registerkarten sind als Ordnerreiter gezeichnet, die an die Seite anschließen. Die gewählte Registerkarte ist höher und hat den Seitenhintergrund. Die anderen sind kürzer und grau. Es gibt keine Unterstreichung. Sie stehen in einer Reihe, von links nach rechts.</td></tr>
       </tbody>
     </table>
 

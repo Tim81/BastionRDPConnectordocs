@@ -11,7 +11,7 @@ lastReviewed: '2026-10-19'
 | --- | --- |
 | Favoriten | Die Registerkarte Favoriten hält bis zu zehn IP-Adressen und Azure-VMs für den Mandanten, bei dem Sie angemeldet sind. Ein Stern neben Verbinden speichert das aktuelle Ziel oder entfernt es, und das Entfernen fragt nach einer Bestätigung. Verbinden verwendet den in diesem Moment gewählten Bastion-Host. Ein IP-Favorit öffnet einen Tunnel. Ein VM-Favorit verwendet die Verbindungsmethode, die Ports, die Entra-ID-Option und die Monitorauswahl der Registerkarte Azure VM. Die Karte folgt denselben Energiestatusregeln wie diese Registerkarte: Verbinden ist nur verfügbar, solange die VM aktiv ist, und VM starten erscheint, wenn die VM gestoppt ist und Ihr Konto sie starten darf. |
 | Sprachwechsel erreichen jede Registerkarte | Ein Sprachwechsel schreibt das ganze Fenster sofort um, auch Registerkarten, die Sie nicht ansehen. Eine noch nicht geöffnete Registerkarte behielt zuvor die alte Sprache bis zum nächsten Start. |
-| Ordner-Registerkarten | Die Registerleiste ist eine Reihe von Ordner-Reitern, von links nach rechts. |
+| Ordner-Registerkarten | Die Registerkarten sind als Ordnerreiter gezeichnet, die an die Seite anschließen. Die gewählte Registerkarte ist höher und hat den Seitenhintergrund. Die anderen sind kürzer und grau. Es gibt keine Unterstreichung. Sie stehen in einer Reihe, von links nach rechts. |
 
 ## 3.3.10
 

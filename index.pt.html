@@ -319,20 +319,35 @@
   .ui-btn.danger { background: var(--red); color: #fff; }
   .ui-tab-bar {
     display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 16px;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 0;
   }
   .ui-tab {
-    padding: 6px 16px;
+    padding: 6px 14px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--ink-faint);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     cursor: default;
   }
-  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-tab.active {
+    color: var(--ink);
+    background: #fff;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ui-tab-bar + div {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+  }
   .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
   .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
   .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -1654,7 +1669,7 @@
       <tbody>
         <tr><td>Favoritos</td><td>O separador Favoritos guarda até dez endereços IP e VMs do Azure para o inquilino com sessão iniciada. Uma estrela junto a Ligar guarda o destino atual ou remove-o, e a remoção pede confirmação. Ligar usa o anfitrião Bastion selecionado nesse momento. Um favorito de IP abre um túnel. Um favorito de VM usa o método de ligação, as portas, a opção Entra ID e a escolha de monitor do separador Azure VM, e segue as mesmas regras de estado de energia: Ligar permanece desativado até a VM estar em execução, e Iniciar VM aparece quando a VM está parada e a sua conta a pode iniciar.</td></tr>
         <tr><td>A alteração de idioma chega a cada separador</td><td>Uma alteração de idioma reescreve toda a janela de imediato, incluindo os separadores que não está a ver. Antes, um separador que ainda não tinha aberto mantinha o idioma anterior até ao arranque seguinte.</td></tr>
-        <tr><td>Separadores em forma de pasta</td><td>A barra de separadores é uma fila de separadores em forma de pasta, da esquerda para a direita.</td></tr>
+        <tr><td>Separadores em forma de pasta</td><td>Os separadores são desenhados como pastas ligadas à página. O separador selecionado é mais alto e usa o fundo da página. Os outros são mais baixos e cinzentos. Não há sublinhado. Ficam numa só fila, da esquerda para a direita.</td></tr>
       </tbody>
     </table>
 

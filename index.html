@@ -319,20 +319,35 @@
   .ui-btn.danger { background: var(--red); color: #fff; }
   .ui-tab-bar {
     display: flex;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 16px;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: 0;
   }
   .ui-tab {
-    padding: 6px 16px;
+    padding: 6px 14px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--ink-faint);
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    color: var(--ink-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
     cursor: default;
   }
-  .ui-tab.active { color: var(--azure); border-bottom-color: var(--azure); }
+  .ui-tab.active {
+    color: var(--ink);
+    background: #fff;
+    padding-top: 9px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ui-tab-bar + div {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+  }
   .ui-section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-faint); margin: 14px 0 8px; }
   .ui-state { display: flex; align-items: center; gap: 6px; font-size: 12px; }
   .ui-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -1642,7 +1657,7 @@
       <tbody>
         <tr><td>Favorites</td><td>A Favorites tab holds up to ten IP addresses and Azure VMs for the signed-in tenant. A star next to Connect saves or removes the current target, and removing one asks you to confirm. Connect uses the Bastion host selected at that moment. An IP favorite opens a tunnel. A VM favorite uses the Azure VM tab's connection method, ports, Entra ID option, and monitor choice, and follows that tab's power rules: Connect stays off until the VM is running, and Start VM appears when the VM is stopped and your account can start it.</td></tr>
         <tr><td>Language changes reach every tab</td><td>Changing the language rewrites the whole window at once, including tabs you are not looking at. A tab you had not opened yet used to keep the previous language until the next start.</td></tr>
-        <tr><td>Folder tabs</td><td>The tab strip is a row of folder tabs, running left to right.</td></tr>
+        <tr><td>Folder tabs</td><td>The tabs are drawn as folder tabs joined to the page. The selected tab is taller and uses the page background. The others are shorter and gray. There is no underline. They sit in one row, left to right.</td></tr>
       </tbody>
     </table>
 

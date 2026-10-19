@@ -11,7 +11,7 @@ lastReviewed: '2026-10-19'
 | --- | --- |
 | Favorites | A Favorites tab holds up to ten IP addresses and Azure VMs for the tenant you are signed in to. A star next to Connect saves or removes the current target, and removing one asks you to confirm. Connect uses the Bastion host selected at that moment. An IP favorite opens a tunnel. A VM favorite uses the connection method, ports, Entra ID option, and monitor choice on the Azure VM tab. The card follows the same power rules as that tab: Connect is available only while the VM is running, and Start VM appears when the VM is stopped and your account can start it. |
 | Language changes reach every tab | Changing the language rewrites the whole window at once, including tabs you are not looking at. A tab you had not opened yet used to keep the previous language until the next start. |
-| Folder tabs | The tab strip is a row of folder tabs, running left to right. |
+| Folder tabs | The tabs are drawn as folder tabs joined to the page. The selected tab is taller and uses the page background. The others are shorter and gray. There is no underline. They sit in one row, left to right. |
 
 ## 3.3.10
 
