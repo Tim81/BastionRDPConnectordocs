@@ -2,7 +2,7 @@
 title: Favoriten
 description: Speichern Sie bis zu zehn IP-Adressen und Azure-VMs pro Mandant, und verbinden Sie sich erneut über die Registerkarte Favoriten mit dem zu diesem Zeitpunkt gewählten Bastion-Host.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Favoriten sind ein kürzerer Weg zurück zu einer Verbindung, die Sie bereits herstellen. Die Liste enthält bis zu zehn Einträge für den Entra ID-Mandanten, bei dem Sie angemeldet sind. Ein Favorit ist eine IP-Adresse oder eine Azure-VM. Ports, Verbindungsmethode und Bastion-Host bleiben dort, wo Sie sie festlegen.
@@ -17,6 +17,16 @@ Auf der Registerkarte [IP-Adresse](../connect-ip/) und der Registerkarte [Azure 
 Dieselbe Bestätigung erscheint, wenn Sie in einer Zeile auf der Registerkarte Favoriten auf **Entfernen** klicken.
 
 Eine leere oder ungültige IP-Adresse, oder keine ausgewählte virtuelle Maschine, wird nicht gespeichert. Der Stern bleibt leer, und Sie sehen dieselbe Warnung wie bei **Verbinden**. Ein elfter Eintrag wird abgelehnt, bis Sie einen entfernen.
+
+## Beschreibung
+
+Ein IP-Favorit kann eine kurze Beschreibung tragen, wohin diese Adresse verbindet, mit höchstens 40 Zeichen. Auf der Registerkarte Favoriten zeigt die Zeile diesen Text unter der Adresse. Ohne Beschreibung zeigt die Zeile **IP-Adresse**.
+
+Eine Stift-Schaltfläche öffnet einen Dialog. Der Tooltip ist **Beschreibung hinzufügen**, wenn die Zeile keine hat, und **Beschreibung bearbeiten**, wenn eine gespeichert ist. Geben Sie den Text ein und drücken Sie **Speichern**. **Abbrechen**, oder das Schließen des Dialogs, lässt den gespeicherten Text stehen. Wenn Sie das Feld leeren und auf **Speichern** drücken, wird die Beschreibung entfernt.
+
+Eine Papierkorb-Schaltfläche erscheint nur, wenn eine Beschreibung gespeichert ist. Der Tooltip ist **Beschreibung löschen**. Sie entfernt die Beschreibung und lässt den Favoriten in der Liste. Es gibt keine Rückfrage.
+
+Ein VM-Favorit hat keine Beschreibung. Das Entfernen des Favoriten fragt weiterhin nach einer Bestätigung, und damit entfällt auch seine Beschreibung.
 
 ## Verbinden aus der Liste
 

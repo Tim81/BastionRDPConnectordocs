@@ -1,9 +1,16 @@
 ---
 title: Nouveautés
 description: Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector.
-appliesTo: '3.4.2'
-lastReviewed: '2026-10-19'
+appliesTo: '3.5.0'
+lastReviewed: '2026-10-20'
 ---
+
+## 3.5.0
+
+| Changement | Détails |
+| --- | --- |
+| Description des favoris IP | Un favori IP peut porter une courte description de l'endroit auquel cette adresse se connecte, jusqu'à 40 caractères. Dans l'onglet Favoris, la ligne affiche ce texte sous l'adresse. Un crayon l'ajoute ou la modifie, et une corbeille retire seulement la description. Un favori de VM Azure n'a pas de description. |
+| Drapeaux du choix de langue sous Windows | Le bouton de langue et son menu affichent un drapeau à côté du nom de la langue. Windows ne dessine pas les emoji de drapeaux comme des drapeaux. macOS continue d'utiliser les emoji, qui y apparaissent déjà comme des drapeaux. |
 
 ## 3.4.2
 

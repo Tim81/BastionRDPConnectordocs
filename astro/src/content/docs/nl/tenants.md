@@ -2,7 +2,7 @@
 title: Meerdere tenants
 description: Hoe de applicatie een aparte set voorkeuren bijhoudt voor elke Entra ID-tenant die uw account kan zien, en wat globaal blijft.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Als uw account toegang heeft tot meer dan één Entra ID-tenant, bijvoorbeeld via Azure Lighthouse, houdt de applicatie voor elke tenant een aparte set voorkeuren bij in plaats van telkens een enkele gedeelde set te overschrijven wanneer u wisselt.
@@ -30,7 +30,7 @@ Schakel van tenant A naar tenant B en weer terug, en de Bastion, VM en poorten v
 
 ## Wat globaal blijft
 
-Uw taalkeuze geldt voor elke tenant. Wijzig deze terwijl u in de ene tenant werkt, en deze blijft gewijzigd nadat u naar een andere overschakelt. Taal is een voorkeur over uzelf, niet over de omgeving waarmee u verbonden bent.
+Uw taalkeuze geldt voor elke tenant. Wijzig deze terwijl u in de ene tenant werkt, en deze blijft gewijzigd nadat u naar een andere overschakelt. Taal is een voorkeur over uzelf, niet over de omgeving waarmee u verbonden bent. Op Windows tonen de taalknop en het menu een vlag naast de taalnaam. macOS houdt de emoji, die daar al als vlaggen verschijnen.
 
 ## Waar dit op schijf staat
 

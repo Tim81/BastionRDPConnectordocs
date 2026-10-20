@@ -1,9 +1,16 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.4.2'
-lastReviewed: '2026-10-19'
+appliesTo: '3.5.0'
+lastReviewed: '2026-10-20'
 ---
+
+## 3.5.0
+
+| Änderung | Details |
+| --- | --- |
+| Beschreibung bei IP-Favoriten | Ein IP-Favorit kann eine kurze Beschreibung tragen, wohin diese Adresse verbindet, bis zu 40 Zeichen. Auf der Registerkarte Favoriten steht dieser Text unter der Adresse. Ein Stift fügt sie hinzu oder bearbeitet sie, und ein Papierkorb entfernt nur die Beschreibung. Ein Azure-VM-Favorit hat keine Beschreibung. |
+| Flaggen bei der Sprachwahl unter Windows | Die Sprachschaltfläche und ihr Menü zeigen eine Flagge neben dem Sprachnamen. Windows zeichnet Flaggen-Emoji nicht als Flaggen. macOS verwendet weiterhin die Emoji, die dort bereits als Flaggen erscheinen. |
 
 ## 3.4.2
 

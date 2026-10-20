@@ -2,7 +2,7 @@
 title: Mehrere Mandanten
 description: Wie die Anwendung für jeden Entra ID-Mandanten, den Ihr Konto sehen kann, einen eigenen Satz an Präferenzen führt, und was global bleibt.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Wenn Ihr Konto Zugriff auf mehr als einen Entra ID-Mandanten hat, zum Beispiel über Azure Lighthouse, führt die Anwendung für jeden einen eigenen Satz an Präferenzen, statt bei jedem Wechsel einen einzigen gemeinsamen Satz zu überschreiben.
@@ -30,7 +30,7 @@ Wechseln Sie von Mandant A zu Mandant B und wieder zurück, kommen Bastion, VM u
 
 ## Was global bleibt
 
-Ihre Sprachwahl gilt über alle Mandanten hinweg. Ändern Sie sie, während Sie mit einem Mandanten arbeiten, bleibt sie geändert, nachdem Sie zu einem anderen gewechselt haben. Sprache ist eine Präferenz über Sie, nicht über die Umgebung, mit der Sie verbunden sind.
+Ihre Sprachwahl gilt über alle Mandanten hinweg. Ändern Sie sie, während Sie mit einem Mandanten arbeiten, bleibt sie geändert, nachdem Sie zu einem anderen gewechselt haben. Sprache ist eine Präferenz über Sie, nicht über die Umgebung, mit der Sie verbunden sind. Unter Windows zeigen die Sprachschaltfläche und ihr Menü eine Flagge neben dem Sprachnamen. macOS behält die Emoji, die dort bereits als Flaggen erscheinen.
 
 ## Wo das auf der Festplatte liegt
 

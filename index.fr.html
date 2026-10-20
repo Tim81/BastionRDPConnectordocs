@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.4.2 · Documentation</div>
+    <div class="version">v3.5.0 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Langue</div>
@@ -1288,6 +1288,7 @@
     <p><strong>Connecter</strong> sur un favori utilise l'hôte Bastion sélectionné en haut de la fenêtre à ce moment-là. Un favori IP ouvre un tunnel, avec le port cible et le port local de l'onglet Adresse IP. Un favori VM utilise la méthode de connexion de l'onglet Azure VM : Tunnel utilise les ports de cet onglet, et RD Gateway utilise le port 3389, la case d'authentification Entra ID et le choix de moniteur.</p>
     <p>La machine virtuelle doit encore figurer dans la liste chargée pour cette connexion. Si le filtre d'abonnement, de nom ou d'étiquette actuel la masquerait, Connecter passe à l'abonnement de cette VM, efface ces filtres et laisse l'onglet Azure VM sur cette machine.</p>
     <p>Un favori VM suit les mêmes règles d'état d'alimentation que l'onglet Azure VM. <strong>Connecter</strong> n'est disponible que pendant que la VM est en cours d'exécution. Une VM arrêtée ou désallouée propose <strong>Démarrer la VM</strong> lorsque votre compte peut la démarrer. Pendant le démarrage, <strong>Démarrer la VM</strong> est masqué et <strong>Connecter</strong> reste désactivé. Un favori IP n'a pas d'état d'alimentation.</p>
+    <p>Un favori IP peut porter une courte description de l'endroit auquel cette adresse se connecte, jusqu'à 40 caractères. Dans l'onglet Favoris, la ligne affiche ce texte sous l'adresse. Sans description, la ligne affiche <strong>Adresse IP</strong>. Un crayon ajoute le texte ou le modifie. Une corbeille retire seulement la description et laisse le favori. Un favori de VM Azure n'a pas de description.</p>
   </section>
 
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
@@ -1577,7 +1578,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct, y compris sur les onglets que vous ne regardez pas. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages.</p>
+    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct, y compris sur les onglets que vous ne regardez pas. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages. Sous Windows, le bouton de langue et son menu affichent un drapeau à côté du nom de la langue, parce que Windows ne dessine pas les emoji de drapeaux comme des drapeaux. macOS continue d'utiliser les emoji, qui y apparaissent déjà comme des drapeaux.</p>
 
     <h3>Ordre de détection automatique</h3>
     <p>Si aucune langue n'a encore été sauvegardée, l'application essaie de détecter votre préférence dans cet ordre :</p>
@@ -1656,6 +1657,15 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Nouveautés</h2>
+
+    <h3>v3.5.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td>Description des favoris IP</td><td>Un favori IP peut porter une courte description de l'endroit auquel cette adresse se connecte, jusqu'à 40 caractères. Dans l'onglet Favoris, la ligne affiche ce texte sous l'adresse. Un crayon l'ajoute ou la modifie, et une corbeille retire seulement la description. Un favori de VM Azure n'a pas de description.</td></tr>
+        <tr><td>Drapeaux du choix de langue sous Windows</td><td>Le bouton de langue et son menu affichent un drapeau à côté du nom de la langue. Windows ne dessine pas les emoji de drapeaux comme des drapeaux. macOS continue d'utiliser les emoji, qui y apparaissent déjà comme des drapeaux.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.4.2</h3>
     <table class="field-table">
@@ -1863,7 +1873,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.4.2 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
 </footer>
 </div>
 

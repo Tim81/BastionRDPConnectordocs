@@ -1,9 +1,16 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.4.2'
-lastReviewed: '2026-10-19'
+appliesTo: '3.5.0'
+lastReviewed: '2026-10-20'
 ---
+
+## 3.5.0
+
+| Alteração | Detalhes |
+| --- | --- |
+| Descrição dos favoritos de IP | Um favorito de IP pode ter uma descrição curta de para onde esse endereço liga, até 40 caracteres. No separador Favoritos, a linha mostra esse texto por baixo do endereço. Um lápis adiciona-a ou edita-a, e um caixote do lixo remove apenas a descrição. Um favorito de VM do Azure não tem descrição. |
+| Bandeiras na escolha de idioma no Windows | O botão de idioma e o respetivo menu mostram uma bandeira junto ao nome do idioma. O Windows não desenha os emojis de bandeiras como bandeiras. O macOS continua a usar os emojis, que ali já aparecem como bandeiras. |
 
 ## 3.4.2
 

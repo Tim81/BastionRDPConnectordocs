@@ -2,7 +2,7 @@
 title: Favoritos
 description: Guarde até dez endereços IP e VMs do Azure por inquilino, e volte a ligar a partir do separador Favoritos com o anfitrião Bastion selecionado nesse momento.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Os favoritos são um caminho mais curto de volta a uma ligação que já faz. A lista guarda até dez entradas para o inquilino do Entra ID em que iniciou sessão. Um favorito é um endereço IP ou uma VM do Azure. As portas, o método de ligação e o anfitrião Bastion ficam onde os define.
@@ -17,6 +17,16 @@ No separador [Endereço IP](../connect-ip/) e no separador [Azure VM](../connect
 A mesma confirmação aparece quando prime **Remover** numa linha do separador Favoritos.
 
 Um endereço IP vazio ou inválido, ou nenhuma máquina virtual selecionada, não é guardado. A estrela fica vazia e vê o mesmo aviso que com **Ligar**. Uma décima primeira entrada é recusada até remover uma.
+
+## Descrição
+
+Um favorito de IP pode ter uma descrição curta de para onde esse endereço liga, com um máximo de 40 caracteres. No separador Favoritos, a linha mostra esse texto por baixo do endereço. Sem descrição, a linha mostra **Endereço IP**.
+
+Um botão de lápis abre uma caixa de diálogo. A dica é **Adicionar descrição** quando não há nenhuma, e **Editar descrição** quando há uma guardada. Escreva o texto e prima **Guardar**. **Cancelar**, ou fechar a caixa, deixa o texto guardado como estava. Esvaziar o campo e premir **Guardar** remove a descrição.
+
+Um botão de caixote do lixo só aparece quando há uma descrição guardada. A dica é **Eliminar descrição**. Remove a descrição e deixa o favorito na lista. Não pede confirmação.
+
+Um favorito de VM não tem descrição. Remover o favorito continua a pedir confirmação, e isso também remove a descrição.
 
 ## Ligar a partir da lista
 
