@@ -2,7 +2,7 @@
 title: Favorieten
 description: Sla tot tien IP-adressen en Azure-VM's per tenant op, en verbind opnieuw vanaf het tabblad Favorieten met de Bastion-host die op dat moment is gekozen.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Favorieten zijn een kortere weg terug naar een verbinding die u al maakt. De lijst bevat maximaal tien items voor de Entra ID-tenant waarbij u bent aangemeld. Een favoriet is een IP-adres of een Azure-VM. De poorten, de verbindingsmethode en de Bastion-host blijven staan waar u ze instelt.
@@ -17,6 +17,16 @@ Op het tabblad [IP-adres](../connect-ip/) en het tabblad [Azure VM](../connect-v
 Dezelfde bevestiging verschijnt als u op **Verwijderen** drukt bij een rij op het tabblad Favorieten.
 
 Een leeg of ongeldig IP-adres, of geen geselecteerde virtuele machine, wordt niet opgeslagen. De ster blijft leeg en u ziet dezelfde waarschuwing als bij **Verbinden**. Een elfde item wordt geweigerd totdat u er een verwijdert.
+
+## Omschrijving
+
+Een IP-favoriet kan een korte omschrijving dragen van waar dat adres naartoe verbindt, tot 40 tekens. Op het tabblad Favorieten toont de rij die tekst onder het adres. Zonder omschrijving toont de rij **IP-adres**.
+
+Een potloodknop opent een dialoogvenster. De tooltip is **Omschrijving toevoegen** als de rij er geen heeft, en **Omschrijving bewerken** als er een is opgeslagen. Typ de tekst en druk op **Opslaan**. **Annuleren**, of het venster sluiten, laat de opgeslagen tekst staan. Het veld leegmaken en op **Opslaan** drukken verwijdert de omschrijving.
+
+Een prullenbakknop verschijnt alleen als er een omschrijving is opgeslagen. De tooltip is **Omschrijving verwijderen**. Die verwijdert de omschrijving en laat de favoriet in de lijst staan. Er wordt niet om bevestiging gevraagd.
+
+Een Azure VM-favoriet heeft geen omschrijving. Het verwijderen van de favoriet vraagt nog steeds om bevestiging, en daarmee verdwijnt ook de omschrijving.
 
 ## Verbinden vanuit de lijst
 

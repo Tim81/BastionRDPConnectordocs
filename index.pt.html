@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.4.2 · Documentação</div>
+    <div class="version">v3.5.0 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -1295,6 +1295,7 @@
     <p><strong>Ligar</strong> num favorito usa o anfitrião Bastion selecionado no topo da janela nesse momento. Um favorito de IP abre um túnel, com a porta de destino e a porta local do separador Endereço IP. Um favorito de VM usa o método de ligação do separador Azure VM: Túnel usa as portas desse separador, e RD Gateway usa a porta 3389, a caixa de autenticação Entra ID e a escolha de monitor.</p>
     <p>A máquina virtual tem de continuar na lista carregada para este início de sessão. Se o filtro atual de subscrição, nome ou etiqueta a ocultasse, Ligar muda para a subscrição dessa VM, limpa esses filtros e deixa o separador Azure VM nessa máquina.</p>
     <p>Um favorito de VM segue as mesmas regras de estado de energia que o separador Azure VM. <strong>Ligar</strong> só está disponível enquanto a VM está em execução. Uma VM parada ou desalocada oferece <strong>Iniciar VM</strong> quando a sua conta a pode iniciar. Enquanto a VM arranca, <strong>Iniciar VM</strong> fica oculto e <strong>Ligar</strong> permanece desativado. Um favorito de IP não tem estado de energia.</p>
+    <p>Um favorito de IP pode ter uma descrição curta de para onde esse endereço liga, até 40 caracteres. No separador Favoritos, a linha mostra esse texto por baixo do endereço. Sem descrição, a linha mostra <strong>Endereço IP</strong>. Um lápis adiciona o texto ou edita-o. Um caixote do lixo remove apenas a descrição e deixa o favorito. Um favorito de VM do Azure não tem descrição.</p>
   </section>
 
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
@@ -1584,7 +1585,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real, incluindo nos separadores que não está a ver. O idioma selecionado é guardado globalmente e persiste entre arranques.</p>
+    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real, incluindo nos separadores que não está a ver. O idioma selecionado é guardado globalmente e persiste entre arranques. No Windows, o botão de idioma e o respetivo menu mostram uma bandeira junto ao nome do idioma, porque o Windows não desenha os emojis de bandeiras como bandeiras. O macOS continua a usar os emojis, que ali já aparecem como bandeiras.</p>
 
     <h3>Ordem de deteção automática</h3>
     <p>Se ainda não foi guardado nenhum idioma, a aplicação tenta detetar a sua preferência por esta ordem:</p>
@@ -1662,6 +1663,15 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.5.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Descrição dos favoritos de IP</td><td>Um favorito de IP pode ter uma descrição curta de para onde esse endereço liga, até 40 caracteres. No separador Favoritos, a linha mostra esse texto por baixo do endereço. Um lápis adiciona-a ou edita-a, e um caixote do lixo remove apenas a descrição. Um favorito de VM do Azure não tem descrição.</td></tr>
+        <tr><td>Bandeiras na escolha de idioma no Windows</td><td>O botão de idioma e o respetivo menu mostram uma bandeira junto ao nome do idioma. O Windows não desenha os emojis de bandeiras como bandeiras. O macOS continua a usar os emojis, que ali já aparecem como bandeiras.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.4.2</h3>
     <table class="field-table">
@@ -1861,7 +1871,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.4.2 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

@@ -2,7 +2,7 @@
 title: Varios inquilinos
 description: Cómo mantiene la aplicación un conjunto de preferencias distinto para cada inquilino de Entra ID que su cuenta puede ver, y qué permanece global.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Si su cuenta de Azure tiene acceso a más de un inquilino de Entra ID, por ejemplo a través de Azure Lighthouse, la aplicación mantiene un conjunto de preferencias distinto para cada uno en lugar de sobrescribir un único conjunto compartido cada vez que cambia.
@@ -30,7 +30,7 @@ Cambie del inquilino A al inquilino B y de vuelta, y el Bastion, la VM y los pue
 
 ## Qué permanece global
 
-Su elección de idioma se aplica en todos los inquilinos. Cámbiela mientras trabaja en un inquilino, y seguirá cambiada después de pasar a otro. El idioma es una preferencia sobre usted, no sobre el entorno al que está conectado.
+Su elección de idioma se aplica en todos los inquilinos. Cámbiela mientras trabaja en un inquilino, y seguirá cambiada después de pasar a otro. El idioma es una preferencia sobre usted, no sobre el entorno al que está conectado. En Windows, el botón de idioma y su menú muestran una bandera junto al nombre del idioma. macOS conserva los emoji, que allí ya aparecen como banderas.
 
 ## Dónde vive esto en el disco
 

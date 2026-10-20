@@ -1,9 +1,16 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.4.2'
-lastReviewed: '2026-10-19'
+appliesTo: '3.5.0'
+lastReviewed: '2026-10-20'
 ---
+
+## 3.5.0
+
+| Wijziging | Details |
+| --- | --- |
+| Omschrijving bij IP-favorieten | Een IP-favoriet kan een korte omschrijving dragen van waar dat adres naartoe verbindt, tot 40 tekens. Op het tabblad Favorieten staat die tekst onder het adres. Een potlood voegt die toe of bewerkt die, en een prullenbak verwijdert alleen de omschrijving. Een Azure-VM-favoriet heeft geen omschrijving. |
+| Vlaggen bij de taalkeuze op Windows | De taalknop en het menu tonen een vlag naast de taalnaam. Windows tekent vlag-emoji niet als vlaggen. macOS gebruikt nog de emoji, die daar al als vlaggen verschijnen. |
 
 ## 3.4.2
 

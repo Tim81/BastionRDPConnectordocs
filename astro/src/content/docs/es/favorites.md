@@ -2,7 +2,7 @@
 title: Favoritos
 description: Guarde hasta diez direcciones IP y VM de Azure por inquilino, y vuelva a conectarse desde la pestaña Favoritos con el host de Bastion seleccionado en ese momento.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Los favoritos son un camino más corto de vuelta a una conexión que usted ya hace. La lista guarda hasta diez entradas para el inquilino de Entra ID en el que ha iniciado sesión. Un favorito es una dirección IP o una VM de Azure. Los puertos, el método de conexión y el host de Bastion se quedan donde usted los configura.
@@ -17,6 +17,16 @@ En la pestaña [Dirección IP](../connect-ip/) y en la pestaña [Azure VM](../co
 La misma confirmación aparece cuando pulsa **Quitar** en una fila de la pestaña Favoritos.
 
 Una dirección IP vacía o no válida, o ninguna máquina virtual seleccionada, no se guarda. La estrella sigue vacía y ve la misma advertencia que con **Conectar**. Una undécima entrada se rechaza hasta que quite una.
+
+## Descripción
+
+Un favorito de IP puede llevar una descripción breve de a dónde se conecta esa dirección, de 40 caracteres como máximo. En la pestaña Favoritos, la fila muestra ese texto bajo la dirección. Si no hay descripción, la fila muestra **Dirección IP**.
+
+Un botón de lápiz abre un cuadro de diálogo. La información sobre herramientas es **Añadir descripción** cuando no hay ninguna, y **Editar descripción** cuando hay una guardada. Escriba el texto y pulse **Guardar**. **Cancelar**, o cerrar el cuadro, deja el texto guardado como estaba. Vaciar el campo y pulsar **Guardar** quita la descripción.
+
+Un botón de papelera solo aparece cuando hay una descripción guardada. La información sobre herramientas es **Eliminar descripción**. Quita la descripción y deja el favorito en la lista. No pide confirmación.
+
+Un favorito de VM no tiene descripción. Quitar el favorito sigue pidiendo confirmación, y eso también quita su descripción.
 
 ## Conectarse desde la lista
 

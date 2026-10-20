@@ -1,9 +1,16 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.4.2'
-lastReviewed: '2026-10-19'
+appliesTo: '3.5.0'
+lastReviewed: '2026-10-20'
 ---
+
+## 3.5.0
+
+| Change | Details |
+| --- | --- |
+| IP favorite descriptions | An IP favorite can carry a short description of where that address connects, up to 40 characters. On the Favorites tab the row shows that text under the address. A pencil adds or edits it, and a trash button removes only the description. An Azure VM favorite has no description. |
+| Language flags on Windows | The language button and its menu show a flag picture next to the language name. Windows does not draw flag emoji as flags. macOS still uses the emoji, which already appear as flags there. |
 
 ## 3.4.2
 

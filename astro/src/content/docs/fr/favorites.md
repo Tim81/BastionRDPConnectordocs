@@ -2,7 +2,7 @@
 title: Favoris
 description: Enregistrez jusqu'à dix adresses IP et VM Azure par locataire, puis reconnectez-vous depuis l'onglet Favoris avec l'hôte Bastion sélectionné à ce moment-là.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Les favoris sont un raccourci vers une connexion que vous faites déjà. La liste contient jusqu'à dix entrées pour le locataire Entra ID auquel vous êtes connecté. Un favori est une adresse IP ou une VM Azure. Les ports, la méthode de connexion et l'hôte Bastion restent là où vous les réglez.
@@ -17,6 +17,16 @@ Sur l'onglet [Adresse IP](../connect-ip/) et l'onglet [Azure VM](../connect-vm/)
 La même confirmation apparaît lorsque vous appuyez sur **Retirer** dans une ligne de l'onglet Favoris.
 
 Une adresse IP vide ou non valide, ou aucune machine virtuelle sélectionnée, n'est pas enregistrée. L'étoile reste vide et vous voyez le même avertissement que pour **Connecter**. Une onzième entrée est refusée tant que vous n'en retirez pas une.
+
+## Description
+
+Un favori IP peut porter une courte description de l'endroit où cette adresse se connecte, de 40 caractères au plus. Dans l'onglet Favoris, la ligne affiche ce texte sous l'adresse. Sans description, la ligne affiche **Adresse IP**.
+
+Un bouton crayon ouvre une boîte de dialogue. L'infobulle est **Ajouter une description** lorsqu'il n'y en a pas, et **Modifier la description** lorsqu'une description est enregistrée. Saisissez le texte et appuyez sur **Enregistrer**. **Annuler**, ou la fermeture de la boîte de dialogue, laisse le texte enregistré tel quel. Vider le champ et appuyer sur **Enregistrer** retire la description.
+
+Un bouton corbeille n'apparaît que lorsqu'une description est enregistrée. L'infobulle est **Supprimer la description**. Il retire la description et laisse le favori dans la liste. Il ne demande pas de confirmation.
+
+Un favori VM n'a pas de description. Retirer le favori demande toujours une confirmation, et cela retire aussi sa description.
 
 ## Se connecter depuis la liste
 

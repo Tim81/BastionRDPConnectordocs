@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.4.2 · Dokumentation</div>
+    <div class="version">v3.5.0 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -1289,6 +1289,7 @@
     <p><strong>Verbinden</strong> bei einem Favoriten verwendet den Bastion-Host, der in diesem Moment oben im Fenster ausgewählt ist. Ein IP-Favorit öffnet einen Tunnel, mit Zielport und lokalem Port der Registerkarte IP-Adresse. Ein VM-Favorit verwendet die Verbindungsmethode der Registerkarte Azure VM: Tunnel verwendet die Ports dieser Registerkarte, und RD Gateway verwendet Port 3389, das Kontrollkästchen für die Entra ID-Authentifizierung und die Monitorauswahl.</p>
     <p>Die virtuelle Maschine muss noch in der für diese Anmeldung geladenen Liste stehen. Würde der aktuelle Subscription-, Namens- oder Tagfilter die VM ausblenden, wechselt Verbinden zur Subscription dieser VM, löscht diese Filter und lässt die Registerkarte Azure VM auf dieser Maschine stehen.</p>
     <p>Ein VM-Favorit folgt denselben Energiestatusregeln wie die Registerkarte Azure VM. <strong>Verbinden</strong> ist nur verfügbar, solange die VM aktiv ist. Eine gestoppte oder freigegebene VM bietet <strong>VM starten</strong>, wenn Ihr Konto sie starten darf. Während die VM startet, ist <strong>VM starten</strong> ausgeblendet und <strong>Verbinden</strong> bleibt aus. Ein IP-Favorit hat keinen Energiestatus.</p>
+    <p>Ein IP-Favorit kann eine kurze Beschreibung tragen, wohin diese Adresse verbindet, bis zu 40 Zeichen. Auf der Registerkarte Favoriten steht dieser Text unter der Adresse. Ohne Beschreibung zeigt die Zeile <strong>IP-Adresse</strong>. Ein Stift fügt den Text hinzu oder bearbeitet ihn. Ein Papierkorb entfernt nur die Beschreibung und lässt den Favoriten stehen. Ein Azure-VM-Favorit hat keine Beschreibung.</p>
   </section>
 
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
@@ -1578,7 +1579,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert, auch auf Registerkarten, die Sie nicht ansehen. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten.</p>
+    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert, auch auf Registerkarten, die Sie nicht ansehen. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten. Unter Windows zeigen die Sprachschaltfläche und ihr Menü eine Flagge neben dem Sprachnamen, weil Windows Flaggen-Emoji nicht als Flaggen zeichnet. macOS verwendet weiterhin die Emoji, die dort bereits als Flaggen erscheinen.</p>
 
     <h3>Automatische Erkennungsreihenfolge</h3>
     <p>Wenn noch keine Sprache gespeichert wurde, versucht die Anwendung, Ihre Präferenz in dieser Reihenfolge zu erkennen:</p>
@@ -1657,6 +1658,15 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Neuigkeiten</h2>
+
+    <h3>v3.5.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Beschreibung bei IP-Favoriten</td><td>Ein IP-Favorit kann eine kurze Beschreibung tragen, wohin diese Adresse verbindet, bis zu 40 Zeichen. Auf der Registerkarte Favoriten steht dieser Text unter der Adresse. Ein Stift fügt sie hinzu oder bearbeitet sie, und ein Papierkorb entfernt nur die Beschreibung. Ein Azure-VM-Favorit hat keine Beschreibung.</td></tr>
+        <tr><td>Flaggen bei der Sprachwahl unter Windows</td><td>Die Sprachschaltfläche und ihr Menü zeigen eine Flagge neben dem Sprachnamen. Windows zeichnet Flaggen-Emoji nicht als Flaggen. macOS verwendet weiterhin die Emoji, die dort bereits als Flaggen erscheinen.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.4.2</h3>
     <table class="field-table">
@@ -1864,7 +1874,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.4.2 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 

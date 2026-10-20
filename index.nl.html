@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.4.2 · Documentatie</div>
+    <div class="version">v3.5.0 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -1283,6 +1283,7 @@
     <p><strong>Verbinden</strong> bij een favoriet gebruikt de Bastion-host die op dat moment bovenaan het venster is gekozen. Een IP-favoriet opent een tunnel, met de doelpoort en de lokale poort van het tabblad IP-adres. Een VM-favoriet gebruikt de verbindingsmethode van het tabblad Azure VM: Tunnel gebruikt de poorten van dat tabblad, en RD Gateway gebruikt poort 3389, het selectievakje voor Entra ID en de monitorkeuze.</p>
     <p>De virtuele machine moet nog in de lijst staan die voor deze aanmelding is geladen. Als het huidige subscription-, naam- of tagfilter de VM zou verbergen, schakelt Verbinden naar de subscription van die VM, wist die filters en laat het tabblad Azure VM op die machine staan.</p>
     <p>Een VM-favoriet volgt dezelfde energiestatusregels als het tabblad Azure VM. <strong>Verbinden</strong> is alleen beschikbaar terwijl de VM actief is. Een gestopte of vrijgegeven VM biedt <strong>Start VM</strong> wanneer uw account die mag starten. Terwijl de VM start, is <strong>Start VM</strong> verborgen en blijft <strong>Verbinden</strong> uit. Een IP-favoriet heeft geen energiestatus.</p>
+    <p>Een IP-favoriet kan een korte omschrijving dragen van waar dat adres naartoe verbindt, tot 40 tekens. Op het tabblad Favorieten staat die tekst onder het adres. Zonder omschrijving toont de rij <strong>IP-adres</strong>. Een potlood voegt de tekst toe of bewerkt die. Een prullenbak verwijdert alleen de omschrijving en laat de favoriet staan. Een Azure-VM-favoriet heeft geen omschrijving.</p>
   </section>
 
   <!-- ── METHOD: TUNNEL ─────────────────────── -->
@@ -1572,7 +1573,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt, ook op tabbladen die u niet bekijkt. De geselecteerde taal wordt globaal opgeslagen.</p>
+    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt, ook op tabbladen die u niet bekijkt. De geselecteerde taal wordt globaal opgeslagen. Op Windows tonen de taalknop en het menu een vlag naast de taalnaam, omdat Windows vlag-emoji niet als vlaggen tekent. macOS gebruikt nog de emoji, die daar al als vlaggen verschijnen.</p>
 
     <h3>Automatische detectievolgorde</h3>
     <p>Als er nog geen taal is opgeslagen, probeert de applicatie uw voorkeur in deze volgorde te detecteren:</p>
@@ -1651,6 +1652,15 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.5.0</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Omschrijving bij IP-favorieten</td><td>Een IP-favoriet kan een korte omschrijving dragen van waar dat adres naartoe verbindt, tot 40 tekens. Op het tabblad Favorieten staat die tekst onder het adres. Een potlood voegt die toe of bewerkt die, en een prullenbak verwijdert alleen de omschrijving. Een Azure-VM-favoriet heeft geen omschrijving.</td></tr>
+        <tr><td>Vlaggen bij de taalkeuze op Windows</td><td>De taalknop en het menu tonen een vlag naast de taalnaam. Windows tekent vlag-emoji niet als vlaggen. macOS gebruikt nog de emoji, die daar al als vlaggen verschijnen.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.4.2</h3>
     <table class="field-table">
@@ -1858,7 +1868,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.4.2 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

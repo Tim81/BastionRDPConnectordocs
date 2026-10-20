@@ -2,7 +2,7 @@
 title: Favorites
 description: Save up to ten IP addresses and Azure VMs per tenant, and connect again from the Favorites tab with the Bastion host selected at that moment.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-19'
+lastReviewed: '2026-10-20'
 ---
 
 Favorites are a shorter way back to a connection you already make. The list holds up to ten entries for the Entra ID tenant you are signed in to. A favorite is an IP address or an Azure VM. Ports, the connection method, and the Bastion host stay where you set them.
@@ -17,6 +17,16 @@ On the [IP address](../connect-ip/) tab and the [Azure VM](../connect-vm/) tab, 
 The same confirm appears when you press **Remove** on a row in the Favorites tab.
 
 An empty or invalid IP address, or no virtual machine selected, is not saved. The star stays empty and you see the same warning **Connect** would show. An eleventh entry is refused until you remove one.
+
+## Description
+
+An IP favorite can carry a short description of where that address connects, up to 40 characters. On the Favorites tab the row shows that text under the address. With no description, the row shows **IP Address**.
+
+A pencil button opens a dialog. The tooltip is **Add description** when the row has none, and **Edit description** when one is saved. Type the text and press **Save**. **Cancel**, or closing the dialog, leaves the saved text as it was. Clearing the box and pressing **Save** removes the description.
+
+A trash button appears only when a description is saved. The tooltip is **Delete description**. It removes the description and leaves the favorite in the list. It does not ask for confirmation.
+
+An Azure VM favorite has no description. Removing a favorite still asks for confirmation, and that also removes its description.
 
 ## Connecting from the list
 
