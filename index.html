@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Documentation</div>
+    <div class="version">v3.5.1 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Language</div>
@@ -949,7 +949,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>To log out and clear the cached token, click the red <strong>Logout</strong> button in the top bar. A confirmation dialog will appear before the application closes and removes all cached credentials. The next launch will require a full sign-in.</p>
+      <p>To log out and clear the cached token, click <strong>Logout</strong> in the top bar. A confirmation dialog will appear before the application closes and removes all cached credentials. The next launch will require a full sign-in.</p>
     </div>
   </section>
 
@@ -972,7 +972,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Logout</span>
+            <span class="ui-btn secondary">Logout</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1017,7 +1017,7 @@
       <p>The IP Address tab always uses <strong>Tunnel mode</strong>. RD Gateway is not available for direct IP connections.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/en-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1090,19 +1090,7 @@
     <h2><span class="icon">🖥️</span> Azure VM Tab</h2>
     <p>Use this tab to browse your Azure Virtual Machines and connect to them directly. The application can automatically start stopped VMs and supports both connection methods. <span class="badge blue">v3.3</span> The tab uses a <strong>two-column layout</strong>: connection settings on the left, VM selection on the right.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM stopped (deallocated)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM running – Connect enabled</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Azure VM tab – Tunnel mode" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/en-02-azure-vm.png" alt="Azure VM tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Two-column layout <span class="badge blue">v3.3</span></h3>
     <p>The Azure VM tab is divided into two columns:</p>
@@ -1128,8 +1116,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — In v3.3, VM loading uses the Azure Resource Graph API for cross-subscription queries. This replaces the previous approach of calling each subscription's ARM endpoint individually, making multi-subscription scenarios dramatically faster.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Azure VM tab – All subscriptions search" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1278,6 +1264,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Favorites Tab <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/en-04-favorites.png" alt="Favorites tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Favorites are a shorter way back to a connection you already make. The list holds up to ten IP addresses and Azure VMs for the Entra ID tenant you are signed in to. Ports, the connection method, and the Bastion host stay where you set them.</p>
     <p>On the IP Address tab and the Azure VM tab, a star sits next to <strong>Connect</strong>. An empty star saves the current target. A filled star removes it, after you confirm. <strong>Remove</strong> on a Favorites row asks the same question. An eleventh entry is refused until you remove one.</p>
     <p><strong>Connect</strong> on a Favorites row uses the Bastion host selected at the top of the window at that moment. An IP favorite opens a tunnel, using the target port and local port from the IP Address tab. A VM favorite uses the connection method on the Azure VM tab: Tunnel uses that tab's ports, and RD Gateway uses port 3389, the Entra ID checkbox, and the monitor choice.</p>
@@ -1573,7 +1560,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Language changes take effect <strong>immediately</strong> without restarting the application. All UI text — labels, buttons, messages, and tooltips — updates live, including on tabs you are not looking at. The selected language is saved globally and persists across launches. On Windows the language button and its menu show a flag picture next to the language name, because Windows does not draw flag emoji as flags. macOS still uses the emoji, which already appear as flags there.</p>
+    <p>Language changes take effect <strong>immediately</strong> without restarting the application. All UI text — labels, buttons, messages, and tooltips — updates live, including on tabs you are not looking at. The selected language is saved globally and persists across launches. On Windows the language button and its menu show the same waving flags as on macOS. Windows does not draw flag emoji as flags, so the app uses matching pictures. macOS still uses the emoji.</p>
 
     <h3>Automatic detection order</h3>
     <p>If no language has been saved yet, the application tries to detect your preference in this order:</p>
@@ -1591,7 +1578,7 @@
     <h2><span class="icon">ℹ️</span> About &amp; Diagnostics <span class="badge blue">v3.3</span></h2>
     <p>A new <strong>ℹ button</strong> in the top bar opens the About dialog. It shows the application version, platform information, and two diagnostic actions:</p>
 
-    <img src="screen-about.png" alt="About dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/en-05-about.png" alt="About dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
@@ -1651,6 +1638,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> What's New</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Matching language flags</td><td>The Windows language flags are now the same waving flags, at the same size, as the ones macOS shows. Windows still does not draw flag emoji, so the app uses matching pictures.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1867,7 +1862,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Back to top ↑</a></p>
 </footer>
 </div>
 

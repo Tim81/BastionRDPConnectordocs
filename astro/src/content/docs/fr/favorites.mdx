@@ -4,8 +4,11 @@ description: Enregistrez jusqu'à dix adresses IP et VM Azure par locataire, pui
 appliesTo: '3.4.0'
 lastReviewed: '2026-10-20'
 ---
+import ScreenFavorites from '../../../components/ScreenFavorites.astro';
 
 Les favoris sont un raccourci vers une connexion que vous faites déjà. La liste contient jusqu'à dix entrées pour le locataire Entra ID auquel vous êtes connecté. Un favori est une adresse IP ou une VM Azure. Les ports, la méthode de connexion et l'hôte Bastion restent là où vous les réglez.
+
+<ScreenFavorites lang="fr" caption={`L'onglet Favoris. Un favori IP affiche une description sous l'adresse, ou Adresse IP s'il n'y en a pas. Le crayon modifie ce texte. La corbeille retire seulement la description.`} />
 
 ## Ajouter et retirer
 

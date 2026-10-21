@@ -227,7 +227,7 @@ figcaption b { font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spac
    Drawn, not screenshotted, so they stay legible at any size, do
    not carry a tenant's real resource names, and do not go stale
    the moment a control moves. The vocabulary below mirrors the
-   real window: 640x760, a top bar, a Bastion picker, three tabs. */
+   real window: 640x760, a top bar, a Bastion picker, four folder tabs. */
 
 .appshot { margin: 22px 0 26px; max-width: 74ch; }
 .appshot .frame {
@@ -276,7 +276,7 @@ figcaption b { font-family: 'DM Mono', monospace; font-size: 11.5px; letter-spac
    need an empty box as often as a ticked one. */
 .ui-ck.off { fill: #fff; stroke: #9AA5B2; stroke-width: 1; }
 
-/* Logout carries the application's DangerButton class */
+/* Remove and Stop use the application's DangerButton. Logout does not. */
 .ui-btn-d { fill: var(--halt); }
 
 /* Dropdown chevrons on ComboBox fields */

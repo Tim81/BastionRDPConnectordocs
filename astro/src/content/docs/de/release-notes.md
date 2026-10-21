@@ -1,9 +1,15 @@
 ---
 title: Versionshinweise
 description: Was sich in jeder aktuellen Version von Azure Bastion RDP Connector geändert hat.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Änderung | Details |
+| --- | --- |
+| Passende Sprachflaggen | Die Windows-Flaggen bei der Sprachwahl sind jetzt dieselben wehenden Flaggen, in derselben Größe, wie macOS sie zeigt. Windows zeichnet Flaggen-Emoji weiterhin nicht als Flaggen, deshalb verwendet die App passende Bilder. |
 
 ## 3.5.0
 

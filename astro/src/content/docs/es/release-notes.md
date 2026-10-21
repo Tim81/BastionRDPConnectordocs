@@ -1,9 +1,15 @@
 ---
 title: Notas de la versión
 description: Qué cambió en cada versión reciente de Azure Bastion RDP Connector.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Cambio | Detalles |
+| --- | --- |
+| Banderas de idioma iguales | Las banderas de idioma en Windows son ahora las mismas banderas ondeantes, del mismo tamaño, que muestra macOS. Windows sigue sin dibujar los emoji de banderas, así que la aplicación usa imágenes equivalentes. |
 
 ## 3.5.0
 

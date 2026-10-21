@@ -4,8 +4,11 @@ description: Guarde hasta diez direcciones IP y VM de Azure por inquilino, y vue
 appliesTo: '3.4.0'
 lastReviewed: '2026-10-20'
 ---
+import ScreenFavorites from '../../../components/ScreenFavorites.astro';
 
 Los favoritos son un camino más corto de vuelta a una conexión que usted ya hace. La lista guarda hasta diez entradas para el inquilino de Entra ID en el que ha iniciado sesión. Un favorito es una dirección IP o una VM de Azure. Los puertos, el método de conexión y el host de Bastion se quedan donde usted los configura.
+
+<ScreenFavorites lang="es" caption={`La pestaña Favoritos. Un favorito IP muestra una descripción bajo la dirección, o Dirección IP si no tiene ninguna. El lápiz edita ese texto. La papelera elimina solo la descripción.`} />
 
 ## Añadir y quitar
 

@@ -2,7 +2,7 @@
 title: Multiple tenants
 description: How the application keeps a separate set of preferences for every Entra ID tenant your account can see, and what stays global.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-20'
+lastReviewed: '2026-10-21'
 ---
 
 If your account has access to more than one Entra ID tenant, for example through Azure Lighthouse, the application keeps a separate set of preferences for each one instead of overwriting a single shared set every time you switch.
@@ -30,7 +30,7 @@ Switch from tenant A to tenant B and back, and tenant A's Bastion, VM, and ports
 
 ## What stays global
 
-Your language choice applies across every tenant. Change it while working in one tenant, and it stays changed after you switch to another. Language is a preference about you, not about the environment you're connected to. On Windows the language button and its menu show a flag picture next to the language name. macOS keeps the emoji, which already appear as flags there.
+Your language choice applies across every tenant. Change it while working in one tenant, and it stays changed after you switch to another. Language is a preference about you, not about the environment you're connected to. On Windows the language button and its menu show the same waving flags as on macOS. Windows does not draw flag emoji as flags, so the app uses matching pictures. macOS still uses the emoji.
 
 ## Where this lives on disk
 

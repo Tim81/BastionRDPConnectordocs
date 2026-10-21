@@ -72,4 +72,4 @@ Depois de escolhido um inquilino, a janela principal carrega com uma **subscriç
 <p>A subscrição de Bastion no topo é a que contém o seu recurso Bastion. No separador Azure VM, a subscrição da VM pode ser completamente diferente. As ligações entre subscrições funcionam sem configuração adicional.</p>
 </div>
 
-O seu token mantém-se em disco entre arranques, pelo que não lhe é pedido para iniciar sessão novamente a não ser que a sessão expire ou uma política de Acesso Condicional o exija. Para forçar um novo início de sessão, selecione **Terminar sessão** na barra superior. Remove o token em cache e limpa o estado do MSAL num único passo, e o arranque seguinte começa a partir de um início de sessão em branco.
+O seu token mantém-se em disco entre arranques, pelo que não lhe é pedido para iniciar sessão novamente a não ser que a sessão expire ou uma política de Acesso Condicional o exija. Para forçar um novo início de sessão, selecione **Sair** na barra superior. Remove o token em cache e limpa o estado do MSAL num único passo, e o arranque seguinte começa a partir de um início de sessão em branco.

@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Documentatie</div>
+    <div class="version">v3.5.1 · Documentatie</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Taal</div>
@@ -949,7 +949,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>Om u af te melden en de gecachede token te wissen, klikt u op de rode knop <strong>Afmelden</strong> in de bovenste balk. Er verschijnt een bevestigingsdialoogvenster voordat de applicatie sluit en alle gecachede aanmeldingsgegevens verwijdert. De volgende start vereist een volledige aanmelding.</p>
+      <p>Om u af te melden en de gecachede token te wissen, klikt u op <strong>Afmelden</strong> in de bovenste balk. Er verschijnt een bevestigingsdialoogvenster voordat de applicatie sluit en alle gecachede aanmeldingsgegevens verwijdert. De volgende start vereist een volledige aanmelding.</p>
     </div>
   </section>
 
@@ -972,7 +972,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Afmelden</span>
+            <span class="ui-btn secondary">Afmelden</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1017,7 +1017,7 @@
       <p>Het tabblad IP-adres gebruikt altijd de <strong>tunnelmodus</strong>. RD Gateway is niet beschikbaar voor directe IP-verbindingen.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/nl-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1090,19 +1090,7 @@
     <h2><span class="icon">🖥️</span> Tabblad Azure VM</h2>
     <p>Gebruik dit tabblad om door uw Azure Virtual Machines te bladeren en er direct mee verbinding te maken. De applicatie kan gestopte VM's automatisch starten en ondersteunt beide verbindingsmethoden. <span class="badge blue">v3.3</span> Het tabblad gebruikt een <strong>twee-kolommenindeling</strong>: verbindingsinstellingen links, VM-selectie rechts.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestopt (gede-alloceerd)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM actief — Verbinden ingeschakeld</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Azure VM tab – Tunnel-modus" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/nl-02-azure-vm.png" alt="Tabblad Azure VM" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Twee-kolommenindeling <span class="badge blue">v3.3</span></h3>
     <p>Het tabblad Azure VM is verdeeld in twee kolommen:</p>
@@ -1128,8 +1116,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Vanaf v3.3 gebruikt het laden van VM's de Azure Resource Graph API voor zoekopdrachten over meerdere subscriptions. Dit vervangt de vorige aanpak waarbij elk subscription afzonderlijk werd bevraagd, waardoor scenario's met meerdere subscriptions aanzienlijk sneller zijn.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Azure VM tab – Alle subscriptions zoeken" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1278,6 +1264,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Favorieten tabblad <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/nl-04-favorites.png" alt="Tabblad Favorieten" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Favorieten zijn een kortere weg terug naar een verbinding die u al maakt. De lijst bevat maximaal tien IP-adressen en Azure-VM's voor de Entra ID-tenant waarbij u bent aangemeld. De poorten, de verbindingsmethode en de Bastion-host blijven staan waar u ze instelt.</p>
     <p>Op het tabblad IP-adres en het tabblad Azure VM staat een ster naast <strong>Verbinden</strong>. Een lege ster slaat het huidige doel op. Een gevulde ster verwijdert het, nadat u bevestigt. <strong>Verwijderen</strong> bij een rij op Favorieten stelt dezelfde vraag. Een elfde item wordt geweigerd totdat u er een verwijdert.</p>
     <p><strong>Verbinden</strong> bij een favoriet gebruikt de Bastion-host die op dat moment bovenaan het venster is gekozen. Een IP-favoriet opent een tunnel, met de doelpoort en de lokale poort van het tabblad IP-adres. Een VM-favoriet gebruikt de verbindingsmethode van het tabblad Azure VM: Tunnel gebruikt de poorten van dat tabblad, en RD Gateway gebruikt poort 3389, het selectievakje voor Entra ID en de monitorkeuze.</p>
@@ -1573,7 +1560,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt, ook op tabbladen die u niet bekijkt. De geselecteerde taal wordt globaal opgeslagen. Op Windows tonen de taalknop en het menu een vlag naast de taalnaam, omdat Windows vlag-emoji niet als vlaggen tekent. macOS gebruikt nog de emoji, die daar al als vlaggen verschijnen.</p>
+    <p>Taalwijzigingen worden <strong>onmiddellijk</strong> van kracht zonder de applicatie opnieuw te starten. Alle UI-tekst — labels, knoppen, berichten en tooltips — wordt live bijgewerkt, ook op tabbladen die u niet bekijkt. De geselecteerde taal wordt globaal opgeslagen. Op Windows tonen de taalknop en het menu dezelfde wapperende vlaggen als op macOS. Windows tekent vlag-emoji niet als vlaggen, dus de app gebruikt bijpassende afbeeldingen. macOS gebruikt nog de emoji.</p>
 
     <h3>Automatische detectievolgorde</h3>
     <p>Als er nog geen taal is opgeslagen, probeert de applicatie uw voorkeur in deze volgorde te detecteren:</p>
@@ -1591,7 +1578,7 @@
     <h2><span class="icon">ℹ️</span> Over &amp; Diagnostiek <span class="badge blue">v3.3</span></h2>
     <p>Een nieuwe <strong>ℹ-knop</strong> in de bovenste balk opent het Dialoogvenster Info. Dit toont de applicatieversie, platforminformatie en twee diagnostische acties:</p>
 
-    <img src="screen-about.png" alt="Over-dialoogvenster" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/nl-05-about.png" alt="Over-dialoogvenster" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Actie</th><th>Beschrijving</th></tr></thead>
@@ -1652,6 +1639,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Wat is nieuw</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Functie</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Gelijke taalkvlaggen</td><td>De Windows-vlaggen bij de taalkeuze zijn nu dezelfde wapperende vlaggen, op dezelfde grootte, als die macOS toont. Windows tekent vlag-emoji nog steeds niet als vlaggen, dus de app gebruikt bijpassende afbeeldingen.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1868,7 +1863,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Terug naar boven ↑</a></p>
 </footer>
 </div>
 

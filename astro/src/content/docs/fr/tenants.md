@@ -2,7 +2,7 @@
 title: Plusieurs locataires
 description: Comment l'application conserve un ensemble distinct de préférences pour chaque locataire Entra ID auquel votre compte a accès, et ce qui reste global.
 appliesTo: '3.4.0'
-lastReviewed: '2026-10-20'
+lastReviewed: '2026-10-21'
 ---
 
 Si votre compte a accès à plus d'un locataire Entra ID, par exemple via Azure Lighthouse, l'application conserve un ensemble distinct de préférences pour chacun au lieu d'écraser un seul ensemble partagé à chaque changement.
@@ -30,7 +30,7 @@ Passez du locataire A au locataire B puis revenez, et le Bastion, la VM et les p
 
 ## Ce qui reste global
 
-Votre choix de langue s'applique à tous les locataires. Modifiez-le pendant que vous travaillez dans un locataire, et il reste modifié après être passé à un autre. La langue est une préférence qui vous concerne, pas l'environnement auquel vous êtes connecté. Sous Windows, le bouton de langue et son menu affichent un drapeau à côté du nom de la langue. macOS conserve les emoji, qui y apparaissent déjà comme des drapeaux.
+Votre choix de langue s'applique à tous les locataires. Modifiez-le pendant que vous travaillez dans un locataire, et il reste modifié après être passé à un autre. La langue est une préférence qui vous concerne, pas l'environnement auquel vous êtes connecté. Sous Windows, le bouton de langue et son menu affichent les mêmes drapeaux flottants que sous macOS. Windows ne dessine pas les emoji de drapeaux comme des drapeaux, donc l'application utilise des images correspondantes. macOS continue d'utiliser les emoji.
 
 ## Où cela se trouve sur le disque
 
