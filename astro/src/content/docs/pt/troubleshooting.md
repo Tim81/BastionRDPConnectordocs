@@ -54,7 +54,7 @@ Isto normalmente significa que a sua conta não tem nenhuma atribuição de fun�
 
 - Selecionar **Atualizar** junto ao campo Bastion.
 - Selecionar **Alterar** para escolher uma subscrição diferente.
-- Terminar sessão e voltar a iniciá-la, caso a sua sessão tenha expirado.
+- Selecione Sair e volte a iniciá-la, caso a sua sessão tenha expirado.
 - Pedir a quem gere as suas funções do Azure para confirmar que tem Leitor no anfitrião Bastion e na sua rede virtual.
 
 ## Ligar
@@ -103,7 +103,7 @@ A política de Acesso Condicional da sua organização pode exigir reautenticaç
 
 ### Quero começar do zero, a partir de um estado limpo
 
-Selecione **Terminar sessão** na barra superior para limpar o seu estado de início de sessão; remove a cache de tokens e o estado do MSAL num único passo. Para também repor as preferências, feche a aplicação e elimine `%APPDATA%\BastionRDPConnector\settings.json`. [Ficheiros e definições](../files-and-settings/) explica o que cada ficheiro contém e onde vivem.
+Selecione **Sair** na barra superior para limpar o seu estado de início de sessão; remove a cache de tokens e o estado do MSAL num único passo. Para também repor as preferências, feche a aplicação e elimine `%APPDATA%\BastionRDPConnector\settings.json`. [Ficheiros e definições](../files-and-settings/) explica o que cada ficheiro contém e onde vivem.
 
 ### Preciso de enviar um registo para o suporte
 

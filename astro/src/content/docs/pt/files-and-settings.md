@@ -39,6 +39,6 @@ As escritas de definições são atómicas: a aplicação escreve primeiro um fi
 
 Eliminar `settings.json` repõe todas as preferências para as predefinições. Continua com sessão iniciada; nada muda na sua cache de tokens.
 
-Eliminar `msal_token_cache.bin`, ou selecionar **Terminar sessão** na barra superior, termina a sua sessão e limpa o token em cache. Terminar sessão é a opção mais segura: remove a cache de tokens e limpa o estado em memória do MSAL num único passo, e o arranque seguinte começa a partir de um início de sessão em branco.
+Eliminar `msal_token_cache.bin`, ou selecionar **Sair** na barra superior, termina a sua sessão e limpa o token em cache. Sair é a opção mais segura: remove a cache de tokens e limpa o estado em memória do MSAL num único passo, e o arranque seguinte começa a partir de um início de sessão em branco.
 
 Para repor ambos, feche primeiro a aplicação e depois elimine os dois ficheiros. Eliminar um não afeta o outro.

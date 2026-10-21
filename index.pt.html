@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Documentação</div>
+    <div class="version">v3.5.1 · Documentação</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -894,7 +894,7 @@
 
     <div class="callout tip">
       <span class="ci">💡</span>
-      <p><strong>Para repor a cache de tokens</strong> (forçar um novo início de sessão no próximo arranque), elimine o ficheiro de cache de Utilize o botão <strong>Terminar sessão</strong> — elimina automaticamente o ficheiro de cache e limpa a cache MSAL num único passo. Também pode eliminar o ficheiro manualmente:</p>
+      <p><strong>Para repor a cache de tokens</strong> (forçar um novo início de sessão no próximo arranque), elimine o ficheiro de cache de Utilize o botão <strong>Sair</strong> — elimina automaticamente o ficheiro de cache e limpa a cache MSAL num único passo. Também pode eliminar o ficheiro manualmente:</p>
     <pre>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</pre>
     </div>
     <div class="callout info">
@@ -961,7 +961,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>Para terminar sessão e limpar o token em cache, clique no botão vermelho <strong>Terminar sessão</strong> na barra superior. Aparecerá uma caixa de diálogo de confirmação antes de a aplicação fechar e remover todas as credenciais em cache. O próximo arranque exigirá um início de sessão completo.</p>
+      <p>Para terminar sessão e limpar o token em cache, clique em <strong>Sair</strong> na barra superior. Aparecerá uma caixa de diálogo de confirmação antes de a aplicação fechar e remover todas as credenciais em cache. O próximo arranque exigirá um início de sessão completo.</p>
     </div>
   </section>
 
@@ -984,7 +984,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Terminar sessão</span>
+            <span class="ui-btn secondary">Sair</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1009,7 +1009,7 @@
     <table class="field-table">
       <thead><tr><th>Área</th><th>Propósito</th></tr></thead>
       <tbody>
-        <tr><td>Barra de subscrição (em cima)</td><td>Mostra a subscrição de Bastion ativa e a conta com sessão iniciada. Fornece os botões <strong>Alterar</strong> e <strong>Terminar sessão</strong>.</td></tr>
+        <tr><td>Barra de subscrição (em cima)</td><td>Mostra a subscrição de Bastion ativa e a conta com sessão iniciada. Fornece os botões <strong>Alterar</strong> e <strong>Sair</strong>.</td></tr>
         <tr><td>Seletor Bastion</td><td>Lista suspensa para escolher a instância do Azure Bastion. Clique em <strong>Atualizar</strong> para recarregar a lista.</td></tr>
         <tr><td>Separador Endereço IP</td><td>Ligação a qualquer endereço IP através do Bastion com um túnel local.</td></tr>
         <tr><td>Separador Azure VM</td><td>Navegar pelas VMs nas subscrições, verificar estado de energia, iniciar VMs e ligar.</td></tr>
@@ -1029,7 +1029,7 @@
       <p>O separador Endereço IP usa sempre o <strong>modo de túnel</strong>. O RD Gateway não está disponível para ligações IP diretas.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/pt-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1102,19 +1102,7 @@
     <h2><span class="icon">🖥️</span> Separador Azure VM</h2>
     <p>Utilize este separador para navegar pelas suas Máquinas Virtuais do Azure e ligar-se diretamente a elas. A aplicação pode iniciar automaticamente VMs paradas e suporta ambos os métodos de ligação. <span class="badge blue">v3.3</span> O separador utiliza uma <strong>disposição de duas colunas</strong>: definições de ligação à esquerda, seleção de VM à direita.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM parada (desalocada)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM em execução – Ligar ativado</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Separador Azure VM – Modo Túnel" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/pt-02-azure-vm.png" alt="Separador Azure VM" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Disposição de duas colunas <span class="badge blue">v3.3</span></h3>
     <p>O separador Azure VM está dividido em duas colunas:</p>
@@ -1140,8 +1128,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Na v3.3, o carregamento de VMs utiliza a API Azure Resource Graph para consultas entre subscrições. Isto substitui a abordagem anterior de chamar individualmente cada subscrição, tornando os cenários de múltiplas subscrições consideravelmente mais rápidos.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Separador Azure VM – Pesquisar todas as assinaturas" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1290,6 +1276,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Separador Favoritos <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/pt-04-favorites.png" alt="Separador Favoritos" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Os favoritos são um caminho mais curto de volta a uma ligação que já faz. A lista guarda até dez endereços IP e VMs do Azure para o inquilino do Entra ID em que iniciou sessão. As portas, o método de ligação e o anfitrião Bastion ficam onde os define.</p>
     <p>No separador Endereço IP e no separador Azure VM, uma estrela fica junto a <strong>Ligar</strong>. Uma estrela vazia guarda o destino atual. Uma estrela preenchida remove-o, depois de confirmar. <strong>Remover</strong> numa linha de Favoritos faz a mesma pergunta. Uma décima primeira entrada é recusada até remover uma.</p>
     <p><strong>Ligar</strong> num favorito usa o anfitrião Bastion selecionado no topo da janela nesse momento. Um favorito de IP abre um túnel, com a porta de destino e a porta local do separador Endereço IP. Um favorito de VM usa o método de ligação do separador Azure VM: Túnel usa as portas desse separador, e RD Gateway usa a porta 3389, a caixa de autenticação Entra ID e a escolha de monitor.</p>
@@ -1585,7 +1572,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real, incluindo nos separadores que não está a ver. O idioma selecionado é guardado globalmente e persiste entre arranques. No Windows, o botão de idioma e o respetivo menu mostram uma bandeira junto ao nome do idioma, porque o Windows não desenha os emojis de bandeiras como bandeiras. O macOS continua a usar os emojis, que ali já aparecem como bandeiras.</p>
+    <p>As alterações de idioma entram em vigor <strong>imediatamente</strong> sem reiniciar a aplicação. Todo o texto da interface — rótulos, botões, mensagens e dicas — atualiza em tempo real, incluindo nos separadores que não está a ver. O idioma selecionado é guardado globalmente e persiste entre arranques. No Windows, o botão de idioma e o respetivo menu mostram as mesmas bandeiras ondulantes que no macOS. O Windows não desenha os emojis de bandeiras como bandeiras, por isso a aplicação usa imagens correspondentes. O macOS continua a usar os emojis.</p>
 
     <h3>Ordem de deteção automática</h3>
     <p>Se ainda não foi guardado nenhum idioma, a aplicação tenta detetar a sua preferência por esta ordem:</p>
@@ -1603,7 +1590,7 @@
     <h2><span class="icon">ℹ️</span> Sobre &amp; Diagnósticos <span class="badge blue">v3.3</span></h2>
     <p>Um novo <strong>botão ℹ</strong> na barra superior abre a caixa de diálogo Sobre. Mostra a versão da aplicação, informações da plataforma e duas ações de diagnóstico:</p>
 
-    <img src="screen-about.png" alt="Caixa de diálogo Sobre" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/pt-05-about.png" alt="Caixa de diálogo Sobre" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Ação</th><th>Descrição</th></tr></thead>
@@ -1663,6 +1650,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novidades</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Funcionalidade</th><th>Detalhes</th></tr></thead>
+      <tbody>
+        <tr><td>Bandeiras de idioma iguais</td><td>As bandeiras de idioma no Windows são agora as mesmas bandeiras ondulantes, do mesmo tamanho, que o macOS mostra. O Windows continua a não desenhar os emojis de bandeiras, por isso a aplicação usa imagens correspondentes.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1764,7 +1759,7 @@
         <tr><td>Ícone da área de notificação restaurado</td><td>O ícone da área de notificação não aparecia no Windows nas versões 3.2 a 3.3.3. Minimizar para a área de notificação, as notificações de túnel e o menu de contexto da área de notificação agora funcionam conforme descrito nesta documentação.</td></tr>
         <tr><td>Dez sessões de histórico de registos</td><td>O <code>debug.log</code> era anteriormente substituído sempre que a aplicação iniciava. As últimas dez sessões são agora mantidas como <code>debug.0.log</code> a <code>debug.9.log</code>, para que o registo da execução em que ocorreu um problema sobreviva a um reinício.</td></tr>
         <tr><td>Pacote de diagnóstico abrange sessões anteriores</td><td><em>Copiar informações de diagnóstico</em> agora inclui os registos de sessões arquivadas além do atual, do mais recente ao mais antigo, até cerca de 1 MB.</td></tr>
-        <tr><td>Limpeza conclui antes de a janela fechar</td><td>Os túneis ativos são fechados e os ficheiros <code>.rdp</code> temporários são eliminados antes de a janela fechar. Terminar sessão executa a mesma limpeza em vez de encerrar o processo de imediato.</td></tr>
+        <tr><td>Limpeza conclui antes de a janela fechar</td><td>Os túneis ativos são fechados e os ficheiros <code>.rdp</code> temporários são eliminados antes de a janela fechar. Sair executa a mesma limpeza em vez de encerrar o processo de imediato.</td></tr>
         <tr><td>Armazenamento do navegador de início de sessão movido</td><td>O navegador de início de sessão incorporado mantinha o seu perfil junto ao ficheiro da aplicação, o que impedia a aplicação de funcionar a partir de uma pasta protegida contra escrita como <code>Program Files</code>. Agora utiliza <code>%LOCALAPPDATA%\BastionRDPConnector\WebView2</code>. A localização da cache de tokens não é alterada.</td></tr>
         <tr><td>Componentes atualizados</td><td>Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0.</td></tr>
       </tbody>
@@ -1798,7 +1793,7 @@
     <ul style="margin: 8px 0 8px 20px; color:var(--ink-muted); line-height:2;">
       <li>Clique em <strong>Atualizar</strong> junto ao seletor de Bastion.</li>
       <li>Utilize <strong>Alterar</strong> para selecionar uma subscrição diferente.</li>
-      <li>Terminar sessão e voltar a iniciar sessão se a sua sessão Azure pode ter expirado.</li>
+      <li>Selecione Sair e volte a iniciar sessão se a sua sessão Azure pode ter expirado.</li>
       <li>Contactar o seu administrador Azure para verificar as suas atribuições de funções.</li>
     </ul>
 
@@ -1845,7 +1840,7 @@
     <p>O próximo arranque irá repor todas as preferências guardadas. Não terá a sessão terminada.</p>
 
     <h3>Repor início de sessão / cache de tokens</h3>
-    <p>A forma mais fácil é clicar no botão <strong>Terminar sessão</strong> — isso elimina automaticamente o ficheiro de cache de autenticação e limpa a cache MSAL num único passo. Se precisar de repor sem abrir a aplicação, elimine o ficheiro manualmente:</p>
+    <p>A forma mais fácil é clicar no botão <strong>Sair</strong> — isso elimina automaticamente o ficheiro de cache de autenticação e limpa a cache MSAL num único passo. Se precisar de repor sem abrir a aplicação, elimine o ficheiro manualmente:</p>
     <pre>%LOCALAPPDATA%\BastionRDPConnector\msal_token_cache.bin</pre>
     <div class="callout info">
       <span class="ci">ℹ️</span>
@@ -1871,7 +1866,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Voltar ao topo ↑</a></p>
 </footer>
 </div>
 

@@ -1,9 +1,15 @@
 ---
 title: Nouveautés
 description: Ce qui a changé dans chaque version récente d'Azure Bastion RDP Connector.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Changement | Détails |
+| --- | --- |
+| Drapeaux de langue identiques | Les drapeaux de langue sous Windows sont maintenant les mêmes drapeaux flottants, à la même taille, que ceux que macOS affiche. Windows ne dessine toujours pas les emoji de drapeaux, donc l'application utilise des images correspondantes. |
 
 ## 3.5.0
 

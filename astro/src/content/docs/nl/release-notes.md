@@ -1,9 +1,15 @@
 ---
 title: Wat is nieuw
 description: Wat er is veranderd in elke recente release van Azure Bastion RDP Connector.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Wijziging | Details |
+| --- | --- |
+| Gelijke taalkvlaggen | De Windows-vlaggen bij de taalkeuze zijn nu dezelfde wapperende vlaggen, op dezelfde grootte, als die macOS toont. Windows tekent vlag-emoji nog steeds niet als vlaggen, dus de app gebruikt bijpassende afbeeldingen. |
 
 ## 3.5.0
 

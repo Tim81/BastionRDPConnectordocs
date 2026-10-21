@@ -16,7 +16,8 @@ const LANGS = {
 const WANTED = new Set([
   'AppTitle', 'Change', 'Logout', 'Account', 'Bastion', 'BastionSubscription',
   'Refresh', 'Connect', 'OK', 'Exit', 'Show', 'Loading',
-  'TabIPAddress', 'TabAzureVM', 'TabActiveTunnels',
+  'TabIPAddress', 'TabAzureVM', 'TabActiveTunnels', 'TabFavorites',
+  'RemoveFavorite', 'PowerStateStopped',
   'ConnectionMethod', 'ConnectionMethodTunnel', 'ConnectionMethodRDGateway',
   'MonitorConfiguration', 'SingleMonitor', 'AllMonitors',
   'UseEntraIdAuth', 'EntraIdAuthInfo',

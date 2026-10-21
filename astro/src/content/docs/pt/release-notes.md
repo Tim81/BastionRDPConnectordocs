@@ -1,9 +1,15 @@
 ---
 title: Notas de versão
 description: O que mudou em cada versão recente do Azure Bastion RDP Connector.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Alteração | Detalhes |
+| --- | --- |
+| Bandeiras de idioma iguais | As bandeiras de idioma no Windows são agora as mesmas bandeiras ondulantes, do mesmo tamanho, que o macOS mostra. O Windows continua a não desenhar os emojis de bandeiras, por isso a aplicação usa imagens correspondentes. |
 
 ## 3.5.0
 
@@ -88,7 +94,7 @@ lastReviewed: '2026-10-20'
 | Ícone da área de notificação restaurado | O ícone da área de notificação não aparecia no Windows nas versões 3.2 a 3.3.3. Minimizar para a área de notificação, as notificações de túnel e o menu de contexto da área de notificação voltam a funcionar como esta documentação descreve. |
 | Dez sessões de histórico de registos | O `debug.log` costumava ser substituído em cada arranque. As últimas dez sessões são agora mantidas como `debug.0.log` a `debug.9.log`, para que o registo da execução em que ocorreu um problema sobreviva a um reinício. |
 | Pacote de diagnóstico abrange sessões anteriores | Copiar informações de diagnóstico agora inclui os registos de sessões arquivadas ao lado do atual, das mais recentes para as mais antigas, até cerca de 1 MB. |
-| A limpeza conclui antes de a janela fechar | Os túneis ativos fecham e os ficheiros `.rdp` temporários são eliminados antes de a janela fechar. Terminar sessão executa a mesma limpeza em vez de encerrar o processo de imediato. |
+| A limpeza conclui antes de a janela fechar | Os túneis ativos fecham e os ficheiros `.rdp` temporários são eliminados antes de a janela fechar. Sair executa a mesma limpeza em vez de encerrar o processo de imediato. |
 | Perfil do navegador de início de sessão movido | O navegador de início de sessão incorporado costumava manter o seu perfil junto ao ficheiro da aplicação, o que impedia o início de sessão quando a aplicação corria a partir de uma pasta protegida contra escrita, como a Program Files. Agora vive em `%LOCALAPPDATA%\BastionRDPConnector\WebView2`. A localização da cache de tokens não muda. |
 | Componentes atualizados | Avalonia 12.1.0, MSAL 4.87.0, Azure.Core 1.60.0. |
 

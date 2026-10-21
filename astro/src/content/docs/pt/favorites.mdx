@@ -4,8 +4,11 @@ description: Guarde até dez endereços IP e VMs do Azure por inquilino, e volte
 appliesTo: '3.4.0'
 lastReviewed: '2026-10-20'
 ---
+import ScreenFavorites from '../../../components/ScreenFavorites.astro';
 
 Os favoritos são um caminho mais curto de volta a uma ligação que já faz. A lista guarda até dez entradas para o inquilino do Entra ID em que iniciou sessão. Um favorito é um endereço IP ou uma VM do Azure. As portas, o método de ligação e o anfitrião Bastion ficam onde os define.
+
+<ScreenFavorites lang="pt" caption={`O separador Favoritos. Um favorito IP mostra uma descrição por baixo do endereço, ou Endereço IP se não tiver nenhuma. O lápis edita esse texto. O caixote do lixo remove apenas a descrição.`} />
 
 ## Adicionar e remover
 

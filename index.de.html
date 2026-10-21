@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Dokumentation</div>
+    <div class="version">v3.5.1 · Dokumentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Sprache</div>
@@ -955,7 +955,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>Um sich abzumelden und den Token-Cache zu leeren, klicken Sie auf die rote Schaltfläche <strong>Abmelden</strong> in der oberen Leiste. Vor dem Schließen der Anwendung erscheint ein Bestätigungsdialog. Beim nächsten Start ist eine vollständige Anmeldung erforderlich.</p>
+      <p>Um sich abzumelden und den Token-Cache zu leeren, klicken Sie auf <strong>Abmelden</strong> in der oberen Leiste. Vor dem Schließen der Anwendung erscheint ein Bestätigungsdialog. Beim nächsten Start ist eine vollständige Anmeldung erforderlich.</p>
     </div>
   </section>
 
@@ -978,7 +978,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Abmelden</span>
+            <span class="ui-btn secondary">Abmelden</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1023,7 +1023,7 @@
       <p>Die Registerkarte IP-Adresse verwendet immer den <strong>Tunnelmodus</strong>. RD Gateway ist für direkte IP-Verbindungen nicht verfügbar.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/de-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1096,19 +1096,7 @@
     <h2><span class="icon">🖥️</span> Registerkarte Azure VM</h2>
     <p>Verwenden Sie diese Registerkarte, um Ihre Azure Virtual Machines zu durchsuchen und eine direkte Verbindung herzustellen. Die Anwendung kann gestoppte VMs automatisch starten und unterstützt beide Verbindungsmethoden. <span class="badge blue">v3.3</span> Die Registerkarte verwendet ein <strong>zweispaltiges Layout</strong>: Verbindungseinstellungen links, VM-Auswahl rechts.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM gestoppt (freigegeben)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM läuft – Verbinden aktiviert</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Azure VM-Tab – Tunnel-Modus" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/de-02-azure-vm.png" alt="Registerkarte Azure VM" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Zweispaltiges Layout <span class="badge blue">v3.3</span></h3>
     <p>Die Registerkarte Azure VM ist in zwei Spalten unterteilt:</p>
@@ -1134,8 +1122,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Ab v3.3 verwendet das Laden von VMs die Azure Resource Graph API für abonnementübergreifende Abfragen. Dies ersetzt den bisherigen Ansatz, bei dem jede Subscription einzeln abgefragt wurde, und macht Szenarien mit mehreren Subscriptions deutlich schneller.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Azure VM-Tab – Alle Abonnements suchen" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1284,6 +1270,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Favoriten <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/de-04-favorites.png" alt="Registerkarte Favoriten" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Favoriten sind ein kürzerer Weg zurück zu einer Verbindung, die Sie bereits herstellen. Die Liste enthält bis zu zehn IP-Adressen und Azure-VMs für den Entra ID-Mandanten, bei dem Sie angemeldet sind. Ports, Verbindungsmethode und Bastion-Host bleiben dort, wo Sie sie festlegen.</p>
     <p>Auf der Registerkarte IP-Adresse und der Registerkarte Azure VM steht ein Stern neben <strong>Verbinden</strong>. Ein leerer Stern speichert das aktuelle Ziel. Ein gefüllter Stern entfernt es, nachdem Sie bestätigen. <strong>Entfernen</strong> in einer Favoritenzeile stellt dieselbe Frage. Ein elfter Eintrag wird abgelehnt, bis Sie einen entfernen.</p>
     <p><strong>Verbinden</strong> bei einem Favoriten verwendet den Bastion-Host, der in diesem Moment oben im Fenster ausgewählt ist. Ein IP-Favorit öffnet einen Tunnel, mit Zielport und lokalem Port der Registerkarte IP-Adresse. Ein VM-Favorit verwendet die Verbindungsmethode der Registerkarte Azure VM: Tunnel verwendet die Ports dieser Registerkarte, und RD Gateway verwendet Port 3389, das Kontrollkästchen für die Entra ID-Authentifizierung und die Monitorauswahl.</p>
@@ -1579,7 +1566,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert, auch auf Registerkarten, die Sie nicht ansehen. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten. Unter Windows zeigen die Sprachschaltfläche und ihr Menü eine Flagge neben dem Sprachnamen, weil Windows Flaggen-Emoji nicht als Flaggen zeichnet. macOS verwendet weiterhin die Emoji, die dort bereits als Flaggen erscheinen.</p>
+    <p>Sprachänderungen treten <strong>sofort</strong> in Kraft, ohne die Anwendung neu zu starten. Alle UI-Texte — Beschriftungen, Schaltflächen, Meldungen und Tooltips — werden live aktualisiert, auch auf Registerkarten, die Sie nicht ansehen. Die ausgewählte Sprache wird global gespeichert und bleibt über Starts hinweg erhalten. Unter Windows zeigen die Sprachschaltfläche und ihr Menü dieselben wehenden Flaggen wie unter macOS. Windows zeichnet Flaggen-Emoji nicht als Flaggen, deshalb verwendet die App passende Bilder. macOS verwendet weiterhin die Emoji.</p>
 
     <h3>Automatische Erkennungsreihenfolge</h3>
     <p>Wenn noch keine Sprache gespeichert wurde, versucht die Anwendung, Ihre Präferenz in dieser Reihenfolge zu erkennen:</p>
@@ -1597,7 +1584,7 @@
     <h2><span class="icon">ℹ️</span> Info &amp; Diagnose <span class="badge blue">v3.3</span></h2>
     <p>Eine neue <strong>ℹ-Schaltfläche</strong> in der oberen Leiste öffnet den Info-Dialog. Er zeigt die Anwendungsversion, Plattforminformationen und zwei Diagnoseaktionen:</p>
 
-    <img src="screen-about.png" alt="Über-Dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/de-05-about.png" alt="Über-Dialog" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Aktion</th><th>Beschreibung</th></tr></thead>
@@ -1658,6 +1645,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Neuigkeiten</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Funktion</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Passende Sprachflaggen</td><td>Die Windows-Flaggen bei der Sprachwahl sind jetzt dieselben wehenden Flaggen, in derselben Größe, wie macOS sie zeigt. Windows zeichnet Flaggen-Emoji weiterhin nicht als Flaggen, deshalb verwendet die App passende Bilder.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1874,7 +1869,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Nach oben ↑</a></p>
 </footer>
 </div>
 

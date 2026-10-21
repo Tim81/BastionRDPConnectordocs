@@ -9,7 +9,7 @@
 // Regenerate with:
 //   node scripts/extract-strings.mjs <path-to>/source/Localization.cs src/ui-strings.ts
 //
-// Keys resolved: 50
+// Keys resolved: 53
 
 export type Lang = 'en' | 'nl' | 'de' | 'fr' | 'es' | 'pt';
 
@@ -166,6 +166,22 @@ export const UI: Record<string, Record<Lang, string>> = {
     "es": "Túneles activos",
     "pt": "Túneis ativos"
   },
+  "TabFavorites": {
+    "en": "Favorites",
+    "nl": "Favorieten",
+    "de": "Favoriten",
+    "fr": "Favoris",
+    "es": "Favoritos",
+    "pt": "Favoritos"
+  },
+  "RemoveFavorite": {
+    "en": "Remove",
+    "nl": "Verwijderen",
+    "de": "Entfernen",
+    "fr": "Retirer",
+    "es": "Quitar",
+    "pt": "Remover"
+  },
   "ConnectionMethod": {
     "en": "Connection Method",
     "nl": "Verbindingsmethode",
@@ -253,6 +269,14 @@ export const UI: Record<string, Record<Lang, string>> = {
     "fr": "Actualiser l'état",
     "es": "Actualizar estado",
     "pt": "Atualizar estado"
+  },
+  "PowerStateStopped": {
+    "en": "Stopped",
+    "nl": "Gestopt",
+    "de": "Beendet",
+    "fr": "Arrêté",
+    "es": "Detenido",
+    "pt": "Parado"
   },
   "PowerStateRunning": {
     "en": "Running",

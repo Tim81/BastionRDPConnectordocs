@@ -1,0 +1,139 @@
+---
+// Schematic of the Favorites tab. Same window chrome and folder tabs as
+// ScreenAzureVm, with Favorites selected. The rows follow the application:
+// a VM row shows its subscription and power state, and Connect is off unless
+// the VM is running. An IP row shows its description, or the IP Address
+// label when none is saved. The pencil edits that text. The trash button
+// appears only when a description is saved, and it removes the description.
+import { s, tw, btnW, type Lang } from './screen';
+
+interface Props { lang?: Lang; caption?: string; }
+const { lang = 'en', caption } = Astro.props as Props;
+const t = (k: string) => s(k, lang);
+
+const F = 6.4;
+const F_S = 5.6;
+
+const wLogout = btnW(t('Logout'), F_S, 10, 28);
+const xLogout = 290 - wLogout;
+const wChange = btnW(t('Change'), F_S, 10, 28);
+const xChange = 290 - wChange;
+const wRefresh = btnW(t('Refresh'), F_S, 12, 36);
+const xRefresh = 290 - wRefresh;
+const xBastionField = 14 + tw(t('Bastion'), F);
+const wBastionField = Math.max(40, xRefresh - 6 - xBastionField);
+
+const tabLabels = [t('TabIPAddress'), t('TabAzureVM'), t('TabActiveTunnels'), t('TabFavorites')];
+let tabSize = F;
+while (tabSize > 4.6) {
+  const used = tabLabels.reduce((a, l) => a + tw(l, tabSize), 0) + 8 * 3 + 16;
+  if (used <= 280) break;
+  tabSize = Math.round((tabSize - 0.1) * 10) / 10;
+}
+const tabX = [10];
+for (let i = 0; i < 3; i++) tabX.push(tabX[i] + tw(tabLabels[i], tabSize) + 8);
+
+const wAct = Math.max(
+  btnW(t('Connect'), F_S, 8, 34, 'bold'),
+  btnW(t('RemoveFavorite'), F_S, 8, 34, 'bold'),
+);
+const xAct = 288 - wAct;
+
+const id = `s-fav-${lang}`;
+---
+<figure class="appshot">
+  <div class="frame">
+    <svg viewBox="0 0 300 400" role="img" aria-labelledby={id}>
+      <title id={id}>The Favorites tab. Two virtual machines, one stopped and one running, then two IP addresses. One IP row has no description and shows the IP Address label with a pencil. The other shows a saved description, a pencil, and a trash button that removes only the description.</title>
+
+      <rect class="ui-win" x="1" y="1" width="298" height="398" rx="6"/>
+      <path class="ui-bar" d="M2 2 H298 V22 H2 Z"/>
+      <rect x="8" y="7" width="9" height="9" rx="2" fill="#0F6CBD"/>
+      <text class="ui-title" x="22" y="15">{t('AppTitle')}</text>
+      <path d="M256 11 h8 M270 7 h8 v8 h-8 Z M286 7 l8 8 M294 7 l-8 8" stroke="#7B8794" stroke-width="1.1" fill="none"/>
+
+      <text class="ui-tb" x="10" y="39" style={`font-size:${F}px`}>{t('BastionSubscription')}: Production - West Europe</text>
+      <rect class="ui-btn-2" x={xChange} y="30" width={wChange} height="14" rx="3"/>
+      <text class="ui-tb" x={xChange + wChange / 2} y="40" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Change')}</text>
+
+      <text class="ui-p" x="10" y="56" style={`font-size:${F_S}px`}>{t('Account')}: demo@contoso.com</text>
+      <rect class="ui-btn-2" x={xLogout - 18} y="47" width="14" height="14" rx="3"/>
+      <text class="ui-tb" x={xLogout - 11} y="57" text-anchor="middle" style={`font-size:${F_S}px`}>i</text>
+      <rect class="ui-btn-2" x={xLogout} y="47" width={wLogout} height="14" rx="3"/>
+      <text class="ui-tb" x={xLogout + wLogout / 2} y="57" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Logout')}</text>
+
+      <text class="ui-tb" x="10" y="81" style={`font-size:${F}px`}>{t('Bastion')}</text>
+      <rect class="ui-field" x={xBastionField} y="71" width={wBastionField} height="15" rx="3"/>
+      <text class="ui-v" x={xBastionField + 5} y="82" style="font-size:6.2px">bastion-hub-weu</text>
+      <path class="ui-chev" d={`M${xBastionField + wBastionField - 11} 77 l3 3 l3 -3`}/>
+      <rect class="ui-btn-2" x={xRefresh} y="71" width={wRefresh} height="15" rx="3"/>
+      <text class="ui-tb" x={xRefresh + wRefresh / 2} y="82" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Refresh')}</text>
+
+      <line x1="10" y1="107" x2="290" y2="107" stroke="#C8C8C8" stroke-width="1"/>
+      {tabLabels.map((label, i) => {
+        const x = tabX[i];
+        const w = tw(label, tabSize);
+        const on = i === 3;
+        const d = on
+          ? `M${x - 4} 107 V95 Q${x - 4} 90 ${x} 90 H${x + w} Q${x + w + 4} 90 ${x + w + 4} 95 V107 Z`
+          : `M${x - 4} 107 V101 Q${x - 4} 97 ${x} 97 H${x + w} Q${x + w + 4} 97 ${x + w + 4} 101 V107 Z`;
+        return <path class={on ? 'ui-tabon' : 'ui-taboff'} d={d} />;
+      })}
+      <line class="ui-tabjoin" x1={tabX[3] - 3} y1="107" x2={tabX[3] + tw(tabLabels[3], tabSize) + 3} y2="107"/>
+      {tabLabels.map((label, i) => (
+        <text class={i === 3 ? 'ui-tb' : 'ui-tb off'} x={tabX[i]} y={i === 3 ? 102 : 104} style={`font-size:${tabSize}px${i === 3 ? ';font-weight:600' : ''}`}>{label}</text>
+      ))}
+
+      {/* Stopped VM. Connect stays off. */}
+      <rect class="ui-panel" x="10" y="116" width="280" height="58" rx="4"/>
+      <rect x="18" y="124" width="11" height="8" rx="1.5" fill="#0F6CBD"/>
+      <text class="ui-tb" x="34" y="131" style="font-size:6.4px;font-weight:600">vm-jumpbox-65</text>
+      <text class="ui-p" x="34" y="142" style="font-size:5.4px">Contoso - Finance</text>
+      <circle class="ui-stop" cx="22" cy="156" r="3"/>
+      <text class="ui-tb" x="30" y="158" style={`font-size:${F_S}px`}>{t('PowerStateStopped')}</text>
+      <rect x={xAct} y="126" width={wAct} height="16" rx="3" fill="#E6E8EB" stroke="#D5D8DE"/>
+      <text x={xAct + wAct / 2} y="137" text-anchor="middle" fill="#8B939E" style={`font-size:${F_S}px;font-family:'Instrument Sans',system-ui,sans-serif;font-weight:600`}>{t('Connect')}</text>
+      <rect class="ui-btn-d" x={xAct} y="148" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="159" text-anchor="middle" style={`font-size:${F_S}px`}>{t('RemoveFavorite')}</text>
+
+      {/* Running VM. Connect is available. */}
+      <rect class="ui-panel" x="10" y="180" width="280" height="58" rx="4"/>
+      <rect x="18" y="188" width="11" height="8" rx="1.5" fill="#0F6CBD"/>
+      <text class="ui-tb" x="34" y="195" style="font-size:6.4px;font-weight:600">vm-jumpbox-29</text>
+      <text class="ui-p" x="34" y="206" style="font-size:5.4px">Staging - West Europe</text>
+      <circle class="ui-run" cx="22" cy="220" r="3"/>
+      <text class="ui-tb" x="30" y="222" style={`font-size:${F_S}px`}>{t('PowerStateRunning')}</text>
+      <rect class="ui-btn" x={xAct} y="190" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="201" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Connect')}</text>
+      <rect class="ui-btn-d" x={xAct} y="212" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="223" text-anchor="middle" style={`font-size:${F_S}px`}>{t('RemoveFavorite')}</text>
+
+      {/* IP with no description. Pencil only. */}
+      <rect class="ui-panel" x="10" y="244" width="280" height="58" rx="4"/>
+      <circle cx="23" cy="258" r="5" fill="none" stroke="#0F6CBD" stroke-width="1"/>
+      <text class="ui-tb" x="34" y="261" style="font-size:6.4px;font-weight:600">10.1.5.66</text>
+      <text class="ui-p" x="34" y="274" style={`font-size:${F_S}px`}>{t('IPAddress')}</text>
+      <rect class="ui-btn-2" x={xAct - 18} y="262" width="14" height="14" rx="2"/>
+      <path d={`M${xAct - 14} 272 l5 -5 l2 2 l-5 5 z`} fill="none" stroke="#5C6770" stroke-width="0.8"/>
+      <rect class="ui-btn" x={xAct} y="254" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="265" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Connect')}</text>
+      <rect class="ui-btn-d" x={xAct} y="276" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="287" text-anchor="middle" style={`font-size:${F_S}px`}>{t('RemoveFavorite')}</text>
+
+      {/* IP with a description. Pencil and trash. */}
+      <rect class="ui-panel" x="10" y="308" width="280" height="58" rx="4"/>
+      <circle cx="23" cy="322" r="5" fill="none" stroke="#0F6CBD" stroke-width="1"/>
+      <text class="ui-tb" x="34" y="325" style="font-size:6.4px;font-weight:600">10.1.1.1</text>
+      <text class="ui-p" x="34" y="338" style={`font-size:${F_S}px`}>Jump box</text>
+      <rect class="ui-btn-2" x={xAct - 36} y="326" width="14" height="14" rx="2"/>
+      <path d={`M${xAct - 32} 336 l5 -5 l2 2 l-5 5 z`} fill="none" stroke="#5C6770" stroke-width="0.8"/>
+      <rect class="ui-btn-2" x={xAct - 18} y="326" width="14" height="14" rx="2"/>
+      <path d={`M${xAct - 15} 330 h8 M${xAct - 14} 332 h6 v6 h-6 z`} fill="none" stroke="#5C6770" stroke-width="0.8"/>
+      <rect class="ui-btn" x={xAct} y="318" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="329" text-anchor="middle" style={`font-size:${F_S}px`}>{t('Connect')}</text>
+      <rect class="ui-btn-d" x={xAct} y="340" width={wAct} height="16" rx="3"/>
+      <text class="ui-bt" x={xAct + wAct / 2} y="351" text-anchor="middle" style={`font-size:${F_S}px`}>{t('RemoveFavorite')}</text>
+    </svg>
+  </div>
+  {caption && <figcaption><b>Windows</b> {caption}</figcaption>}
+</figure>

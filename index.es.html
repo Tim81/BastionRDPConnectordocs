@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Documentación</div>
+    <div class="version">v3.5.1 · Documentación</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Idioma</div>
@@ -962,7 +962,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>Para cerrar sesión y borrar el token en caché, haga clic en el botón rojo <strong>Cerrar sesión</strong> en la barra superior. Aparecerá un diálogo de confirmación antes de que la aplicación se cierre y elimine todas las credenciales en caché. El próximo inicio requerirá un inicio de sesión completo.</p>
+      <p>Para cerrar sesión y borrar el token en caché, haga clic en <strong>Cerrar sesión</strong> en la barra superior. Aparecerá un diálogo de confirmación antes de que la aplicación se cierre y elimine todas las credenciales en caché. El próximo inicio requerirá un inicio de sesión completo.</p>
     </div>
   </section>
 
@@ -985,7 +985,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Cerrar sesión</span>
+            <span class="ui-btn secondary">Cerrar sesión</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1030,7 +1030,7 @@
       <p>La pestaña Dirección IP siempre usa el <strong>modo túnel</strong>. RD Gateway no está disponible para conexiones IP directas.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/es-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1103,19 +1103,7 @@
     <h2><span class="icon">🖥️</span> Pestaña Azure VM</h2>
     <p>Use esta pestaña para explorar sus máquinas virtuales de Azure y conectarse a ellas directamente. La aplicación puede iniciar automáticamente las VM detenidas y admite ambos métodos de conexión. <span class="badge blue">v3.3</span> La pestaña usa un <strong>diseño de dos columnas</strong>: configuración de conexión a la izquierda, selección de VM a la derecha.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM detenida (desasignada)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM en ejecución – Conectar habilitado</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Pestaña Azure VM – Modo Túnel" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/es-02-azure-vm.png" alt="Pestaña Azure VM" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Diseño de dos columnas <span class="badge blue">v3.3</span></h3>
     <p>La pestaña Azure VM está dividida en dos columnas:</p>
@@ -1141,8 +1129,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — En la v3.3, la carga de VM usa la API Azure Resource Graph para consultas entre suscripciones. Esto reemplaza el enfoque anterior de llamar individualmente a cada suscripción, haciendo los escenarios de múltiples suscripciones considerablemente más rápidos.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Pestaña Azure VM – Buscar todas las suscripciones" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1291,6 +1277,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Pestaña Favoritos <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/es-04-favorites.png" alt="Pestaña Favoritos" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Los favoritos son un camino más corto de vuelta a una conexión que usted ya hace. La lista guarda hasta diez direcciones IP y VM de Azure para el inquilino de Entra ID en el que ha iniciado sesión. Los puertos, el método de conexión y el host de Bastion se quedan donde usted los configura.</p>
     <p>En la pestaña Dirección IP y en la pestaña Azure VM, una estrella está junto a <strong>Conectar</strong>. Una estrella vacía guarda el destino actual. Una estrella rellena lo quita, después de confirmar. <strong>Quitar</strong> en una fila de Favoritos hace la misma pregunta. Una undécima entrada se rechaza hasta que quite una.</p>
     <p><strong>Conectar</strong> en un favorito usa el host de Bastion seleccionado en la parte superior de la ventana en ese momento. Un favorito de IP abre un túnel, con el puerto de destino y el puerto local de la pestaña Dirección IP. Un favorito de VM usa el método de conexión de la pestaña Azure VM: Túnel usa los puertos de esa pestaña, y RD Gateway usa el puerto 3389, la casilla de autenticación Entra ID y la elección de monitor.</p>
@@ -1586,7 +1573,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Los cambios de idioma tienen efecto <strong>inmediatamente</strong> sin reiniciar la aplicación. Todo el texto de la interfaz — etiquetas, botones, mensajes y tooltips — se actualiza en vivo, incluidas las pestañas que no está mirando. El idioma seleccionado se guarda globalmente y persiste entre inicios. En Windows, el botón de idioma y su menú muestran una bandera junto al nombre del idioma, porque Windows no dibuja los emoji de banderas como banderas. macOS sigue usando los emoji, que allí ya aparecen como banderas.</p>
+    <p>Los cambios de idioma tienen efecto <strong>inmediatamente</strong> sin reiniciar la aplicación. Todo el texto de la interfaz — etiquetas, botones, mensajes y tooltips — se actualiza en vivo, incluidas las pestañas que no está mirando. El idioma seleccionado se guarda globalmente y persiste entre inicios. En Windows, el botón de idioma y su menú muestran las mismas banderas ondeantes que en macOS. Windows no dibuja los emoji de banderas como banderas, así que la aplicación usa imágenes equivalentes. macOS sigue usando los emoji.</p>
 
     <h3>Orden de detección automática</h3>
     <p>Si aún no se ha guardado ningún idioma, la aplicación intenta detectar su preferencia en este orden:</p>
@@ -1604,7 +1591,7 @@
     <h2><span class="icon">ℹ️</span> Acerca de &amp; Diagnósticos <span class="badge blue">v3.3</span></h2>
     <p>Un nuevo <strong>botón ℹ</strong> en la barra superior abre el cuadro de diálogo Acerca de. Muestra la versión de la aplicación, información de la plataforma y dos acciones de diagnóstico:</p>
 
-    <img src="screen-about.png" alt="Cuadro de diálogo Acerca de" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/es-05-about.png" alt="Cuadro de diálogo Acerca de" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
@@ -1665,6 +1652,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Novedades</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Función</th><th>Detalles</th></tr></thead>
+      <tbody>
+        <tr><td>Banderas de idioma iguales</td><td>Las banderas de idioma en Windows son ahora las mismas banderas ondeantes, del mismo tamaño, que muestra macOS. Windows sigue sin dibujar los emoji de banderas, así que la aplicación usa imágenes equivalentes.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1873,7 +1868,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Volver arriba ↑</a></p>
 </footer>
 </div>
 

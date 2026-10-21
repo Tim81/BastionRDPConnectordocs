@@ -1,9 +1,15 @@
 ---
 title: Release notes
 description: What changed in each recent release of Azure Bastion RDP Connector.
-appliesTo: '3.5.0'
-lastReviewed: '2026-10-20'
+appliesTo: '3.5.1'
+lastReviewed: '2026-10-21'
 ---
+
+## 3.5.1
+
+| Change | Details |
+| --- | --- |
+| Matching language flags | The Windows language flags are now the same waving flags, at the same size, as the ones macOS shows. Windows still does not draw flag emoji, so the app uses matching pictures. |
 
 ## 3.5.0
 

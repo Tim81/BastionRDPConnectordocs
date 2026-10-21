@@ -652,7 +652,7 @@
   <div class="sidebar-logo">
     <div class="product">Azure Bastion</div>
     <h1>RDP Connector</h1>
-    <div class="version">v3.5.0 · Documentation</div>
+    <div class="version">v3.5.1 · Documentation</div>
   </div>
   <div class="mobile-lang-bar">
     <div class="mlb-label">🌐 Langue</div>
@@ -954,7 +954,7 @@
 
     <div class="callout danger">
       <span class="ci">🔴</span>
-      <p>Pour vous déconnecter et effacer le jeton mis en cache, cliquez sur le bouton rouge <strong>Se déconnecter</strong> dans la barre supérieure. Une boîte de dialogue de confirmation apparaîtra avant que l'application ne se ferme et ne supprime toutes les informations d'identification mises en cache. Le prochain démarrage nécessitera une connexion complète.</p>
+      <p>Pour vous déconnecter et effacer le jeton mis en cache, cliquez sur <strong>Se déconnecter</strong> dans la barre supérieure. Une boîte de dialogue de confirmation apparaîtra avant que l'application ne se ferme et ne supprime toutes les informations d'identification mises en cache. Le prochain démarrage nécessitera une connexion complète.</p>
     </div>
   </section>
 
@@ -977,7 +977,7 @@
           </div>
           <div class="ui-row" style="margin-bottom:0;">
             <span style="font-size:11px; flex:1; color:var(--ink-faint);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4923262127672d262c092a26273d263a26672a2624">[email&#160;protected]</a> · Contoso Tenant</span>
-            <span class="ui-btn danger">Se déconnecter</span>
+            <span class="ui-btn secondary">Se déconnecter</span>
           </div>
         </div>
         <!-- Bastion bar -->
@@ -1022,7 +1022,7 @@
       <p>L'onglet Adresse IP utilise toujours le <strong>mode tunnel</strong>. RD Gateway n'est pas disponible pour les connexions IP directes.</p>
     </div>
 
-    <img src="screen-ip.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/fr-01-ip-address.png" alt="IP Address tab" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1095,19 +1095,7 @@
     <h2><span class="icon">🖥️</span> Onglet Azure VM</h2>
     <p>Utilisez cet onglet pour parcourir vos machines virtuelles Azure et vous y connecter directement. L'application peut démarrer automatiquement les VM arrêtées et prend en charge les deux méthodes de connexion. <span class="badge blue">v3.3</span> L'onglet utilise une <strong>disposition en deux colonnes</strong> : paramètres de connexion à gauche, sélection de VM à droite.</p>
 
-    <div style="display:flex; gap:16px; align-items:flex-start; margin:16px 0 20px; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <img src="screen-vm-stopped.png" alt="Azure VM tab – VM stopped" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM arrêtée (désallouée)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="screen-vm-running.png" alt="Azure VM tab – VM running" style="width:240px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10);"/>
-        <div style="font-size:12px; color:var(--ink-faint); margin-top:6px;">VM en cours – Connecter activé</div>
-      </div>
-    </div>
-
-    <!-- Tunnel mode screenshot -->
-    <img src="screen-vm-tunnel.png" alt="Onglet Azure VM – Mode Tunnel" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/fr-02-azure-vm.png" alt="Onglet Azure VM" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <h3>Disposition en deux colonnes <span class="badge blue">v3.3</span></h3>
     <p>L'onglet Azure VM est divisé en deux colonnes :</p>
@@ -1133,8 +1121,6 @@
       <span class="ci">ℹ️</span>
       <p><strong>Azure Resource Graph</strong> — Depuis la v3.3, le chargement des VM utilise l'API Azure Resource Graph pour les requêtes inter-abonnements. Cela remplace l'approche précédente consistant à interroger chaque abonnement individuellement, rendant les scénarios multi-abonnements nettement plus rapides.</p>
     </div>
-
-    <img src="screen-vm-allsubs.png" alt="Onglet Azure VM – Recherche tous abonnements" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <div class="ui-card">
       <div class="ui-card-titlebar">
@@ -1283,6 +1269,7 @@
   <!-- ── TAB 4: FAVORITES ─────────────────── -->
   <section id="tab-favorites">
     <h2><span class="icon">⭐</span> Onglet Favoris <span class="badge blue">v3.4.0</span></h2>
+    <img src="screens/fr-04-favorites.png" alt="Onglet Favoris" style="display:block; width:280px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
     <p>Les favoris sont un raccourci vers une connexion que vous faites déjà. La liste contient jusqu'à dix adresses IP et VM Azure pour le locataire Entra ID auquel vous êtes connecté. Les ports, la méthode de connexion et l'hôte Bastion restent là où vous les réglez.</p>
     <p>Sur l'onglet Adresse IP et l'onglet Azure VM, une étoile se trouve à côté de <strong>Connecter</strong>. Une étoile vide enregistre la cible actuelle. Une étoile pleine la retire, après confirmation. <strong>Retirer</strong> sur une ligne de Favoris pose la même question. Une onzième entrée est refusée tant que vous n'en retirez pas une.</p>
     <p><strong>Connecter</strong> sur un favori utilise l'hôte Bastion sélectionné en haut de la fenêtre à ce moment-là. Un favori IP ouvre un tunnel, avec le port cible et le port local de l'onglet Adresse IP. Un favori VM utilise la méthode de connexion de l'onglet Azure VM : Tunnel utilise les ports de cet onglet, et RD Gateway utilise le port 3389, la case d'authentification Entra ID et le choix de moniteur.</p>
@@ -1578,7 +1565,7 @@
       <div class="lang-card"><img src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%203%202%22%3E%0A%3Crect%20width=%221.2%22%20height=%222%22%20fill=%22%23006600%22/%3E%0A%3Crect%20x=%221.2%22%20width=%221.8%22%20height=%222%22%20fill=%22%23FF0000%22/%3E%0A%3Ccircle%20cx=%221.2%22%20cy=%221%22%20r=%220.35%22%20fill=%22%23FFFF00%22%20opacity=%220.9%22/%3E%0A%3C/svg%3E" width="24" height="18" alt="Português" style="border-radius:2px; flex-shrink:0; display:block;"> Português</div>
     </div>
 
-    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct, y compris sur les onglets que vous ne regardez pas. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages. Sous Windows, le bouton de langue et son menu affichent un drapeau à côté du nom de la langue, parce que Windows ne dessine pas les emoji de drapeaux comme des drapeaux. macOS continue d'utiliser les emoji, qui y apparaissent déjà comme des drapeaux.</p>
+    <p>Les changements de langue prennent effet <strong>immédiatement</strong> sans redémarrer l'application. Tous les textes de l'interface — libellés, boutons, messages et info-bulles — se mettent à jour en direct, y compris sur les onglets que vous ne regardez pas. La langue sélectionnée est sauvegardée globalement et persiste entre les démarrages. Sous Windows, le bouton de langue et son menu affichent les mêmes drapeaux flottants que sous macOS. Windows ne dessine pas les emoji de drapeaux comme des drapeaux, donc l'application utilise des images correspondantes. macOS continue d'utiliser les emoji.</p>
 
     <h3>Ordre de détection automatique</h3>
     <p>Si aucune langue n'a encore été sauvegardée, l'application essaie de détecter votre préférence dans cet ordre :</p>
@@ -1596,7 +1583,7 @@
     <h2><span class="icon">ℹ️</span> À propos &amp; Diagnostics <span class="badge blue">v3.3</span></h2>
     <p>Un nouveau <strong>bouton ℹ</strong> dans la barre supérieure ouvre la boîte de dialogue À propos. Elle affiche la version de l'application, les informations sur la plateforme et deux actions de diagnostic :</p>
 
-    <img src="screen-about.png" alt="Fenêtre À propos" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
+    <img src="screens/fr-05-about.png" alt="Fenêtre À propos" style="display:block; width:320px; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,.10); margin:16px 0 20px;"/>
 
     <table class="field-table">
       <thead><tr><th>Action</th><th>Description</th></tr></thead>
@@ -1657,6 +1644,14 @@
   <!-- ── WHAT'S NEW ─────────────────────────── -->
   <section id="whats-new">
     <h2><span class="icon">🚀</span> Nouveautés</h2>
+
+    <h3>v3.5.1</h3>
+    <table class="field-table">
+      <thead><tr><th>Fonctionnalité</th><th>Détails</th></tr></thead>
+      <tbody>
+        <tr><td>Drapeaux de langue identiques</td><td>Les drapeaux de langue sous Windows sont maintenant les mêmes drapeaux flottants, à la même taille, que ceux que macOS affiche. Windows ne dessine toujours pas les emoji de drapeaux, donc l'application utilise des images correspondantes.</td></tr>
+      </tbody>
+    </table>
 
     <h3>v3.5.0</h3>
     <table class="field-table">
@@ -1873,7 +1868,7 @@
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
-  <p>Azure Bastion RDP Connector v3.5.0 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
+  <p>Azure Bastion RDP Connector v3.5.1 · Copyright © 2026 Timothy van der Ham · <a href="#overview">Haut de page ↑</a></p>
 </footer>
 </div>
 

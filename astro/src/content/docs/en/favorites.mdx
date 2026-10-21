@@ -4,8 +4,11 @@ description: Save up to ten IP addresses and Azure VMs per tenant, and connect a
 appliesTo: '3.4.0'
 lastReviewed: '2026-10-20'
 ---
+import ScreenFavorites from '../../../components/ScreenFavorites.astro';
 
 Favorites are a shorter way back to a connection you already make. The list holds up to ten entries for the Entra ID tenant you are signed in to. A favorite is an IP address or an Azure VM. Ports, the connection method, and the Bastion host stay where you set them.
+
+<ScreenFavorites lang="en" caption={`The Favorites tab. An IP favorite shows a description under the address, or IP Address when it has none. The pencil edits that text. The trash button removes only the description.`} />
 
 ## Adding and removing
 
